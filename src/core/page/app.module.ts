@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
-import { FormsModule } from '@angular/forms';
+import { NgZorroAntdModule, NZ_I18N, zh_CN, NzTabSetComponent } from 'ng-zorro-antd';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -21,6 +21,7 @@ registerLocaleData(zh);
     MainComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     NgZorroAntdModule,
     FormsModule,
