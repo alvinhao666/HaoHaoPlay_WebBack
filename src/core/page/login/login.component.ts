@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import * as JSEncryptModule from 'jsencrypt';
 
@@ -21,8 +22,10 @@ export class LoginComponent {
   constructor(
     fb: FormBuilder,
     public msg: NzMessageService,
-    private modalSrv: NzModalService
+    private modalSrv: NzModalService,
+    public titleService: Title
   ) {
+    this.titleService.setTitle('登录');
     this.form = fb.group({
       userName: [null, [Validators.required]],
       password: [null, Validators.required],

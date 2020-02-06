@@ -48,7 +48,7 @@
       "object-literal-sort-keys": false,
       "one-line": [true, "check-open-brace", "check-catch", "check-else", "check-whitespace"],
       "prefer-const": true,
-      "quotemark": [false, "single"],
+      "quotemark": [true, "single"], //单双引号
       "radix": true,
       "semicolon": [true, "always"],
       "triple-equals": [true, "allow-null-check"],
