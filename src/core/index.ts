@@ -1,11 +1,9 @@
 import { NgModule, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
-// export * from './service';
+export * from './base';
+export * from './net';
 // export * from './util';
-
-export * from './super';
 
 @NgModule({
     imports: [CommonModule],

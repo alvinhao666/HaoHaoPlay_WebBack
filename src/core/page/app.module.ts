@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { AppComponent } from './app-root.component';
 import { Core } from '..';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CoreInterceptor } from '../net/interceptor';
 
 registerLocaleData(zh);
 
@@ -29,7 +31,9 @@ registerLocaleData(zh);
     BrowserAnimationsModule
   ],
   entryComponents: [LoginComponent, MainComponent],  // 动态加载的组件
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CoreInterceptor, multi: true },
+    { provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
 })
 

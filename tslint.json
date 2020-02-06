@@ -4,12 +4,12 @@
       "arrow-return-shorthand": true,
       "callable-types": true,
       "class-name": true,
-      "comment-format": [true, "check-space"],
+      "comment-format": [false, "check-space"],
       "curly": false,
       "deprecation": {
           "severity": "warn"
       },
-      "eofline": true,
+      "eofline": false,
       "forin": true,
       "import-blacklist": [true, "rxjs/Rx"],
       "import-spacing": true,

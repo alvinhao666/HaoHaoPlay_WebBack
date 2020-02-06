@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import * as JSEncryptModule from 'jsencrypt';
+import { Http } from '../../net/http';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent {
     fb: FormBuilder,
     public msg: NzMessageService,
     private modalSrv: NzModalService,
-    public titleService: Title
+    public titleService: Title,
+    private http: Http
   ) {
     this.titleService.setTitle('登录');
     this.form = fb.group({
@@ -82,5 +84,15 @@ export class LoginComponent {
     const jsencrypt = new JSEncryptModule.JSEncrypt();
     jsencrypt.setPublicKey(this.publicKey);
     const pwd = jsencrypt.encrypt(this.password.value);
+
+
+    this.http.post('Login', {
+      LoginName: this.userName.value,
+      Password: pwd
+    }).subscribe((d: any) => {
+
+      this.loading = false;
+      if (!d.Success) return;
+    });
   }
 }
