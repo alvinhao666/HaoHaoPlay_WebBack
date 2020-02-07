@@ -1,0 +1,17 @@
+<div nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
+    <nz-avatar nzSrc="../../../../assets//img/avatar.jpeg"></nz-avatar>
+    戎国浩
+</div>
+
+
+
+<nz-dropdown-menu #menu>
+    <ul nz-menu>
+        <li nz-menu-item>
+            <i nz-icon nzType="setting"></i> 个人设置
+        </li>
+        <li nz-menu-item (click)="logout()">
+            <i nz-icon nzType="logout"></i> 退出登录
+        </li>
+    </ul>
+</nz-dropdown-menu>

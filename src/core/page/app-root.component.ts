@@ -1,7 +1,7 @@
 import { Component, OnInit, Type, NgModuleFactoryLoader } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {Core} from '../';
+import { Core } from '../';
 
 import { environment } from '../../environments/environment';
 
@@ -25,16 +25,16 @@ export class AppComponent extends Core implements OnInit {
         super();
     }
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.viewSwitching();
     }
 
     viewSwitching() {
         const token = this.getToken();
-        this.componentConent =  LoginComponent;
+        this.componentConent = token ? MainComponent : LoginComponent;
     }
 
     getToken(): string {
-        return sessionStorage.getItem('HaoToken') || localStorage.getItem('HaoToken');
+        return localStorage.getItem('HaoToken');
     }
 }

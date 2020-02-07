@@ -22,7 +22,7 @@ import { environment } from '../../environments/environment';
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
  */
 @Injectable()
-export class CoreInterceptor implements HttpInterceptor {
+export class CoreHttpInterceptor implements HttpInterceptor {
   constructor(private injector: Injector) { }
 
   get msg(): NzMessageService {
@@ -49,9 +49,13 @@ export class CoreInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           const body: any = event.body;
 
-          if (body && !body.Success && body.ErrorMsg) {
-            this.msg.error(body.ErrorMsg);
-
+          if (body && body.Success) {
+            // 重新修改 `body` 内容为 `response` 内容，对于绝大多数场景已经无须再关心业务状态码
+            return of(new HttpResponse(Object.assign(event, { body: body.Data })));
+          } else {
+            if (body.ErrorMsg) {
+              this.msg.error(body.ErrorMsg);
+            }
             if (body.ErrorCode > 100000 && body.ErrorCode < 100006) {
               this.goTo('/passport/login');
               //todo 清除token
@@ -59,13 +63,6 @@ export class CoreInterceptor implements HttpInterceptor {
             // 继续抛出错误中断后续所有 Pipe、subscribe 操作，因此：
             // this.http.get('/').subscribe() 并不会触发
             // return throwError({});
-            return of(new HttpResponse(Object.assign(event, { body: body })));
-          } else if (body && body.Success) {
-            // 重新修改 `body` 内容为 `response` 内容，对于绝大多数场景已经无须再关心业务状态码
-            return of(new HttpResponse(Object.assign(event, { body: Object.assign(body.Data || {}, { Success: true }) })));
-            // 或者依然保持完整的格式
-            // return of(event);
-          } else {
             return of(new HttpResponse(Object.assign(event, { body: body })));
           }
         }
@@ -101,15 +98,7 @@ export class CoreInterceptor implements HttpInterceptor {
     | HttpResponse<any>
     | HttpUserEvent<any>
   > {
-    // 统一加上服务端前缀
-    let url = req.url;
-    if (!url.startsWith('https://') && !url.startsWith('http://')) {
-      url = environment.SERVER_URL + url;
-    }
-
-    const newReq = req.clone({
-      url: url,
-    });
+    const newReq = this.setReq(req);
     return next.handle(newReq).pipe(
       mergeMap((event: any) => {
         // 允许统一对请求错误处理，这是因为一个请求若是业务上错误的情况下其HTTP请求的状态是200的情况下需要
@@ -120,5 +109,29 @@ export class CoreInterceptor implements HttpInterceptor {
       }),
       catchError((err: HttpErrorResponse) => this.handleData(err)),
     );
+  }
+
+  private setReq(req: HttpRequest<any>): HttpRequest<any> {
+    // 统一加上服务端前缀
+    let url = req.url;
+    if (!url.startsWith('https://') && !url.startsWith('http://')) {
+      url = environment.SERVER_URL + url;
+    }
+    let update = { url: url };
+    const token = this.getToken();
+
+    if (token) {
+      update = Object.assign(update, {
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
+    }
+
+    return req.clone(update);
+  }
+
+  private getToken(): string {
+    return localStorage.getItem('HaoToken');
   }
 }

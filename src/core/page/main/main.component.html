@@ -33,11 +33,11 @@
         <nz-header>
             <div class="app-header">
                 <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-              <i class="trigger"
-                 nz-icon
-                 [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-              ></i>
-          </span>
+                    <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" class="trigger"></i>
+                </span>
+                <span class="header-user">
+                    <header-user class="user"></header-user>
+                </span>
             </div>
         </nz-header>
         <nz-content>

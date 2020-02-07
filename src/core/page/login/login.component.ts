@@ -15,7 +15,6 @@ export class LoginComponent {
   form: FormGroup;
   // error = '';
   type = 0;
-  loading = false;
   count = 0;
 
   publicKey = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnVVB8ECm9XgSAgQ10Gn2dyhFCVissWi2guj62999e/gOaUVjYxKmyEtZoZOKGhRIxgzvh3gD8OGm+cpjp8oTGlvIj2q788miw8GMKcgVa4bmF4eIkSksDI7SyHvr6maVt5Cdnpe/S7fqi9XoDf4hJXshQ7TXrO1EQ8F2/9MAeRiS5+AYNtnyxSLoXtkTGYKWqCYyuqqPPCn5LrXKATrbzZhigrrzptUdGvaRpTmEnQc7hyrGKDAfRwqOG/FIx9BlKiG61pBxqfBmwcoZVm3pJYdulLZ9Nq95Q8J/SGuJ1uFMwQdSq1BcbCUDV5v4wZOeIORwJj98J+FiHvizEA1DrwIDAQAB';
@@ -25,7 +24,7 @@ export class LoginComponent {
     public msg: NzMessageService,
     private modalSrv: NzModalService,
     public titleService: Title,
-    private http: Http
+    public http: Http
   ) {
     this.titleService.setTitle('登录');
     this.form = fb.group({
@@ -85,14 +84,12 @@ export class LoginComponent {
     jsencrypt.setPublicKey(this.publicKey);
     const pwd = jsencrypt.encrypt(this.password.value);
 
-
     this.http.post('Login', {
       LoginName: this.userName.value,
       Password: pwd
     }).subscribe((d: any) => {
-
-      this.loading = false;
-      if (!d.Success) return;
+      localStorage.setItem('HaoToken', d.Jwt);
+      location.reload();
     });
   }
 }
