@@ -47,11 +47,13 @@
                 <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
                     <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" class="trigger"></i>
                 </span>
-                <span class="header-user" nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
-                    <nz-avatar nzSrc="../../../../assets//img/avatar.jpeg"></nz-avatar>
+                <div class="header-user" nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
                     戎国浩
                     <i nz-icon nzType="caret-down"></i>
-                </span>
+                </div>
+                <div class="header-avatar">
+                    <img src="../../../../assets//img/avatar.jpeg">
+                </div>
 
                 <nz-dropdown-menu #menu>
                     <ul nz-menu>

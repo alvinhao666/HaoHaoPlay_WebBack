@@ -76,10 +76,26 @@ nz-content {
 }
 
 .header-user {
-  display: block;
-  height        : 64px;
-  // font-size  : 15px;
-  // align-items: center;
-  float         : right;
+  height      : 64px;
+  line-height : 64px;
+  float       : right;
   margin-right: 25px;
+}
+
+.header-avatar {
+  position: relative;
+  height  : 64px;
+  width   : 32px;
+  float   : right;
+  margin-right: 3px;
+}
+
+.header-avatar>img {
+  position  : absolute;
+  width     : 32px;
+  height    : 32px;
+  top       : 50%;
+  margin-top: -16px;
+  border-radius: 50%;
+  overflow: hidden;
 }
