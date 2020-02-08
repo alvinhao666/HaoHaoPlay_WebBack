@@ -17,6 +17,7 @@ export class MainComponent implements OnInit {
 
   // 退出登录
   logout() {
+    localStorage.removeItem('HaoToken');
     location.reload();
   }
 }
