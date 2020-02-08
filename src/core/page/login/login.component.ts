@@ -90,6 +90,7 @@ export class LoginComponent {
     }).subscribe((d: any) => {
       localStorage.setItem('HaoToken', d.Jwt);
       location.reload();
+      // location.href=window.location.href; 
     });
   }
 }

@@ -1,9 +1,4 @@
-import { Component, OnInit, Type, NgModuleFactoryLoader } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { Core } from '../';
-
-import { environment } from '../../environments/environment';
+import { Component, OnInit, Type } from '@angular/core';
 
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
@@ -12,18 +7,9 @@ import { MainComponent } from './main/main.component';
     selector: 'app-root',
     template: `<ng-container *ngComponentOutlet='componentConent'></ng-container>`,
 })
-export class AppComponent extends Core implements OnInit {
-
-    redirectTos: any;
+export class AppComponent  implements OnInit {
 
     componentConent: Type<any>;
-
-    hash: string;
-
-    constructor() {
-
-        super();
-    }
 
     ngOnInit() {
         this.viewSwitching();

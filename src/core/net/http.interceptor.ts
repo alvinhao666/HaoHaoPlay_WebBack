@@ -15,7 +15,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Http } from './http';
-import { environment } from '../../environments/environment';
+import { environment } from '@env/environment';
 
 
 /**
