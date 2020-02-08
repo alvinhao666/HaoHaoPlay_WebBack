@@ -14,7 +14,7 @@ export type HttpObserve = 'body' | 'events' | 'response';
  */
 @Injectable({ providedIn: 'root' })
 
-export class Http {
+export class H_Http {
 
   constructor(private http: HttpClient) {
   }

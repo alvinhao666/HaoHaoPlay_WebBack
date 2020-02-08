@@ -10,11 +10,10 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
-import {HeaderUserComponent} from './main/header/user.component';
 import { AppComponent } from './app-root.component';
 import { Core } from '..';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CoreHttpInterceptor } from '../net/http.interceptor';
+import { H_HttpInterceptor } from '../net';
 
 registerLocaleData(zh);
 
@@ -22,8 +21,7 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent,
-    HeaderUserComponent
+    MainComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -36,7 +34,7 @@ registerLocaleData(zh);
   ],
   entryComponents: [LoginComponent, MainComponent],  // 动态加载的组件
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: CoreHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: H_HttpInterceptor, multi: true },
     { provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
 })

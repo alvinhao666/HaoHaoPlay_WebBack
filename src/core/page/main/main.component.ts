@@ -14,4 +14,9 @@ export class MainComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  // 退出登录
+  logout() {
+    location.reload();
+  }
 }

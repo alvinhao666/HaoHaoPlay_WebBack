@@ -7,26 +7,38 @@
             </a>
         </div>
         <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-            <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+            <li nz-submenu nzOpen nzTitle="设置" nzIcon="dashboard">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
-                        <a routerLink="/welcome">Welcome</a>
+                        <a routerLink="/user">用户管理</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/app">应用管理</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/dept">部门管理</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/app">角色管理</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/auth">权限管理</a>
+                    </li>
+                    <!-- <li nz-menu-item nzMatchRouter>
                         <a>Monitor</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
                         <a>Workplace</a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
-            <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+            <!-- <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
                         <a>Basic Form</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
         </ul>
     </nz-sider>
     <nz-layout>
@@ -35,9 +47,22 @@
                 <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
                     <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" class="trigger"></i>
                 </span>
-                <span class="header-user">
-                    <header-user class="user"></header-user>
+                <span class="header-user" nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
+                    <nz-avatar nzSrc="../../../../assets//img/avatar.jpeg"></nz-avatar>
+                    戎国浩
+                    <i nz-icon nzType="caret-down"></i>
                 </span>
+
+                <nz-dropdown-menu #menu>
+                    <ul nz-menu>
+                        <li nz-menu-item>
+                            <i nz-icon nzType="setting"></i> 个人设置
+                        </li>
+                        <li nz-menu-item (click)="logout()">
+                            <i nz-icon nzType="logout"></i> 退出登录
+                        </li>
+                    </ul>
+                </nz-dropdown-menu>
             </div>
         </nz-header>
         <nz-content>

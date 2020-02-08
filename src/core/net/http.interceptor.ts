@@ -14,7 +14,7 @@ import {
 import { Observable, of, throwError } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Http } from './http';
+import { H_Http } from './http';
 import { environment } from '@env/environment';
 
 
@@ -22,7 +22,7 @@ import { environment } from '@env/environment';
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
  */
 @Injectable()
-export class CoreHttpInterceptor implements HttpInterceptor {
+export class H_HttpInterceptor implements HttpInterceptor {
   constructor(private injector: Injector) { }
 
   get msg(): NzMessageService {
@@ -37,7 +37,7 @@ export class CoreHttpInterceptor implements HttpInterceptor {
     event: HttpResponse<any> | HttpErrorResponse,
   ): Observable<any> {
     // 可能会因为 `throw` 导出无法执行 `_HttpClient` 的 `end()` 操作
-    this.injector.get(Http).end();
+    this.injector.get(H_Http).end();
     // 业务处理：一些通用操作
     switch (event.status) {
       case 200:

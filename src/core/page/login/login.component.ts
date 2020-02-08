@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import * as JSEncryptModule from 'jsencrypt';
-import { Http } from '../../net/http';
+import { H_Http } from '../../net';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,7 @@ export class LoginComponent {
     public msg: NzMessageService,
     private modalSrv: NzModalService,
     public titleService: Title,
-    public http: Http
+    public http: H_Http
   ) {
     this.titleService.setTitle('登录');
     this.form = fb.group({
