@@ -16,6 +16,8 @@ import { Core } from '..';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { H_HttpInterceptor } from '../net';
 import { UserModule } from '../../app/setting-manage/user';
+import { ApplicationModule } from '../../app/setting-manage/application';
+import { AuthModule } from '../../app/setting-manage/auth';
 
 registerLocaleData(zh);
 
@@ -34,7 +36,9 @@ registerLocaleData(zh);
     HttpClientModule,
     BrowserAnimationsModule,
     NzDropDownModule,
-    UserModule
+    UserModule,
+    ApplicationModule,
+    AuthModule
   ],
   entryComponents: [LoginComponent, MainComponent],  // 动态加载的组件
   providers: [
