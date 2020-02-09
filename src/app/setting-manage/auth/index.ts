@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { AuthListComponent} from './auth.list';
+import { AuthListComponent} from './auth-list';
 
 @NgModule({
     imports: [

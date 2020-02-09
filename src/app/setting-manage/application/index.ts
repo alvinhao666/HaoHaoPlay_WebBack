@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { ApplicationListComponent} from './application.list';
+import { ApplicationListComponent} from './application-list';
 
 @NgModule({
     imports: [

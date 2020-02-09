@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserListComponent } from './user.list';
+import { AuthListComponent } from './auth-list';
+
 
 const routes: Routes = [
     {
         path: 'setting',
         data: { breadcrumb: '设置' },
         children: [
-            { path: 'user', component: UserListComponent, data: { breadcrumb: '用户管理' } }
+            { path: 'auth', component: AuthListComponent, data: { breadcrumb: '权限管理' } }
         ]
     }
 ];
@@ -16,7 +17,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes)],
 })
-export class UserRoutingModule {
+export class AuthRoutingModule {
 }
 
 
