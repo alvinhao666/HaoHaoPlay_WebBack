@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 
-import { NgZorroAntdModule, NZ_I18N, zh_CN, NzTabSetComponent } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
