@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthListComponent} from './auth.list';
+import { AuthListComponent } from './auth.list';
 
 
 const routes: Routes = [
-    { path: 'auth', component: AuthListComponent },
+    {
+        path: 'setting',
+        data: { breadcrumb: '设置' },
+        children: [
+            { path: 'auth', component: AuthListComponent, data: { breadcrumb: '权限管理' } }
+        ]
+    }
 ];
 
 @NgModule({

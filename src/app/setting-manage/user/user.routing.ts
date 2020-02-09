@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserListComponent} from './user.list';
-
+import { UserListComponent } from './user.list';
 
 const routes: Routes = [
-    { path: 'user', component: UserListComponent },
+    {
+        path: 'setting',
+        data: { breadcrumb: '设置' },
+        children: [
+            { path: 'user', component: UserListComponent, data: { breadcrumb: '用户管理' } }
+        ]
+    }
 ];
 
 @NgModule({

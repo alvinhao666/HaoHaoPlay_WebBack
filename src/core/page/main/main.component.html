@@ -9,11 +9,11 @@
         <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
             <li nz-submenu nzOpen nzTitle="设置" nzIcon="appstore">
                 <ul>
-                    <li nz-menu-item nzMatchRouter>
-                        <a routerLink="/user">用户管理</a>
+                    <li nz-menu-item [nzMatchRouter]="true">
+                        <a routerLink="/setting/user">用户管理</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
-                        <a routerLink="/app">应用管理</a>
+                        <a routerLink="/setting/app">应用管理</a>
                     </li>
                     <!-- <li nz-menu-item nzMatchRouter>
                         <a routerLink="/dept">部门管理</a>
@@ -22,7 +22,7 @@
                         <a routerLink="/app">角色管理</a>
                     </li> -->
                     <li nz-menu-item nzMatchRouter>
-                        <a routerLink="/auth">权限管理</a>
+                        <a routerLink="/setting/auth">权限管理</a>
                     </li>
                     <!-- <li nz-menu-item nzMatchRouter>
                         <a>Monitor</a>
@@ -93,9 +93,8 @@
             </div>
         </nz-header>
         <nz-content>
-            <nz-breadcrumb>
-                <nz-breadcrumb-item>设置</nz-breadcrumb-item>
-                <nz-breadcrumb-item>用户管理</nz-breadcrumb-item>
+            <nz-breadcrumb nzSeparator=">" [nzAutoGenerate]="true">
+
             </nz-breadcrumb>
             <div class="inner-content">
 
