@@ -9,6 +9,7 @@ export class MainComponent implements OnInit {
 
   isCollapsed = false;
 
+
   constructor() { }
 
   ngOnInit() {

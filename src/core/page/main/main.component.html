@@ -7,7 +7,7 @@
             </a>
         </div>
         <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-            <li nz-submenu nzOpen nzTitle="设置" nzIcon="dashboard">
+            <li nz-submenu nzOpen nzTitle="设置" nzIcon="appstore">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="/user">用户管理</a>
@@ -68,8 +68,13 @@
             </div>
         </nz-header>
         <nz-content>
+            <nz-breadcrumb>
+                <nz-breadcrumb-item>设置</nz-breadcrumb-item>
+                <nz-breadcrumb-item>用户管理</nz-breadcrumb-item>
+            </nz-breadcrumb>
             <div class="inner-content">
-                <!-- <router-outlet></router-outlet> -->
+
+                <router-outlet></router-outlet>
             </div>
         </nz-content>
     </nz-layout>

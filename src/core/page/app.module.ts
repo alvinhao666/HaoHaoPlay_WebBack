@@ -11,9 +11,11 @@ import zh from '@angular/common/locales/zh';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { AppComponent } from './app-root.component';
+import { AppRoutingModule } from './app-root.routing';
 import { Core } from '..';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { H_HttpInterceptor } from '../net';
+import { UserModule } from '../../app/setting-manage/user';
 
 registerLocaleData(zh);
 
@@ -24,13 +26,15 @@ registerLocaleData(zh);
     MainComponent
   ],
   imports: [
+    AppRoutingModule,
     ReactiveFormsModule,
     BrowserModule,
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzDropDownModule
+    NzDropDownModule,
+    UserModule
   ],
   entryComponents: [LoginComponent, MainComponent],  // 动态加载的组件
   providers: [
