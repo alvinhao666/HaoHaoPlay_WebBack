@@ -7,7 +7,7 @@
             </a>
         </div>
         <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-            <li nz-submenu nzOpen nzTitle="设置" nzIcon="appstore">
+            <li nz-submenu nzOpen [nzTitle]="title1">
                 <ul>
                     <li nz-menu-item [nzMatchRouter]="true">
                         <a routerLink="/setting/user">用户管理</a>
@@ -32,7 +32,8 @@
                     </li> -->
                 </ul>
             </li>
-            <li nz-submenu nzOpen nzTitle="电影" nzIcon="form">
+            <ng-template #title1><i nz-icon [nzType]="'appstore'"></i><span>设置</span></ng-template>
+            <li nz-submenu nzOpen [nzTitle]="title2">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
                         <a>内地</a>
@@ -48,7 +49,8 @@
                     </li>
                 </ul>
             </li>
-            <li nz-submenu nzOpen nzTitle="电视剧" nzIcon="form">
+            <ng-template #title2><i nz-icon [nzIconfont]="'icon-film'"></i><span>电影</span></ng-template>
+            <li nz-submenu nzOpen [nzTitle]="title3">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
                         <a>内地</a>
@@ -64,6 +66,7 @@
                     </li>
                 </ul>
             </li>
+            <ng-template #title3><i nz-icon [nzIconfont]="'icon-dianshiju'"></i><span>电视剧</span></ng-template>
         </ul>
     </nz-sider>
     <nz-layout>
