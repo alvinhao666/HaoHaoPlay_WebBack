@@ -1,0 +1,23 @@
+{
+  "id": "1632933",
+  "name": "haohaoplay_webback",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "180894",
+      "name": "电视剧",
+      "font_class": "dianshiju",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "397589",
+      "name": "film",
+      "font_class": "film",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    }
+  ]
+}
