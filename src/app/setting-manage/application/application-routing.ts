@@ -5,11 +5,8 @@ import { ApplicationListComponent } from './application-list';
 
 const routes: Routes = [
     {
-        path: 'setting',
-        data: { breadcrumb: '设置' },
-        children: [
-            { path: 'app', component: ApplicationListComponent, data: { breadcrumb: '应用管理' } }
-        ]
+        path: '',
+        component: ApplicationListComponent
     }
 ];
 

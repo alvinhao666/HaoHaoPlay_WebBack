@@ -5,11 +5,8 @@ import { AuthListComponent } from './auth-list';
 
 const routes: Routes = [
     {
-        path: 'setting',
-        data: { breadcrumb: '设置' },
-        children: [
-            { path: 'auth', component: AuthListComponent, data: { breadcrumb: '权限管理' } }
-        ]
+        path: '',
+        component: AuthListComponent
     }
 ];
 

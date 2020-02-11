@@ -15,9 +15,6 @@ import { AppRoutingModule } from './app-root.routing';
 import { Core } from '..';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { H_HttpInterceptor } from '../net';
-import { UserModule } from '../../app/setting-manage/user';
-import { ApplicationModule } from '../../app/setting-manage/application';
-import { AuthModule } from '../../app/setting-manage/auth';
 
 registerLocaleData(zh);
 
@@ -35,10 +32,7 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzDropDownModule,
-    UserModule,
-    ApplicationModule,
-    AuthModule
+    NzDropDownModule
   ],
   entryComponents: [LoginComponent, MainComponent],  // 动态加载的组件
   providers: [
