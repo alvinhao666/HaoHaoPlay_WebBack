@@ -89,9 +89,10 @@ export class LoginComponent {
       Password: pwd
     }).subscribe((d: any) => {
       localStorage.setItem('HaoToken', d.Jwt);
+      // location.reload();
+      // location.href = location.href.split('/')[0] + '/setting';
+      // this.router.navigateByUrl('setting');
       location.reload();
-      // location.href=window.location.href; 
-      // this.router.navigateByUrl('main');
     });
   }
 }

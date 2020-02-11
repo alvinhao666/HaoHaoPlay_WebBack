@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  // {
-  //   path: 'login',
-  //   component: LoginComponent
-  // },
-  // {
-  //   path: 'login',
-  //   component: LoginComponent
-  // },
+  {
+    path: '',
+    loadChildren: '../../app/dashboard/index#DashboardModule'
+  },
   {
     path: 'setting',
     data: { breadcrumb: '设置' },
@@ -20,10 +15,6 @@ const routes: Routes = [
       { path: 'auth', loadChildren: '../../app/setting-manage/auth/index#AuthModule', data: { breadcrumb: '权限管理' } }
     ]
   }
-  // {
-  //   path: '**',
-  //   redirectTo: 'setting',
-  // },
 ];
 
 @NgModule({

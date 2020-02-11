@@ -10,6 +10,7 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
+import { Exception404Component } from './exception/404.component';
 import { AppComponent } from './app-root.component';
 import { AppRoutingModule } from './app-root.routing';
 import { Core } from '..';
@@ -22,7 +23,8 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    Exception404Component
   ],
   imports: [
     AppRoutingModule,

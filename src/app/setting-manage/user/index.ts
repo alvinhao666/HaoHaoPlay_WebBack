@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { UserListComponent } from './user-list';
+import { UserListComponent } from './user-list.component';
 
 import { UserRoutingModule } from './user-routing';
 
