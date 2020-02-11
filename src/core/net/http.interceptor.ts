@@ -115,7 +115,7 @@ export class H_HttpInterceptor implements HttpInterceptor {
     // 统一加上服务端前缀
     let url = req.url;
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
-      url = environment.SERVER_URL + url;
+      url = environment.api_url + url;
     }
     let update = { url: url };
     const token = this.getToken();
