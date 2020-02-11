@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -10,7 +11,7 @@ export class MainComponent implements OnInit {
   isCollapsed = false;
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -19,6 +20,6 @@ export class MainComponent implements OnInit {
   // 退出登录
   logout() {
     localStorage.removeItem('HaoToken');
-    location.reload();
+    this.router.navigateByUrl('login');
   }
 }

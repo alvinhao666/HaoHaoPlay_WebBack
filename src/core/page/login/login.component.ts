@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import * as JSEncryptModule from 'jsencrypt';
 import { H_Http } from '../../net';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,10 +23,10 @@ export class LoginComponent {
     fb: FormBuilder,
     public msg: NzMessageService,
     private modalSrv: NzModalService,
-    public titleService: Title,
-    public http: H_Http
+    public http: H_Http,
+    private router: Router
   ) {
-    this.titleService.setTitle('登录');
+
     this.form = fb.group({
       userName: [null, [Validators.required]],
       password: [null, Validators.required],
@@ -89,8 +89,9 @@ export class LoginComponent {
       Password: pwd
     }).subscribe((d: any) => {
       localStorage.setItem('HaoToken', d.Jwt);
-      location.reload();
+      // location.reload();
       // location.href=window.location.href; 
+      this.router.navigateByUrl('main');
     });
   }
 }
