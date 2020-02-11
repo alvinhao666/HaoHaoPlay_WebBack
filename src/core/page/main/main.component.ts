@@ -20,6 +20,7 @@ export class MainComponent implements OnInit {
   // 退出登录
   logout() {
     localStorage.removeItem('HaoToken');
-    this.router.navigateByUrl('login');
+    // this.router.navigateByUrl('login');
+    location.reload();
   }
 }
