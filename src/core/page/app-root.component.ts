@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit() {
-        this.titleService.setTitle('好好玩');
+        this.titleService.setTitle('好好玩后台系管理统');
         // this.viewSwitching();
     }
 
