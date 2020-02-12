@@ -90,9 +90,9 @@ export class LoginComponent {
     }).subscribe((d: any) => {
       localStorage.setItem('HaoToken', d.Jwt);
       // location.reload();
-      // location.href = location.href.split('/')[0] + '/setting';
+      location.href = location.href.split('/')[0] + '/main/dashboard';
       // this.router.navigateByUrl('setting');
-      location.reload();
+      // location.reload();
     });
   }
 }

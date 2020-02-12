@@ -1,7 +1,7 @@
 <nz-layout class="app-layout">
     <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
         <div class="sidebar-logo">
-            <a routerLink="/">
+            <a routerLink="dashboard">
                 <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
                 <h1>HaoHaoPlay</h1>
             </a>
@@ -10,10 +10,10 @@
             <li nz-submenu nzOpen [nzTitle]="title1">
                 <ul>
                     <li nz-menu-item [nzMatchRouter]="true">
-                        <a routerLink="setting/user">用户管理</a>
+                        <a routerLink="user">用户管理</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
-                        <a routerLink="setting/app">应用管理</a>
+                        <a routerLink="app">应用管理</a>
                     </li>
                     <!-- <li nz-menu-item nzMatchRouter>
                         <a routerLink="/dept">部门管理</a>
@@ -22,7 +22,7 @@
                         <a routerLink="/app">角色管理</a>
                     </li> -->
                     <li nz-menu-item nzMatchRouter>
-                        <a routerLink="setting/auth">权限管理</a>
+                        <a routerLink="auth">权限管理</a>
                     </li>
                     <!-- <li nz-menu-item nzMatchRouter>
                         <a>Monitor</a>
