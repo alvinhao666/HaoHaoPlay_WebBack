@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { ApplicationListComponent} from './application-list.component';
 
-import { ApplicationRoutingModule} from './application-routing';
+import { ApplicationRoutingModule} from './application.route';
 
 @NgModule({
     imports: [

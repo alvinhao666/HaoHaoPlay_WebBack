@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { UserListComponent } from './user-list.component';
 
-import { UserRoutingModule } from './user-routing';
+import { UserRoutingModule } from './user.route';
 
 @NgModule({
     imports: [
