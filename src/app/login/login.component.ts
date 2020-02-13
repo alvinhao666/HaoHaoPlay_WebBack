@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import * as JSEncryptModule from 'jsencrypt';
-import { H_Http } from '../../net';
+import { H_Http } from '@core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -90,8 +90,8 @@ export class LoginComponent {
     }).subscribe((d: any) => {
       localStorage.setItem('HaoToken', d.Jwt);
       // location.reload();
-      location.href = location.href.split('/')[0] + '/main/dashboard';
-      // this.router.navigateByUrl('setting');
+      // location.href = location.href.split('/')[0] + '#/main/dashboard';
+      this.router.navigateByUrl('main/dashboard');
       // location.reload();
     });
   }

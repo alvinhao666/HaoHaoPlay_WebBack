@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
                     }
                 } else {
                     if (evt.url !== '/' && evt.url !== '/login') {
+                        this.msg.error('请先登录系统');
                         this.goTo('/login');
                     }
                 }

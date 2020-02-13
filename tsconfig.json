@@ -21,6 +21,12 @@
     "paths": {
       "@env/*": [
         "src/environments/*"
+      ],
+      "@core": [
+        "src/core/index"
+      ],
+      "@core/*": [
+        "src/core/*"
       ]
     }
   },
