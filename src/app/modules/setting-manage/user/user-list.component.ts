@@ -33,19 +33,37 @@ export class UserListComponent implements OnInit {
     sortKey = '';
 
 
+    get sName() {
+        return this.searchForm.controls.sName;
+    }
+
+    get sPhone() {
+        return this.searchForm.controls.sPhone;
+    }
+
+    get sEnabled() {
+        return this.searchForm.controls.sEnabled;
+    }
+
+    get sLastLoginTime() {
+        return this.searchForm.controls.sLastLoginTime;
+    }
+
+
     constructor(
         private fb: FormBuilder,
         private http: H_Http,
         // private drawerService: NzDrawerService
     ) {
-        // this.searchForm = this.fb.group({
-        //     sName: [null],
-        //     sPhone: [null],
-        //     // sGender: [null],
-        //     sEnabled: [null],
-        //     sLastLoginTime: [null]
-        // });
+        this.searchForm = this.fb.group({
+            sName: [null],
+            sPhone: [null],
+            sGender: [null],
+            sEnabled: [null],
+            sLastLoginTime: [null]
+        });
     }
+
 
 
     ngOnInit() {
@@ -113,11 +131,11 @@ export class UserListComponent implements OnInit {
         //     //     value: this.value
         //     // }
         //   });
-      
+
         //   drawerRef.afterOpen.subscribe(() => {
         //     console.log('Drawer(Component) open');
         //   });
-      
+
         //   drawerRef.afterClose.subscribe(data => {
         //     console.log(data);
         //     if (typeof data === 'string') {
