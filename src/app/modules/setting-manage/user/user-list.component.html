@@ -35,33 +35,40 @@
                         </nz-range-picker>
                         <!-- <nz-date-picker nzPlaceHolder="开始时间"> </nz-date-picker>
                         <nz-date-picker nzPlaceHolder="结束时间"> </nz-date-picker> -->
+
                     </nz-form-control>
                 </nz-form-item>
             </div>
+
+        </div>
+        <div nz-row>
+            <div nz-col class="operater">
+                <button nz-button [nzType]="'primary'" (click)="addUser()">
+                    <i nz-icon nzType="plus"></i>
+                    <span>添加</span>
+                </button>
+                <button nz-button nz-dropdown [nzDropdownMenu]="moreOperate" [nzPlacement]="'bottomRight'">
+                    更多操作
+                    <i nz-icon nzType="down"></i>
+                </button>
+                <nz-dropdown-menu #moreOperate>
+                    <ul nz-menu>
+                        <li nz-menu-item (click)="export()">导出</li>
+                        <li nz-menu-item (click)="exportTemplate()">导出模板</li>
+                    </ul>
+                </nz-dropdown-menu>
+                <button nz-button [nzType]="'default'">
+                    <i nz-icon nzType="upload"></i>
+                    <span>上传Excel</span>
+                </button>
+                <div class="fr">
+                    <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="http.loading" (click)="getUsers()">查询</button>
+                    <button nz-button type="reset" style="margin-right: 0;">重置</button>
+                </div>
+            </div>
         </div>
     </form>
-    <div nz-row>
-        <div nz-col>
-            <button nz-button [nzType]="'primary'">
-                <i nz-icon nzType="plus"></i>
-                <span>添加</span>
-            </button>
-            <button nz-button nz-dropdown [nzDropdownMenu]="moreOperate" [nzPlacement]="'bottomRight'">
-                更多操作
-                <i nz-icon nzType="down"></i>
-            </button>
-            <nz-dropdown-menu #moreOperate>
-                <ul nz-menu>
-                    <li nz-menu-item (click)="export()">导出</li>
-                    <li nz-menu-item (click)="exportTemplate()">导出模板</li>
-                </ul>
-            </nz-dropdown-menu>
-            <button nz-button [nzType]="'default'">
-                <i nz-icon nzType="upload"></i>
-                <span>上传Excel</span>
-            </button>
-        </div>
-    </div>
+
     <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
         [nzLoading]="http.loading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ x:'1475px',y: '450px' }">
         <thead (nzSortChange)="sort($event)" nzSingleSort>
@@ -106,7 +113,7 @@
             </tr>
         </tbody>
     </nz-table>
-    <ng-template #totalTemplate let-total>
+    <ng-template #totalTemplate>
         共{{total}}条
     </ng-template>
 </nz-card>

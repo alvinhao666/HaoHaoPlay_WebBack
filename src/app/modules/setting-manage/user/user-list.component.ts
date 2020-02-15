@@ -1,6 +1,8 @@
 import { OnInit, Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { H_Http } from '@core';
+// import { UserEditComponent } from './edit/user-edit.componnent';
+// import { NzDrawerService } from 'ng-zorro-antd';
 
 @Component({
     selector: 'setting-user-list',
@@ -33,7 +35,8 @@ export class UserListComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private http: H_Http
+        private http: H_Http,
+        // private drawerService: NzDrawerService
     ) {
         // this.searchForm = this.fb.group({
         //     sName: [null],
@@ -100,6 +103,27 @@ export class UserListComponent implements OnInit {
                 this.pageSize = d.PageSize;
                 this.total = d.TotalCount;
             });
+    }
+
+    addUser() {
+        // const drawerRef = this.drawerService.create<UserEditComponent, { value: string }, string>({
+        //     nzTitle: '新增用户',
+        //     nzContent: UserEditComponent
+        //     // nzContentParams: {
+        //     //     value: this.value
+        //     // }
+        //   });
+      
+        //   drawerRef.afterOpen.subscribe(() => {
+        //     console.log('Drawer(Component) open');
+        //   });
+      
+        //   drawerRef.afterClose.subscribe(data => {
+        //     console.log(data);
+        //     if (typeof data === 'string') {
+        //     //   this.value = data;
+        //     }
+        //   });
     }
 
 }
