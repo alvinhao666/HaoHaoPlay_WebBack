@@ -1,1 +1,87 @@
-user works
+<nz-card [nzBordered]="false">
+    <form nz-form [nzLayout]="'inline'" class="search__form">
+        <div nz-row nzType="flex">
+            <div nz-col nzSpan="4">
+                <nz-form-item>
+                    <nz-form-label>姓名</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input id="sName" autocomplete="off">
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="4">
+                <nz-form-item>
+                    <nz-form-label>手机号</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input id="sPhone" autocomplete="off">
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="4">
+                <nz-form-item>
+                    <nz-form-label>状态</nz-form-label>
+                    <nz-form-control>
+                        <nz-select [nzPlaceHolder]="'请选择'" nzId="sEnabled" [nzShowSearch]="true">
+                            <nz-option *ngFor="let i of statuses; let idx = index" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="8">
+                <nz-form-item>
+                    <nz-form-label>最后登录时间</nz-form-label>
+                    <nz-form-control>
+                        <nz-range-picker [nzShowTime]="{ nzFormat: 'HH:mm' }" nzFormat="yyyy-MM-dd HH:mm"></nz-range-picker>
+                        <!-- <nz-date-picker nzPlaceHolder="开始时间"> </nz-date-picker>
+                        <nz-date-picker nzPlaceHolder="结束时间"> </nz-date-picker> -->
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+    <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
+        [nzLoading]="http.loading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ x:'1475px',y: '450px' }">
+        <thead (nzSortChange)="sort($event)" nzSingleSort>
+            <tr>
+                <th nzLeft="0px" nzWidth="60px">序号</th>
+                <th nzLeft="60px" nzWidth="115px">姓名</th>
+                <th nzWidth="100px" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别</th>
+                <th nzWidth="100px" nzShowSort nzSortKey="0">年龄</th>
+                <th nzWidth="150px">手机号</th>
+                <th nzWidth="200px">邮箱</th>
+                <th nzWidth="100px">微信</th>
+                <th nzWidth="100px">状态</th>
+                <th nzWidth="200px">最后登录时间</th>
+                <th nzWidth="200px">最后登录地点</th>
+                <th nzRight="0px" nzWidth="150px">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let d of nzTable.data;let idx=index;">
+                <td nzLeft="0px">{{idx+1}}</td>
+                <td nzLeft="60px">{{d.Name}}</td>
+                <td nzWidth="100px">{{d.GenderString}}</td>
+                <td nzWidth="100px">{{d.Age}}</td>
+                <td nzWidth="150px">{{d.Phone}}</td>
+                <td nzWidth="200px">{{d.Email}}</td>
+                <td nzWidth="150px">{{d.WeChat}}</td>
+                <td nzWidth="100px">
+                    <p [class.text-success-light]="d.Enabled" [class.text-error-light]="!d.Enabled">{{d.EnabledString}}</p>
+                </td>
+                <td nzWidth="200px">{{d.LastLoginTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td nzWidth="200px">{{d.LastLoginIP}}</td>
+                <td nzRight="0px">
+                    <a href="javascript:;" (click)="edit(d.Id,modalContentEdit)">编辑</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a href="javascript:;" (click)="disable(d.Id)" *ngIf="d.Enabled">注销</a>
+                    <a href="javascript:;" (click)="enable(d.Id)" *ngIf="!d.Enabled">启用</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a href="javascript:;" (click)="delete(d.Id)">删除</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+    <ng-template #totalTemplate let-total>
+        共{{total}}条
+    </ng-template>
+</nz-card>
