@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserListComponent } from './user-list.component';
@@ -15,6 +15,7 @@ import { UserRoutingModule } from './user.route';
         NgZorroAntdModule,
         UserRoutingModule
     ],
+    providers: [DatePipe],
     declarations: [UserListComponent, UserEditComponent],
     entryComponents: [UserEditComponent]
 })

@@ -57,18 +57,18 @@ export class H_HttpInterceptor implements HttpInterceptor {
               this.msg.error(body.ErrorMsg);
             }
             if (body.ErrorCode > 100000 && body.ErrorCode < 100006) {
-              this.goTo('/passport/login');
+              this.goTo('login');
               //todo 清除token
             }
             // 继续抛出错误中断后续所有 Pipe、subscribe 操作，因此：
             // this.http.get('/').subscribe() 并不会触发
-            // return throwError({});
-            return of(new HttpResponse(Object.assign(event, { body: body })));
+            return throwError({});
+            //return of(new HttpResponse(Object.assign(event, { body: body })));
           }
         }
         break;
       case 401: // 未登录状态码
-        this.goTo('/passport/login');
+        this.goTo('login');
         break;
       case 403:
       case 404:

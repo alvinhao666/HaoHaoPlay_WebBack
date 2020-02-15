@@ -1,6 +1,8 @@
 import { OnInit, Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { H_Http } from '@core';
+import { DatePipe } from '@angular/common';
+import { environment} from '@env/environment';
 // import { UserEditComponent } from './edit/user-edit.componnent';
 // import { NzDrawerService } from 'ng-zorro-antd';
 
@@ -53,6 +55,7 @@ export class UserListComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private http: H_Http,
+        private datePipe: DatePipe,
         // private drawerService: NzDrawerService
     ) {
         this.searchForm = this.fb.group({
@@ -104,12 +107,12 @@ export class UserListComponent implements OnInit {
     getUsers() {
         this.http
             .get('User', {
-                // Name: this.sName.value || '',
-                // Phone: this.sPhone.value || '',
+                Name: this.sName.value || '',
+                Phone: this.sPhone.value || '',
                 Gender: this.sGender,
-                // Enabled: this.sEnabled.value || '',
-                // LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd HH:mm') || '',
-                // LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd HH:mm') || '',
+                Enabled: this.sEnabled.value || '',
+                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd HH:mm') || '',
+                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd HH:mm') || '',
                 PageIndex: this.pageIndex,
                 PageSize: this.pageSize,
                 SortField: this.sortKey,
@@ -122,6 +125,38 @@ export class UserListComponent implements OnInit {
                 this.total = d.TotalCount;
             });
     }
+
+    export() {
+        this.http
+          .get('User/ExportUser', {
+            Name: this.sName.value || '',
+            Phone: this.sPhone.value || '',
+            Gender: this.sGender,
+            Enabled: this.sEnabled.value || '',
+            LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd HH:mm') || '',
+            LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd HH:mm') || '',
+            OrderFileds: this.sortValue && (this.sortKey + this.sortValue)
+          })
+          .subscribe((d: any) => {
+            const a = document.createElement('a'); //创建一个<a></a>标签
+            a.href = `${environment.api_url}ExportExcel/${d.FileName}?Authorization=${this.getToken()}&FileId=${d.FileId}`;
+            a.download = '系统用户.xlsx';  //文件名称   //跨域的时候 名字不会改
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          });
+      }
+    
+      exportTemplate() {
+        const a = document.createElement('a'); //创建一个<a></a>标签
+        a.href = `${environment.api_url}template/user.xlsx?Authorization=${this.getToken()}`;
+        a.download = '用户模板.xlsx';  //文件名称   //跨域的时候 名字不会改
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
 
     addUser() {
         // const drawerRef = this.drawerService.create<UserEditComponent, { value: string }, string>({
@@ -142,6 +177,11 @@ export class UserListComponent implements OnInit {
         //     //   this.value = data;
         //     }
         //   });
+    }
+
+
+    private getToken(): string {
+        return localStorage.getItem('HaoToken');
     }
 
 }
