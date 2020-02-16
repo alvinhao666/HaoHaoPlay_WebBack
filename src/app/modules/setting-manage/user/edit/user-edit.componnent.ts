@@ -160,6 +160,7 @@ export class UserEditComponent implements OnInit {
     reset() {
         this.validateForm.reset();
         this.isEdit = false;
+        this.userId = null;
     }
 }
 
