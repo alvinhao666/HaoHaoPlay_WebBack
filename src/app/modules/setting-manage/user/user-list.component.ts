@@ -2,7 +2,8 @@ import { OnInit, Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { H_Http } from '@core';
 import { DatePipe } from '@angular/common';
-import { environment} from '@env/environment';
+import { environment } from '@env/environment';
+import { UploadFile } from 'ng-zorro-antd';
 // import { UserEditComponent } from './edit/user-edit.componnent';
 // import { NzDrawerService } from 'ng-zorro-antd';
 
@@ -50,6 +51,9 @@ export class UserListComponent implements OnInit {
     get sLastLoginTime() {
         return this.searchForm.controls.sLastLoginTime;
     }
+
+    uploading = false;
+    fileList: UploadFile[] = [];
 
 
     constructor(
@@ -128,27 +132,27 @@ export class UserListComponent implements OnInit {
 
     export() {
         this.http
-          .get('User/ExportUser', {
-            Name: this.sName.value || '',
-            Phone: this.sPhone.value || '',
-            Gender: this.sGender,
-            Enabled: this.sEnabled.value || '',
-            LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd HH:mm') || '',
-            LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd HH:mm') || '',
-            OrderFileds: this.sortValue && (this.sortKey + this.sortValue)
-          })
-          .subscribe((d: any) => {
-            const a = document.createElement('a'); //创建一个<a></a>标签
-            a.href = `${environment.api_url}ExportExcel/${d.FileName}?Authorization=${this.getToken()}&FileId=${d.FileId}`;
-            a.download = '系统用户.xlsx';  //文件名称   //跨域的时候 名字不会改
-            a.style.display = 'none';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-          });
-      }
-    
-      exportTemplate() {
+            .get('User/ExportUser', {
+                Name: this.sName.value || '',
+                Phone: this.sPhone.value || '',
+                Gender: this.sGender,
+                Enabled: this.sEnabled.value || '',
+                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd HH:mm') || '',
+                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd HH:mm') || '',
+                OrderFileds: this.sortValue && (this.sortKey + this.sortValue)
+            })
+            .subscribe((d: any) => {
+                const a = document.createElement('a'); //创建一个<a></a>标签
+                a.href = `${environment.api_url}ExportExcel/${d.FileName}?Authorization=${this.getToken()}&FileId=${d.FileId}`;
+                a.download = '系统用户.xlsx';  //文件名称   //跨域的时候 名字不会改
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            });
+    }
+
+    exportTemplate() {
         const a = document.createElement('a'); //创建一个<a></a>标签
         a.href = `${environment.api_url}template/user.xlsx?Authorization=${this.getToken()}`;
         a.download = '用户模板.xlsx';  //文件名称   //跨域的时候 名字不会改
@@ -156,7 +160,7 @@ export class UserListComponent implements OnInit {
         document.body.appendChild(a);
         a.click();
         a.remove();
-      }
+    }
 
     addUser() {
         // const drawerRef = this.drawerService.create<UserEditComponent, { value: string }, string>({
@@ -177,6 +181,17 @@ export class UserListComponent implements OnInit {
         //     //   this.value = data;
         //     }
         //   });
+    }
+
+
+    beforeUpload = (file: UploadFile): boolean => {
+        console.log(file)
+        const isExist = this.fileList.find(a => a.name === file.name);
+        if (!isExist) {
+            this.fileList = this.fileList.concat(file);
+        }
+
+        return false;
     }
 
 

@@ -38,30 +38,30 @@
             </div>
 
         </div>
-        <div nz-row>
-            <div nz-col class="operater">
-                <button nz-button [nzType]="'primary'" (click)="addUser()">
-                    <i nz-icon nzType="plus"></i>
-                    <span>添加</span>
-                </button>
-                <button nz-button nz-dropdown [nzDropdownMenu]="moreOperate" [nzPlacement]="'bottomRight'">
-                    更多操作
-                    <i nz-icon nzType="down"></i>
-                </button>
-                <nz-dropdown-menu #moreOperate>
-                    <ul nz-menu>
-                        <li nz-menu-item (click)="export()">导出</li>
-                        <li nz-menu-item (click)="exportTemplate()">导出模板</li>
-                    </ul>
-                </nz-dropdown-menu>
-                <button nz-button [nzType]="'default'">
-                    <i nz-icon nzType="upload"></i>
-                    <span>上传Excel</span>
-                </button>
+        <div nz-row class="operater">
+            <div nz-col>
+                <div class="fl">
+                    <button nz-button [nzType]="'primary'" (click)="addUser()">
+                        <i nz-icon nzType="plus"></i>
+                        <span>添加</span>
+                    </button>
+                    <button nz-button nz-dropdown [nzDropdownMenu]="moreOperate" [nzPlacement]="'bottomRight'">
+                        更多操作
+                        <i nz-icon nzType="down"></i>
+                    </button>
+                    <nz-dropdown-menu #moreOperate>
+                        <ul nz-menu>
+                            <li nz-menu-item (click)="export()">导出</li>
+                            <li nz-menu-item (click)="exportTemplate()">导出模板</li>
+                        </ul>
+                    </nz-dropdown-menu>
+                </div>
+
                 <div class="fr">
                     <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="http.loading" (click)="getUsers()">查询</button>
                     <button nz-button type="reset" class="btn-reset">重置</button>
                 </div>
+
             </div>
         </div>
     </form>
@@ -113,4 +113,18 @@
     <ng-template #totalTemplate>
         共{{total}}条
     </ng-template>
+
+    <div nz-row nzType="flex">
+        <div nz-col nzSpan="4">
+            <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload" [nzFileType]="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">
+                <button nz-button [nzType]="'default'">
+                    <i nz-icon nzType="upload"></i>
+                    <span>选择excel文件</span>
+                </button>
+            </nz-upload>
+            <button nz-button [nzType]="'primary'" *ngIf="fileList?.length>0">
+                <span>导入</span>
+            </button>
+        </div>
+    </div>
 </nz-card>
