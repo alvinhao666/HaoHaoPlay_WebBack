@@ -4,6 +4,7 @@ import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import * as JSEncryptModule from 'jsencrypt';
 import { H_Http } from '@core';
 import { Router } from '@angular/router';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-login',
@@ -88,7 +89,7 @@ export class LoginComponent {
       LoginName: this.userName.value,
       Password: pwd
     }).subscribe((d: any) => {
-      localStorage.setItem('HaoToken', d.Jwt);
+      localStorage.setItem(environment.token_key, d.Jwt);
       // location.reload();
       // location.href = location.href.split('/')[0] + '#/main/dashboard';
       this.router.navigateByUrl('main/dashboard');

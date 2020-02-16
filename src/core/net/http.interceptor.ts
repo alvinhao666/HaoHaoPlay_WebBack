@@ -57,6 +57,7 @@ export class H_HttpInterceptor implements HttpInterceptor {
               this.msg.error(body.ErrorMsg);
             }
             if (body.ErrorCode > 100000 && body.ErrorCode < 100006) {
+              localStorage.removeItem(environment.token_key);
               this.goTo('login');
               //todo 清除token
             }
@@ -132,6 +133,6 @@ export class H_HttpInterceptor implements HttpInterceptor {
   }
 
   private getToken(): string {
-    return localStorage.getItem('HaoToken');
+    return localStorage.getItem(environment.token_key);
   }
 }

@@ -181,7 +181,7 @@ export class UserListComponent implements OnInit {
 
 
     private getToken(): string {
-        return localStorage.getItem('HaoToken');
+        return localStorage.getItem(environment.token_key);
     }
 
 }

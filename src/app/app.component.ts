@@ -2,6 +2,7 @@ import { Component, OnInit, Type } from '@angular/core';
 
 import { Router, NavigationError, NavigationCancel, NavigationStart } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
+import { environment } from '@env/environment';
 
 @Component({
     selector: 'app-root',
@@ -59,7 +60,7 @@ export class AppComponent implements OnInit {
     }
 
     private getToken(): string {
-        return localStorage.getItem('HaoToken');
+        return localStorage.getItem(environment.token_key);
     }
 
 

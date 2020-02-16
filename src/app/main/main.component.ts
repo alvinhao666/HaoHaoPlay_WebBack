@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-main',
@@ -19,7 +20,7 @@ export class MainComponent implements OnInit {
 
   // 退出登录
   logout() {
-    localStorage.removeItem('HaoToken');
+    localStorage.removeItem(environment.token_key);
     location.href = location.href.split('/')[0];
     // location.reload();
   }
