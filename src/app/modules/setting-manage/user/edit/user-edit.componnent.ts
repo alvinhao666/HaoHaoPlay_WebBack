@@ -20,6 +20,8 @@ export class UserEditComponent implements OnInit {
 
     isEdit = false;
 
+    userId: any = null;
+
     validateForm: FormGroup;
 
     formatterAge = value => value && `${value}`;
@@ -88,28 +90,43 @@ export class UserEditComponent implements OnInit {
         this.reset();
     }
 
-    add() {
+    save() {
         if (!this.validate()) return;
-        this.saveUser();
+        if (this.isEdit && this.userId) {
+            this.editUser(this.userId);
+        } else {
+            this.addUser();
+        }
     }
 
-    saveUser() {
-        let data = {
-            Name: this.fName.value,
-            Gender: parseInt(this.fGender.value, 10),
-            Age: this.fAge.value,
-            Phone: this.fPhone.value,
-            Email: this.fEmail.value,
-            WeChat: this.fWechat.value
-        };
-        if (!this.isEdit) {
-            data = Object.assign(data, {
-                LoginName: this.fLoginName.value,
-                Password: this.fPassword.value
-            });
-        }
+    addUser() {
         this.http
-            .post('User')
+            .post('User', {
+                LoginName: this.fLoginName.value,
+                Password: this.fPassword.value,
+                Name: this.fName.value,
+                Gender: parseInt(this.fGender.value, 10),
+                Age: this.fAge.value,
+                Phone: this.fPhone.value,
+                Email: this.fEmail.value,
+                WeChat: this.fWechat.value
+            })
+            .subscribe(() => {
+                this.onAdd.emit();
+                this.reset();
+            });
+    }
+
+    editUser(id: any) {
+        this.http
+            .put(`User/${id}`, {
+                Name: this.fName.value,
+                Gender: parseInt(this.fGender.value, 10),
+                Age: this.fAge.value,
+                Phone: this.fPhone.value,
+                Email: this.fEmail.value,
+                WeChat: this.fWechat.value
+            })
             .subscribe(() => {
                 this.onAdd.emit();
                 this.reset();
@@ -125,12 +142,14 @@ export class UserEditComponent implements OnInit {
             this.validateForm.get('fPhone').setValue(d.Phone);
             this.validateForm.get('fEmail').setValue(d.Email);
             this.validateForm.get('fWechat').setValue(d.WeChat);
+            this.userId = d.Id;
         });
     }
 
     validate(): boolean {
         let flag = true;
         for (const key of Object.keys(this.validateForm.controls)) {
+            if (this.isEdit && (key === 'fLoginName' || key === 'fPassword' || key === 'fRePassword')) continue;
             this.validateForm.controls[key].markAsDirty();
             this.validateForm.controls[key].updateValueAndValidity();
             flag = flag && !this.validateForm.controls[key].invalid;
