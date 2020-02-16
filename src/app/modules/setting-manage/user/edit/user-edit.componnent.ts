@@ -1,16 +1,26 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'setting-user-edit',
+    selector: 'slider-user',
     templateUrl: './user-edit.component.html',
     styleUrls: ['./user-edit.component.less']
 })
 
 export class UserEditComponent implements OnInit {
 
+    @Input()
+    visible = false;
 
-    ngOnInit(): void {
+
+    constructor() {
 
     }
 
+    ngOnInit() {
+
+    }
+
+    close() {
+        this.visible = false;
+    }
 }

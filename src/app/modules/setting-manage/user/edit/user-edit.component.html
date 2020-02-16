@@ -1,1 +1,9 @@
-usereditworks
+<nz-drawer [nzWidth]="320" [nzVisible]="visible" nzTitle="添加用户" (nzOnClose)="close()">
+    <form nz-form>
+        usereditworks
+    </form>
+    <div class="footer">
+        <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>取消</span></button>
+        <button type="button" (click)="close()" class="ant-btn ant-btn-primary"><span>确认</span></button>
+    </div>
+</nz-drawer>

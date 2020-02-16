@@ -35,6 +35,7 @@ export class UserListComponent implements OnInit {
     sortValue = '';
     sortKey = '';
 
+    visible = false;
 
     get sName() {
         return this.searchForm.controls.sName;
@@ -181,16 +182,15 @@ export class UserListComponent implements OnInit {
         //     //   this.value = data;
         //     }
         //   });
+        this.visible = true;
     }
 
 
     beforeUpload = (file: UploadFile): boolean => {
-        console.log(file)
         const isExist = this.fileList.find(a => a.name === file.name);
         if (!isExist) {
             this.fileList = this.fileList.concat(file);
         }
-
         return false;
     }
 
