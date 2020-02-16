@@ -80,7 +80,7 @@
                 <th nzWidth="100px">微信</th>
                 <th nzWidth="100px">状态</th>
                 <th nzWidth="200px">最后登录时间</th>
-                <th nzWidth="200px">最后登录地点</th>
+                <th nzWidth="200px">最后登录IP</th>
                 <th nzRight="0px" nzWidth="150px">操作</th>
             </tr>
         </thead>
@@ -94,7 +94,7 @@
                 <td nzWidth="200px">{{d.Email}}</td>
                 <td nzWidth="150px">{{d.WeChat}}</td>
                 <td nzWidth="100px">
-                    <p [class.text-success-light]="d.Enabled" [class.text-error-light]="!d.Enabled">{{d.EnabledString}}
+                    <p [class.success]="d.Enabled" [class.error]="!d.Enabled">{{d.EnabledString}}
                     </p>
                 </td>
                 <td nzWidth="200px">{{d.LastLoginTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
@@ -116,17 +116,17 @@
 
     <div nz-row nzType="flex">
         <div nz-col nzSpan="4">
+            <button nz-button [nzType]="'primary'" [disabled]="fileList.length == 0" style="margin-right: 8px">
+                <span>导入</span>
+            </button>
             <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload" [nzFileType]="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">
                 <button nz-button [nzType]="'default'">
                     <i nz-icon nzType="upload"></i>
                     <span>选择excel文件</span>
                 </button>
             </nz-upload>
-            <button nz-button [nzType]="'primary'" *ngIf="fileList?.length>0">
-                <span>导入</span>
-            </button>
         </div>
     </div>
 </nz-card>
 
-<slider-user [visible]="dialog_visible" [title]="dialog_title" (onClose)="closeDialog()"></slider-user>
+<slider-user [visible]="dialog_visible" [title]="dialog_title" (onClose)="closeDialog()" (onAdd)="onAdd()"></slider-user>

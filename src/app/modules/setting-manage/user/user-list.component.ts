@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { H_Http } from '@core';
 import { DatePipe } from '@angular/common';
 import { environment } from '@env/environment';
-import { UploadFile } from 'ng-zorro-antd';
+import { UploadFile, NzModalService } from 'ng-zorro-antd';
 // import { UserEditComponent } from './edit/user-edit.componnent';
 // import { NzDrawerService } from 'ng-zorro-antd';
 
@@ -63,7 +63,7 @@ export class UserListComponent implements OnInit {
         private fb: FormBuilder,
         private http: H_Http,
         private datePipe: DatePipe,
-        // private drawerService: NzDrawerService
+        private modalSrv: NzModalService
     ) {
         this.searchForm = this.fb.group({
             sName: [null],
@@ -181,6 +181,47 @@ export class UserListComponent implements OnInit {
 
     closeDialog() {
         this.dialog_visible = false;
+    }
+
+    onAdd() {
+        this.dialog_visible = false;
+        this.getUsers();
+    }
+
+    //删除用户
+    delete(id: any) {
+        this.modalSrv.confirm({
+            nzTitle: '确认删除吗?',
+            nzOnOk: () => this.http
+                .delete(`User/${id}`)
+                .subscribe(() => {
+                    this.getUsers();
+                })
+        });
+    }
+
+    //注销用户
+    disable(id: any) {
+        this.modalSrv.confirm({
+            nzTitle: '确认注销吗?',
+            nzOnOk: () => this.http
+                .put(`User/Disable/${id}`)
+                .subscribe(() => {
+                    this.getUsers();
+                })
+        });
+    }
+
+    //启用用户
+    enable(id: any) {
+        this.modalSrv.confirm({
+            nzTitle: '确认启用吗?',
+            nzOnOk: () => this.http
+                .put(`User/Enable/${id}`)
+                .subscribe(() => {
+                    this.getUsers();
+                })
+        });
     }
 
 
