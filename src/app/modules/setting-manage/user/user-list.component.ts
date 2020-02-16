@@ -35,8 +35,6 @@ export class UserListComponent implements OnInit {
     sortValue = '';
     sortKey = '';
 
-    visible = false;
-
     get sName() {
         return this.searchForm.controls.sName;
     }
@@ -55,6 +53,10 @@ export class UserListComponent implements OnInit {
 
     uploading = false;
     fileList: UploadFile[] = [];
+
+
+    dialog_visible = false;
+    dialog_title = '';
 
 
     constructor(
@@ -164,25 +166,8 @@ export class UserListComponent implements OnInit {
     }
 
     addUser() {
-        // const drawerRef = this.drawerService.create<UserEditComponent, { value: string }, string>({
-        //     nzTitle: '新增用户',
-        //     nzContent: UserEditComponent
-        //     // nzContentParams: {
-        //     //     value: this.value
-        //     // }
-        //   });
-
-        //   drawerRef.afterOpen.subscribe(() => {
-        //     console.log('Drawer(Component) open');
-        //   });
-
-        //   drawerRef.afterClose.subscribe(data => {
-        //     console.log(data);
-        //     if (typeof data === 'string') {
-        //     //   this.value = data;
-        //     }
-        //   });
-        this.visible = true;
+        this.dialog_title = '添加用户';
+        this.dialog_visible = true;
     }
 
 
@@ -194,9 +179,12 @@ export class UserListComponent implements OnInit {
         return false;
     }
 
+    closeDialog() {
+        this.dialog_visible = false;
+    }
+
 
     private getToken(): string {
         return localStorage.getItem(environment.token_key);
     }
-
 }

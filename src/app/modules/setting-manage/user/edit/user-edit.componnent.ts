@@ -1,4 +1,4 @@
-import { OnInit, Component, Input } from '@angular/core';
+import { OnInit, Component, Input, Output, EventEmitter, ComponentRef } from '@angular/core';
 
 @Component({
     selector: 'slider-user',
@@ -8,9 +8,11 @@ import { OnInit, Component, Input } from '@angular/core';
 
 export class UserEditComponent implements OnInit {
 
-    @Input()
-    visible = false;
+    @Input() visible = false;
 
+    @Input() title = '';
+
+    @Output() onClose = new EventEmitter();
 
     constructor() {
 
@@ -21,6 +23,6 @@ export class UserEditComponent implements OnInit {
     }
 
     close() {
-        this.visible = false;
+        this.onClose.emit();
     }
 }
