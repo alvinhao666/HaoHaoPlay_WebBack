@@ -1,41 +1,33 @@
 <nz-card [nzBordered]="false">
     <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm">
-        <div nz-row nzType="flex">
-            <div nz-col nzSpan="4">
-                <nz-form-item>
-                    <nz-form-label>姓名</nz-form-label>
-                    <nz-form-control>
-                        <input nz-input formControlName="sName" autocomplete="off">
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <div nz-col nzSpan="4">
-                <nz-form-item>
-                    <nz-form-label>手机号</nz-form-label>
-                    <nz-form-control>
-                        <input nz-input formControlName="sPhone" autocomplete="off">
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <div nz-col nzSpan="4">
-                <nz-form-item>
-                    <nz-form-label>状态</nz-form-label>
-                    <nz-form-control>
-                        <nz-select [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" formControlName="sEnabled">
-                            <nz-option *ngFor="let i of statuses; let idx = index" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <div nz-col nzSpan="8">
-                <nz-form-item>
-                    <nz-form-label>最后登录时间</nz-form-label>
-                    <nz-form-control>
-                        <nz-range-picker [nzShowTime]="{ nzFormat: 'HH:mm' }" nzFormat="yyyy-MM-dd HH:mm" formControlName="sLastLoginTime">
-                        </nz-range-picker>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
+        <div nz-row>
+            <nz-form-item>
+                <nz-form-label>姓名</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="sName" autocomplete="off">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>手机</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="sPhone" autocomplete="off">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>状态</nz-form-label>
+                <nz-form-control>
+                    <nz-select [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" formControlName="sEnabled">
+                        <nz-option *ngFor="let i of statuses; let idx = index" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>时间</nz-form-label>
+                <nz-form-control>
+                    <nz-range-picker [nzShowTime]="{ nzFormat: 'HH:mm' }" nzFormat="yyyy-MM-dd HH:mm" formControlName="sLastLoginTime">
+                    </nz-range-picker>
+                </nz-form-control>
+            </nz-form-item>
 
         </div>
         <div nz-row class="operater">
