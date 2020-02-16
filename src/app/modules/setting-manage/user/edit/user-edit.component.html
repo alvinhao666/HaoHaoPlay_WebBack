@@ -25,7 +25,7 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            <div nz-col nzSpan="12" *ngIf="!isEdit">
+            <div nz-col nzSpan="12">
                 <nz-form-item>
                     <nz-form-label nzRequired>重复密码</nz-form-label>
                     <nz-form-control nzErrorTip="密码不一致">
@@ -81,7 +81,7 @@
         </div>
         <div class="footer">
             <button nz-button (click)="close()" style="margin-right: 8px;"><span>取消</span></button>
-            <button nz-button type="reset" style="margin-right: 8px;"><span>重置</span></button>
+            <button nz-button type="reset" style="margin-right: 8px;" *ngIf="!isEdit"><span>重置</span></button>
             <button nz-button type="submit" [nzType]="'primary'" (click)="save()"><span>确认</span></button>
         </div>
     </form>
