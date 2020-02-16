@@ -18,6 +18,8 @@ export class UserEditComponent implements OnInit {
 
     @Output() onAdd = new EventEmitter();
 
+    isEdit = false;
+
     validateForm: FormGroup;
 
     formatterAge = value => value && `${value}`;
@@ -39,9 +41,11 @@ export class UserEditComponent implements OnInit {
     get fRePassword() {
         return this.validateForm.controls.fRePassword;
     }
+
     get fAge() {
         return this.validateForm.controls.fAge;
     }
+
     get fGender() {
         return this.validateForm.controls.fGender;
     }
@@ -57,7 +61,6 @@ export class UserEditComponent implements OnInit {
     get fWechat() {
         return this.validateForm.controls.fWechat;
     }
-
 
     constructor(
         private fb: FormBuilder,
@@ -82,6 +85,7 @@ export class UserEditComponent implements OnInit {
 
     close() {
         this.onClose.emit();
+        this.reset();
     }
 
     add() {
@@ -90,21 +94,38 @@ export class UserEditComponent implements OnInit {
     }
 
     saveUser() {
-        this.http
-            .post('User', {
+        let data = {
+            Name: this.fName.value,
+            Gender: parseInt(this.fGender.value, 10),
+            Age: this.fAge.value,
+            Phone: this.fPhone.value,
+            Email: this.fEmail.value,
+            WeChat: this.fWechat.value
+        };
+        if (!this.isEdit) {
+            data = Object.assign(data, {
                 LoginName: this.fLoginName.value,
-                Password: this.fPassword.value,
-                Name: this.fName.value,
-                Gender: parseInt(this.fGender.value, 10),
-                Age: this.fAge.value,
-                Phone: this.fPhone.value,
-                Email: this.fEmail.value,
-                WeChat: this.fWechat.value
-            })
+                Password: this.fPassword.value
+            });
+        }
+        this.http
+            .post('User')
             .subscribe(() => {
                 this.onAdd.emit();
-                this.validateForm.reset();
+                this.reset();
             });
+    }
+
+    showUser(id: any) {
+        this.isEdit = true;
+        this.http.get(`User/${id}`).subscribe((d: any) => {
+            this.validateForm.get('fName').setValue(d.Name);
+            this.validateForm.get('fGender').setValue(d.Gender.toString());
+            this.validateForm.get('fAge').setValue(d.Age);
+            this.validateForm.get('fPhone').setValue(d.Phone);
+            this.validateForm.get('fEmail').setValue(d.Email);
+            this.validateForm.get('fWechat').setValue(d.WeChat);
+        });
     }
 
     validate(): boolean {
@@ -115,6 +136,11 @@ export class UserEditComponent implements OnInit {
             flag = flag && !this.validateForm.controls[key].invalid;
         }
         return flag;
+    }
+
+    reset() {
+        this.validateForm.reset();
+        this.isEdit = false;
     }
 }
 

@@ -1,9 +1,10 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { H_Http } from '@core';
 import { DatePipe } from '@angular/common';
 import { environment } from '@env/environment';
 import { UploadFile, NzModalService } from 'ng-zorro-antd';
+import { UserEditComponent } from './edit/user-edit.componnent';
 // import { UserEditComponent } from './edit/user-edit.componnent';
 // import { NzDrawerService } from 'ng-zorro-antd';
 
@@ -15,6 +16,7 @@ import { UploadFile, NzModalService } from 'ng-zorro-antd';
 
 export class UserListComponent implements OnInit {
 
+    @ViewChild('userSlider', { static: false }) userEdit: UserEditComponent;
     searchForm: FormGroup;
     statuses = [
         { text: '注销', value: 'false' },
@@ -168,6 +170,7 @@ export class UserListComponent implements OnInit {
     addUser() {
         this.dialog_title = '添加用户';
         this.dialog_visible = true;
+
     }
 
 
@@ -222,6 +225,12 @@ export class UserListComponent implements OnInit {
                     this.getUsers();
                 })
         });
+    }
+
+    edit(id: any) {
+        this.userEdit.showUser(id);
+        this.dialog_title = '编辑用户';
+        this.dialog_visible = true;
     }
 
 
