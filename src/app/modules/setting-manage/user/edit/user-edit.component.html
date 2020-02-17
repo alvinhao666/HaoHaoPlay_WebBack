@@ -1,4 +1,4 @@
-<nz-drawer [nzClosable]="false" [nzWidth]="720" [nzVisible]="visible" [nzTitle]="title">
+<nz-drawer [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible" [nzTitle]="title" (nzOnClose)="close()">
     <form nz-form [formGroup]="validateForm">
         <div nz-row nzGutter="8">
             <div nz-col nzSpan="12">
