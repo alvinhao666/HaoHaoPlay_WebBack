@@ -137,6 +137,7 @@ export class UserEditComponent implements OnInit {
     async showUser(id: any) {
         this.isEdit = true;
         await this.http.get(`User/${id}`).toPromise().then((d: any) => {
+            if (!d) return;
             this.validateForm.get('fName').setValue(d.Name);
             this.validateForm.get('fGender').setValue(d.Gender.toString());
             this.validateForm.get('fAge').setValue(d.Age);
