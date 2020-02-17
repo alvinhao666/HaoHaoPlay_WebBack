@@ -5,7 +5,8 @@ import { H_Http } from '@core';
 @Component({
     selector: 'slider-user',
     templateUrl: './user-edit.component.html',
-    styleUrls: ['./user-edit.component.less']
+    styleUrls: ['./user-edit.component.less'],
+    providers: [H_Http]
 })
 
 export class UserEditComponent implements OnInit {
@@ -133,9 +134,9 @@ export class UserEditComponent implements OnInit {
             });
     }
 
-    showUser(id: any) {
+    async showUser(id: any) {
         this.isEdit = true;
-        this.http.get(`User/${id}`).subscribe((d: any) => {
+        await this.http.get(`User/${id}`).toPromise().then((d: any) => {
             this.validateForm.get('fName').setValue(d.Name);
             this.validateForm.get('fGender').setValue(d.Gender.toString());
             this.validateForm.get('fAge').setValue(d.Age);

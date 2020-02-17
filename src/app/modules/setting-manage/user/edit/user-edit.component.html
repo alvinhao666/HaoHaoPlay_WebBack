@@ -1,4 +1,4 @@
-<nz-drawer [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible" [nzTitle]="title" (nzOnClose)="close()">
+<nz-modal [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="720" [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="close()" (nzOnOk)="save()">
     <form nz-form [formGroup]="validateForm">
         <div nz-row nzGutter="8">
             <div nz-col nzSpan="12">
@@ -79,10 +79,10 @@
                 </nz-form-item>
             </div>
         </div>
-        <div class="footer">
+        <!-- <div class="footer">
             <button nz-button (click)="close()" style="margin-right: 8px;"><span>取消</span></button>
             <button nz-button type="reset" style="margin-right: 8px;" *ngIf="!isEdit"><span>重置</span></button>
             <button nz-button type="submit" [nzType]="'primary'" (click)="save()"><span>确认</span></button>
-        </div>
+        </div> -->
     </form>
-</nz-drawer>
+</nz-modal>

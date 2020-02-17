@@ -228,8 +228,8 @@ export class UserListComponent implements OnInit {
         });
     }
 
-    edit(id: any) {
-        this.userEdit.showUser(id);
+    async edit(id: any) {
+        await this.userEdit.showUser(id);
         this.dialog_title = '编辑用户';
         this.dialog_visible = true;
     }

@@ -12,7 +12,7 @@ export type HttpObserve = 'body' | 'events' | 'response';
  * + 统一实现 loading
  * + 统一处理时间格式问题
  */
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'root'})
 
 export class H_Http {
 
