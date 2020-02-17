@@ -16,7 +16,7 @@ export class UserEditComponent implements OnInit {
 
     @Output() onClose = new EventEmitter();
 
-    @Output() onAdd = new EventEmitter();
+    @Output() onSave = new EventEmitter();
 
     isEdit = false;
 
@@ -112,7 +112,7 @@ export class UserEditComponent implements OnInit {
                 WeChat: this.fWechat.value
             })
             .subscribe(() => {
-                this.onAdd.emit();
+                this.onSave.emit();
                 this.reset();
             });
     }
@@ -128,7 +128,7 @@ export class UserEditComponent implements OnInit {
                 WeChat: this.fWechat.value
             })
             .subscribe(() => {
-                this.onAdd.emit();
+                this.onSave.emit();
                 this.reset();
             });
     }

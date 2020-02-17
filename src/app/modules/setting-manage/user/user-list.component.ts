@@ -186,8 +186,9 @@ export class UserListComponent implements OnInit {
         this.dialog_visible = false;
     }
 
-    onAdd() {
+    onSave() {
         this.dialog_visible = false;
+        this.pageIndex = 1;
         this.getUsers();
     }
 
