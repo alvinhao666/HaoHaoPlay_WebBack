@@ -69,7 +69,7 @@ nz-content {
 }
 
 .inner-content {
-  width: 100%;
+  width     : 100%;
   background: #fff;
   height    : 100%;
 }
@@ -89,15 +89,21 @@ nz-content {
 }
 
 .header-avatar>img {
-  position  : absolute;
-  width     : 32px;
-  height    : 32px;
-  top       : 50%;
-  margin-top: -16px;
+  position     : absolute;
+  width        : 32px;
+  height       : 32px;
+  top          : 50%;
+  margin-top   : -16px;
   border-radius: 50%;
-  overflow: hidden;
+  overflow     : hidden;
 }
 
-.active{
-  color:red;
+.active {
+  color: red;
+}
+
+::ng-deep {
+  .ant-breadcrumb-link>a {
+    pointer-events: none // 禁用a标签点击事件
   }
+}
