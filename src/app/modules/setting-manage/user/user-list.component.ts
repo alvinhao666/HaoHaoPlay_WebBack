@@ -9,7 +9,7 @@ import { UserEditComponent } from './edit/user-edit.componnent';
 // import { NzDrawerService } from 'ng-zorro-antd';
 
 @Component({
-    selector: 'setting-user-list',
+    selector: 'user-list',
     templateUrl: './user-list.component.html',
     styleUrls: ['./user-list.component.less'],
     providers: [H_Http]

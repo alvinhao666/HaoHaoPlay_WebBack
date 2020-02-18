@@ -1,7 +1,7 @@
 import { OnInit, Component } from '@angular/core';
 
 @Component({
-    selector: 'setting-auth-list',
+    selector: 'auth-list',
     templateUrl: './auth-list.component.html',
 })
 
