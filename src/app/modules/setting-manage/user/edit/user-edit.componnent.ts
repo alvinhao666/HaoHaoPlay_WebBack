@@ -5,8 +5,7 @@ import { H_Http } from '@core';
 @Component({
     selector: 'slider-user',
     templateUrl: './user-edit.component.html',
-    styleUrls: ['./user-edit.component.less'],
-    providers: [H_Http]
+    styleUrls: ['./user-edit.component.less']
 })
 
 export class UserEditComponent implements OnInit {

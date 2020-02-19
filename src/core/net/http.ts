@@ -19,12 +19,12 @@ export class H_Http {
   constructor(private http: HttpClient) {
   }
 
-  private _loading = false;
+  // private _loading = false;
 
-  /** 是否正在加载中 */
-  get loading(): boolean {
-    return this._loading;
-  }
+  // /** 是否正在加载中 */
+  // get loading(): boolean {
+  //   return this._loading;
+  // }
 
   parseParams(params: {}): HttpParams {
     const newParams = {};
@@ -52,13 +52,13 @@ export class H_Http {
     return url + arr.join('&');
   }
 
-  begin() {
-    setTimeout(() => (this._loading = true), 10);
-  }
+  // begin() {
+  //   setTimeout(() => (this._loading = true), 10);
+  // }
 
-  end() {
-    setTimeout(() => (this._loading = false), 10);
-  }
+  // end() {
+  //   setTimeout(() => (this._loading = false), 10);
+  // }
 
   // #region get
 
@@ -374,11 +374,11 @@ export class H_Http {
    * @param callbackParam CALLBACK值，默认：JSONP_CALLBACK
    */
   jsonp(url: string, params?: any, callbackParam: string = 'JSONP_CALLBACK'): Observable<any> {
-    this.begin();
+    // this.begin();
     return this.http.jsonp(this.appliedUrl(url, params), callbackParam).pipe(
-      tap(() => this.end()),
+      // tap(() => this.end()), //tap 在subscrible之前操作
       catchError(res => {
-        this.end();
+        // this.end();
         return throwError(res);
       }),
     );
@@ -808,12 +808,12 @@ export class H_Http {
       withCredentials?: boolean;
     } = {},
   ): Observable<any> {
-    this.begin();
+    // this.begin();
     if (options.params) options.params = this.parseParams(options.params);
     return this.http.request(method, url, options).pipe(
-      tap(() => this.end()),
+      // tap(() => this.end()), //tap 在subscrible之前操作
       catchError(res => {
-        this.end();
+        // this.end();
         return throwError(res);
       }),
     );

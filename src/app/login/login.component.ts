@@ -9,22 +9,21 @@ import { environment } from '@env/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less'],
-  providers: [H_Http]
+  styleUrls: ['./login.component.less']
 })
 export class LoginComponent {
 
   form: FormGroup;
-  // error = '';
+
   type = 0;
   count = 0;
 
   publicKey = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnVVB8ECm9XgSAgQ10Gn2dyhFCVissWi2guj62999e/gOaUVjYxKmyEtZoZOKGhRIxgzvh3gD8OGm+cpjp8oTGlvIj2q788miw8GMKcgVa4bmF4eIkSksDI7SyHvr6maVt5Cdnpe/S7fqi9XoDf4hJXshQ7TXrO1EQ8F2/9MAeRiS5+AYNtnyxSLoXtkTGYKWqCYyuqqPPCn5LrXKATrbzZhigrrzptUdGvaRpTmEnQc7hyrGKDAfRwqOG/FIx9BlKiG61pBxqfBmwcoZVm3pJYdulLZ9Nq95Q8J/SGuJ1uFMwQdSq1BcbCUDV5v4wZOeIORwJj98J+FiHvizEA1DrwIDAQAB';
 
+  loginLoading = false;
   constructor(
     private fb: FormBuilder,
     private msg: NzMessageService,
-    private modalSrv: NzModalService,
     private http: H_Http,
     private router: Router
   ) {
@@ -36,7 +35,6 @@ export class LoginComponent {
       captcha: [null, [Validators.required]],
       remember: [true],
     });
-    modalSrv.closeAll();
   }
 
   get userName() {
@@ -63,7 +61,7 @@ export class LoginComponent {
   // endregion
 
   submit() {
-    // this.error = '';
+    this.loginLoading = true;
     if (this.type === 0) {
       this.userName.markAsDirty();
       this.userName.updateValueAndValidity();
@@ -89,12 +87,22 @@ export class LoginComponent {
     this.http.post('Login', {
       LoginName: this.userName.value,
       Password: pwd
-    }).subscribe((d: any) => {
+    }).subscribe(d => {
+      this.loginLoading = false;
+      if (!d) return;
       localStorage.setItem(environment.token_key, d.Jwt);
       // location.reload();
       // location.href = location.href.split('/')[0] + '#/main/dashboard';
       this.router.navigateByUrl('main/dashboard');
       // location.reload();
-    });
+    },
+      e => {
+        console.log('e', e);
+        this.loginLoading = false;
+      }
+      // () => {  //顺利完成后调用 
+      //   console.log('complete');
+      // }
+    );
   }
 }

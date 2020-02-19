@@ -11,8 +11,7 @@ import { UserEditComponent } from './edit/user-edit.componnent';
 @Component({
     selector: 'user-list',
     templateUrl: './user-list.component.html',
-    styleUrls: ['./user-list.component.less'],
-    providers: [H_Http]
+    styleUrls: ['./user-list.component.less']
 })
 
 export class UserListComponent implements OnInit {

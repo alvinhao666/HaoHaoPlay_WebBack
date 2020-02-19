@@ -37,7 +37,7 @@ export class H_HttpInterceptor implements HttpInterceptor {
     event: HttpResponse<any> | HttpErrorResponse,
   ): Observable<any> {
     // 可能会因为 `throw` 导出无法执行 `_HttpClient` 的 `end()` 操作
-    this.injector.get(H_Http).end();
+    // this.injector.get(H_Http).end();
     // 业务处理：一些通用操作
     switch (event.status) {
       case 200:
@@ -63,8 +63,8 @@ export class H_HttpInterceptor implements HttpInterceptor {
             }
             // 继续抛出错误中断后续所有 Pipe、subscribe 操作，因此：
             // this.http.get('/').subscribe() 并不会触发
-            return throwError({});
-            //return of(new HttpResponse(Object.assign(event, { body: body })));
+            // return throwError({});
+            return of(new HttpResponse(Object.assign(event, { body: null })));
           }
         }
         break;
@@ -78,11 +78,12 @@ export class H_HttpInterceptor implements HttpInterceptor {
         break;
       default:
         if (event instanceof HttpErrorResponse) {
-          console.warn(
-            '未可知错误，大部分是由于后端不支持CORS或无效配置引起',
-            event,
-          );
+          // console.warn(
+          //   '未可知错误，大部分是由于后端不支持CORS或无效配置引起',
+          //   event,
+          // );
           this.msg.error(event.message);
+          return throwError(event.message); // 这边继续抛出异常，http.ts里面catchError会触发，subscrible会触发
         }
         break;
     }
