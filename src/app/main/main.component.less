@@ -79,13 +79,18 @@ nz-content {
   line-height : 64px;
   float       : right;
   margin-right: 25px;
+  cursor      : pointer;
+}
+
+.header-user:hover {
+  background-color: rgb(224, 245, 255);
 }
 
 .header-avatar {
   position: relative;
   height  : 64px;
   width   : 38px;
-  float   : right;
+  float   : left;
 }
 
 .header-avatar>img {
@@ -98,9 +103,6 @@ nz-content {
   overflow     : hidden;
 }
 
-.active {
-  color: red;
-}
 
 ::ng-deep {
   .ant-breadcrumb-link>a {
