@@ -28,7 +28,7 @@ export class LoginComponent {
     private router: Router
   ) {
 
-    this.form = fb.group({
+    this.form = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, Validators.required],
       mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
@@ -92,14 +92,12 @@ export class LoginComponent {
       if (!d) return;
       localStorage.setItem(environment.token_key, d.Jwt);
       // location.reload();
-      // location.href = location.href.split('/')[0] + '#/main/dashboard';
-      this.router.navigateByUrl('main/dashboard');
+      location.href = location.href.split('/')[0] + '/main/dashboard';
+      // this.router.navigateByUrl('main/dashboard');
       // location.reload();
-    },
-      e => {
-        console.log('e', e);
-        this.loginLoading = false;
-      }
+    }, e => {
+      this.loginLoading = false;
+    }
       // () => {  //顺利完成后调用 
       //   console.log('complete');
       // }

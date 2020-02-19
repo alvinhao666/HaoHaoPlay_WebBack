@@ -60,7 +60,7 @@ export class UserListComponent implements OnInit {
     dialog_visible = false;
     dialog_title = '';
 
-
+    tableLoading = false;
     constructor(
         private fb: FormBuilder,
         private http: H_Http,
@@ -114,6 +114,7 @@ export class UserListComponent implements OnInit {
 
     //查询用户
     getUsers() {
+        this.tableLoading = true;
         this.http
             .get('User', {
                 Name: this.sName.value || '',
@@ -127,12 +128,16 @@ export class UserListComponent implements OnInit {
                 SortField: this.sortKey,
                 OrderByType: this.sortValue
             })
-            .subscribe((d: any) => {
+            .subscribe(d => {
                 this.dataSet = d.Items;
                 this.pageIndex = d.PageIndex;
                 this.pageSize = d.PageSize;
                 this.total = d.TotalCount;
-            });
+                this.tableLoading = false;
+            }, e => {
+                this.tableLoading = false;
+            }
+            );
     }
 
     export() {

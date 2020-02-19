@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="fr">
-                    <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="http.loading" (click)="getUsers()">查询</button>
+                    <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getUsers()">查询</button>
                     <button nz-button type="reset" class="btn-reset">重置</button>
                 </div>
 
@@ -59,7 +59,7 @@
     </form>
 
     <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
-        [nzLoading]="http.loading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ x:'1475px',y: '420px' }" [nzSize]="'middle'">
+        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ x:'1475px',y: '420px' }" [nzSize]="'middle'">
         <thead (nzSortChange)="sort($event)" nzSingleSort>
             <tr>
                 <th nzLeft="0px" nzWidth="60px">序号</th>
