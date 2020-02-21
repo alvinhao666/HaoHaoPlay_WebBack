@@ -9,9 +9,162 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <script src="./assets/iconfont/iconfont.js"></script>
+    <style type="text/css">
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #49a9ee;
+            z-index: 9999;
+            transition: opacity .65s
+        }
+        
+        .preloader-hidden-add {
+            opacity: 1;
+            display: block
+        }
+        
+        .preloader-hidden-add-active {
+            opacity: 0
+        }
+        
+        .preloader-hidden {
+            display: none
+        }
+        
+        .cs-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%
+        }
+        
+        .cs-loader-inner {
+            transform: translateY(-50%);
+            top: 50%;
+            position: absolute;
+            width: 100%;
+            color: #fff;
+            text-align: center
+        }
+        
+        .cs-loader-inner label {
+            font-size: 20px;
+            opacity: 0;
+            display: inline-block
+        }
+        
+        @keyframes lol {
+            0% {
+                opacity: 0;
+                transform: translateX(-300px)
+            }
+            33% {
+                opacity: 1;
+                transform: translateX(0)
+            }
+            66% {
+                opacity: 1;
+                transform: translateX(0)
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(300px)
+            }
+        }
+        
+        .cs-loader-inner label:nth-child(6) {
+            animation: lol 3s infinite ease-in-out
+        }
+        
+        .cs-loader-inner label:nth-child(5) {
+            animation: lol 3s .1s infinite ease-in-out
+        }
+        
+        .cs-loader-inner label:nth-child(4) {
+            animation: lol 3s .2s infinite ease-in-out
+        }
+        
+        .cs-loader-inner label:nth-child(3) {
+            animation: lol 3s .3s infinite ease-in-out
+        }
+        
+        .cs-loader-inner label:nth-child(2) {
+            animation: lol 3s .4s infinite ease-in-out
+        }
+        
+        .cs-loader-inner label:nth-child(1) {
+            animation: lol 3s .5s infinite ease-in-out
+        }
+        
+        @keyframes disappear {
+            from {
+                opacity: 1
+            }
+            to {
+                opacity: 0
+            }
+        }
+        /* Firefox */
+        
+        @-moz-keyframes disappear {
+            from {
+                opacity: 1
+            }
+            to {
+                opacity: 0
+            }
+        }
+        /* Safari and Chrome */
+        
+        @-webkit-keyframes disappear {
+            from {
+                opacity: 1
+            }
+            to {
+                opacity: 0
+            }
+        }
+        /* Opera */
+        
+        @-o-keyframes disappear {
+            from {
+                opacity: 1
+            }
+            to {
+                opacity: 0
+            }
+        }
+    </style>
+    <script>
+        //监听加载状态改变
+        document.onreadystatechange = completeLoading;
+
+        //加载状态为complete时移除loading效果
+        function completeLoading() {
+            if (document.readyState == "complete") {
+                var loading = document.getElementById('preloader');
+                loading.style.animation = "disappear 1.4s"
+                setTimeout(() => {
+                    loading.remove();
+                }, 1400)
+            }
+        }
+    </script>
 
     <body>
         <app-root></app-root>
+        <div id="preloader">
+            <div class="cs-loader">
+                <div class="cs-loader-inner">
+                    <label> ●</label><label> ●</label><label> ●</label><label> ●</label><label>●</label><label> ●</label>
+                </div>
+            </div>
+        </div>
     </body>
 
 </html>
