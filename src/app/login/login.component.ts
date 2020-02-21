@@ -24,7 +24,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     public msg: NzMessageService,
-    private http: H_Http
+    private http: H_Http,
+    private router: Router
   ) {
 
     this.form = this.fb.group({
@@ -91,8 +92,8 @@ export class LoginComponent {
       if (!d) return;
       localStorage.setItem(environment.token_key, d.Jwt);
       // location.reload();
-      location.href = location.href.split('/')[0] + '/main/dashboard';
-      // this.router.navigateByUrl('main/dashboard');
+      // location.href = location.href.split('/')[0] + '/main/dashboard';
+      this.router.navigateByUrl('main/dashboard');
       // location.reload();
     }, e => {
       this.loginLoading = false;

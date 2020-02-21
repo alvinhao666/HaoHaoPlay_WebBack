@@ -1,23 +1,45 @@
 :host {
+  ::ng-deep {
+    .container {
+      display          : flex;
+      flex-direction   : column;
+      min-height       : 100%;
+      background-repeat: no-repeat;
+      background-size  : 100%;
+      background-color : #f0f2f5;
+      background-image : url('../../assets/img/background.svg');
+    }
 
-  .container {
-    display          : flex;
-    flex-direction   : column;
-    background-repeat: no-repeat;
-    background-size  : 100%;
-    background-color : #f0f2f5;
-    background-image : url('../../assets/img/background.svg');
-
-    .wrap {
+    .content {
       display: block;
       width  : 368px;
       margin : 100px auto;
     }
-  }
 
+    .ant-input-affix-wrapper .ant-input {
+      position     : relative;
+      text-align   : inherit;
+      min-height: 47px ;
+    }
 
+    .ant-tabs-default-bar {
+      height: 47px;
+    }
 
-  ::ng-deep {
+    .ant-tabs {
+
+      .ant-tabs-top-content.ant-tabs-content-animated,
+      .ant-tabs-bottom-content.ant-tabs-content-animated,
+      .ant-tabs-top-content>.ant-tabs-tabpane,
+      .ant-tabs-bottom-content>.ant-tabs-tabpane,
+      &.ant-tabs-left .ant-tabs-ink-bar-animated,
+      &.ant-tabs-right .ant-tabs-ink-bar-animated,
+      &.ant-tabs-top .ant-tabs-ink-bar-animated,
+      &.ant-tabs-bottom .ant-tabs-ink-bar-animated {
+        transition: none;
+      }
+    }
+
     .ant-tabs .ant-tabs-bar {
       margin-bottom: 24px;
       text-align   : center;
@@ -32,43 +54,49 @@
     .ant-input-affix-wrapper .ant-input:not(:first-child) {
       padding-left: 34px;
     }
+
+
+    .text-right {
+      text-align: right;
+    }
+
+    .footer {
+      margin: auto;
+    }
+
   }
-
-  .text-right {
-    text-align: right;
-  }
-
-  .app-footer {
-    margin: auto;
-  }
-
-
-
-
-  // .icon {
-  //   margin-left   : 16px;
-  //   color         : rgba(0, 0, 0, 0.2);
-  //   font-size     : 24px;
-  //   vertical-align: middle;
-  //   cursor        : pointer;
-  //   transition    : color 0.3s;
-
-  //   &:hover {
-  //     color: #1890ff;
-  //   }
-  // }
-
-  // .other {
-  //   margin-top : 24px;
-  //   line-height: 22px;
-  //   text-align : left;
-
-  //   nz-tooltip {
-  //     vertical-align: middle;
-  //   }
-
-  //   .register {
-  //     float: right;
-  //   }
-  // }
 }
+
+
+
+
+
+
+
+// .icon {
+//   margin-left   : 16px;
+//   color         : rgba(0, 0, 0, 0.2);
+//   font-size     : 24px;
+//   vertical-align: middle;
+//   cursor        : pointer;
+//   transition    : color 0.3s;
+
+//   &:hover {
+//     color: #1890ff;
+//   }
+// }
+
+// .other {
+//   margin-top : 24px;
+//   line-height: 22px;
+//   text-align : left;
+
+//   nz-tooltip {
+//     vertical-align: middle;
+//   }
+
+//   .register {
+//     float: right;
+//   }
+// }
+// }
