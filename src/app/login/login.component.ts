@@ -23,9 +23,8 @@ export class LoginComponent {
   loginLoading = false;
   constructor(
     private fb: FormBuilder,
-    private msg: NzMessageService,
-    private http: H_Http,
-    private router: Router
+    public msg: NzMessageService,
+    private http: H_Http
   ) {
 
     this.form = this.fb.group({
