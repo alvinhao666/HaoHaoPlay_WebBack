@@ -38,9 +38,7 @@ registerLocaleData(zh);
   providers: [
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: H_HttpInterceptor, multi: true },
-    { provide: NZ_I18N, useValue: zh_CN },
-    { provide: LocationStrategy, useClass: PathLocationStrategy },
-    { provide: APP_BASE_HREF, useValue: '/' }
+    { provide: NZ_I18N, useValue: zh_CN }
   ],
   bootstrap: [AppComponent]
 })
