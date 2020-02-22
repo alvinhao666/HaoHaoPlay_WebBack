@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
         private router: Router,
         public msg: NzMessageService,
     ) {
-        this.routerHandle();
+       this.routerHandle();
     }
 
 
