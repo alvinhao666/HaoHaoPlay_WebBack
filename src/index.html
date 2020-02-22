@@ -8,7 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <script src="./assets/iconfont/iconfont.js"></script>
+    <script src="assets/iconfont/iconfont.js"></script>
+    <!-- // 布使用base href的时候需要注意打包项目的href和src前面不要加/ 否则可能会报错
+
+    Resource interpreted as Stylesheet but transferred with MIME type text/html-->
     <style type="text/css">
         #preloader {
             position: fixed;
@@ -18,7 +21,7 @@
             height: 100%;
             overflow: hidden;
             background: #49a9ee;
-            z-index: 9999;
+            z-index: 999;
             transition: opacity .65s
         }
         
@@ -148,10 +151,10 @@
         function completeLoading() {
             if (document.readyState == "complete") {
                 var loading = document.getElementById('preloader');
-                loading.style.animation = "disappear 2.6s"
+                loading.style.animation = "disappear 2.5s"
                 setTimeout(() => {
                     loading.remove();
-                }, 2600)
+                }, 1000)
             }
         }
     </script>

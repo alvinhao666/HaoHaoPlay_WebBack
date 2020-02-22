@@ -91,9 +91,9 @@ export class LoginComponent {
       this.loginLoading = false;
       if (!d) return;
       localStorage.setItem(environment.token_key, d.Jwt);
-      location.reload();
-      // location.href = location.href.split('/')[0] + '/main/dashboard';
-      // this.router.navigateByUrl('main/dashboard');
+      // location.reload();
+      location.href = location.href.split('/')[0] + '/main/dashboard';
+      //this.router.navigateByUrl('main/dashboard');
       // location.reload();
     }, e => {
       this.loginLoading = false;
