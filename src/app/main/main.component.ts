@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
+import { H_Http } from '@core';
 
 @Component({
   selector: 'app-main',
@@ -11,10 +12,16 @@ export class MainComponent implements OnInit {
 
   isCollapsed = false;
 
+  name = '';
 
-  constructor(private router: Router) { }
+  constructor(private http: H_Http) { }
 
   ngOnInit() {
+    this.http.get(`User/Current`).subscribe(d => {
+      console.log('21',d)
+      if (!d) return;
+      this.name = d.Name;
+    });
   }
 
 
