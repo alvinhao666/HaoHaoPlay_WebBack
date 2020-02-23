@@ -143,7 +143,7 @@ export class UserListComponent implements OnInit {
 
     export() {
         this.http
-            .get('User/ExportUser', {
+            .get('User/Export', {
                 Name: this.sName.value || '',
                 Phone: this.sPhone.value || '',
                 Gender: this.sGender,
