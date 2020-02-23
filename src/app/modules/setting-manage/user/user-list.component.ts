@@ -129,12 +129,12 @@ export class UserListComponent implements OnInit {
                 OrderByType: this.sortValue
             })
             .subscribe(d => {
+                this.tableLoading = false;
                 if (!d) return;
                 this.dataSet = d.Items;
                 this.pageIndex = d.PageIndex;
                 this.pageSize = d.PageSize;
                 this.total = d.TotalCount;
-                this.tableLoading = false;
             }, e => {
                 this.tableLoading = false;
             }
