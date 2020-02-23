@@ -18,7 +18,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.http.get(`User/Current`).subscribe(d => {
-      console.log('21',d)
       if (!d) return;
       this.name = d.Name;
     });
