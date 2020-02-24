@@ -87,7 +87,7 @@
                 <nz-dropdown-menu #menu>
                     <ul nz-menu>
                         <li nz-menu-item>
-                            <i nz-icon nzType="setting"></i> 个人设置
+                            <a routerLink="personal"><i nz-icon nzType="setting" style="margin-right: 8px;"></i><span>个人设置</span></a>
                         </li>
                         <li nz-menu-item (click)="logout()">
                             <i nz-icon nzType="logout"></i> 退出登录

@@ -19,6 +19,7 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       { path: 'dashboard', loadChildren: './modules/dashboard/dashboard.module#DashboardModule', data: { breadcrumb: '数据看板' } },
+      { path: 'personal', loadChildren: './modules/personal/personal.module#PersonalModule', data: { breadcrumb: '个人设置' } },
       {
         path: 'setting',
         data: { breadcrumb: '设置' },
