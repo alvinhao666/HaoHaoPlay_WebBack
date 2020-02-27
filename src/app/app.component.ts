@@ -1,28 +1,33 @@
-import { Component, OnInit, Type } from '@angular/core';
+import { Component, OnInit, Type, OnDestroy } from '@angular/core';
 
 import { Router, NavigationError, NavigationCancel, NavigationStart } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { environment } from '@env/environment';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-root',
     // template: `<ng-container *ngComponentOutlet='componentConent'></ng-container>`,
     template: `<router-outlet></router-outlet>`,
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
+    private router$: Subscription;
     componentConent: Type<any>;
     constructor(
         private router: Router,
         public msg: NzMessageService,
     ) {
-       this.routerHandle();
+        this.routerHandle();
     }
 
 
     ngOnInit() {
         // this.titleService.setTitle('好好玩后台系管理统');
         // this.viewSwitching();
+    }
+    ngOnDestroy(): void {
+        this.router$.unsubscribe();
     }
 
     // viewSwitching() {
@@ -31,7 +36,7 @@ export class AppComponent implements OnInit {
     // }
 
     private routerHandle() {
-        this.router.events.subscribe(evt => {
+        this.router$ = this.router.events.subscribe(evt => {
             if (evt instanceof NavigationError || evt instanceof NavigationCancel) {
                 if (evt instanceof NavigationError) {
                     this.msg.error(`${evt.url}地址无效`, { nzDuration: 1000 * 3 });
