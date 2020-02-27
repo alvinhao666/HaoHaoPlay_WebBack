@@ -1,1 +1,39 @@
-<p>base-info works!</p>
+<nz-spin [nzSpinning]="userLoading">
+    <div class="main">
+        <div class="left">
+            <form nz-form [formGroup]="validateForm" [nzLayout]="'horizontal'">
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzSpan]="5">昵称</nz-form-label>
+                    <nz-form-control nzErrorTip="姓名必填" [nzSpan]="12">
+                        <input nz-input formControlName="fName" placeholder="" autocomplete="off">
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzSpan]="5">姓名</nz-form-label>
+                    <nz-form-control nzErrorTip="姓名必填" [nzSpan]="12">
+                        <input nz-input formControlName="fName" placeholder="" autocomplete="off">
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzSpan]="5">性别</nz-form-label>
+                    <nz-form-control>
+                        <nz-radio-group formControlName="fGender">
+                            <label nz-radio nzValue="1">男</label>
+                            <label nz-radio nzValue="0">女</label>
+                        </nz-radio-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzSpan]="5">年龄</nz-form-label>
+                    <nz-form-control nzErrorTip="年龄必填">
+                        <nz-input-number formControlName="fAge" [nzMin]="18" [nzMax]="80" [nzStep]="1" [nzFormatter]="formatterAge" [nzParser]="parserAge"></nz-input-number>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </div>
+        <div class="right">
+            <div class="avatar"><img src="../../../../assets/img/avatar.jpeg"></div>
+            <div class="over-avatar">更换头像</div>
+        </div>
+    </div>
+</nz-spin>

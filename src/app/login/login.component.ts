@@ -61,7 +61,7 @@ export class LoginComponent {
   // endregion
 
   submit() {
-    this.loginLoading = true;
+ 
     if (this.type === 0) {
       this.userName.markAsDirty();
       this.userName.updateValueAndValidity();
@@ -83,7 +83,7 @@ export class LoginComponent {
     const jsencrypt = new JSEncryptModule.JSEncrypt();
     jsencrypt.setPublicKey(this.publicKey);
     const pwd = jsencrypt.encrypt(this.password.value);
-
+    this.loginLoading = true;
     this.http.post('Login', {
       LoginName: this.userName.value,
       Password: pwd

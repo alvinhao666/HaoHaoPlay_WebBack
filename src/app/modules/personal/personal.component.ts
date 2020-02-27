@@ -11,14 +11,15 @@ import { Subscription } from 'rxjs';
 export class PersonalComponent implements OnInit, OnDestroy {
 
   private router$: Subscription;
+  title: string;
   menus: any[] = [
     {
       key: 'base',
-      title: '基本设置',
+      title: '基本信息',
     },
     {
       key: 'security',
-      title: '安全设置',
+      title: '安全信息',
     }
   ];
 
@@ -41,6 +42,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
     this.menus.forEach(i => {
       i.selected = i.key === key;
     });
+    this.title = this.menus.find(w => w.selected).title;
   }
 
 

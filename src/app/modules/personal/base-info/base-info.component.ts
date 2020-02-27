@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -8,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseInfoComponent implements OnInit {
 
+  validateForm: FormGroup;
+  formatterAge = value => value && `${value}`;
+  parserAge = value => value && value.replace('.', '');
   constructor(
-
-  ) { }
+    private fb: FormBuilder) { 
+      this.validateForm = this.fb.group({
+        fName: ['', [Validators.required]],
+        fGender: [null, [Validators.required]],
+        fAge: [null, [Validators.required]]
+      });
+    }
 
   ngOnInit() {
   }

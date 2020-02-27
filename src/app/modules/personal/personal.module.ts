@@ -6,6 +6,7 @@ import { PersonalRouteModule } from './personal.route';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { BaseInfoComponent } from './base-info/base-info.component';
 import { SafeInfoComponent } from './safe-info/safe-info.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,6 +14,8 @@ import { SafeInfoComponent } from './safe-info/safe-info.component';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgZorroAntdModule,
     PersonalRouteModule
   ]
