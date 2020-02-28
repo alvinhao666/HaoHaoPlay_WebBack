@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,6 +17,8 @@ export class BaseInfoComponent implements OnInit {
   firstName = '';
 
   validateForm: FormGroup;
+
+  // user: Observable<any>;
 
   formatterAge = value => value && `${value}`;
   parserAge = value => value && value.replace('.', '');
@@ -46,7 +50,8 @@ export class BaseInfoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: H_Http,
-    private msg: NzMessageService) {
+    private msg: NzMessageService,
+    private router: ActivatedRoute) {
     this.validateForm = this.fb.group({
       fName: [null, [Validators.required]],
       fNickName: [null],
@@ -58,25 +63,33 @@ export class BaseInfoComponent implements OnInit {
     this.getCurrentUser();
   }
 
-  async ngOnInit() {
+  ngOnInit() {
 
   }
 
   getCurrentUser() {
-    this.http.get(`User/Current`).subscribe(d => {
-      if (!d) return;
-      this.firstName = d.Name.substring(0, 1);
-      this.validateForm.get('fName').setValue(d.Name);
-      this.validateForm.get('fNickName').setValue(d.NickName);
-      this.validateForm.get('fGender').setValue(d.Gender.toString());
-      this.validateForm.get('fAge').setValue(d.Age);
-      this.validateForm.get('fProfile').setValue(d.Profile);
-      this.validateForm.get('fHomeAddress').setValue(d.HomeAddress);
+    const d = this.router.snapshot.data.user;
+    this.firstName = d.Name.substring(0, 1);
+    this.validateForm.get('fName').setValue(d.Name);
+    this.validateForm.get('fNickName').setValue(d.NickName);
+    this.validateForm.get('fGender').setValue(d.Gender.toString());
+    this.validateForm.get('fAge').setValue(d.Age);
+    this.validateForm.get('fProfile').setValue(d.Profile);
+    this.validateForm.get('fHomeAddress').setValue(d.HomeAddress);
 
-      // this.validateForm.get('fPhone').setValue(d.Phone);
-      // this.validateForm.get('fEmail').setValue(d.Email);
-      // this.validateForm.get('fWechat').setValue(d.WeChat);
-    });
+    // this.router.data
+    //   .subscribe(user => {
+    //     console.log(user)
+    //     this.firstName = d.Name.substring(0, 1);
+    //     this.validateForm.get('fName').setValue(d.Name);
+    //     this.validateForm.get('fNickName').setValue(d.NickName);
+    //     this.validateForm.get('fGender').setValue(d.Gender.toString());
+    //     this.validateForm.get('fAge').setValue(d.Age);
+    //     this.validateForm.get('fProfile').setValue(d.Profile);
+    //     this.validateForm.get('fHomeAddress').setValue(d.HomeAddress);
+    //   });
+    // console.log(d)
+
   }
 
   update() {
