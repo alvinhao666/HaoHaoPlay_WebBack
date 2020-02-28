@@ -37,7 +37,8 @@
             </form>
         </div>
         <div class="right">
-            <div class="avatar"><img src="../../../../assets/img/avatar.jpeg"></div>
+            <div class="avatar"><img src="../../../../assets/img/avatar.jpeg" *ngIf="false"></div>
+            <nz-avatar [ngStyle]="{ 'background-color': '#f56a00' }" [nzText]="firstName" nzSize="large" class="avatar" *ngIf="true"></nz-avatar>
             <div class="over-avatar">更换头像</div>
         </div>
     </div>

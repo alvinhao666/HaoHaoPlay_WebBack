@@ -9,17 +9,22 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class BaseInfoComponent implements OnInit {
 
+
+  firstName = '王';
+
   validateForm: FormGroup;
   formatterAge = value => value && `${value}`;
   parserAge = value => value && value.replace('.', '');
+
+
   constructor(
-    private fb: FormBuilder) { 
-      this.validateForm = this.fb.group({
-        fName: ['', [Validators.required]],
-        fGender: [null, [Validators.required]],
-        fAge: [null, [Validators.required]]
-      });
-    }
+    private fb: FormBuilder) {
+    this.validateForm = this.fb.group({
+      fName: ['', [Validators.required]],
+      fGender: [null, [Validators.required]],
+      fAge: [null, [Validators.required]]
+    });
+  }
 
   ngOnInit() {
   }
