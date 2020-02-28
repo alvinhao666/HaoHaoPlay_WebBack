@@ -77,9 +77,11 @@
                 </span>
                 <div class="header-user" nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'" nzTrigger="click">
                     <div class="header-avatar" *ngIf="headImgurl">
-                        <img src="../../../../assets//img/avatar.jpeg">
+                        <img src="../../../../assets//img/avatar.png">
                     </div>
-                    <nz-avatar [ngStyle]="{ 'background-color': '#f56a00' }" [nzText]="firstName" nzSize="large" style="vertical-align: middle;" *ngIf="!headImgurl"></nz-avatar>
+                    <div class="header-avatar" *ngIf="!headImgurl">
+                        <div>{{firstName}}</div>
+                    </div>
                     <span style="margin-left: 5px;">{{name}}</span>
                     <i nz-icon nzType="caret-down"></i>
                 </div>

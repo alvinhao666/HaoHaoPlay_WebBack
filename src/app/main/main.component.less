@@ -108,10 +108,23 @@ nz-content {
   overflow     : hidden;
 }
 
+.header-avatar>div {
+  position     : absolute;
+  width        : 40px;
+  height       : 40px;
+  top          : 50%;
+  margin-top   : -20px;
+  border-radius: 50%;
+  overflow     : hidden;
+  text-align: center;
+  line-height: 40px;
+  background-color: #f56a00;
+  color: #fff;
+}
+
 
 ::ng-deep {
   .ant-breadcrumb-link>a {
     pointer-events: none // 禁用a标签点击事件
   }
 }
-
