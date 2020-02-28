@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { H_Http } from '@core';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class BaseInfoComponent implements OnInit {
 
 
-  firstName = '王';
+  firstName = '戎';
 
   validateForm: FormGroup;
   formatterAge = value => value && `${value}`;
@@ -18,7 +19,8 @@ export class BaseInfoComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private http: H_Http) {
     this.validateForm = this.fb.group({
       fName: ['', [Validators.required]],
       fGender: [null, [Validators.required]],
