@@ -91,12 +91,12 @@
                 <td nzWidth="200px">{{d.LastLoginTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
                 <td nzWidth="200px">{{d.LastLoginIP}}</td>
                 <td nzRight="0px">
-                    <a href="javascript:;" (click)="edit(d.Id)">编辑</a>
-                    <nz-divider nzType="vertical"></nz-divider>
-                    <a href="javascript:;" (click)="disable(d.Id)" *ngIf="d.Enabled">注销</a>
-                    <a href="javascript:;" (click)="enable(d.Id)" *ngIf="!d.Enabled">启用</a>
-                    <nz-divider nzType="vertical"></nz-divider>
-                    <a href="javascript:;" (click)="delete(d.Id)">删除</a>
+                    <a href="javascript:;" (click)="edit(d.Id)" *ngIf="d.Id!=-1">编辑</a>
+                    <nz-divider nzType="vertical" *ngIf="d.Id!=-1"></nz-divider>
+                    <a href="javascript:;" (click)="disable(d.Id)" *ngIf="d.Enabled&&d.Id!=-1">注销</a>
+                    <a href="javascript:;" (click)="enable(d.Id)" *ngIf="!d.Enabled&&d.Id!=-1">启用</a>
+                    <nz-divider nzType="vertical" *ngIf="d.Id!=-1"></nz-divider>
+                    <a href="javascript:;" (click)="delete(d.Id)" *ngIf="d.Id!=-1">删除</a>
                 </td>
             </tr>
         </tbody>
