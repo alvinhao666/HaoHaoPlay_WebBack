@@ -14,12 +14,18 @@ export class MainComponent implements OnInit {
 
   name = '';
 
+  firstName = '';
+
+  headImgUrl = null;
+
   constructor(private http: H_Http) { }
 
   ngOnInit() {
     this.http.get(`User/Current`).subscribe(d => {
       if (!d) return;
       this.name = d.Name;
+      this.firstName = this.name.substring(0, 1);
+      this.headImgUrl = d.HeadImgUrl;
     });
   }
 
