@@ -51,7 +51,8 @@ export class H_HttpInterceptor implements HttpInterceptor {
 
           if (body && body.Success) {
             // 重新修改 `body` 内容为 `response` 内容，对于绝大多数场景已经无须再关心业务状态码
-            return of(new HttpResponse(Object.assign(event, { body: body.Data })));
+            // return of(new HttpResponse(Object.assign(event, { body: Object.assign(body.Data || {}, { Success: true }) })));
+            return of(new HttpResponse(Object.assign(event, { body: body.Data || {} })));
           } else {
             if (body.ErrorMsg) {
               this.msg.error(body.ErrorMsg);
