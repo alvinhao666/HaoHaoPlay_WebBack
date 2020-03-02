@@ -93,7 +93,7 @@ export class BaseInfoComponent implements OnInit {
   }
 
   update() {
-    this.http.put(`User/UpdateCurrentUserBaseInfo`, {
+    this.http.put(`User/UpdateCurrentBaseInfo`, {
       Name: this.fName.value,
       NickName: this.fNickName.value,
       Gender: parseInt(this.fGender.value, 10),
