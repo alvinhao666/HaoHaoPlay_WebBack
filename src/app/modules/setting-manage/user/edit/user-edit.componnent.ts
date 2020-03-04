@@ -111,7 +111,8 @@ export class UserEditComponent implements OnInit {
                 Email: this.fEmail.value,
                 WeChat: this.fWechat.value
             })
-            .subscribe(() => {
+            .subscribe(d => {
+                if (!d) return;
                 this.onSave.emit();
                 this.reset();
             });
@@ -127,7 +128,8 @@ export class UserEditComponent implements OnInit {
                 Email: this.fEmail.value,
                 WeChat: this.fWechat.value
             })
-            .subscribe(() => {
+            .subscribe(d => {
+                if (!d) return;
                 this.onSave.emit();
                 this.reset();
             });
