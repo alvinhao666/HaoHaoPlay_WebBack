@@ -68,28 +68,14 @@ export class BaseInfoComponent implements OnInit {
   }
 
   getCurrentUser() {
-    const d = this.router.snapshot.data.user;
-    this.firstName = d.Name.substring(0, 1);
-    this.validateForm.get('fName').setValue(d.Name);
-    this.validateForm.get('fNickName').setValue(d.NickName);
-    this.validateForm.get('fGender').setValue(d.Gender.toString());
-    this.validateForm.get('fAge').setValue(d.Age);
-    this.validateForm.get('fProfile').setValue(d.Profile);
-    this.validateForm.get('fHomeAddress').setValue(d.HomeAddress);
-
-    // this.router.data
-    //   .subscribe(user => {
-    //     console.log(user)
-    //     this.firstName = d.Name.substring(0, 1);
-    //     this.validateForm.get('fName').setValue(d.Name);
-    //     this.validateForm.get('fNickName').setValue(d.NickName);
-    //     this.validateForm.get('fGender').setValue(d.Gender.toString());
-    //     this.validateForm.get('fAge').setValue(d.Age);
-    //     this.validateForm.get('fProfile').setValue(d.Profile);
-    //     this.validateForm.get('fHomeAddress').setValue(d.HomeAddress);
-    //   });
-    // console.log(d)
-
+    const user = this.router.snapshot.data.user;
+    this.firstName = user.Name.substring(0, 1);
+    this.validateForm.get('fName').setValue(user.Name);
+    this.validateForm.get('fNickName').setValue(user.NickName);
+    this.validateForm.get('fGender').setValue(user.Gender.toString());
+    this.validateForm.get('fAge').setValue(user.Age);
+    this.validateForm.get('fProfile').setValue(user.Profile);
+    this.validateForm.get('fHomeAddress').setValue(user.HomeAddress);
   }
 
   update() {

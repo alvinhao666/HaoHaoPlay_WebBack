@@ -22,9 +22,9 @@ export class SafeInfoComponent implements OnInit {
   }
 
   getCurrentUserSecurity() {
-    const d = this.router.snapshot.data.user;
-    this.passwordLevel = d.PasswordLevel;
-    this.phone = d.Phone;
-    this.email = d.Email;
+    const user = this.router.snapshot.data.user;
+    this.passwordLevel = user.PasswordLevel;
+    this.phone = user.Phone;
+    this.email = user.Email;
   }
 }
