@@ -5,7 +5,7 @@
         </ng-template>
         <nz-list-item-meta nzTitle="账户密码" [nzDescription]="passwordDesc">
             <ng-template #passwordDesc>
-                当前密码强度：<span class="text-green">强</span>
+                当前密码强度：<span class="text-green">{{passwordLevel}}</span>
             </ng-template>
         </nz-list-item-meta>
     </nz-list-item>
@@ -15,7 +15,7 @@
         </ng-template>
         <nz-list-item-meta nzTitle="手机" [nzDescription]="phoneDesc">
             <ng-template #phoneDesc>
-                已绑定手机：159****2231
+                已绑定手机：{{phone}}
             </ng-template>
         </nz-list-item-meta>
     </nz-list-item>
@@ -25,7 +25,7 @@
         </ng-template>
         <nz-list-item-meta nzTitle="邮箱" [nzDescription]="emailDesc">
             <ng-template #emailDesc>
-                已绑定邮箱：cip*****.com
+                已绑定邮箱：{{email}}
             </ng-template>
         </nz-list-item-meta>
     </nz-list-item>
