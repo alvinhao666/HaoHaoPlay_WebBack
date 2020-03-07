@@ -7,10 +7,11 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { BaseInfoComponent } from './base-info/base-info.component';
 import { SafeInfoComponent } from './safe-info/safe-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UpdatePwdComponent } from './update-pwd/update-pwd.component';
 
 
 @NgModule({
-  declarations: [PersonalComponent, BaseInfoComponent, SafeInfoComponent],
+  declarations: [PersonalComponent, BaseInfoComponent, SafeInfoComponent, UpdatePwdComponent],
   imports: [
     CommonModule,
     RouterModule,

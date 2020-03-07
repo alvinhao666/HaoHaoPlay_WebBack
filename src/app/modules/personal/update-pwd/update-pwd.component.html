@@ -1,0 +1,23 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="修改密码" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzWidth]="390">
+    <form nz-form [formGroup]="validateForm" [nzLayout]="'horizontal'">
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="7">原密码</nz-form-label>
+            <nz-form-control nzErrorTip="原密码必填" [nzSpan]="14">
+                <input nz-input formControlName="fOldPassword" placeholder="" type="password" autocomplete="new-password">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="7">新密码</nz-form-label>
+            <nz-form-control nzErrorTip="新密码必填" [nzSpan]="14">
+                <input nz-input formControlName="fPassword" placeholder="" type="password" autocomplete="new-password" (ngModelChange)="passwordChange($event)" ng-minlength="6">
+            </nz-form-control>
+            <nz-form-label [nzSpan]="3" [nzNoColon]="true"><span [style.color]="levelColor">{{passwordLevel}}</span></nz-form-label>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="7">重复新密码</nz-form-label>
+            <nz-form-control nzErrorTip="密码不一致" [nzSpan]="14">
+                <input nz-input formControlName="fRePassword" placeholder="" type="password" autocomplete="new-password" ng-minlength="6">
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</nz-modal>

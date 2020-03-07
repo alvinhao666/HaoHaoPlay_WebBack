@@ -1,11 +1,11 @@
 <nz-list nzItemLayout="horizontal">
     <nz-list-item [nzActions]="[passwordOp]">
         <ng-template #passwordOp>
-            <a>修改</a>
+            <a (click)="showDialogUpdatePwd()">修改</a>
         </ng-template>
         <nz-list-item-meta nzTitle="账户密码" [nzDescription]="passwordDesc">
             <ng-template #passwordDesc>
-                当前密码强度：<span class="text-green">{{passwordLevel}}</span>
+                当前密码强度：<span [style.color]="pwdLevelColor">{{passwordLevel}}</span>
             </ng-template>
         </nz-list-item-meta>
     </nz-list-item>
@@ -30,3 +30,5 @@
         </nz-list-item-meta>
     </nz-list-item>
 </nz-list>
+
+<dialog-update-pwd #DiaglogUpdatePwd (onSave)="updatePwd()"></dialog-update-pwd>

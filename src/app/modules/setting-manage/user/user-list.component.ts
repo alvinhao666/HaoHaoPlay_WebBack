@@ -16,7 +16,7 @@ import { UserEditComponent } from './edit/user-edit.componnent';
 
 export class UserListComponent implements OnInit {
 
-    @ViewChild('userSlider', { static: false }) userEdit: UserEditComponent;
+    @ViewChild('userSlider', { static: false }) sliderUserEdit: UserEditComponent;
     searchForm: FormGroup;
     statuses = [
         { text: '注销', value: 'false' },
@@ -235,7 +235,7 @@ export class UserListComponent implements OnInit {
     }
 
     async edit(id: any) {
-        await this.userEdit.showUser(id);
+        await this.sliderUserEdit.showUser(id);
         this.dialog_title = '编辑用户';
         this.dialog_visible = true;
     }
