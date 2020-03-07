@@ -1,6 +1,6 @@
 import { OnInit, Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { H_Http, CompareEqualValidators } from '@core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { H_Http, ComparePwdValidators } from '@core';
 
 @Component({
     selector: 'slider-user',
@@ -72,7 +72,7 @@ export class UserEditComponent implements OnInit {
             fLoginName: [null, Validators.required],
             fName: [null, Validators.required],
             fPassword: [null, Validators.required],
-            fRePassword: [null, [Validators.required, CompareEqualValidators.equal('fPassword')]],
+            fRePassword: [null, [Validators.required, ComparePwdValidators.equal('fPassword')]],
             fAge: [null, Validators.required],
             fGender: [null, Validators.required],
             fPhone: [null, [Validators.required, Validators.pattern(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)]],

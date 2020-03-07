@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { H_Http, CoreEdit, CompareEqualValidators } from '@core';
+import { H_Http, CoreEdit, ComparePwdValidators, CompareOldPwdValidators } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
@@ -50,8 +50,8 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
     super();
     this.form = this.fb.group({
       fOldPassword: [null, Validators.required],
-      fPassword: [null, Validators.required],
-      fRePassword: [null, [Validators.required, CompareEqualValidators.equal('fPassword')]]
+      fPassword: [null, [Validators.required, CompareOldPwdValidators.match('fOldPassword')]],
+      fRePassword: [null, [Validators.required, ComparePwdValidators.equal('fPassword')]]
     });
   }
 
