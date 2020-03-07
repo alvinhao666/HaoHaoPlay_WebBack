@@ -14,6 +14,8 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
 
   isVisible = false;
 
+  loading = false;
+
   form: FormGroup;
 
   passwordLevel = '';
@@ -70,16 +72,19 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
 
   handleOk() {
     if (!this.checkForm(this.form)) return;
-
+    this.loading = true;
     this.http.put('User/UpdateCurrentPassword', {
       OldPassword: this.fOldPassword.value,
       NewPassword: this.fPassword.value,
       RePassword: this.fRePassword.value
     }).subscribe(d => {
+      this.loading = false;
       if (!d) return;
       this.onSave.emit();
       this.msg.success('更新成功');
       this.reset();
+    }, e => {
+      this.loading = false;
     });
   }
 

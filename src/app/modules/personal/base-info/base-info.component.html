@@ -43,7 +43,7 @@
             </nz-form-item>
             <nz-form-item>
                 <nz-form-control [nzSpan]="16" [nzOffset]="8">
-                    <button nz-button nzType="primary" (click)="update()">更新</button>
+                    <button nz-button nzType="primary" (click)="update()" [nzLoading]="loading">更新</button>
                 </nz-form-control>
             </nz-form-item>
         </form>

@@ -1,4 +1,4 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="修改密码" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzWidth]="390">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="修改密码" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzWidth]="390" [nzOkLoading]="loading">
     <form nz-form [formGroup]="form" [nzLayout]="'horizontal'">
         <nz-form-item>
             <nz-form-label nzRequired [nzSpan]="7">原密码</nz-form-label>

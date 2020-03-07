@@ -18,6 +18,8 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
 
   form: FormGroup;
 
+  loading = false;
+
   // user: Observable<any>;
 
   formatterAge = value => value && `${value}`;
@@ -82,6 +84,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
 
   update() {
     if (!this.checkForm(this.form)) return;
+    this.loading = true;
     this.http.put(`User/UpdateCurrentBaseInfo`, {
       Name: this.fName.value,
       NickName: this.fNickName.value,
@@ -90,8 +93,11 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       Profile: this.fProfile.value,
       HomeAddress: this.fHomeAddress.value
     }).subscribe(d => {
+      this.loading = false;
       if (!d) return;
       this.msg.success('更新成功');
+    }, e => {
+      this.loading = false;
     });
   }
 }
