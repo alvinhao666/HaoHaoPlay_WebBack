@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { H_Http } from '@core';
+import { H_Http, CoreEdit } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -11,12 +11,12 @@ import { Observable } from 'rxjs';
   templateUrl: './base-info.component.html',
   styleUrls: ['./base-info.component.less']
 })
-export class BaseInfoComponent implements OnInit {
+export class BaseInfoComponent extends CoreEdit implements OnInit {
 
 
   firstName = '';
 
-  validateForm: FormGroup;
+  form: FormGroup;
 
   // user: Observable<any>;
 
@@ -25,25 +25,25 @@ export class BaseInfoComponent implements OnInit {
 
 
   get fAge() {
-    return this.validateForm.controls.fAge;
+    return this.form.controls.fAge;
   }
 
   get fGender() {
-    return this.validateForm.controls.fGender;
+    return this.form.controls.fGender;
   }
 
   get fName() {
-    return this.validateForm.controls.fName;
+    return this.form.controls.fName;
   }
 
   get fNickName() {
-    return this.validateForm.controls.fNickName;
+    return this.form.controls.fNickName;
   }
   get fProfile() {
-    return this.validateForm.controls.fProfile;
+    return this.form.controls.fProfile;
   }
   get fHomeAddress() {
-    return this.validateForm.controls.fHomeAddress;
+    return this.form.controls.fHomeAddress;
   }
 
 
@@ -52,7 +52,8 @@ export class BaseInfoComponent implements OnInit {
     private http: H_Http,
     private msg: NzMessageService,
     private router: ActivatedRoute) {
-    this.validateForm = this.fb.group({
+    super();
+    this.form = this.fb.group({
       fName: [null, Validators.required],
       fNickName: [null],
       fGender: [null],
@@ -61,6 +62,7 @@ export class BaseInfoComponent implements OnInit {
       fHomeAddress: [null]
     });
     this.getCurrentUser();
+
   }
 
   ngOnInit() {
@@ -70,15 +72,16 @@ export class BaseInfoComponent implements OnInit {
   getCurrentUser() {
     const user = this.router.snapshot.data.user;
     this.firstName = user.Name.substring(0, 1);
-    this.validateForm.get('fName').setValue(user.Name);
-    this.validateForm.get('fNickName').setValue(user.NickName);
-    this.validateForm.get('fGender').setValue(user.Gender.toString());
-    this.validateForm.get('fAge').setValue(user.Age);
-    this.validateForm.get('fProfile').setValue(user.Profile);
-    this.validateForm.get('fHomeAddress').setValue(user.HomeAddress);
+    this.form.get('fName').setValue(user.Name);
+    this.form.get('fNickName').setValue(user.NickName);
+    this.form.get('fGender').setValue(user.Gender.toString());
+    this.form.get('fAge').setValue(user.Age);
+    this.form.get('fProfile').setValue(user.Profile);
+    this.form.get('fHomeAddress').setValue(user.HomeAddress);
   }
 
   update() {
+    if (!this.checkForm(this.form)) return;
     this.http.put(`User/UpdateCurrentBaseInfo`, {
       Name: this.fName.value,
       NickName: this.fNickName.value,

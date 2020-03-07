@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { H_Http } from '@core';
+import { H_Http, CoreEdit } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
@@ -10,11 +10,11 @@ import { NzMessageService } from 'ng-zorro-antd';
   templateUrl: './update-pwd.component.html',
   styleUrls: ['./update-pwd.component.less']
 })
-export class UpdatePwdComponent implements OnInit {
+export class UpdatePwdComponent extends CoreEdit implements OnInit {
 
   isVisible = false;
 
-  validateForm: FormGroup;
+  form: FormGroup;
 
   passwordLevel = '';
   levelColor = '';
@@ -29,15 +29,15 @@ export class UpdatePwdComponent implements OnInit {
   passwordChange$ = new BehaviorSubject('');
 
   get fPassword() {
-    return this.validateForm.controls.fPassword;
+    return this.form.controls.fPassword;
   }
 
   get fRePassword() {
-    return this.validateForm.controls.fRePassword;
+    return this.form.controls.fRePassword;
   }
 
   get fOldPassword() {
-    return this.validateForm.controls.fOldPassword;
+    return this.form.controls.fOldPassword;
   }
 
 
@@ -45,7 +45,8 @@ export class UpdatePwdComponent implements OnInit {
     private fb: FormBuilder,
     private http: H_Http,
     private msg: NzMessageService) {
-    this.validateForm = this.fb.group({
+    super();
+    this.form = this.fb.group({
       fOldPassword: [null, Validators.required],
       fPassword: [null, Validators.required],
       fRePassword: [null, CompareValidators.match('fPassword')]
@@ -57,34 +58,18 @@ export class UpdatePwdComponent implements OnInit {
       .asObservable()
       .pipe(debounceTime(300)) // debounceTime(200) 间隔时间 200ms
       .subscribe((value: string) => this.checkPasswordLevel(value));
-
-    // this.validateForm.get('fPassword').valueChanges.subscribe(d => {
-    //   this.passwordChange$.next(d);
-    // });
-
-
-    // // 订阅
-    // password$.subscribe(data => {
-    //   this.projectOfOption = data;
-    //   this.isLoading = false;
-    // });
   }
+
   passwordChange(value: string) {
     this.passwordChange$.next(value);
   }
 
   handleCancel() {
-    this.isVisible = false;
+    this.reset();
   }
 
   handleOk() {
-    this.fOldPassword.markAsDirty();
-    this.fOldPassword.updateValueAndValidity();
-    this.fPassword.markAsDirty();
-    this.fPassword.updateValueAndValidity();
-    this.fRePassword.markAsDirty();
-    this.fRePassword.updateValueAndValidity();
-    if (this.fOldPassword.invalid || this.fPassword.invalid || this.fRePassword.invalid) return;
+    if (!this.checkForm(this.form)) return;
 
     this.http.put('User/UpdateCurrentPassword', {
       OldPassword: this.fOldPassword.value,
@@ -94,13 +79,11 @@ export class UpdatePwdComponent implements OnInit {
       if (!d) return;
       this.onSave.emit();
       this.msg.success('更新成功');
-      this.isVisible = false;
-      this.validateForm.reset();
+      this.reset();
     });
   }
 
   checkPasswordLevel(password: string) {
-
     if (this.regexWeak.test(password)) {
       this.passwordLevel = '弱';
       this.levelColor = 'red';
@@ -115,6 +98,10 @@ export class UpdatePwdComponent implements OnInit {
     }
   }
 
+  reset() {
+    this.isVisible = false;
+    this.form.reset();
+  }
 }
 
 export class CompareValidators {

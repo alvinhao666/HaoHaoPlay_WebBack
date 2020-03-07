@@ -22,7 +22,7 @@ export class UserEditComponent implements OnInit {
 
     userId: any = null;
 
-    validateForm: FormGroup;
+    form: FormGroup;
 
     formatterAge = value => value && `${value}`;
     parserAge = value => value && value.replace('.', '');
@@ -30,45 +30,45 @@ export class UserEditComponent implements OnInit {
 
 
     get fLoginName() {
-        return this.validateForm.controls.fLoginName;
+        return this.form.controls.fLoginName;
     }
 
     get fName() {
-        return this.validateForm.controls.fName;
+        return this.form.controls.fName;
     }
 
     get fPassword() {
-        return this.validateForm.controls.fPassword;
+        return this.form.controls.fPassword;
     }
     get fRePassword() {
-        return this.validateForm.controls.fRePassword;
+        return this.form.controls.fRePassword;
     }
 
     get fAge() {
-        return this.validateForm.controls.fAge;
+        return this.form.controls.fAge;
     }
 
     get fGender() {
-        return this.validateForm.controls.fGender;
+        return this.form.controls.fGender;
     }
 
     get fPhone() {
-        return this.validateForm.controls.fPhone;
+        return this.form.controls.fPhone;
     }
 
     get fEmail() {
-        return this.validateForm.controls.fEmail;
+        return this.form.controls.fEmail;
     }
 
     get fWechat() {
-        return this.validateForm.controls.fWechat;
+        return this.form.controls.fWechat;
     }
 
     constructor(
         private fb: FormBuilder,
         private http: H_Http
     ) {
-        this.validateForm = this.fb.group({
+        this.form = this.fb.group({
             fLoginName: [null, Validators.required],
             fName: [null, Validators.required],
             fPassword: [null, Validators.required],
@@ -139,29 +139,29 @@ export class UserEditComponent implements OnInit {
         this.isEdit = true;
         await this.http.get(`User/${id}`).toPromise().then(d => {
             if (!d) return;
-            this.validateForm.get('fName').setValue(d.Name);
-            this.validateForm.get('fGender').setValue(d.Gender.toString());
-            this.validateForm.get('fAge').setValue(d.Age);
-            this.validateForm.get('fPhone').setValue(d.Phone);
-            this.validateForm.get('fEmail').setValue(d.Email);
-            this.validateForm.get('fWechat').setValue(d.WeChat);
+            this.form.get('fName').setValue(d.Name);
+            this.form.get('fGender').setValue(d.Gender.toString());
+            this.form.get('fAge').setValue(d.Age);
+            this.form.get('fPhone').setValue(d.Phone);
+            this.form.get('fEmail').setValue(d.Email);
+            this.form.get('fWechat').setValue(d.WeChat);
             this.userId = d.Id;
         });
     }
 
     validate(): boolean {
         let flag = true;
-        for (const key of Object.keys(this.validateForm.controls)) {
+        for (const key of Object.keys(this.form.controls)) {
             if (this.isEdit && (key === 'fLoginName' || key === 'fPassword' || key === 'fRePassword')) continue;
-            this.validateForm.controls[key].markAsDirty();
-            this.validateForm.controls[key].updateValueAndValidity();
-            flag = flag && !this.validateForm.controls[key].invalid;
+            this.form.controls[key].markAsDirty();
+            this.form.controls[key].updateValueAndValidity();
+            flag = flag && !this.form.controls[key].invalid;
         }
         return flag;
     }
 
     reset() {
-        this.validateForm.reset();
+        this.form.reset();
         this.isEdit = false;
         this.userId = null;
     }
