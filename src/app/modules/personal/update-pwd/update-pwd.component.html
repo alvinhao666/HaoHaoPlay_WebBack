@@ -15,9 +15,12 @@
         </nz-form-item>
         <nz-form-item>
             <nz-form-label nzRequired [nzSpan]="7">重复新密码</nz-form-label>
-            <nz-form-control nzErrorTip="密码不一致" [nzSpan]="14">
+            <nz-form-control [nzSpan]="14">
                 <input nz-input formControlName="fRePassword" placeholder="" type="password" autocomplete="new-password" ng-minlength="6">
+                <nz-form-explain *ngIf="fRePassword.dirty && fRePassword.errors?.required">重复新密码必填</nz-form-explain>
+                <nz-form-explain *ngIf="fRePassword.dirty && fRePassword.errors?.notEqual">密码不一致</nz-form-explain>
             </nz-form-control>
+
         </nz-form-item>
     </form>
 </nz-modal>

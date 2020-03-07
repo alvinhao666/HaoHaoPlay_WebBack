@@ -1,6 +1,6 @@
 import { OnInit, Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { H_Http } from '@core';
+import { H_Http, CompareEqualValidators } from '@core';
 
 @Component({
     selector: 'slider-user',
@@ -72,7 +72,7 @@ export class UserEditComponent implements OnInit {
             fLoginName: [null, Validators.required],
             fName: [null, Validators.required],
             fPassword: [null, Validators.required],
-            fRePassword: [null, CompareValidators.match('fPassword')],
+            fRePassword: [null, [Validators.required, CompareEqualValidators.equal('fPassword')]],
             fAge: [null, Validators.required],
             fGender: [null, Validators.required],
             fPhone: [null, [Validators.required, Validators.pattern(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)]],
@@ -164,19 +164,5 @@ export class UserEditComponent implements OnInit {
         this.form.reset();
         this.isEdit = false;
         this.userId = null;
-    }
-}
-
-export class CompareValidators {
-    static match(targetField: string): ValidatorFn {
-        return (self: AbstractControl): { [key: string]: any } => {    //这里严格按照ValidatorFn的声明来
-            const form = self.parent;
-            if (form) {
-                const targetControl: AbstractControl = form.controls[targetField];
-                if (targetControl.value == null || (targetControl.value && self.value !== targetControl.value)) {   //如果两个值不一致
-                    return { match: '' };
-                }
-            }
-        };
     }
 }

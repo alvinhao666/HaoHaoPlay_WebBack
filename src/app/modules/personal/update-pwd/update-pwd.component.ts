@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { H_Http, CoreEdit } from '@core';
+import { H_Http, CoreEdit, CompareEqualValidators } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
@@ -51,7 +51,7 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
     this.form = this.fb.group({
       fOldPassword: [null, Validators.required],
       fPassword: [null, Validators.required],
-      fRePassword: [null, CompareValidators.match('fPassword')]
+      fRePassword: [null, [Validators.required, CompareEqualValidators.equal('fPassword')]]
     });
   }
 
@@ -109,16 +109,3 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
   }
 }
 
-export class CompareValidators {
-  static match(targetField: string): ValidatorFn {
-    return (self: AbstractControl): { [key: string]: any } => {    //这里严格按照ValidatorFn的声明来
-      const form = self.parent;
-      if (form) {
-        const targetControl: AbstractControl = form.controls[targetField];
-        if (targetControl.value == null || (targetControl.value && self.value !== targetControl.value)) {   //如果两个值不一致
-          return { match: '' };
-        }
-      }
-    };
-  }
-}
