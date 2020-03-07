@@ -46,9 +46,9 @@ export class UpdatePwdComponent implements OnInit {
     private http: H_Http,
     private msg: NzMessageService) {
     this.validateForm = this.fb.group({
-      fOldPassword: [null, [Validators.required]],
-      fPassword: [null, [Validators.required]],
-      fRePassword: [null, [CompareValidators.match('fPassword')]]
+      fOldPassword: [null, Validators.required],
+      fPassword: [null, Validators.required],
+      fRePassword: [null, CompareValidators.match('fPassword')]
     });
   }
 

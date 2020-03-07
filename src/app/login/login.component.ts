@@ -29,10 +29,10 @@ export class LoginComponent {
   ) {
 
     this.form = this.fb.group({
-      userName: [null, [Validators.required]],
+      userName: [null, Validators.required],
       password: [null, Validators.required],
       mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
-      captcha: [null, [Validators.required]],
+      captcha: [null, Validators.required],
       remember: [true],
     });
   }

@@ -69,15 +69,15 @@ export class UserEditComponent implements OnInit {
         private http: H_Http
     ) {
         this.validateForm = this.fb.group({
-            fLoginName: [null, [Validators.required]],
-            fName: [null, [Validators.required]],
-            fPassword: [null, [Validators.required]],
-            fRePassword: [null, [CompareValidators.match('fPassword')]],
-            fAge: [null, [Validators.required]],
-            fGender: [null, [Validators.required]],
+            fLoginName: [null, Validators.required],
+            fName: [null, Validators.required],
+            fPassword: [null, Validators.required],
+            fRePassword: [null, CompareValidators.match('fPassword')],
+            fAge: [null, Validators.required],
+            fGender: [null, Validators.required],
             fPhone: [null, [Validators.required, Validators.pattern(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)]],
-            fEmail: [null, [Validators.email]],
-            fWechat: [null, [Validators.nullValidator]],
+            fEmail: [null, Validators.email],
+            fWechat: [null, Validators.nullValidator],
         });
     }
 

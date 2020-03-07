@@ -53,10 +53,10 @@ export class BaseInfoComponent implements OnInit {
     private msg: NzMessageService,
     private router: ActivatedRoute) {
     this.validateForm = this.fb.group({
-      fName: [null, [Validators.required]],
+      fName: [null, Validators.required],
       fNickName: [null],
       fGender: [null],
-      fAge: [null, [Validators.required]],
+      fAge: [null, Validators.required],
       fProfile: [null],
       fHomeAddress: [null]
     });
