@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { H_Http, getColorByFirstName, CoreContainer } from '@core';
+import { UserInfoService } from '../share/user-info.service';
 
 @Component({
   selector: 'app-main',
@@ -15,7 +16,9 @@ export class MainComponent extends CoreContainer implements OnInit {
 
   headImgUrl = null;
 
-  constructor(private http: H_Http) {
+  constructor(
+    private http: H_Http,
+    private userInfoService: UserInfoService) {
     super();
 
     // const orignalSetItem = localStorage.setItem;
@@ -35,7 +38,10 @@ export class MainComponent extends CoreContainer implements OnInit {
     //     this.firstNameBgColor = e['value'];
     //   }
     // });
-
+    this.userInfoService.globalVar.subscribe((d: any) => {
+      this.firstName = d.firstName;
+      this.firstNameBgColor = d.firstNameBgColor;
+    });
   }
 
   ngOnInit() {

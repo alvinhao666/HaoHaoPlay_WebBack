@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, CoreEdit, getColorByFirstName } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
+import { UserInfoService } from '../../../share/user-info.service';
 
 
 @Component({
@@ -49,7 +50,8 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     private fb: FormBuilder,
     private http: H_Http,
     private msg: NzMessageService,
-    private router: ActivatedRoute) {
+    private router: ActivatedRoute,
+    private userInfoService: UserInfoService) {
     super();
     this.form = this.fb.group({
       fName: [null, Validators.required],
@@ -68,16 +70,17 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   }
 
   setCurrentUser(user: any) {
-    // this.firstName = user.Name.substring(0, 1);
-    // this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
-    this.setFirstName(user.Name.substring(0, 1));
-    this.setFirstNameBgColor(getColorByFirstName(user.FirstNameSpell));
+    this.firstName = user.Name.substring(0, 1);
+    this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
+    // this.setFirstName(user.Name.substring(0, 1));
+    // this.setFirstNameBgColor(getColorByFirstName(user.FirstNameSpell));
     this.form.get('fName').setValue(user.Name);
     this.form.get('fNickName').setValue(user.NickName);
     this.form.get('fGender').setValue(user.Gender.toString());
     this.form.get('fAge').setValue(user.Age);
     this.form.get('fProfile').setValue(user.Profile);
     this.form.get('fHomeAddress').setValue(user.HomeAddress);
+    this.userInfoService.globalVar.next({ firstName: this.firstName, firstNameBgColor: this.firstNameBgColor });
   }
 
   update() {
