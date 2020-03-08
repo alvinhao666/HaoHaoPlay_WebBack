@@ -50,9 +50,9 @@ export class SafeInfoComponent implements OnInit {
   handlePwdLevelColor() {
     if (this.passwordLevel === '弱') {
       this.pwdLevelColor = 'red';
-    } else if (this.pwdLevelColor === '中') {
+    } else if (this.passwordLevel === '中') {
       this.pwdLevelColor = 'orange';
-    } else if (this.pwdLevelColor === '强') {
+    } else if (this.passwordLevel === '强') {
       this.pwdLevelColor = 'green';
     }
   }
