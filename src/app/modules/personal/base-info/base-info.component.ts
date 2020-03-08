@@ -12,11 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BaseInfoComponent extends CoreEdit implements OnInit {
 
-
-  firstName = '';
-
-  firstNameBgColor = '';
-
   form: FormGroup;
 
   loading = false;
@@ -73,8 +68,10 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   }
 
   setCurrentUser(user: any) {
-    this.firstName = user.Name.substring(0, 1);
-    this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
+    // this.firstName = user.Name.substring(0, 1);
+    // this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
+    this.setFirstName(user.Name.substring(0, 1));
+    this.setFirstNameBgColor(getColorByFirstName(user.FirstNameSpell));
     this.form.get('fName').setValue(user.Name);
     this.form.get('fNickName').setValue(user.NickName);
     this.form.get('fGender').setValue(user.Gender.toString());

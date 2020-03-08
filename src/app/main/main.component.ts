@@ -1,26 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { environment } from '@env/environment';
-import { H_Http, getColorByFirstName } from '@core';
+import { H_Http, getColorByFirstName, CoreContainer } from '@core';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.less']
 })
-export class MainComponent implements OnInit {
+export class MainComponent extends CoreContainer implements OnInit {
 
   isCollapsed = false;
 
   name = '';
 
-  firstName = '';
-
-  firstNameBgColor = '';
-
   headImgUrl = null;
 
-  constructor(private http: H_Http) { }
+  constructor(private http: H_Http) {
+    super();
+
+    // const orignalSetItem = localStorage.setItem;
+    // localStorage.setItem = function (key, value) {
+    //   const setItemEvent = new Event('setItemEvent');
+    //   setItemEvent['key'] = key;
+    //   setItemEvent['value'] = value;
+    //   window.dispatchEvent(setItemEvent);
+    //   orignalSetItem.apply(this, arguments);
+    // };
+    // window.addEventListener('setItemEvent', function (e) {
+    //   console.log('1123')
+    //   if (e['key'] === 'H_FirstName') {
+    //     // 执行你的逻辑
+    //     this.firstName = e['value'];
+    //   } else if (e['key'] === 'H_FirstNameBgColor') {
+    //     this.firstNameBgColor = e['value'];
+    //   }
+    // });
+
+  }
 
   ngOnInit() {
     this.http.get(`User/Current`).subscribe(d => {
