@@ -64,7 +64,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       fProfile: [null],
       fHomeAddress: [null]
     });
-    this.getCurrentUser();
+    this.setCurrentUser(this.router.snapshot.data.user);
 
   }
 
@@ -72,8 +72,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
 
   }
 
-  getCurrentUser() {
-    const user = this.router.snapshot.data.user;
+  setCurrentUser(user: any) {
     this.firstName = user.Name.substring(0, 1);
     this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
     this.form.get('fName').setValue(user.Name);
@@ -98,8 +97,16 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       this.loading = false;
       if (!d) return;
       this.msg.success('更新成功');
+      this.getUser();
     }, e => {
       this.loading = false;
+    });
+  }
+
+  getUser() {
+    this.http.get(`User/Current`).subscribe(d => {
+      if (!d) return;
+      this.setCurrentUser(d);
     });
   }
 }
