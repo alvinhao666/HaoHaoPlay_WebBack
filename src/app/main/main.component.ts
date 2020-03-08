@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
-import { H_Http } from '@core';
+import { H_Http, getColorByFirstName } from '@core';
 
 @Component({
   selector: 'app-main',
@@ -16,6 +16,8 @@ export class MainComponent implements OnInit {
 
   firstName = '';
 
+  firstNameBgColor = '';
+
   headImgUrl = null;
 
   constructor(private http: H_Http) { }
@@ -25,6 +27,7 @@ export class MainComponent implements OnInit {
       if (!d) return;
       this.name = d.Name;
       this.firstName = this.name.substring(0, 1);
+      this.firstNameBgColor = getColorByFirstName(d.FirstNameSpell);
       this.headImgUrl = d.HeadImgUrl;
     });
   }

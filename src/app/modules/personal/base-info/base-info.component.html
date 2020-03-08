@@ -51,7 +51,7 @@
     <div class="right">
         <div class="avatar" *ngIf="false"><img src="../../../../assets/img/avatar.jpeg"></div>
         <div class="avatar" *ngIf="true">
-            <div>{{firstName}}</div>
+            <div [style.background-color]="firstNameBgColor">{{firstName}}</div>
         </div>
 
         <div class="over-avatar">更换头像</div>

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { H_Http, CoreEdit } from '@core';
+import { H_Http, CoreEdit, getColorByFirstName } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,6 +14,8 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
 
 
   firstName = '';
+
+  firstNameBgColor = '';
 
   form: FormGroup;
 
@@ -74,6 +75,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   getCurrentUser() {
     const user = this.router.snapshot.data.user;
     this.firstName = user.Name.substring(0, 1);
+    this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
     this.form.get('fName').setValue(user.Name);
     this.form.get('fNickName').setValue(user.NickName);
     this.form.get('fGender').setValue(user.Gender.toString());

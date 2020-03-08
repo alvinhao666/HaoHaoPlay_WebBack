@@ -80,7 +80,7 @@
                         <img src="../../../../assets//img/avatar.png">
                     </div>
                     <div class="header-avatar" *ngIf="!headImgurl">
-                        <div>{{firstName}}</div>
+                        <div [style.background-color]="firstNameBgColor">{{firstName}}</div>
                     </div>
                     <span class="ml3">{{name}}</span>
                     <i nz-icon nzType="caret-down"></i>
