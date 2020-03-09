@@ -18,27 +18,9 @@ export class MainComponent extends CoreContainer implements OnInit {
 
   constructor(
     private http: H_Http,
-    private userInfo$: UserInfoSubject) {
+    private userInfoSubject: UserInfoSubject) {
     super();
-
-    // const orignalSetItem = localStorage.setItem;
-    // localStorage.setItem = function (key, value) {
-    //   const setItemEvent = new Event('setItemEvent');
-    //   setItemEvent['key'] = key;
-    //   setItemEvent['value'] = value;
-    //   window.dispatchEvent(setItemEvent);
-    //   orignalSetItem.apply(this, arguments);
-    // };
-    // window.addEventListener('setItemEvent', function (e) {
-    //   console.log('1123')
-    //   if (e['key'] === 'H_FirstName') {
-    //     // 执行你的逻辑
-    //     this.firstName = e['value'];
-    //   } else if (e['key'] === 'H_FirstNameBgColor') {
-    //     this.firstNameBgColor = e['value'];
-    //   }
-    // });
-    this.userInfo$.userSubject.subscribe((d: any) => {
+    this.userInfoSubject.userInfo$.subscribe((d: any) => {
       this.name = d.Name;
       this.firstName = d.FirstName;
       this.firstNameBgColor = d.FirstNameBgColor;

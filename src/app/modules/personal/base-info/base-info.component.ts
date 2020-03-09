@@ -51,7 +51,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     private http: H_Http,
     private msg: NzMessageService,
     private router: ActivatedRoute,
-    private userInfo$: UserInfoSubject) {
+    private userInfoSubject: UserInfoSubject) {
     super();
     this.form = this.fb.group({
       fName: [null, Validators.required],
@@ -80,7 +80,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     this.form.get('fAge').setValue(user.Age);
     this.form.get('fProfile').setValue(user.Profile);
     this.form.get('fHomeAddress').setValue(user.HomeAddress);
-    this.userInfo$.userSubject.next({ Name: user.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor });
+    this.userInfoSubject.userInfo$.next({ Name: user.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor });
   }
 
   update() {

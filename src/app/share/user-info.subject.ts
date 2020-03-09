@@ -4,5 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 
 export class UserInfoSubject {
-    public userSubject = new Subject();
+
+    public userInfo$ = new Subject();
+    
 }
