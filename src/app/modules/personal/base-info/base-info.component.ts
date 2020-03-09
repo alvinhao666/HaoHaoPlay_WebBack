@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, CoreEdit, getColorByFirstName } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
-import { UserInfoService } from '../../../share/user-info.service';
+import { UserInfoSubject } from '../../../share/user-info.subject';
 
 
 @Component({
@@ -51,7 +51,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     private http: H_Http,
     private msg: NzMessageService,
     private router: ActivatedRoute,
-    private userInfoService: UserInfoService) {
+    private userInfo$: UserInfoSubject) {
     super();
     this.form = this.fb.group({
       fName: [null, Validators.required],
@@ -80,7 +80,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     this.form.get('fAge').setValue(user.Age);
     this.form.get('fProfile').setValue(user.Profile);
     this.form.get('fHomeAddress').setValue(user.HomeAddress);
-    this.userInfoService.globalVar.next({ firstName: this.firstName, firstNameBgColor: this.firstNameBgColor });
+    this.userInfo$.userSubject.next({ firstName: this.firstName, firstNameBgColor: this.firstNameBgColor });
   }
 
   update() {

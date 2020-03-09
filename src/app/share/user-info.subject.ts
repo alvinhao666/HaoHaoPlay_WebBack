@@ -3,6 +3,6 @@ import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 
-export class UserInfoService {
-    public globalVar = new Subject();
+export class UserInfoSubject {
+    public userSubject = new Subject();
 }

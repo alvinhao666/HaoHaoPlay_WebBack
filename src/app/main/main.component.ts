@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { H_Http, getColorByFirstName, CoreContainer } from '@core';
-import { UserInfoService } from '../share/user-info.service';
+import { UserInfoSubject } from '../share/user-info.subject';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +18,7 @@ export class MainComponent extends CoreContainer implements OnInit {
 
   constructor(
     private http: H_Http,
-    private userInfoService: UserInfoService) {
+    private userInfo$: UserInfoSubject) {
     super();
 
     // const orignalSetItem = localStorage.setItem;
@@ -38,7 +38,7 @@ export class MainComponent extends CoreContainer implements OnInit {
     //     this.firstNameBgColor = e['value'];
     //   }
     // });
-    this.userInfoService.globalVar.subscribe((d: any) => {
+    this.userInfo$.userSubject.subscribe((d: any) => {
       this.firstName = d.firstName;
       this.firstNameBgColor = d.firstNameBgColor;
     });
