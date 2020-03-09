@@ -80,7 +80,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     this.form.get('fAge').setValue(user.Age);
     this.form.get('fProfile').setValue(user.Profile);
     this.form.get('fHomeAddress').setValue(user.HomeAddress);
-    this.userInfo$.userSubject.next({ firstName: this.firstName, firstNameBgColor: this.firstNameBgColor });
+    this.userInfo$.userSubject.next({ Name: user.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor });
   }
 
   update() {

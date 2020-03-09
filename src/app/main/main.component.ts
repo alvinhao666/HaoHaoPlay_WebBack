@@ -39,8 +39,9 @@ export class MainComponent extends CoreContainer implements OnInit {
     //   }
     // });
     this.userInfo$.userSubject.subscribe((d: any) => {
-      this.firstName = d.firstName;
-      this.firstNameBgColor = d.firstNameBgColor;
+      this.name = d.Name;
+      this.firstName = d.FirstName;
+      this.firstNameBgColor = d.FirstNameBgColor;
     });
   }
 
