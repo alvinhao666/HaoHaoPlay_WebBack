@@ -76,10 +76,10 @@
                     <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" class="trigger"></i>
                 </span>
                 <div class="header-user" nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'" nzTrigger="click">
-                    <div class="header-avatar" *ngIf="headImgurl">
+                    <div class="header-avatar" *ngIf="headImgUrl">
                         <img src="../../../../assets//img/avatar.png">
                     </div>
-                    <div class="header-avatar" *ngIf="!headImgurl">
+                    <div class="header-avatar" *ngIf="!headImgUrl">
                         <div [style.background-color]="firstNameBgColor">{{firstName}}</div>
                     </div>
                     <span class="ml3">{{name}}</span>
