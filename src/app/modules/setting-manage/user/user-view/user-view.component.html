@@ -1,3 +1,13 @@
-<nz-drawer [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="720" [(nzVisible)]="visible" [nzTitle]="title" (nzOnClose)="close()">
-
+<nz-drawer [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="500" [(nzVisible)]="visible" [nzTitle]="title" (nzOnClose)="close()">
+    <nz-card nzType="inner" nzTitle="个人信息" [nzSize]="'small'">
+        <nz-descriptions [nzColumn]="1">
+            <nz-descriptions-item nzTitle="姓名">{{user?.Name}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="性别">{{user?.GenderString}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="年龄">{{user?.Age}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="手机">{{user?.Phone}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="邮箱">{{user?.Email}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="QQ">{{user?.QQ}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="微信">{{user?.WeChat}}</nz-descriptions-item>
+        </nz-descriptions>
+    </nz-card>
 </nz-drawer>

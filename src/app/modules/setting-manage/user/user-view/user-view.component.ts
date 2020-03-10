@@ -12,6 +12,8 @@ export class UserViewComponent implements OnInit {
 
   title = '查看用户';
 
+  user: any;
+
   constructor(
     private http: H_Http) {
 
@@ -29,6 +31,7 @@ export class UserViewComponent implements OnInit {
 
     await this.http.get(`User/${id}`).toPromise().then(d => {
       if (!d) return;
+      this.user = d;
       this.visible = true;
     });
   }
