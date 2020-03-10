@@ -1,6 +1,7 @@
 import { OnInit, Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, ComparePwdValidators } from '@core';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
     selector: 'slider-user-edit',
@@ -70,8 +71,8 @@ export class UserEditComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private http: H_Http
-    ) {
+        private http: H_Http,
+        public msg: NzMessageService) {
         this.form = this.fb.group({
             fLoginName: [null, Validators.required],
             fName: [null, Validators.required],
@@ -92,9 +93,7 @@ export class UserEditComponent implements OnInit {
 
     close() {
         this.onClose.emit();
-        setTimeout(() => {
-            this.reset();
-        }, 600);
+        this.reset();
     }
 
     save() {
@@ -121,6 +120,7 @@ export class UserEditComponent implements OnInit {
             })
             .subscribe(d => {
                 if (!d) return;
+                this.msg.success('添加成功');
                 this.onSave.emit();
                 this.reset();
             });
@@ -139,6 +139,7 @@ export class UserEditComponent implements OnInit {
             })
             .subscribe(d => {
                 if (!d) return;
+                this.msg.success('编辑成功');
                 this.onSave.emit();
                 this.reset();
             });
@@ -171,8 +172,10 @@ export class UserEditComponent implements OnInit {
     }
 
     reset() {
-        this.form.reset();
-        this.isEdit = false;
-        this.userId = null;
+        setTimeout(() => {
+            this.form.reset();
+            this.isEdit = false;
+            this.userId = null;
+        }, 300);
     }
 }
