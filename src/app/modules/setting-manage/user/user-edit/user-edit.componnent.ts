@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, ComparePwdValidators } from '@core';
 
 @Component({
-    selector: 'slider-user',
+    selector: 'slider-user-edit',
     templateUrl: './user-edit.component.html',
     styleUrls: ['./user-edit.component.less']
 })

@@ -4,9 +4,8 @@ import { H_Http } from '@core';
 import { DatePipe } from '@angular/common';
 import { environment } from '@env/environment';
 import { UploadFile, NzModalService } from 'ng-zorro-antd';
-import { UserEditComponent } from './edit/user-edit.componnent';
-// import { UserEditComponent } from './edit/user-edit.componnent';
-// import { NzDrawerService } from 'ng-zorro-antd';
+import { UserEditComponent } from './user-edit/user-edit.componnent';
+import { UserViewComponent } from './user-view/user-view.component';
 
 @Component({
     selector: 'user-list',
@@ -16,7 +15,14 @@ import { UserEditComponent } from './edit/user-edit.componnent';
 
 export class UserListComponent implements OnInit {
 
-    @ViewChild('userSlider', { static: false }) sliderUserEdit: UserEditComponent;
+    @ViewChild('silderUserEdit', { static: false }) sliderUserEdit: UserEditComponent;
+    @ViewChild('silderUserView', { static: false }) sliderUserView: UserViewComponent;  
+    slider_edit_visible = false;
+    slider_edit_title = '';
+
+    slider_view_visible = false;
+    slider_view_title = '';
+
     searchForm: FormGroup;
     statuses = [
         { text: '注销', value: 'false' },
@@ -57,8 +63,6 @@ export class UserListComponent implements OnInit {
     fileList: UploadFile[] = [];
 
 
-    dialog_visible = false;
-    dialog_title = '';
 
     tableLoading = false;
     constructor(
@@ -174,8 +178,8 @@ export class UserListComponent implements OnInit {
     }
 
     addUser() {
-        this.dialog_title = '添加用户';
-        this.dialog_visible = true;
+        this.slider_edit_title = '添加用户';
+        this.slider_edit_visible = true;
 
     }
 
@@ -188,12 +192,12 @@ export class UserListComponent implements OnInit {
         return false;
     }
 
-    closeDialog() {
-        this.dialog_visible = false;
+    closeEditSlider() {
+        this.slider_edit_visible = false;
     }
 
     onSave() {
-        this.dialog_visible = false;
+        this.slider_edit_visible = false;
         this.pageIndex = 1;
         this.getUsers();
     }
@@ -236,8 +240,13 @@ export class UserListComponent implements OnInit {
 
     async edit(id: any) {
         await this.sliderUserEdit.showUser(id);
-        this.dialog_title = '编辑用户';
-        this.dialog_visible = true;
+        this.slider_edit_title = '编辑用户';
+        this.slider_edit_visible = true;
+    }
+
+    async view(id: any) {
+        await this.sliderUserView.showUser(id);
+        this.slider_view_visible = true;
     }
 
 
