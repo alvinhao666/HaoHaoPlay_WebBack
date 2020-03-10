@@ -71,7 +71,7 @@ export class UserEditComponent implements OnInit {
         this.form = this.fb.group({
             fLoginName: [null, Validators.required],
             fName: [null, Validators.required],
-            fPassword: [null, Validators.required],
+            fPassword: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
             fRePassword: [null, [Validators.required, ComparePwdValidators.equal('fPassword')]],
             fAge: [null, Validators.required],
             fGender: [null, Validators.required],
