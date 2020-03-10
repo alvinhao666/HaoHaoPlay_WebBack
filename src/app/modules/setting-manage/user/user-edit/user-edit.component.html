@@ -1,6 +1,6 @@
 <nz-drawer [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="720" [(nzVisible)]="visible" [nzTitle]="title" (nzOnClose)="close()">
     <form nz-form [formGroup]="form">
-        <nz-card nzType="inner" nzTitle="账号信息" *ngIf="!isEdit">
+        <nz-card nzType="inner" nzTitle="账号信息" *ngIf="!isEdit" style="margin-bottom: 24px;">
             <nz-form-item>
                 <nz-form-label nzRequired [nzSpan]="3">账号</nz-form-label>
                 <nz-form-control nzErrorTip="账号必填" [nzSpan]="8">
@@ -25,7 +25,7 @@
                 </nz-form-control>
             </nz-form-item>
         </nz-card>
-        <nz-card nzType="inner" nzTitle="个人信息" style="margin-top:16px;">
+        <nz-card nzType="inner" nzTitle="个人信息">
             <div nz-row nzGutter="32">
                 <div nz-col nzSpan="12">
                     <nz-form-item>

@@ -1,6 +1,7 @@
 import { OnInit, Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, ComparePwdValidators } from '@core';
+import { setTimeout } from 'timers';
 
 @Component({
     selector: 'slider-user-edit',
@@ -87,7 +88,9 @@ export class UserEditComponent implements OnInit {
 
     close() {
         this.onClose.emit();
-        this.reset();
+        setTimeout(() => {
+            this.reset();
+        }, 600);
     }
 
     save() {
