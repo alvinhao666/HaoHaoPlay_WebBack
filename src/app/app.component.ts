@@ -16,8 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
     componentConent: Type<any>;
     constructor(
         private router: Router,
-        public msg: NzMessageService,
-    ) {
+        public msg: NzMessageService) {
         this.routerHandle();
     }
 

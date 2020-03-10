@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { H_Http, CoreEdit, ComparePwdValidators, CompareOldPwdValidators } from '@core';
@@ -50,7 +50,7 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
     super();
     this.form = this.fb.group({
       fOldPassword: [null, Validators.required],
-      fPassword: [null, [Validators.required, CompareOldPwdValidators.match('fOldPassword')]],
+      fPassword: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(16), CompareOldPwdValidators.match('fOldPassword')]],
       fRePassword: [null, [Validators.required, ComparePwdValidators.equal('fPassword')]]
     });
   }

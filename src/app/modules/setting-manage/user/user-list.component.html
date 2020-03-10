@@ -73,7 +73,7 @@
                 <th nzWidth="100px">状态</th>
                 <th nzWidth="200px">最后登录时间</th>
                 <th nzWidth="200px">最后登录IP</th>
-                <th nzRight="0px" nzWidth="150px">操作</th>
+                <th nzRight="0px" nzWidth="170px">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -91,6 +91,8 @@
                 <td nzWidth="200px">{{d.LastLoginTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
                 <td nzWidth="200px">{{d.LastLoginIP}}</td>
                 <td nzRight="0px">
+                    <a href="javascript:;" (click)="view(d.Id)">查看</a>
+                    <nz-divider nzType="vertical"></nz-divider>
                     <a href="javascript:;" (click)="edit(d.Id)" *ngIf="d.Id!=-1">编辑</a>
                     <nz-divider nzType="vertical" *ngIf="d.Id!=-1"></nz-divider>
                     <a href="javascript:;" (click)="disable(d.Id)" *ngIf="d.Enabled&&d.Id!=-1">注销</a>

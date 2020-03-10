@@ -7,7 +7,7 @@ export class ComparePwdValidators {
             const form = self.parent;
             if (form) {
                 const targetControl: AbstractControl = form.controls[targetField];
-                if (self.value !== targetControl.value) {   //如果两个值不一致
+                if (self.value && self.value !== targetControl.value) {   //如果两个值不一致
                     return { notEqual: true };
                 }
             }
