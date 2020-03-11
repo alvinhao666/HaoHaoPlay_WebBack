@@ -59,13 +59,12 @@
     </form>
 
     <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
-        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ x:'1475px',y: '420px' }" [nzSize]="'middle'">
+        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ x:'1550px',y: '420px' }" [nzSize]="'middle'">
         <thead (nzSortChange)="sort($event)" nzSingleSort>
             <tr>
                 <th nzLeft="0px" nzWidth="60px">序号</th>
-                <th nzLeft="60px" nzWidth="115px">姓名</th>
-                <th nzWidth="100px" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别
-                </th>
+                <th nzLeft="60px" nzWidth="120px">姓名</th>
+                <th nzWidth="100px" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别</th>
                 <th nzWidth="100px" nzShowSort nzSortKey="0">年龄</th>
                 <th nzWidth="150px">手机号</th>
                 <th nzWidth="200px">邮箱</th>
@@ -73,23 +72,23 @@
                 <th nzWidth="100px">状态</th>
                 <th nzWidth="200px">最后登录时间</th>
                 <th nzWidth="200px">最后登录IP</th>
-                <th nzRight="0px" nzWidth="180px">操作</th>
+                <th nzRight="0px" nzWidth="190px">操作</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let d of nzTable.data;let idx=index;">
                 <td nzLeft="0px">{{idx+1}}</td>
                 <td nzLeft="60px">{{d.Name}}</td>
-                <td nzWidth="100px">{{d.GenderString}}</td>
-                <td nzWidth="100px">{{d.Age}}</td>
-                <td nzWidth="150px">{{d.Phone}}</td>
-                <td nzWidth="200px">{{d.Email}}</td>
-                <td nzWidth="150px">{{d.WeChat}}</td>
-                <td nzWidth="100px" [class.success]="d.Enabled" [class.error]="!d.Enabled">
+                <td>{{d.GenderString}}</td>
+                <td>{{d.Age}}</td>
+                <td>{{d.Phone}}</td>
+                <td>{{d.Email}}</td>
+                <td>{{d.WeChat}}</td>
+                <td [class.success]="d.Enabled" [class.error]="!d.Enabled">
                     {{d.EnabledString}}
                 </td>
-                <td nzWidth="200px">{{d.LastLoginTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                <td nzWidth="200px">{{d.LastLoginIP}}</td>
+                <td>{{d.LastLoginTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{d.LastLoginIP}}</td>
                 <td nzRight="0px">
                     <a href="javascript:;" (click)="view(d.Id)">查看</a>
                     <nz-divider nzType="vertical"></nz-divider>
