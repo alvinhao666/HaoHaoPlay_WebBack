@@ -125,8 +125,8 @@ export class UserListComponent implements OnInit {
                 Phone: this.sPhone.value || '',
                 Gender: this.sGender,
                 Enabled: this.sEnabled.value || '',
-                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd HH:mm') || '',
-                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd HH:mm') || '',
+                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
+                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
                 PageIndex: this.pageIndex,
                 PageSize: this.pageSize,
                 SortField: this.sortKey,
@@ -152,8 +152,8 @@ export class UserListComponent implements OnInit {
                 Phone: this.sPhone.value || '',
                 Gender: this.sGender,
                 Enabled: this.sEnabled.value || '',
-                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd HH:mm') || '',
-                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd HH:mm') || '',
+                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
+                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
                 OrderFileds: this.sortValue && (this.sortKey + this.sortValue)
             })
             .subscribe((d: any) => {
