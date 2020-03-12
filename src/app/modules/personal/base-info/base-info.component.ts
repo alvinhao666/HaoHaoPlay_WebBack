@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, CoreEdit, getColorByFirstName } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfoSubject } from '../../../share/user-info.subject';
+import { AvatarComponent } from '../avatar/avatar.component';
 
 
 @Component({
@@ -12,6 +13,9 @@ import { UserInfoSubject } from '../../../share/user-info.subject';
   styleUrls: ['./base-info.component.less']
 })
 export class BaseInfoComponent extends CoreEdit implements OnInit {
+
+
+  @ViewChild('DialogAvator', { static: false }) dialogAavator: AvatarComponent;
 
   form: FormGroup;
 
@@ -108,5 +112,9 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       if (!d) return;
       this.setCurrentUser(d);
     });
+  }
+
+  showAvatarDialog() {
+    this.dialogAavator.isVisible = true;
   }
 }

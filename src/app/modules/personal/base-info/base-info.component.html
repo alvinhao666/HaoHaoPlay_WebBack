@@ -54,7 +54,8 @@
             <div [style.background-color]="firstNameBgColor">{{firstName}}</div>
         </div>
 
-        <div class="over-avatar">更换头像</div>
+        <div class="over-avatar" (click)="showAvatarDialog()">更换头像</div>
     </div>
 </div>
 <!-- </nz-spin> -->
+<dialog-avatar #DialogAvator></dialog-avatar>
