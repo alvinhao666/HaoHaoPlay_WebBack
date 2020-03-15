@@ -1,0 +1,94 @@
+.upload {
+    margin-right: 24px;
+    cursor      : pointer;
+}
+
+.upload:hover {
+    color: #1890ff;
+}
+
+::ng-deep {
+    .ant-modal-footer {
+        border-top: 0;
+        padding-top: 0;
+    }
+}
+
+.zoom-group {
+    float     : left;
+    width     : 320px;
+    text-align: center;
+
+    i.fa {
+        font-size   : 21px;
+        line-height : 33px;
+        margin-left : 10px;
+        margin-right: 10px;
+        cursor      : pointer;
+    }
+
+    i.fa:hover {
+        color: #1890ff;
+    }
+}
+
+.avatar-content {
+    width : 100%;
+    height: 320px;
+}
+
+.avatar-wrapper {
+    position: relative;
+    float           : left;
+    height          : 320px;
+    width           : 320px;
+    box-shadow      : inset 0 0 5px rgba(0, 0, 0, .25);
+    background-color: #fcfcfc;
+    overflow: hidden;
+    box-sizing: border-box;
+    // text-align: center;
+    // vertical-align: middle;
+}
+
+// .avatar-wrapper img {
+//     display  : block;
+//     // margin: 0 auto;
+//     height   : 100%;
+//     // width: 100%;
+//     object-fit: cover;//保证图片覆盖容器的宽高
+// }
+
+.avatar-wrapper:hover {
+    cursor: move;
+}
+
+.avatar-preview{
+    // width: 180px;
+    text-align: center;
+}
+
+.thumb-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    border: 1px solid #666666;
+    border-radius: 100%;
+    -webkit-box-shadow: 0 0 0 1000px rgba(0,0,0,0.5);
+    box-shadow: 0 0 0 1000px rgba(0,0,0,0.5);
+    background: none repeat scroll 0% 0% transparent;
+}
+
+#imgDiv {
+    position: absolute;
+    width: 320px;     // 你要的正方形
+    height: 320px;    // 你要的正方形
+    // background-image: url(../../../../assets/img/background.svg);
+    // background-color: red;
+    background-position: center center;    // 居中
+    background-size: cover;                // 填满div
+    background-repeat: no-repeat;
+}

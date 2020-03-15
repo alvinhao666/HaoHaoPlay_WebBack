@@ -19,6 +19,7 @@
         "@angular/platform-browser": "~8.2.14",
         "@angular/platform-browser-dynamic": "~8.2.14",
         "@angular/router": "~8.2.14",
+        "font-awesome": "^4.7.0",
         "jsencrypt": "^3.0.0-rc.1",
         "minireset.css": "0.0.6",
         "ng-zorro-antd": "^8.5.2",

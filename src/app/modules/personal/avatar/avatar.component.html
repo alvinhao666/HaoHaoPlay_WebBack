@@ -1,3 +1,25 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="更换头像" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzWidth]="580" [nzOkLoading]="loading">
-
+<nz-modal [(nzVisible)]="isVisible" nzTitle="更换头像" [nzWidth]="500" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
+    <div class="avatar-content">
+        <div class="avatar-wrapper">
+            <div id="imgDiv" (mousedown)="mouseDown($event)" (mousemove)="mouseMove($event)" (mouseup)="mouseUp($event)"></div>
+            <!-- <img id="avatarImg"> -->
+            <!-- <canvas id="avatarImg" width="320" height="320"></canvas> -->
+            <div class="thumb-box" (mousedown)="mouseDown($event)"></div>
+        </div>
+        <div class="avatar-preview">
+            <div>预览</div>
+        </div>
+    </div>
+    <input type="file" id="avatarInput" style="display: none;" accept="image/*">
 </nz-modal>
+
+<ng-template #modalFooter>
+    <div class="zoom-group">
+        <i class="fa fa-undo" (click)="turnLeft()"></i>
+        <i class="fa fa-plus" (click)="large()"></i>
+        <i class="fa fa-minus" (click)="reduce()"></i>
+        <i class="fa fa-repeat" (click)="turnRight()"></i>
+    </div>
+    <span class="upload" (click)="upload()">上传</span>
+    <button nz-button nzType="primary" (click)="handleOk()">确定</button>
+</ng-template>
