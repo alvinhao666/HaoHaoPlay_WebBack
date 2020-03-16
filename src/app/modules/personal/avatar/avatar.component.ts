@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
-import { IfStmt } from '@angular/compiler';
 
 
 
@@ -76,12 +75,12 @@ export class AvatarComponent implements OnInit {
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
     if (delD > 0) {
-      if (height < 700) {
+      if (height < 800) {
         avatar.style.height = height + 40 + 'px';
         this.marginTop = this.marginTop - 20;
         avatar.style.marginTop = this.marginTop + 'px';
       }
-      if (width < 700) {
+      if (width < 800) {
         avatar.style.width = width + 40 + 'px';
         this.marginLeft = this.marginLeft - 20;
         avatar.style.marginLeft = this.marginLeft + 'px';
@@ -149,12 +148,12 @@ export class AvatarComponent implements OnInit {
     const avatar = document.getElementById('imgDiv');
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
-    if (height < 700) {
+    if (height < 800) {
       avatar.style.height = height + 40 + 'px';
       this.marginTop = this.marginTop - 20;
       avatar.style.marginTop = this.marginTop + 'px';
     }
-    if (width < 700) {
+    if (width < 800) {
       avatar.style.width = width + 40 + 'px';
       this.marginLeft = this.marginLeft - 20;
       avatar.style.marginLeft = this.marginLeft + 'px';
