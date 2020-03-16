@@ -81,6 +81,7 @@ export class AvatarComponent implements OnInit {
   }
 
   mouseDown(e: MouseEvent) {
+    e.stopPropagation();
     //获取x坐标和y坐标
     this.x = e.clientX;
     this.y = e.clientY;
@@ -90,9 +91,14 @@ export class AvatarComponent implements OnInit {
     this.t = e.offsetY;
     //开关打开
     this.isDown = true;
+    console.log('mousedown1')
   }
 
-  mouseMove(e: any) {
+  mouseDownBox(e: MouseEvent){
+    console.log(e);
+  }
+
+  mouseMove(e: MouseEvent) {
     // console.log(e)
     if (this.isDown === false) {
       return;
@@ -110,7 +116,7 @@ export class AvatarComponent implements OnInit {
     dv.style.top = nt + 'px';
   }
 
-  mouseUp(e: any) {
+  mouseUp(e: MouseEvent) {
     this.isDown = false;
   }
 
