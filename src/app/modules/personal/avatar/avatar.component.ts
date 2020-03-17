@@ -13,15 +13,15 @@ export class AvatarComponent implements OnInit {
   isVisible = false;
 
   degree = 0;
-  marginLeft = 0;
-  marginTop = 0;
 
   x = 0;
   y = 0;
-  // t = 0;
-  // l = 0;
 
   isDown = false;
+
+  isDrag = false;
+
+  i = 1;
 
   constructor(
     private msg: NzMessageService) { }
@@ -35,8 +35,8 @@ export class AvatarComponent implements OnInit {
     e.stopPropagation();
 
     const dv = e.target as HTMLElement;
-    const left = dv.style.left;
-    const top = dv.style.top;
+    const left = dv.style.backgroundPositionX;
+    const top = dv.style.backgroundPositionY;
     //获取x坐标和y坐标
     this.x = e.clientX - parseInt((left === '' ? '0' : left), 10);
     this.y = e.clientY - parseInt((top === '' ? '0' : top), 10);
@@ -58,8 +58,9 @@ export class AvatarComponent implements OnInit {
     const nt = e.clientY - this.y;
     const dv = document.getElementById('imgDiv');
 
-    dv.style.left = nl + 'px';
-    dv.style.top = nt + 'px';
+    dv.style.backgroundPositionX = nl + 'px';
+    dv.style.backgroundPositionY = nt + 'px';
+    // const hw = parseInt(dv.style.backgroundSize.split(' ')[0].split('px')[0], 10);
   }
 
   mouseUp(e: MouseEvent) {
@@ -70,35 +71,46 @@ export class AvatarComponent implements OnInit {
   }
 
   mouseWheel(e: any) {
-    const delD = e.wheelDelta ? e.wheelDelta : -e.detail;
     const avatar = document.getElementById('imgDiv');
+    if (avatar.style.backgroundImage === '') return;
+    const delD = e.wheelDelta ? e.wheelDelta : -e.detail;
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
+    this.isDrag = true;
     if (delD > 0) {
-      if (height < 800) {
-        avatar.style.height = height + 40 + 'px';
-        this.marginTop = this.marginTop - 20;
-        avatar.style.marginTop = this.marginTop + 'px';
+      if (avatar.style.backgroundSize === '') {
+        const size = `${height + 20}px ${width + 20}px`;
+        avatar.style.backgroundSize = size;
+        let p = parseInt(avatar.style.backgroundPositionX, 10);
+        if (isNaN(p)) p = 0;
+        avatar.style.backgroundPosition = `${(p - 10)}px ${(p - 10)}px`;
+      } else {
+        const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
+        if (hw < 800) {
+          const size = `${hw + 20}px ${hw + 20}px`;
+          avatar.style.backgroundSize = size;
+          let p = parseInt(avatar.style.backgroundPositionX, 10);
+          if (isNaN(p)) p = 0;
+          avatar.style.backgroundPosition = `${(p - 10)}px ${(p - 10)}px`;
+        }
       }
-      if (width < 800) {
-        avatar.style.width = width + 40 + 'px';
-        this.marginLeft = this.marginLeft - 20;
-        avatar.style.marginLeft = this.marginLeft + 'px';
-        // avatar.style.marginRight = this.marginLeft + 'px';
-      }
-
     } else {
-      if (height > 200) {
-        avatar.style.height = (height - 40).toString() + 'px';
-        this.marginTop = this.marginTop + 20;
-        avatar.style.marginTop = this.marginTop + 'px';
+      if (avatar.style.backgroundSize === '') {
+        const size = `${height - 20}px ${width - 20}px`;
+        avatar.style.backgroundSize = size;
+        let p = parseInt(avatar.style.backgroundPositionX, 10);
+        if (isNaN(p)) p = 0;
+        avatar.style.backgroundPosition = `${(p + 10)}px ${(p + 10)}px`;
+      } else {
+        const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
+        if (hw > 200) {
+          const size = `${hw - 20}px ${hw - 20}px`;
+          avatar.style.backgroundSize = size;
+          let p = parseInt(avatar.style.backgroundPositionX, 10);
+          if (isNaN(p)) p = 0;
+          avatar.style.backgroundPosition = `${(p + 10)}px ${(p + 10)}px`;
+        }
       }
-      if (width > 200) {
-        avatar.style.width = (width - 40).toString() + 'px';
-        this.marginLeft = this.marginLeft + 20;
-        avatar.style.marginLeft = this.marginLeft + 'px';
-      }
-
     }
   }
 
@@ -118,62 +130,90 @@ export class AvatarComponent implements OnInit {
   }
 
   changeImg(e: any) {
+    const imgDv = document.getElementById('imgDiv');
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = function () {
       const url = reader.result as string;
-
-      document.getElementById('imgDiv').style.backgroundImage = `url(${url})`;
+      // imgDv.style.backgroundSize = '320px 320px';
+      imgDv.style.backgroundImage = `url(${url})`;
     };
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      document.getElementById('imgDiv').style.backgroundImage = null;
+      imgDv.style.backgroundImage = null;
     }
   }
 
 
 
   turnLeft() {
+    const avatar = document.getElementById('imgDiv');
+    if (avatar.style.backgroundImage === '') return;
     this.degree = this.degree - 90;
-    document.getElementById('imgDiv').style.transform = 'rotate(' + this.degree + 'deg)';
+    avatar.style.transform = 'rotate(' + this.degree + 'deg)';
   }
 
   turnRight() {
+    const avatar = document.getElementById('imgDiv');
+    if (avatar.style.backgroundImage === '') return;
     this.degree = this.degree + 90;
-    document.getElementById('imgDiv').style.transform = 'rotate(' + this.degree + 'deg)';
+    avatar.style.transform = 'rotate(' + this.degree + 'deg)';
   }
 
   large() {
     const avatar = document.getElementById('imgDiv');
+    if (avatar.style.backgroundImage === '') return;
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
-    if (height < 800) {
-      avatar.style.height = height + 40 + 'px';
-      this.marginTop = this.marginTop - 20;
-      avatar.style.marginTop = this.marginTop + 'px';
-    }
-    if (width < 800) {
-      avatar.style.width = width + 40 + 'px';
-      this.marginLeft = this.marginLeft - 20;
-      avatar.style.marginLeft = this.marginLeft + 'px';
-      // avatar.style.marginRight = this.marginLeft + 'px';
+
+    if (avatar.style.backgroundSize === '') {
+      const size = `${height + 20}px ${width + 20}px`;
+      avatar.style.backgroundSize = size;
+      let p = parseInt(avatar.style.backgroundPositionX, 10);
+      if (isNaN(p)) p = 0;
+      avatar.style.backgroundPosition = `${(p - 10)}px ${(p - 10)}px`;
+    } else {
+      const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
+      if (hw < 800) {
+        const size = `${hw + 20}px ${hw + 20}px`;
+        avatar.style.backgroundSize = size;
+        let p = parseInt(avatar.style.backgroundPositionX, 10);
+        if (isNaN(p)) p = 0;
+        avatar.style.backgroundPosition = `${(p - 10)}px ${(p - 10)}px`;
+      }
     }
   }
 
   reduce() {
     const avatar = document.getElementById('imgDiv');
+    if (this.isDrag) {
+      avatar.style.backgroundPosition = 'center center';
+      return;
+    }
+
+    if (avatar.style.backgroundImage === '') return;
+
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
-    if (height > 200) {
-      avatar.style.height = (height - 40).toString() + 'px';
-      this.marginTop = this.marginTop + 20;
-      avatar.style.marginTop = this.marginTop + 'px';
+
+    if (avatar.style.backgroundSize === '') {
+      const size = `${height - 20}px ${width - 20}px`;
+      avatar.style.backgroundSize = size;
+      let p = parseInt(avatar.style.backgroundPositionX, 10);
+      if (isNaN(p)) p = 0;
+      avatar.style.backgroundPosition = `${(p + 10)}px ${(p + 10)}px`;
+    } else {
+      const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
+      if (hw > 200) {
+        const size = `${hw - 20}px ${hw - 20}px`;
+        avatar.style.backgroundSize = size;
+        let p = parseInt(avatar.style.backgroundPositionX, 10);
+        if (isNaN(p)) p = 0;
+        avatar.style.backgroundPosition = `${(p + 10)}px ${(p + 10)}px`;
+      }
     }
-    if (width > 200) {
-      avatar.style.width = (width - 40).toString() + 'px';
-      this.marginLeft = this.marginLeft + 20;
-      avatar.style.marginLeft = this.marginLeft + 'px';
-    }
+
   }
+
 }
