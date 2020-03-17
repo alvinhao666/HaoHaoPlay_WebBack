@@ -13,15 +13,13 @@ export class AvatarComponent implements OnInit {
   isVisible = false;
 
   degree = 0;
-  marginLeft = 0;
-  marginTop = 0;
 
   x = 0;
   y = 0;
-  // t = 0;
-  // l = 0;
 
   isDown = false;
+
+  i = 1;
 
   constructor(
     private msg: NzMessageService) { }
@@ -74,31 +72,29 @@ export class AvatarComponent implements OnInit {
     const avatar = document.getElementById('imgDiv');
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
+
     if (delD > 0) {
-      if (height < 800) {
-        avatar.style.height = height + 40 + 'px';
-        this.marginTop = this.marginTop - 20;
-        avatar.style.marginTop = this.marginTop + 'px';
+      if (avatar.style.backgroundSize === '') {
+        const size = `${height + 20}px ${width + 20}px`;
+        avatar.style.backgroundSize = size;
+      } else {
+        const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
+        if (hw < 800){
+          const size = `${hw + 20}px ${hw + 20}px`;
+          avatar.style.backgroundSize = size;
+        }
       }
-      if (width < 800) {
-        avatar.style.width = width + 40 + 'px';
-        this.marginLeft = this.marginLeft - 20;
-        avatar.style.marginLeft = this.marginLeft + 'px';
-        // avatar.style.marginRight = this.marginLeft + 'px';
-      }
-
     } else {
-      if (height > 200) {
-        avatar.style.height = (height - 40).toString() + 'px';
-        this.marginTop = this.marginTop + 20;
-        avatar.style.marginTop = this.marginTop + 'px';
+      if (avatar.style.backgroundSize === '') {
+        const size = `${height - 20}px ${width - 20}px`;
+        avatar.style.backgroundSize = size;
+      } else {
+        const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
+        if (hw > 200) {
+          const size = `${hw - 20}px ${hw - 20}px`;
+          avatar.style.backgroundSize = size;
+        }
       }
-      if (width > 200) {
-        avatar.style.width = (width - 40).toString() + 'px';
-        this.marginLeft = this.marginLeft + 20;
-        avatar.style.marginLeft = this.marginLeft + 'px';
-      }
-
     }
   }
 
@@ -148,16 +144,16 @@ export class AvatarComponent implements OnInit {
     const avatar = document.getElementById('imgDiv');
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
-    if (height < 800) {
-      avatar.style.height = height + 40 + 'px';
-      this.marginTop = this.marginTop - 20;
-      avatar.style.marginTop = this.marginTop + 'px';
-    }
-    if (width < 800) {
-      avatar.style.width = width + 40 + 'px';
-      this.marginLeft = this.marginLeft - 20;
-      avatar.style.marginLeft = this.marginLeft + 'px';
-      // avatar.style.marginRight = this.marginLeft + 'px';
+  
+    if (avatar.style.backgroundSize === '') {
+      const size = `${height + 20}px ${width + 20}px`;
+      avatar.style.backgroundSize = size;
+    } else {
+      const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
+      if (hw < 800){
+        const size = `${hw + 20}px ${hw + 20}px`;
+        avatar.style.backgroundSize = size;
+      }
     }
   }
 
@@ -165,15 +161,16 @@ export class AvatarComponent implements OnInit {
     const avatar = document.getElementById('imgDiv');
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
-    if (height > 200) {
-      avatar.style.height = (height - 40).toString() + 'px';
-      this.marginTop = this.marginTop + 20;
-      avatar.style.marginTop = this.marginTop + 'px';
-    }
-    if (width > 200) {
-      avatar.style.width = (width - 40).toString() + 'px';
-      this.marginLeft = this.marginLeft + 20;
-      avatar.style.marginLeft = this.marginLeft + 'px';
+
+    if (avatar.style.backgroundSize === '') {
+      const size = `${height - 20}px ${width - 20}px`;
+      avatar.style.backgroundSize = size;
+    } else {
+      const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
+      if (hw > 200) {
+        const size = `${hw - 20}px ${hw - 20}px`;
+        avatar.style.backgroundSize = size;
+      }
     }
   }
 }
