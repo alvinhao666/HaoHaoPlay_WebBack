@@ -79,7 +79,7 @@ export class AvatarComponent implements OnInit {
         avatar.style.backgroundSize = size;
       } else {
         const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
-        if (hw < 800){
+        if (hw < 800) {
           const size = `${hw + 20}px ${hw + 20}px`;
           avatar.style.backgroundSize = size;
         }
@@ -144,13 +144,13 @@ export class AvatarComponent implements OnInit {
     const avatar = document.getElementById('imgDiv');
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
-  
+
     if (avatar.style.backgroundSize === '') {
       const size = `${height + 20}px ${width + 20}px`;
       avatar.style.backgroundSize = size;
     } else {
       const hw = parseInt(avatar.style.backgroundSize.split(' ')[0].split('px')[0], 10);
-      if (hw < 800){
+      if (hw < 800) {
         const size = `${hw + 20}px ${hw + 20}px`;
         avatar.style.backgroundSize = size;
       }
