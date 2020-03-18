@@ -151,7 +151,7 @@ export class AvatarComponent implements OnInit {
       img.onload = function () {
         const canvas = document.getElementById('preview-f') as HTMLCanvasElement;
         const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 30, 30, 130, 130, 0, 0, 320, 160);
+        ctx.drawImage(img, 0, 0, 160, 160);
       };
       // const img = new Image();
       // img.src = url;
