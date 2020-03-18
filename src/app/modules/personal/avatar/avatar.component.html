@@ -1,7 +1,7 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="更换头像" [nzWidth]="500" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
     <div class="avatar-content">
-        <div class="avatar-wrapper" (mousemove)="mouseMove($event)" (mouseup)="mouseUp($event)">
-            <div id="imgDiv" (mousedown)="mouseDown($event)" (mousewheel)="mouseWheel($event)" (DOMMouseScroll)="mouseWheel($event)"></div>
+        <div class="avatar-wrapper" (mousemove)="mouseMove($event)" (mouseout)="mouseOut($event)">
+            <div id="imgDiv" (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)" (mousewheel)="mouseWheel($event)" (DOMMouseScroll)="mouseWheel($event)"></div>
             <!-- <img id="avatarImg"> -->
             <!-- <canvas id="avatarImg" width="320" height="320"></canvas> -->
             <div class="thumb-box"></div>

@@ -19,7 +19,7 @@ export class AvatarComponent implements OnInit {
 
   isDown = false;
 
-  isDrag = false;
+  // isDrag = false;
 
   i = 1;
 
@@ -56,11 +56,10 @@ export class AvatarComponent implements OnInit {
     const nl = e.clientX - this.x;
 
     const nt = e.clientY - this.y;
-    const dv = document.getElementById('imgDiv');
+    const dv = e.target as HTMLElement;
 
     dv.style.backgroundPositionX = nl + 'px';
     dv.style.backgroundPositionY = nt + 'px';
-    // const hw = parseInt(dv.style.backgroundSize.split(' ')[0].split('px')[0], 10);
   }
 
   mouseUp(e: MouseEvent) {
@@ -70,13 +69,20 @@ export class AvatarComponent implements OnInit {
     dv.style.cursor = 'default';
   }
 
+  mouseOut(e: MouseEvent) {
+
+    this.isDown = false;
+    const dv = e.target as HTMLElement;
+    dv.style.cursor = 'default';
+  }
+
   mouseWheel(e: any) {
-    const avatar = document.getElementById('imgDiv');
+    const avatar = e.target as HTMLElement;
     if (avatar.style.backgroundImage === '') return;
     const delD = e.wheelDelta ? e.wheelDelta : -e.detail;
     const height = avatar.clientHeight;
     const width = avatar.clientWidth;
-    this.isDrag = true;
+    // this.isDrag = true;
     if (delD > 0) {
       if (avatar.style.backgroundSize === '') {
         const size = `${height + 20}px ${width + 20}px`;
@@ -147,6 +153,8 @@ export class AvatarComponent implements OnInit {
 
 
 
+
+
   turnLeft() {
     const avatar = document.getElementById('imgDiv');
     if (avatar.style.backgroundImage === '') return;
@@ -187,10 +195,6 @@ export class AvatarComponent implements OnInit {
 
   reduce() {
     const avatar = document.getElementById('imgDiv');
-    if (this.isDrag) {
-      avatar.style.backgroundPosition = 'center center';
-      return;
-    }
 
     if (avatar.style.backgroundImage === '') return;
 
