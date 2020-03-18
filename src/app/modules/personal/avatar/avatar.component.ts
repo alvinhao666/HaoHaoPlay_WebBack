@@ -23,6 +23,8 @@ export class AvatarComponent implements OnInit {
 
   i = 1;
 
+  baseUrl = '';
+
   constructor(
     private msg: NzMessageService) { }
 
@@ -143,6 +145,29 @@ export class AvatarComponent implements OnInit {
       const url = reader.result as string;
       // imgDv.style.backgroundSize = '320px 320px';
       imgDv.style.backgroundImage = `url(${url})`;
+
+      const img = new Image();
+      img.src = url;
+      img.onload = function () {
+        const canvas = document.getElementById('preview-f') as HTMLCanvasElement;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 30, 30, 130, 130, 0, 0, 320, 160);
+      };
+      // const img = new Image();
+      // img.src = url;
+      // img.onload = function () {
+      //   const canvas = document.getElementById('preview-f');
+      //   canvas.style.backgroundImage = `url(${url})`;
+      //   canvas.style.backgroundSize = '160px 160px';
+      //   canvas.style.backgroundPosition = 'center center';
+      //   // img.style.clip = 'rect(120,260,260,120)';
+
+      //   const canvas2 = document.getElementById('preview-s');
+      //   canvas2.style.backgroundImage = `url(${url})`;
+      //   canvas2.style.backgroundSize = '80px 80px';
+      //   canvas2.style.backgroundPosition = 'center center';
+      // };
+
     };
     if (file) {
       reader.readAsDataURL(file);
@@ -217,6 +242,32 @@ export class AvatarComponent implements OnInit {
         avatar.style.backgroundPosition = `${(p + 10)}px ${(p + 10)}px`;
       }
     }
+  }
+
+
+  draw() {
+    // let xFactor = image.naturalWidth / image.offsetWidth;
+    // let yFactor = image.naturalHeight / image.offsetHeight;
+    // console.log(xFactor, yFactor);
+
+    const canvas = document.getElementById('preview-f') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    const url = this.baseUrl;
+    img.onload = function () {
+      img.src = url;
+    };
+    // // Draw slice
+    // let sx = (selection.offsetLeft - image.offsetLeft) * xFactor;
+    // let sy = (selection.offsetTop - image.offsetTop) * yFactor;
+    // let sWidth = selection.offsetWidth * xFactor;
+    // let sHeight = selection.offsetHeight * yFactor;
+    // let dx = 0;
+    // let dy = 0;
+    // let dWidth = canvas.offsetWidth * 4;
+    // let dHeight = canvas.offsetHeight * 4;
+
+    // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
   }
 
