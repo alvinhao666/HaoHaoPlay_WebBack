@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
-import { cropbox } from '@core';
+import { cropbox, H_Http } from '@core';
 
 
 @Component({
@@ -24,7 +24,8 @@ export class AvatarComponent implements OnInit {
   cropper: any = null;
 
   constructor(
-    private msg: NzMessageService) { }
+    private msg: NzMessageService,
+    private http: H_Http) { }
 
 
   ngOnInit() {
@@ -36,6 +37,10 @@ export class AvatarComponent implements OnInit {
 
   handleOk() {
     this.isVisible = false;
+    const baseStr = this.cropper.getDataURL();
+    this.http.put('User/UpdateCurrentHeadImg', { Base64Str: baseStr }).subscribe(d => {
+      if (!d) return;
+    });
   }
 
   upload() {
