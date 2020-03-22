@@ -16,6 +16,7 @@ const cropbox = async function (options) {
             options: options,
             imageBox: el,
             thumbBox: el.querySelector(options.thumbBox),
+            spinner: el.querySelector(options.spinner),
             degree: 0,
             image: new Image(),
             getDataURL: function () {
@@ -33,8 +34,14 @@ const cropbox = async function (options) {
 
                 canvas.width = width;
                 canvas.height = height;
-                const context = canvas.getContext('2d');
-                context.drawImage(this.image, 0, 0, sw, sh, dx, dy, dw, dh);
+
+                const ctx = canvas.getContext('2d');
+
+                ctx.translate(width / 2, height / 2);
+                ctx.rotate(this.degree / 180 * Math.PI);
+                ctx.translate(-width / 2, -height / 2);
+                ctx.drawImage(this.image, 0, 0, sw, sh, dx, dy, dw, dh);
+
                 const imageData = canvas.toDataURL('image/png');
 
                 return imageData;
@@ -71,15 +78,6 @@ const cropbox = async function (options) {
                 const previewS = document.querySelector(options.previewBoxS);
                 previewF.setAttribute('src', data);
                 previewS.setAttribute('src', data);
-                this.setTransform(previewF);
-                this.setTransform(previewS);
-            },
-            setTransform: function (element: any) {
-                element.style.webkitTransform = 'rotate(' + this.degree + 'deg)';
-                element.style.MozTransform = 'rotate(' + this.degree + 'deg)';
-                element.style.msTransform = 'rotate(' + this.degree + 'deg)';
-                element.style.OTransform = 'rotate(' + this.degree + 'deg)';
-                element.style.transform = 'rotate(' + this.degree + 'deg)';
             }
         },
         attachEvent = function (node, event, cb) {
@@ -154,10 +152,11 @@ const cropbox = async function (options) {
         };
 
     obj.image.src = options.imgSrc;
-
+    obj.spinner.style.display = 'block';
     attachEvent(el, 'DOMNodeRemoved', function () { detachEvent(document.body, 'DOMNodeRemoved', imgMouseUp); });
     return new Promise((resolve) => {
         obj.image.onload = () => {
+            obj.spinner.style.display = 'none';
             setBackground();
 
             attachEvent(el, 'mousedown', imgMouseDown);

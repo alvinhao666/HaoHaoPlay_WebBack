@@ -15,10 +15,12 @@ export class AvatarComponent implements OnInit {
   options = {
     imageBox: '.imageBox',
     thumbBox: '.thumbBox',
+    spinner: '.spinner',
     imgSrc: '',
     previewBoxF: '.previewBoxF',
     previewBoxS: '.previewBoxS'
   };
+
   cropper: any = null;
 
   constructor(
