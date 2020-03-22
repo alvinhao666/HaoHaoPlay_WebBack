@@ -9,7 +9,7 @@
 
 ::ng-deep {
     .ant-modal-footer {
-        border-top: 0;
+        border-top : 0;
         padding-top: 0;
     }
 }
@@ -37,80 +37,118 @@
     height: 320px;
 }
 
-.avatar-wrapper {
-    position: relative;
-    float           : left;
-    height          : 320px;
-    width           : 320px;
-    box-shadow      : inset 0 0 5px rgba(0, 0, 0, .25);
-    background-color: #fcfcfc;
-    overflow: hidden;
-    box-sizing: border-box;
-    // text-align: center;
-    // vertical-align: middle;
-}
-
-// .avatar-wrapper img {
-//     display  : block;
-//     // margin: 0 auto;
-//     height   : 100%;
-//     // width: 100%;
-//     object-fit: cover;//保证图片覆盖容器的宽高
+// .avatar-wrapper {
+//     position         : relative;
+//     float            : left;
+//     height           : 320px;
+//     width            : 320px;
+//     box-shadow       : inset 0 0 5px rgba(0, 0, 0, .25);
+//     background-color : #fcfcfc;
+//     overflow         : hidden;
+//     background-repeat: no-repeat;
 // }
 
-// .avatar-wrapper:hover {
-//     cursor: move;
+
+.avatar-preview {
+    // position: absolute;
+    // left    : 360px;
+    float      : right;
+    text-align : center;
+
+}
+
+// .thumb-box {
+//     position      : absolute;
+//     top           : 50%;
+//     left          : 50%;
+//     width         : 200px;
+//     height        : 200px;
+//     margin-top    : -100px;
+//     margin-left   : -100px;
+//     box-sizing    : border-box;
+//     border        : 1px solid rgb(102, 102, 102);
+//     box-shadow    : 0 0 0 1000px rgba(0, 0, 0, 0.5);
+//     background    : none repeat scroll 0% 0% transparent;
+//     border-radius : 50%;
+//     pointer-events: none; //点击一个盖在另一个元素上的元素（两元素同级），触发被盖住的元素的点击事件
 // }
 
-.avatar-preview{
-    position: absolute;
-    left: 360px;
-    text-align: center;
-}
+// #imgDiv {
+//     // width              : 320px;     // 你要的正方形
+//     // height             : 320px;    // 你要的正方形
+//     // // background-image: url(../../../../assets/img/background.svg);
+//     // // background-color: red;
+//     // background-position: center center;    // 居中
+//     // background-size    : 320px 320px;                
+//     // background-repeat  : no-repeat;
+//     // overflow           : hidden;
+//     position              : relative;
+//     height                : 320px;
+//     width                 : 320px;
+//     border                :1px solid #aaa;
+//     background            : #fff;
+//     overflow              : hidden;
+//     background-repeat     : no-repeat;
+//     cursor                :move;
+// }
 
-.thumb-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    height: 200px;
-    margin-top: -100px;
-    margin-left: -100px;
-    border: 1px solid #666666;
-    border-radius: 100%;
-    -webkit-box-shadow: 0 0 0 1000px rgba(0,0,0,0.5);
-    box-shadow: 0 0 0 1000px rgba(0,0,0,0.5);
-    background: none repeat scroll 0% 0% transparent;
-    pointer-events: none; //点击一个盖在另一个元素上的元素（两元素同级），触发被盖住的元素的点击事件
-}
-
-#imgDiv {
-    width: 320px;     // 你要的正方形
-    height: 320px;    // 你要的正方形
-    // background-image: url(../../../../assets/img/background.svg);
-    // background-color: red;
-    background-position: center center;    // 居中
-    background-size: cover;                // 填满div
+.imageBox {
+    position         : relative;
+    height           : 320px;
+    width            : 320px;
+    border           : 1px solid #aaa;
+    background       : #fff;
+    overflow         : hidden;
     background-repeat: no-repeat;
-    overflow: hidden;
+    cursor           : move;
+    float            : left;
+}
+
+.imageBox .thumbBox {
+    position        : absolute;
+    top             : 50%;
+    left            : 50%;
+    width           : 200px;
+    height          : 200px;
+    margin-top      : -100px;
+    margin-left     : -100px;
+    box-sizing      : border-box;
+    border          : 1px solid rgb(102, 102, 102);
+    box-shadow      : 0 0 0 1000px rgba(0, 0, 0, 0.5);
+    background      : none repeat scroll 0% 0% transparent;
+    border-radius: 50%;
+}
+
+
+img[src=""],
+img:not([src]) {
+    opacity: 0;
 }
 
 #preview-f {
-
-	border-radius: 50%;
-	box-shadow:  0vh 0vh 20px rgba(0, 0, 0, 0.5);
-	// border: 1px solid #fff;
-	// height: 100px;
-    // width: 100px;
-    margin-top: 25px;
+    border-radius: 50%;
+    box-shadow   : 0vh 0vh 20px rgba(0, 0, 0, 0.5);
+    height       : 100px;
+    width        : 100px;
+    margin-top   : 25px;
 }
 
 #preview-s {
+    border-radius: 50%;
+    box-shadow   : 0vh 0vh 20px rgba(0, 0, 0, 0.5);
+    height       : 50px;
+    width        : 50px;
+    margin-top   : 25px;
+    margin-left  : 25px;
+}
 
-	border-radius: 50%;
-	box-shadow:  0vh 0vh 20px rgba(0, 0, 0, 0.5);
-	// border: 1px solid #fff;
-	// height: 50px;
-    // width: 50px;
-    margin-top: 25px;
+
+.previewBoxF {
+    border-radius: 50%;
+
+}
+
+.previewBoxS {
+    border-radius: 50%;
+
 }
