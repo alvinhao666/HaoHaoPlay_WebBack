@@ -5,6 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfoSubject } from '../../../share/user-info.subject';
 import { AvatarComponent } from '../avatar/avatar.component';
+import { environment } from '@env/environment';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
 
   loading = false;
 
+  headImgUrl = '';
   // user: Observable<any>;
 
   formatterAge = value => value && `${value}`;
@@ -76,6 +78,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   setCurrentUser(user: any) {
     this.firstName = user.Name.substring(0, 1);
     this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
+    this.headImgUrl = environment.api_url + `AvatarFile/${user.HeadImgUrl}`;
     // this.setFirstName(user.Name.substring(0, 1));
     // this.setFirstNameBgColor(getColorByFirstName(user.FirstNameSpell));
     this.form.get('fName').setValue(user.Name);
@@ -84,7 +87,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     this.form.get('fAge').setValue(user.Age);
     this.form.get('fProfile').setValue(user.Profile);
     this.form.get('fHomeAddress').setValue(user.HomeAddress);
-    this.userInfoSubject.userInfo$.next({ Name: user.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor });
+    this.userInfoSubject.userInfo$.next({ Name: user.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: this.headImgUrl });
   }
 
   update() {

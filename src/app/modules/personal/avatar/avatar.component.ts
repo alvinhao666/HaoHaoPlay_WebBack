@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { cropbox, H_Http } from '@core';
 
@@ -23,6 +23,8 @@ export class AvatarComponent implements OnInit {
 
   cropper: any = null;
 
+  @Output() onSave = new EventEmitter();
+
   constructor(
     private msg: NzMessageService,
     private http: H_Http) { }
@@ -40,6 +42,8 @@ export class AvatarComponent implements OnInit {
     const baseStr = this.cropper.getDataURL();
     this.http.put('User/UpdateCurrentHeadImg', { Base64Str: baseStr }).subscribe(d => {
       if (!d) return;
+      this.onSave.emit();
+      this.msg.success('更新成功');
     });
   }
 
