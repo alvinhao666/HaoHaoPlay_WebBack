@@ -31,7 +31,6 @@ export class MainComponent extends CoreContainer implements OnInit {
   ngOnInit() {
     this.http.get(`User/Current`).subscribe(d => {
       if (!d) return;
-      console.log(d);
       this.name = d.Name;
       this.firstName = this.name.substring(0, 1);
       this.firstNameBgColor = getColorByFirstName(d.FirstNameSpell);
