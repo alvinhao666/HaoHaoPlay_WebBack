@@ -24,7 +24,8 @@ export class MainComponent extends CoreContainer implements OnInit {
       this.name = d.Name;
       this.firstName = d.FirstName;
       this.firstNameBgColor = d.FirstNameBgColor;
-      this.headImgUrl = d.HeadImgUrl;
+      const time = new Date().getTime();
+      this.headImgUrl = d.HeadImgUrl + `?time=${time}`;
     });
   }
 
@@ -34,7 +35,8 @@ export class MainComponent extends CoreContainer implements OnInit {
       this.name = d.Name;
       this.firstName = this.name.substring(0, 1);
       this.firstNameBgColor = getColorByFirstName(d.FirstNameSpell);
-      this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
+      const time = new Date().getTime();
+      this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}?time=${time}`;
     });
   }
 
