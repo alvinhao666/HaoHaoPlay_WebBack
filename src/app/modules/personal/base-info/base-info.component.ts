@@ -78,8 +78,6 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   setCurrentUser(user: any) {
     this.firstName = user.Name.substring(0, 1);
     this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
-    const time = new Date().getTime();
-    this.headImgUrl = environment.api_url + `AvatarFile/${user.HeadImgUrl}?time=${time}`;
     // this.setFirstName(user.Name.substring(0, 1));
     // this.setFirstNameBgColor(getColorByFirstName(user.FirstNameSpell));
     this.form.get('fName').setValue(user.Name);
@@ -88,7 +86,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     this.form.get('fAge').setValue(user.Age);
     this.form.get('fProfile').setValue(user.Profile);
     this.form.get('fHomeAddress').setValue(user.HomeAddress);
-    this.userInfoSubject.userInfo$.next({ Name: user.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: this.headImgUrl });
+
   }
 
   update() {
@@ -115,6 +113,9 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     this.http.get(`User/Current`).subscribe(d => {
       if (!d) return;
       this.setCurrentUser(d);
+      const time = new Date().getTime();
+      this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}?time=${time}`;
+      this.userInfoSubject.userInfo$.next({ Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: this.headImgUrl });
     });
   }
 
