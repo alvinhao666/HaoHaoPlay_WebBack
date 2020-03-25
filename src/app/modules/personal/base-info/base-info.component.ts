@@ -116,8 +116,9 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     this.http.get(`User/Current`).subscribe(d => {
       if (!d) return;
       this.setCurrentUser(d);
-      const time = new Date().getTime();
-      this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}?time=${time}`;
+      if (d.HeadImgUrl) {
+        this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
+      }
       this.userInfoSubject.userInfo$.next({ Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: this.headImgUrl });
     });
   }

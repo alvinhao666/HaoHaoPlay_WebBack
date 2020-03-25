@@ -24,8 +24,9 @@ export class MainComponent extends CoreContainer implements OnInit {
       this.name = d.Name;
       this.firstName = d.FirstName;
       this.firstNameBgColor = d.FirstNameBgColor;
-      const time = new Date().getTime();
-      this.headImgUrl = d.HeadImgUrl + `?time=${time}`;
+      if (d.HeadImgUrl) {
+        this.headImgUrl = d.HeadImgUrl;
+      }
     });
   }
 
