@@ -1,6 +1,6 @@
 <nz-modal [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="600" [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="close()" (nzOnOk)="save()">
     <form nz-form [formGroup]="form">
-        <nz-card nzType="inner" nzTitle="账号信息" *ngIf="!isEdit" style="margin-bottom: 24px;" [nzHoverable]="true" [nzSize]="'small'">
+        <nz-card nzType="inner" nzTitle="账号信息" *ngIf="!isEdit" style="margin-bottom: 12px;" [nzHoverable]="true" [nzSize]="'small'">
 
             <div nz-row>
                 <div nz-col nzSpan="12">
@@ -82,7 +82,7 @@
                 </div>
                 <div nz-col nzSpan="12">
                     <nz-form-item>
-                        <nz-form-label [nzSpan]="8">邮箱地址</nz-form-label>
+                        <nz-form-label [nzSpan]="8">邮箱</nz-form-label>
                         <nz-form-control nzErrorTip="邮箱地址格式有误" [nzSpan]="16">
                             <input nz-input formControlName="fEmail" placeholder="">
                         </nz-form-control>
@@ -98,7 +98,7 @@
                 </div>
                 <div nz-col nzSpan="12">
                     <nz-form-item>
-                        <nz-form-label [nzSpan]="8">微信号</nz-form-label>
+                        <nz-form-label [nzSpan]="8">微信</nz-form-label>
                         <nz-form-control [nzSpan]="16">
                             <input nz-input formControlName="fWechat" placeholder="">
                         </nz-form-control>
