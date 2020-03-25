@@ -4,7 +4,7 @@ import { H_Http, ComparePwdValidators } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
-    selector: 'slider-user-edit',
+    selector: 'modal-user-edit',
     templateUrl: './user-edit.component.html',
     styleUrls: ['./user-edit.component.less']
 })
