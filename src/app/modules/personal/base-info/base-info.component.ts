@@ -22,7 +22,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
 
   loading = false;
 
-  headImgUrl = '';
+  headImgUrl = null;
   // user: Observable<any>;
 
   formatterAge = value => value && `${value}`;
@@ -78,7 +78,9 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   setCurrentUser(user: any) {
     this.firstName = user.Name.substring(0, 1);
     this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
-    this.headImgUrl = environment.api_url + `AvatarFile/${user.HeadImgUrl}`;
+    if (user.HeadImgUrl) {
+      this.headImgUrl = environment.api_url + `AvatarFile/${user.HeadImgUrl}`;
+    }
     // this.setFirstName(user.Name.substring(0, 1));
     // this.setFirstNameBgColor(getColorByFirstName(user.FirstNameSpell));
     this.form.get('fName').setValue(user.Name);
