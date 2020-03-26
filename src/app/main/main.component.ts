@@ -45,8 +45,11 @@ export class MainComponent extends CoreContainer implements OnInit {
 
   // 退出登录
   logout() {
-    localStorage.removeItem(environment.token_key);
-    location.href = location.href.split('/')[0];
-    // location.reload();
+    this.http.post('Logout').subscribe(d => {
+      if (!d) return;
+      localStorage.removeItem(environment.token_key);
+      location.href = location.href.split('/')[0];
+      // location.reload();
+    });
   }
 }
