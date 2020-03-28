@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
 import { H_Http } from '@core';
 
 @Injectable()
-export class UserBaseInfoResolve implements Resolve<any> {
+export class ApplicationTreeResolve implements Resolve<any> {
 
     constructor(private http: H_Http) {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        return this.http.get(`User/Current`).toPromise().then(d => {
+        return this.http.get(`Module`).toPromise().then(d => {
             return d;
         });
     }

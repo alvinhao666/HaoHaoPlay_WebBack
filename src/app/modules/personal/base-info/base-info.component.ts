@@ -67,12 +67,12 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       fProfile: [null],
       fHomeAddress: [null]
     });
-    this.setCurrentUser(this.router.snapshot.data.user);
+  
 
   }
 
   ngOnInit() {
-
+    this.setCurrentUser(this.router.snapshot.data.user);
   }
 
   setCurrentUser(user: any) {

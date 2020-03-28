@@ -6,6 +6,7 @@ import { environment } from '@env/environment';
 import { UploadFile, NzModalService } from 'ng-zorro-antd';
 import { UserEditComponent } from './user-edit/user-edit.componnent';
 import { UserViewComponent } from './user-view/user-view.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'user-list',
@@ -16,7 +17,7 @@ import { UserViewComponent } from './user-view/user-view.component';
 export class UserListComponent implements OnInit {
 
     @ViewChild('silderUserEdit', { static: false }) sliderUserEdit: UserEditComponent;
-    @ViewChild('silderUserView', { static: false }) sliderUserView: UserViewComponent;  
+    @ViewChild('silderUserView', { static: false }) sliderUserView: UserViewComponent;
     slider_edit_visible = false;
     slider_edit_title = '';
 
@@ -69,7 +70,8 @@ export class UserListComponent implements OnInit {
         private fb: FormBuilder,
         private http: H_Http,
         private datePipe: DatePipe,
-        private modalSrv: NzModalService
+        private modalSrv: NzModalService,
+        private router: ActivatedRoute,
     ) {
         this.searchForm = this.fb.group({
             sName: [null],
@@ -83,7 +85,9 @@ export class UserListComponent implements OnInit {
 
 
     ngOnInit() {
-        this.getUsers();
+        const d = this.router.snapshot.data.userList;
+        this.dataSet = d.Items;
+        this.total = d.TotalCount;
     }
 
 

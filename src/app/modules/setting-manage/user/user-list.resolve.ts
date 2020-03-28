@@ -6,13 +6,16 @@ import { Observable } from 'rxjs';
 import { H_Http } from '@core';
 
 @Injectable()
-export class UserBaseInfoResolve implements Resolve<any> {
+export class UserListResolve implements Resolve<any> {
 
     constructor(private http: H_Http) {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        return this.http.get(`User/Current`).toPromise().then(d => {
+        return this.http.get(`User`, {
+            PageIndex: 1,
+            PageSize: 10,
+        }).toPromise().then(d => {
             return d;
         });
     }
