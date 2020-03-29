@@ -27,7 +27,15 @@ export class ApplicationListComponent implements OnInit {
     }
 
 
-    activeNode(data: NzFormatEmitEvent): void {
+    select(data: NzFormatEmitEvent): void {
         this.activedNode = data.node;
+        this.getNodeInfo(data.node);
+    }
+
+    getNodeInfo(node: any) {
+        this.http.get(`Module/${node.key}`).subscribe(d => {
+            if (!d) return;
+            console.log(d);
+        });
     }
 }

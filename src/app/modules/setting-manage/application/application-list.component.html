@@ -1,7 +1,7 @@
 <div class="inner-content">
     <div class="content1">
         <nz-card nzType="inner" nzTitle="列表" [nzSize]="'small'">
-            <nz-tree [nzData]="nodes" (nzClick)="activeNode($event)" nzBlockNode nzShowLine nzExpandAll [nzTreeTemplate]="nzTreeTemplate">
+            <nz-tree [nzData]="nodes" (nzClick)="select($event)" nzBlockNode nzShowLine nzExpandAll [nzTreeTemplate]="nzTreeTemplate">
 
             </nz-tree>
             <ng-template #nzTreeTemplate let-node>
