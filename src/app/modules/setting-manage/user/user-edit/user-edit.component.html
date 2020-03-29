@@ -1,6 +1,6 @@
 <nz-modal [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="600" [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="close()" (nzOnOk)="save()">
     <form nz-form [formGroup]="form">
-        <nz-card nzType="inner" nzTitle="账号信息" *ngIf="!isEdit" style="margin-bottom: 12px;" [nzHoverable]="true" [nzSize]="'small'">
+        <nz-card nzType="inner" nzTitle="账号信息" *ngIf="!isEdit" style="margin-bottom: 12px;" [nzSize]="'small'">
 
             <div nz-row>
                 <div nz-col nzSpan="12">
@@ -43,7 +43,7 @@
             </div>
         </nz-card>
 
-        <nz-card nzType="inner" nzTitle="个人信息" [nzHoverable]="true" [nzSize]="'small'">
+        <nz-card nzType="inner" nzTitle="个人信息" [nzSize]="'small'">
             <div nz-row>
                 <div nz-col nzSpan="12">
                     <nz-form-item>

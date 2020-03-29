@@ -1,6 +1,7 @@
 import { OnInit, Component } from '@angular/core';
 import { H_Http } from '@core';
 import { ActivatedRoute } from '@angular/router';
+import { NzTreeNode, NzFormatEmitEvent } from 'ng-zorro-antd';
 
 @Component({
     selector: 'application-list',
@@ -11,6 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ApplicationListComponent implements OnInit {
 
     nodes = null;
+
+    activedNode: NzTreeNode;
 
     constructor(
         private http: H_Http,
@@ -23,4 +26,9 @@ export class ApplicationListComponent implements OnInit {
         this.nodes = this.router.snapshot.data.treeList;
     }
 
+
+    activeNode(data: NzFormatEmitEvent): void {
+        // tslint:disable-next-line:no-non-null-assertion
+        this.activedNode = data.node!;
+    }
 }

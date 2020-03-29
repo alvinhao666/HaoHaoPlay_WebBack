@@ -1,7 +1,51 @@
 <div class="inner-content">
-    <div style="width: 368px;">
+    <div class="content1">
         <nz-card nzType="inner" nzTitle="列表" [nzSize]="'small'">
-            <nz-tree [nzData]="nodes" nzBlockNode nzShowLine></nz-tree>
+            <nz-tree [nzData]="nodes" (nzClick)="activeNode($event)" nzBlockNode nzShowLine [nzTreeTemplate]="nzTreeTemplate">
+
+            </nz-tree>
+            <ng-template #nzTreeTemplate let-node>
+                <span class="custom-node" [class.active]="activedNode?.key === node.key">
+                    {{ node.title }}
+                    <span class="node-add" [class.show-add]="activedNode?.key === node.key">添加</span>
+                </span>
+
+            </ng-template>
+        </nz-card>
+    </div>
+    <div class="content2">
+        <nz-card nzType="inner" nzTitle="详情" [nzSize]="'small'">
+            <form>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzSpan]="4">标题</nz-form-label>
+                    <nz-form-control [nzSpan]="18">
+                        <input nz-input id="title" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzSpan]="4">图标</nz-form-label>
+                    <nz-form-control [nzSpan]="18">
+                        <input nz-input id="icon" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzSpan]="4">路由</nz-form-label>
+                    <nz-form-control [nzSpan]="18">
+                        <input nz-input id="url" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzSpan]="4">排序</nz-form-label>
+                    <nz-form-control [nzSpan]="18">
+                        <nz-input-number id="sort"></nz-input-number>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </nz-card>
+    </div>
+    <div class="content3">
+        <nz-card nzType="inner" nzTitle="资源" [nzSize]="'small'">
+
         </nz-card>
     </div>
 </div>

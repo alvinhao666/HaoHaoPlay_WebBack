@@ -1,5 +1,53 @@
 .inner-content {
-    padding: 24px;
-    background: #fff;
-    min-height: 360px;
-  }
+  padding   : 24px;
+  background: #fff;
+  min-height: 360px;
+}
+
+.content1 {
+  width: 300px;
+  float: left;
+}
+
+.content2 {
+  width      : 400px;
+  float      : left;
+  margin-left: 24px;
+}
+
+.content3 {
+  width      : calc(100% - 748px);
+  float      : left;
+  margin-left: 24px;
+}
+
+.custom-node {
+  display           : inline-block;
+  height            : 24px;
+  margin            : 0;
+  padding           : 0 5px;
+  color             : rgba(0, 0, 0, 0.65);
+  line-height       : 24px;
+  text-decoration   : none;
+  vertical-align    : top;
+  border-radius     : 2px;
+  cursor            : pointer;
+  -webkit-transition: all 0.3s;
+  transition        : all 0.3s;
+  width             : calc(100% - 24px);
+}
+
+.active {
+  background-color: #bae7ff;
+}
+
+.show-add {
+  display: block !important;
+}
+
+.node-add {
+  float: right;
+  color: #1890ff;
+  display: none;
+  font-size: 12px;
+}
