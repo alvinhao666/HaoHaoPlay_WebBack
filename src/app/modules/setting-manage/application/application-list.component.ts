@@ -13,7 +13,7 @@ export class ApplicationListComponent implements OnInit {
 
     nodes = null;
 
-    activedNode: NzTreeNode;
+    activedNode: any = { key: '0' };
 
     constructor(
         private http: H_Http,
@@ -28,7 +28,6 @@ export class ApplicationListComponent implements OnInit {
 
 
     activeNode(data: NzFormatEmitEvent): void {
-        // tslint:disable-next-line:no-non-null-assertion
-        this.activedNode = data.node!;
+        this.activedNode = data.node;
     }
 }
