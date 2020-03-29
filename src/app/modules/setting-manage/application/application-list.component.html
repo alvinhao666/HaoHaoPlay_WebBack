@@ -1,15 +1,14 @@
 <div class="inner-content">
     <div class="content1">
         <nz-card nzType="inner" nzTitle="列表" [nzSize]="'small'">
-            <nz-tree [nzData]="nodes" (nzClick)="activeNode($event)" nzBlockNode nzShowLine [nzTreeTemplate]="nzTreeTemplate">
+            <nz-tree [nzData]="nodes" (nzClick)="activeNode($event)" nzBlockNode nzShowLine nzExpandAll [nzTreeTemplate]="nzTreeTemplate">
 
             </nz-tree>
             <ng-template #nzTreeTemplate let-node>
                 <span class="custom-node" [class.active]="activedNode?.key === node.key">
                     {{ node.title }}
-                    <span class="node-add" [class.show-add]="activedNode?.key === node.key">添加</span>
+                    <a class="node-add" [class.show-add]="activedNode?.key === node.key && !node.isLeaf">添加</a>
                 </span>
-
             </ng-template>
         </nz-card>
     </div>
