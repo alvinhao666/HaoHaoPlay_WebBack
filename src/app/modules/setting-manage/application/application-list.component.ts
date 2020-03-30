@@ -38,7 +38,11 @@ export class ApplicationListComponent implements OnInit {
         this.http.get(`Module/${node.key}`).subscribe(d => {
             if (!d) return;
             this.type = d.Type;
-            console.log(d);
+
         });
+    }
+
+    addNode() {
+        console.log(1)
     }
 }

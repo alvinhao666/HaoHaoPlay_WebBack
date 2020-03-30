@@ -7,7 +7,7 @@
             <ng-template #nzTreeTemplate let-node>
                 <span class="custom-node" [class.active]="activedNode?.key === node.key">
                     {{ node.title }}
-                    <a class="node-add" [class.show-add]="activedNode?.key === node.key && !node.isLeaf">添加</a>
+                    <a class="node-add" *ngIf="activedNode?.key === node.key" (click)="addNode()">添加</a>
                 </span>
             </ng-template>
         </nz-card>
