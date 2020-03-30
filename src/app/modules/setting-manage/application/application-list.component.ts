@@ -15,7 +15,7 @@ export class ApplicationListComponent implements OnInit {
 
     activedNode: any = { key: '0' };
 
-    type: 0;
+    type = null;
 
     constructor(
         private http: H_Http,
