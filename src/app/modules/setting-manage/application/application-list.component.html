@@ -12,7 +12,7 @@
             </ng-template>
         </nz-card>
     </div>
-    <div class="content2">
+    <div class="content2" *ngIf="type===1||type===2">
         <nz-card nzType="inner" nzTitle="详情" [nzSize]="'small'">
             <form>
                 <nz-form-item>
@@ -21,19 +21,19 @@
                         <input nz-input id="title" />
                     </nz-form-control>
                 </nz-form-item>
-                <nz-form-item>
+                <nz-form-item *ngIf="type===1">
                     <nz-form-label nzRequired [nzSpan]="4">图标</nz-form-label>
                     <nz-form-control [nzSpan]="18">
                         <input nz-input id="icon" />
                     </nz-form-control>
                 </nz-form-item>
-                <nz-form-item>
+                <nz-form-item *ngIf="type===2">
                     <nz-form-label nzRequired [nzSpan]="4">路由</nz-form-label>
                     <nz-form-control [nzSpan]="18">
                         <input nz-input id="url" />
                     </nz-form-control>
                 </nz-form-item>
-                <nz-form-item>
+                <nz-form-item *ngIf="type===2">
                     <nz-form-label nzRequired [nzSpan]="4">排序</nz-form-label>
                     <nz-form-control [nzSpan]="18">
                         <nz-input-number id="sort"></nz-input-number>
