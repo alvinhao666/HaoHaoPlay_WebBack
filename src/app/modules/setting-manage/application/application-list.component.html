@@ -7,36 +7,40 @@
             <ng-template #nzTreeTemplate let-node>
                 <span class="custom-node" [class.active]="activedNode?.key === node.key">
                     {{ node.title }}
-                    <a class="node-add" *ngIf="activedNode?.key === node.key" (click)="addNode()">添加</a>
+                    <a class="node-add" *ngIf="activedNode?.key === node.key && !node.isLeaf" (click)="addNode()">添加</a>
                 </span>
             </ng-template>
         </nz-card>
     </div>
     <div class="content2" *ngIf="type===1||type===2">
         <nz-card nzType="inner" nzTitle="详情" [nzSize]="'small'">
-            <form>
+            <form [formGroup]="form">
                 <nz-form-item>
                     <nz-form-label nzRequired [nzSpan]="4">标题</nz-form-label>
                     <nz-form-control [nzSpan]="18">
-                        <input nz-input id="title" />
+                        <input nz-input id="title" formControlName="fTitle" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item *ngIf="type===1">
                     <nz-form-label nzRequired [nzSpan]="4">图标</nz-form-label>
                     <nz-form-control [nzSpan]="18">
-                        <input nz-input id="icon" />
+                        <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzPrefix]="prefixTemplateIcon">
+                            <input nz-input id="icon" formControlName="fIcon" #inputIcon/>
+                        </nz-input-group>
+                        <ng-template #prefixTemplateIcon><i nz-icon [nzIconfont]="inputIcon.value"></i></ng-template>
+
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item *ngIf="type===2">
                     <nz-form-label nzRequired [nzSpan]="4">路由</nz-form-label>
                     <nz-form-control [nzSpan]="18">
-                        <input nz-input id="url" />
+                        <input nz-input id="url" formControlName="fUrl" />
                     </nz-form-control>
                 </nz-form-item>
-                <nz-form-item *ngIf="type===2">
+                <nz-form-item *ngIf="type===1||type===2">
                     <nz-form-label nzRequired [nzSpan]="4">排序</nz-form-label>
                     <nz-form-control [nzSpan]="18">
-                        <nz-input-number id="sort"></nz-input-number>
+                        <nz-input-number id="sort" formControlName="fSort"></nz-input-number>
                     </nz-form-control>
                 </nz-form-item>
             </form>

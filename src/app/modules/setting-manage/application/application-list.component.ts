@@ -2,6 +2,7 @@ import { OnInit, Component } from '@angular/core';
 import { H_Http } from '@core';
 import { ActivatedRoute } from '@angular/router';
 import { NzTreeNode, NzFormatEmitEvent } from 'ng-zorro-antd';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'application-list',
@@ -16,11 +17,20 @@ export class ApplicationListComponent implements OnInit {
     activedNode: any = { key: '0' };
 
     type = null;
+    iconName = '';
+
+    form: FormGroup;
 
     constructor(
         private http: H_Http,
-        private router: ActivatedRoute) {
-
+        private router: ActivatedRoute,
+        private fb: FormBuilder) {
+        this.form = this.fb.group({
+            fTitle: [null],
+            fIcon: [null],
+            fUrl: [null],
+            fSort: [null]
+        });
     }
 
 
@@ -38,11 +48,15 @@ export class ApplicationListComponent implements OnInit {
         this.http.get(`Module/${node.key}`).subscribe(d => {
             if (!d) return;
             this.type = d.Type;
-
+            this.iconName = d.Icon;
+            this.form.get('fTitle').setValue(d.Name);
+            this.form.get('fSort').setValue(d.Sort);
+            this.form.get('fIcon').setValue(d.Icon);
+            this.form.get('fUrl').setValue(d.RouterUrl);
         });
     }
 
     addNode() {
-        console.log(1)
+
     }
 }

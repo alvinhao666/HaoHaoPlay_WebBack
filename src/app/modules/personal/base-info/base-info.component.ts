@@ -67,8 +67,6 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       fProfile: [null],
       fHomeAddress: [null]
     });
-  
-
   }
 
   ngOnInit() {
