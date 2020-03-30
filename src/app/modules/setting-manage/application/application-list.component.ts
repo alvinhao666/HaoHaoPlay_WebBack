@@ -15,6 +15,8 @@ export class ApplicationListComponent implements OnInit {
 
     activedNode: any = { key: '0' };
 
+    type: 0;
+
     constructor(
         private http: H_Http,
         private router: ActivatedRoute) {
@@ -35,6 +37,7 @@ export class ApplicationListComponent implements OnInit {
     getNodeInfo(node: any) {
         this.http.get(`Module/${node.key}`).subscribe(d => {
             if (!d) return;
+            this.type = d.Type;
             console.log(d);
         });
     }
