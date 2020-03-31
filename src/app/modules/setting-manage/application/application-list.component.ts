@@ -87,6 +87,8 @@ export class ApplicationListComponent implements OnInit {
     }
 
     updateNode() {
+
+        if (!this.checkForm(this.form)) return;
         this.modalSrv.confirm({
             nzTitle: '确认更新?',
             nzOnOk: () => {
@@ -116,5 +118,16 @@ export class ApplicationListComponent implements OnInit {
                 });
             }
         });
+    }
+
+    checkForm(form: FormGroup): boolean {
+        let flag = true;
+        for (const key of Object.keys(form.controls)) {
+            if (this.type === 1 && key === 'fRouterUrl' || this.type === 2 && key === 'fIcon') continue;
+            form.controls[key].markAsDirty();
+            form.controls[key].updateValueAndValidity();
+            flag = flag && !form.controls[key].invalid;
+        }
+        return flag;
     }
 }
