@@ -209,7 +209,7 @@ export class UserListComponent implements OnInit {
     //删除用户
     delete(id: any) {
         this.modalSrv.confirm({
-            nzTitle: '确认删除吗?',
+            nzTitle: '确认删除?',
             nzOnOk: () => this.http
                 .delete(`User/${id}`)
                 .subscribe(() => {
@@ -221,7 +221,7 @@ export class UserListComponent implements OnInit {
     //注销用户
     disable(id: any) {
         this.modalSrv.confirm({
-            nzTitle: '确认注销吗?',
+            nzTitle: '确认注销?',
             nzOnOk: () => this.http
                 .put(`User/Disable/${id}`)
                 .subscribe(() => {
@@ -233,7 +233,7 @@ export class UserListComponent implements OnInit {
     //启用用户
     enable(id: any) {
         this.modalSrv.confirm({
-            nzTitle: '确认启用吗?',
+            nzTitle: '确认启用?',
             nzOnOk: () => this.http
                 .put(`User/Enable/${id}`)
                 .subscribe(() => {
