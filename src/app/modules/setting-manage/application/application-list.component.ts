@@ -45,10 +45,10 @@ export class ApplicationListComponent implements OnInit {
         private fb: FormBuilder,
         private modalSrv: NzModalService) {
         this.form = this.fb.group({
-            fName: [null],
-            fIcon: [null],
-            fRouterUrl: [null],
-            fSort: [null]
+            fName: [null, Validators.required],
+            fIcon: [null, Validators.required],
+            fRouterUrl: [null, Validators.required],
+            fSort: [null, Validators.required]
         });
     }
 
