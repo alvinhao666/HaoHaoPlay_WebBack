@@ -1,8 +1,9 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, ViewChild } from '@angular/core';
 import { H_Http } from '@core';
 import { ActivatedRoute } from '@angular/router';
 import { NzTreeNode, NzFormatEmitEvent, NzModalService } from 'ng-zorro-antd';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApplicationEditComponent } from './application-edit/application-edit.component';
 
 @Component({
     selector: 'application-list',
@@ -11,6 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class ApplicationListComponent implements OnInit {
+
+
+    @ViewChild('DiaglogApplicationEdit', { static: false }) dialogApplication: ApplicationEditComponent;
 
     nodes = null;
 
@@ -83,7 +87,7 @@ export class ApplicationListComponent implements OnInit {
     }
 
     addNode() {
-
+        this.dialogApplication.isVisible = true;
     }
 
     updateNode() {
@@ -120,10 +124,14 @@ export class ApplicationListComponent implements OnInit {
         });
     }
 
+    saveAddNode() {
+        this.getNodes();
+    }
+
     checkForm(form: FormGroup): boolean {
         let flag = true;
         for (const key of Object.keys(form.controls)) {
-            if (this.type === 1 && key === 'fRouterUrl' || this.type === 2 && key === 'fIcon') continue;
+            if ((this.type === 2 && key === 'fRouterUrl') || (this.type === 1 && key === 'fIcon')) continue;
             form.controls[key].markAsDirty();
             form.controls[key].updateValueAndValidity();
             flag = flag && !form.controls[key].invalid;

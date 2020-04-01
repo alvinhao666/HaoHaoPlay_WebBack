@@ -4,6 +4,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ApplicationListComponent } from './application-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationRoutingModule } from './application.route';
+import { ApplicationEditComponent } from './application-edit/application-edit.component';
 
 @NgModule({
     imports: [
@@ -13,7 +14,7 @@ import { ApplicationRoutingModule } from './application.route';
         NgZorroAntdModule,
         ApplicationRoutingModule
     ],
-    declarations: [ApplicationListComponent],
+    declarations: [ApplicationListComponent, ApplicationEditComponent],
     entryComponents: []
 })
 export class ApplicationModule {
