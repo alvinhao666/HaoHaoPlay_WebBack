@@ -57,7 +57,7 @@ export class ApplicationEditComponent implements OnInit {
   }
 
   handleOk() {
-    this.isVisible = false;
+    if (!this.checkForm(this.form)) return;
     this.http.post(`Module`, {
       Name: this.fName.value,
       Icon: this.fIcon.value,
@@ -80,7 +80,7 @@ export class ApplicationEditComponent implements OnInit {
   checkForm(form: FormGroup): boolean {
     let flag = true;
     for (const key of Object.keys(form.controls)) {
-      if ((this.type === 1 && key === 'fRouterUrl') || (this.type === 0 && key === 'fIcon')) continue;
+      if ((this.type === 0 && key === 'fRouterUrl') || (this.type === 1 && key === 'fIcon')) continue;
       form.controls[key].markAsDirty();
       form.controls[key].updateValueAndValidity();
       flag = flag && !form.controls[key].invalid;

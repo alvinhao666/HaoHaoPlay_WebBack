@@ -131,7 +131,7 @@ export class ApplicationListComponent implements OnInit {
     checkForm(form: FormGroup): boolean {
         let flag = true;
         for (const key of Object.keys(form.controls)) {
-            if ((this.type === 2 && key === 'fRouterUrl') || (this.type === 1 && key === 'fIcon')) continue;
+            if ((this.type === 1 && key === 'fRouterUrl') || (this.type === 2 && key === 'fIcon')) continue;
             form.controls[key].markAsDirty();
             form.controls[key].updateValueAndValidity();
             flag = flag && !form.controls[key].invalid;
