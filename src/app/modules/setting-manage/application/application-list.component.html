@@ -24,7 +24,7 @@
                 <nz-form-item *ngIf="type===1">
                     <nz-form-label nzRequired [nzSpan]="4">图标</nz-form-label>
                     <nz-form-control [nzSpan]="18" nzErrorTip="图标不能为空">
-                        <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzPrefix]="prefixTemplateIcon">
+                        <nz-input-group [nzPrefix]="prefixTemplateIcon">
                             <input nz-input id="icon" formControlName="fIcon" #inputIcon/>
                         </nz-input-group>
                         <ng-template #prefixTemplateIcon><i nz-icon [nzIconfont]="inputIcon.value"></i></ng-template>
