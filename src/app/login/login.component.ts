@@ -43,6 +43,9 @@ export class LoginComponent {
   get password() {
     return this.form.controls.password;
   }
+  get remember() {
+    return this.form.controls.remember;
+  }
   get mobile() {
     return this.form.controls.mobile;
   }
@@ -61,7 +64,7 @@ export class LoginComponent {
   // endregion
 
   submit() {
- 
+
     if (this.type === 0) {
       this.userName.markAsDirty();
       this.userName.updateValueAndValidity();
@@ -86,7 +89,8 @@ export class LoginComponent {
     this.loginLoading = true;
     this.http.post('Login', {
       LoginName: this.userName.value,
-      Password: pwd
+      Password: pwd,
+      IsRememberLogin: this.remember.value
     }).subscribe(d => {
       this.loginLoading = false;
       if (!d) return;
