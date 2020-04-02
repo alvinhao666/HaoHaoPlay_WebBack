@@ -2,33 +2,33 @@
     <form nz-form [formGroup]="form">
         <nz-form-item>
             <nz-form-label nzRequired [nzSpan]="4">标题</nz-form-label>
-            <nz-form-control [nzSpan]="18">
+            <nz-form-control [nzSpan]="18" nzErrorTip="标题不能为空">
                 <input nz-input id="title" formControlName="fName" />
-                <nz-form-explain *ngIf="fName.dirty && fName.errors?.required">标题不能为空</nz-form-explain>
+                <!-- <nz-form-explain *ngIf="fName.dirty && fName.errors?.required"></nz-form-explain> -->
             </nz-form-control>
         </nz-form-item>
         <nz-form-item *ngIf="type===0">
             <nz-form-label nzRequired [nzSpan]="4">图标</nz-form-label>
-            <nz-form-control [nzSpan]="18">
+            <nz-form-control [nzSpan]="18" nzErrorTip="图标不能为空">
                 <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzPrefix]="prefixTemplateIcon">
                     <input nz-input id="icon" formControlName="fIcon" #inputIcon/>
-                    <nz-form-explain *ngIf="fIcon.dirty && fIcon.errors?.required">图标不能为空</nz-form-explain>
+                    <!-- <nz-form-explain *ngIf="fIcon.dirty && fIcon.errors?.required"></nz-form-explain> -->
                 </nz-input-group>
                 <ng-template #prefixTemplateIcon><i nz-icon [nzIconfont]="inputIcon.value"></i></ng-template>
             </nz-form-control>
         </nz-form-item>
         <nz-form-item *ngIf="type===1">
             <nz-form-label nzRequired [nzSpan]="4">路由</nz-form-label>
-            <nz-form-control [nzSpan]="18">
+            <nz-form-control [nzSpan]="18" nzErrorTip="路由不能为空">
                 <input nz-input id="url" formControlName="fRouterUrl" />
-                <nz-form-explain *ngIf="fRouterUrl.dirty && fRouterUrl.errors?.required">路由不能为空</nz-form-explain>
+                <!-- <nz-form-explain *ngIf="fRouterUrl.dirty && fRouterUrl.errors?.required"></nz-form-explain> -->
             </nz-form-control>
         </nz-form-item>
         <nz-form-item *ngIf="type===0||type===1">
             <nz-form-label nzRequired [nzSpan]="4">排序</nz-form-label>
-            <nz-form-control [nzSpan]="18">
+            <nz-form-control [nzSpan]="18" nzErrorTip="排序不能为空">
                 <nz-input-number id="sort" formControlName="fSort"></nz-input-number>
-                <nz-form-explain *ngIf="fSort.dirty && fSort.errors?.required">排序不能为空</nz-form-explain>
+                <!-- <nz-form-explain *ngIf="fSort.dirty && fSort.errors?.required"></nz-form-explain> -->
             </nz-form-control>
         </nz-form-item>
     </form>
