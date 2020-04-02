@@ -8,22 +8,26 @@
         </nz-form-item>
         <nz-form-item>
             <nz-form-label nzRequired [nzSpan]="7">新密码</nz-form-label>
-            <nz-form-control [nzSpan]="14">
+            <nz-form-control [nzSpan]="14" [nzErrorTip]="passwordErrorTpl">
                 <input nz-input formControlName="fPassword" placeholder="" type="password" autocomplete="new-password" (ngModelChange)="passwordChange($event)" ng-minlength="6">
-                <nz-form-explain *ngIf="fPassword.dirty && fPassword.errors?.required">新密码必填</nz-form-explain>
-                <nz-form-explain *ngIf="fPassword.dirty && fPassword.errors?.minlength">密码最少6个字符</nz-form-explain>
-                <nz-form-explain *ngIf="fPassword.dirty && fPassword.errors?.maxlength">密码最多16个字符</nz-form-explain>
-                <nz-form-explain *ngIf="fPassword.dirty && fPassword.errors?.same">新密码跟原密码不能相同</nz-form-explain>
+                <ng-template #passwordErrorTpl>
+                    <ng-container *ngIf="fPassword.dirty && fPassword.errors?.required">新密码必填</ng-container>
+                    <ng-container *ngIf="fPassword.dirty && fPassword.errors?.minlength">密码最少6个字符</ng-container>
+                    <ng-container *ngIf="fPassword.dirty && fPassword.errors?.maxlength">密码最多16个字符</ng-container>
+                    <ng-container *ngIf="fPassword.dirty && fPassword.errors?.same">新密码跟原密码不能相同</ng-container>
+                </ng-template>
             </nz-form-control>
             <nz-form-label [nzSpan]="3" [nzNoColon]="true"><span [style.color]="levelColor">{{passwordLevel}}</span>
             </nz-form-label>
         </nz-form-item>
         <nz-form-item>
             <nz-form-label nzRequired [nzSpan]="7">重复新密码</nz-form-label>
-            <nz-form-control [nzSpan]="14">
+            <nz-form-control [nzSpan]="14" [nzErrorTip]="repasswordErrorTpl">
                 <input nz-input formControlName="fRePassword" placeholder="" type="password" autocomplete="new-password" ng-minlength="6">
-                <nz-form-explain *ngIf="fRePassword.dirty && fRePassword.errors?.required">重复新密码必填</nz-form-explain>
-                <nz-form-explain *ngIf="fRePassword.dirty && fRePassword.errors?.notEqual">密码不一致</nz-form-explain>
+                <ng-template #repasswordErrorTpl>
+                    <ng-container *ngIf="fRePassword.dirty && fRePassword.errors?.required">重复新密码必填</ng-container>
+                    <ng-container *ngIf="fRePassword.dirty && fRePassword.errors?.notEqual">密码不一致</ng-container>
+                </ng-template>
             </nz-form-control>
 
         </nz-form-item>
