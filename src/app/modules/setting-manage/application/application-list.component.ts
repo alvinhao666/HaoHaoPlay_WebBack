@@ -75,7 +75,10 @@ export class ApplicationListComponent implements OnInit {
     }
 
     getNodeInfo(node: any) {
-        if (node.key === '0') return;
+        if (node.key === '0') {
+            this.type = 0;
+            return;
+        }
         this.http.get(`Module/${node.key}`).subscribe(d => {
             if (!d) return;
             this.type = d.Type;
