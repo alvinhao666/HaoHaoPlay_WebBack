@@ -86,7 +86,8 @@ export class ApplicationListComponent implements OnInit {
         });
     }
 
-    addNode() {
+    addNode(e: Event) {
+        e.stopPropagation();
         this.dialogApplication.isVisible = true;
     }
 
