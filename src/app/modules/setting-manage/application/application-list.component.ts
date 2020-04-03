@@ -20,7 +20,7 @@ export class ApplicationListComponent implements OnInit {
 
     activedNode: any = { key: '0' };
 
-    type = null;
+    type = 0;
     iconName = '';
 
     form: FormGroup;
