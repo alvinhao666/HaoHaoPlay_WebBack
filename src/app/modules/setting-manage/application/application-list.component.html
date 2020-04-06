@@ -53,7 +53,21 @@
     </div>
     <div class="content3" *ngIf="type===2">
         <nz-card nzType="inner" nzTitle="资源" [nzSize]="'small'">
+            <button nz-button nzType="primary" [nzSize]="'small'" (click)="addResource()" style="margin-bottom:12px">添加</button>
+            <nz-table [nzSize]="'small'">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>备注</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
 
+                    </tr>
+                </tbody>
+            </nz-table>
         </nz-card>
     </div>
 </div>

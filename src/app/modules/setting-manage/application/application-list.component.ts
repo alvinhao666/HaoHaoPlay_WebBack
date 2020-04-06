@@ -143,4 +143,9 @@ export class ApplicationListComponent implements OnInit {
         }
         return flag;
     }
+
+    //添加资源
+    addResource() {
+
+    }
 }
