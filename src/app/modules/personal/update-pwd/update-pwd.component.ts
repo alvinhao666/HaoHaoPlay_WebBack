@@ -80,8 +80,8 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
     }).subscribe(d => {
       this.loading = false;
       if (!d) return;
-      this.onSave.emit();
       this.msg.success('更新成功');
+      this.onSave.emit();
       this.reset();
     }, e => {
       this.loading = false;

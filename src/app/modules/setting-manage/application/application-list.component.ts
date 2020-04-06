@@ -1,7 +1,7 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
 import { H_Http } from '@core';
 import { ActivatedRoute } from '@angular/router';
-import { NzTreeNode, NzFormatEmitEvent, NzModalService } from 'ng-zorro-antd';
+import { NzTreeNode, NzFormatEmitEvent, NzModalService, NzMessageService } from 'ng-zorro-antd';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
 
@@ -47,7 +47,8 @@ export class ApplicationListComponent implements OnInit {
         private http: H_Http,
         private router: ActivatedRoute,
         private fb: FormBuilder,
-        private modalSrv: NzModalService) {
+        private modalSrv: NzModalService,
+        private msg: NzMessageService) {
         this.form = this.fb.group({
             fName: [null, Validators.required],
             fIcon: [null, Validators.required],
@@ -109,6 +110,7 @@ export class ApplicationListComponent implements OnInit {
                     Type: this.type
                 }).subscribe(d => {
                     if (!d) return;
+                    this.msg.success('更新成功');
                     this.getNodes();
                 });
             }
