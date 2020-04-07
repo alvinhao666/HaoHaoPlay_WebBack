@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NzTreeNode, NzFormatEmitEvent, NzModalService, NzMessageService } from 'ng-zorro-antd';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
+import { ResourceEditComponent } from './resource-edit/resource-edit.component';
 
 @Component({
     selector: 'application-list',
@@ -16,6 +17,9 @@ export class ApplicationListComponent implements OnInit {
 
     @ViewChild('DiaglogApplicationEdit', { static: false }) dialogApplication: ApplicationEditComponent;
 
+
+    @ViewChild('DiaglogResourceEdit', { static: false }) dialogResource: ResourceEditComponent;
+
     nodes = null;
 
     activedNode: any = { key: '0' };
@@ -25,6 +29,7 @@ export class ApplicationListComponent implements OnInit {
 
     form: FormGroup;
 
+    resourceData = null;
 
     get fName() {
         return this.form.controls.fName;
@@ -88,6 +93,9 @@ export class ApplicationListComponent implements OnInit {
             this.form.get('fSort').setValue(d.Sort);
             this.form.get('fIcon').setValue(d.Icon);
             this.form.get('fRouterUrl').setValue(d.RouterUrl);
+            if (this.type === 2) {
+                this.getResources();
+            }
         });
     }
 
@@ -95,6 +103,7 @@ export class ApplicationListComponent implements OnInit {
         e.stopPropagation();
         this.dialogApplication.isVisible = true;
     }
+
 
     updateNode() {
 
@@ -148,6 +157,17 @@ export class ApplicationListComponent implements OnInit {
 
     //添加资源
     addResource() {
+        this.dialogResource.isVisible = true;
+    }
+
+    getResources() {
+        this.http.get(`Resource/GetList/${this.activedNode.key}`).subscribe(d => {
+            if (!d) return;
+            this.resourceData = d;
+        });
+    }
+
+    saveAddResource() {
 
     }
 }

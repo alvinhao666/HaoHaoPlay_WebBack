@@ -54,9 +54,10 @@
     <div class="content3" *ngIf="type===2">
         <nz-card nzType="inner" nzTitle="资源" [nzSize]="'small'">
 
-            <nz-table [nzSize]="'small'">
+            <nz-table  #nzTable [nzSize]="'small'" [nzData]="resourceData" [nzHideOnSinglePage]="true">
                 <thead>
                     <tr>
+                        <th>序号</th>
                         <th>名称</th>
                         <th>编码</th>
                         <th>排序</th>
@@ -64,8 +65,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-
+                    <tr *ngFor="let d of nzTable.data;let idx=index;">
+                        <td >{{idx+1}}</td>
+                        <td>{{d.Name}}</td>
                     </tr>
                 </tbody>
             </nz-table>
@@ -75,3 +77,4 @@
 </div>
 
 <dialog-application-edit #DiaglogApplicationEdit [type]="type" [Id]="activedNode?.key" (onSave)="saveAddNode()"></dialog-application-edit>
+<dialog-resource-edit #DiaglogResourceEdit [Id]="activedNode?.key" (onSave)="saveAddResource()"></dialog-resource-edit>

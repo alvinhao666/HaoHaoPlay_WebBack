@@ -5,6 +5,7 @@ import { ApplicationListComponent } from './application-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationRoutingModule } from './application.route';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
+import { ResourceEditComponent } from './resource-edit/resource-edit.component';
 
 @NgModule({
     imports: [
@@ -14,7 +15,7 @@ import { ApplicationEditComponent } from './application-edit/application-edit.co
         NgZorroAntdModule,
         ApplicationRoutingModule
     ],
-    declarations: [ApplicationListComponent, ApplicationEditComponent],
+    declarations: [ApplicationListComponent, ApplicationEditComponent, ResourceEditComponent],
     entryComponents: []
 })
 export class ApplicationModule {
