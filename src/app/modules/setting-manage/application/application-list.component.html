@@ -82,7 +82,7 @@
                                 {{ d.Sort }}
                             </ng-container>
                             <ng-template #sortInputTpl>
-                                <input type="text" nz-input [(ngModel)]="editCache[d.Id].data.Sort" />
+                                <nz-input-number [(ngModel)]="editCache[d.Id].data.Sort"></nz-input-number>
                             </ng-template>
                         </td>
                         <td>
