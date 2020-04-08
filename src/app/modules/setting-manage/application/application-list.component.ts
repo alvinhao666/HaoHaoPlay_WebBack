@@ -190,14 +190,14 @@ export class ApplicationListComponent implements OnInit {
     }
 
     saveEdit(id: string): void {
-        const index = this.resourceData.findIndex(item => item.id === id);
+        const index = this.resourceData.findIndex(item => item.Id === id);
         Object.assign(this.resourceData[index], this.editCache[id].data);
         this.editCache[id].edit = false;
     }
 
 
     cancelEdit(id: string): void {
-        const index = this.resourceData.findIndex(item => item.id === id);
+        const index = this.resourceData.findIndex(item => item.Id === id);
         this.editCache[id] = {
             data: { ...this.resourceData[index] },
             edit: false
