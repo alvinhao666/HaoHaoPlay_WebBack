@@ -168,6 +168,13 @@ export class ApplicationListComponent implements OnInit {
     }
 
     saveAddResource() {
+        this.getResources();
+    }
 
+    deleteResource(id: any) {
+        this.http.delete(`Resource/${id}`).subscribe(d => {
+            if (!d) return;
+            this.getResources();
+        });
     }
 }

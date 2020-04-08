@@ -54,20 +54,27 @@
     <div class="content3" *ngIf="type===2">
         <nz-card nzType="inner" nzTitle="资源" [nzSize]="'small'">
 
-            <nz-table  #nzTable [nzSize]="'small'" [nzData]="resourceData" [nzHideOnSinglePage]="true">
+            <nz-table #nzTable [nzSize]="'small'" [nzData]="resourceData" [nzHideOnSinglePage]="true" [nzScroll]="{ y: '400px' }">
                 <thead>
                     <tr>
-                        <th>序号</th>
-                        <th>名称</th>
+                        <th nzWidth="100px">序号</th>
+                        <th nzWidth="150px">名称</th>
                         <th>编码</th>
-                        <th>排序</th>
-                        <th>操作</th>
+                        <th nzWidth="150px">排序值</th>
+                        <th nzWidth="150px">操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let d of nzTable.data;let idx=index;">
-                        <td >{{idx+1}}</td>
+                        <td>{{idx+1}}</td>
                         <td>{{d.Name}}</td>
+                        <td>{{d.ResourceCode}}</td>
+                        <td>{{d.Sort}}</td>
+                        <td>
+                            <a href="javascript:;" (click)="edit(d.Id)">编辑</a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a href="javascript:;" (click)="deleteResource(d.Id)">删除</a>
+                        </td>
                     </tr>
                 </tbody>
             </nz-table>
