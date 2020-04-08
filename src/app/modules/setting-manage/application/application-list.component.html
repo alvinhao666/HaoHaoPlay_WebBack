@@ -7,7 +7,8 @@
             <ng-template #nzTreeTemplate let-node>
                 <span class="custom-node" [class.active]="activedNode?.key === node.key">
                     {{ node.title }}
-                    <a class="node-add" *ngIf="activedNode?.key === node.key && !node.isLeaf" (click)="addNode($event)">添加</a>
+                    <a class="node-add" *ngIf="activedNode?.key === node.key && !node.isLeaf"
+                        (click)="addNode($event)">添加</a>
                 </span>
             </ng-template>
         </nz-card>
@@ -25,7 +26,7 @@
                     <nz-form-label nzRequired [nzSpan]="4">图标</nz-form-label>
                     <nz-form-control [nzSpan]="18" nzErrorTip="图标不能为空">
                         <nz-input-group [nzPrefix]="prefixTemplateIcon">
-                            <input nz-input id="icon" formControlName="fIcon" #inputIcon/>
+                            <input nz-input id="icon" formControlName="fIcon" #inputIcon />
                         </nz-input-group>
                         <ng-template #prefixTemplateIcon><i nz-icon [nzIconfont]="inputIcon.value"></i></ng-template>
 
@@ -67,13 +68,35 @@
                 <tbody>
                     <tr *ngFor="let d of nzTable.data;let idx=index;">
                         <td>{{idx+1}}</td>
-                        <td>{{d.Name}}</td>
-                        <td>{{d.ResourceCode}}</td>
-                        <td>{{d.Sort}}</td>
                         <td>
-                            <a href="javascript:;" (click)="edit(d.Id)">编辑</a>
-                            <nz-divider nzType="vertical"></nz-divider>
-                            <a href="javascript:;" (click)="deleteResource(d.Id)">删除</a>
+                            <ng-container *ngIf="!editCache[d.Id].edit; else nameInputTpl">
+                                {{ d.Name }}
+                            </ng-container>
+                            <ng-template #nameInputTpl>
+                                <input type="text" nz-input [(ngModel)]="editCache[d.Id].data.Name" />
+                            </ng-template>
+                        </td>
+                        <td>{{d.ResourceCode}}</td>
+                        <td>
+                            <ng-container *ngIf="!editCache[d.Id].edit; else sortInputTpl">
+                                {{ d.Sort }}
+                            </ng-container>
+                            <ng-template #sortInputTpl>
+                                <input type="text" nz-input [(ngModel)]="editCache[d.Id].data.Sort" />
+                            </ng-template>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[d.Id].edit; else saveTpl">
+                                <a (click)="startEdit(d.Id)">编辑</a>
+                                <a nz-popconfirm (nzOnConfirm)="deleteResource(d.Id)" style="margin-left:10px;" nzTitle="确定删除?">删除</a>
+                            </ng-container>
+                            <ng-template #saveTpl>
+                                <a (click)="saveEdit(d.Id)">保存</a>
+                                <a (click)="cancelEdit(d.Id)" style="margin-left:10px;">取消</a>
+                            </ng-template>
+                            <!-- <a href="javascript:;" (click)="edit(d.Id)"></a> -->
+                            <!-- <nz-divider nzType="vertical"></nz-divider> -->
+
                         </td>
                     </tr>
                 </tbody>
@@ -83,5 +106,6 @@
     </div>
 </div>
 
-<dialog-application-edit #DiaglogApplicationEdit [type]="type" [Id]="activedNode?.key" (onSave)="saveAddNode()"></dialog-application-edit>
+<dialog-application-edit #DiaglogApplicationEdit [type]="type" [Id]="activedNode?.key" (onSave)="saveAddNode()">
+</dialog-application-edit>
 <dialog-resource-edit #DiaglogResourceEdit [Id]="activedNode?.key" (onSave)="saveAddResource()"></dialog-resource-edit>

@@ -30,6 +30,7 @@ export class ApplicationListComponent implements OnInit {
     form: FormGroup;
 
     resourceData = null;
+    editCache: { [key: string]: { edit: boolean; data: any } } = {};
 
     get fName() {
         return this.form.controls.fName;
@@ -164,6 +165,12 @@ export class ApplicationListComponent implements OnInit {
         this.http.get(`Resource/GetList/${this.activedNode.key}`).subscribe(d => {
             if (!d) return;
             this.resourceData = d;
+            this.resourceData.forEach(item => {
+                this.editCache[item.Id] = {
+                    edit: false,
+                    data: { ...item }
+                };
+            });
         });
     }
 
@@ -177,4 +184,24 @@ export class ApplicationListComponent implements OnInit {
             this.getResources();
         });
     }
+
+    startEdit(id: string): void {
+        this.editCache[id].edit = true;
+    }
+
+    saveEdit(id: string): void {
+        const index = this.resourceData.findIndex(item => item.id === id);
+        Object.assign(this.resourceData[index], this.editCache[id].data);
+        this.editCache[id].edit = false;
+    }
+
+
+    cancelEdit(id: string): void {
+        const index = this.resourceData.findIndex(item => item.id === id);
+        this.editCache[id] = {
+            data: { ...this.resourceData[index] },
+            edit: false
+        };
+    }
+
 }
