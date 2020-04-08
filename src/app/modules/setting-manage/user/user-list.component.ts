@@ -207,11 +207,11 @@ export class UserListComponent implements OnInit {
     }
 
     //删除用户
-    delete(id: any) {
+    delete(data: any) {
         this.modalSrv.confirm({
-            nzTitle: '确认删除?',
+            nzTitle: `确认删除 ${data.Name}?`,
             nzOnOk: () => this.http
-                .delete(`User/${id}`)
+                .delete(`User/${data.Id}`)
                 .subscribe(() => {
                     this.getUsers();
                 })
@@ -219,11 +219,11 @@ export class UserListComponent implements OnInit {
     }
 
     //注销用户
-    disable(id: any) {
+    disable(data: any) {
         this.modalSrv.confirm({
-            nzTitle: '确认注销?',
+            nzTitle: `确认注销 ${data.Name}?`,
             nzOnOk: () => this.http
-                .put(`User/Disable/${id}`)
+                .put(`User/Disable/${data.Id}`)
                 .subscribe(() => {
                     this.getUsers();
                 })
@@ -231,11 +231,11 @@ export class UserListComponent implements OnInit {
     }
 
     //启用用户
-    enable(id: any) {
+    enable(data: any) {
         this.modalSrv.confirm({
-            nzTitle: '确认启用?',
+            nzTitle: `确认启用 ${data.Name}?`,
             nzOnOk: () => this.http
-                .put(`User/Enable/${id}`)
+                .put(`User/Enable/${data.Id}`)
                 .subscribe(() => {
                     this.getUsers();
                 })
