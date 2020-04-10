@@ -95,7 +95,8 @@ export class ApplicationListComponent implements OnInit {
             this.form.get('fIcon').setValue(d.Icon);
             this.form.get('fRouterUrl').setValue(d.RouterUrl);
             if (this.type === 2) {
-                this.getResources();
+                this.resourceData = d.Resources;
+                this.handleResourceData();
             }
         });
     }
@@ -165,12 +166,16 @@ export class ApplicationListComponent implements OnInit {
         this.http.get(`Resource/GetList/${this.activedNode.key}`).subscribe(d => {
             if (!d) return;
             this.resourceData = d;
-            this.resourceData.forEach(item => {
-                this.editCache[item.Id] = {
-                    edit: false,
-                    data: { ...item }
-                };
-            });
+            this.handleResourceData();
+        });
+    }
+
+    handleResourceData() {
+        this.resourceData.forEach(item => {
+            this.editCache[item.Id] = {
+                edit: false,
+                data: { ...item }
+            };
         });
     }
 
