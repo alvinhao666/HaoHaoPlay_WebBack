@@ -76,7 +76,6 @@ export class UserListComponent implements OnInit {
         this.searchForm = this.fb.group({
             sName: [null],
             sPhone: [null],
-            sGender: [null],
             sEnabled: [null],
             sLastLoginTime: [null]
         });

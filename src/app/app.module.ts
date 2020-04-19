@@ -1,8 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import {  NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +28,23 @@ import { AppRoutingModule } from './app.route';
 
 registerLocaleData(zh);
 
+const NzModule = [
+  NzLayoutModule,
+  NzButtonModule,
+  NzMessageModule,
+  NzIconModule,
+  NzDropDownModule,
+  NzBreadCrumbModule,
+  NzTableModule,
+  NzTabsModule,
+  NzGridModule,
+  NzInputModule,
+  NzCheckboxModule,
+  NzIconModule
+];
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,11 +55,10 @@ registerLocaleData(zh);
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserModule,
-    NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzDropDownModule
+    ...NzModule
   ],
   entryComponents: [],  // 动态加载的组件
   providers: [

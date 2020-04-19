@@ -11,19 +11,35 @@
     }
 
     .content {
-      display: block;
       width  : 368px;
       margin : 100px auto;
     }
 
-    .ant-input-affix-wrapper .ant-input {
-      position  : relative;
-      text-align: inherit;
-      min-height: 40px;
+    nz-form-item {
+      margin: 0 0 24px;
     }
+
+    .ant-col {
+      width: 368px;
+    }
+
+    // .ant-input-affix-wrapper .ant-input {
+    //   position  : relative;
+    //   text-align: inherit;
+    //   min-height: 40px;
+    // }
+
+    .ant-input:-webkit-autofill {
+      box-shadow: 0 0 0px 1000px white inset !important;
+    }
+
 
     .ant-tabs-default-bar {
       height: 47px;
+    }
+
+    .ant-input-affix-wrapper-lg {
+      height: 40px;
     }
 
     .ant-tabs {
@@ -51,9 +67,9 @@
       line-height: 24px;
     }
 
-    .ant-input-affix-wrapper .ant-input:not(:first-child) {
-      padding-left: 34px;
-    }
+    // .ant-input-affix-wrapper .ant-input:not(:first-child) {
+    //   padding-left: 34px;
+    // }
 
 
     .text-right {
@@ -71,7 +87,8 @@
       width      : 100%;
 
       a {
-        color: rgba(0, 0, 0, 0.65);;
+        color: rgba(0, 0, 0, 0.65);
+        ;
       }
     }
   }

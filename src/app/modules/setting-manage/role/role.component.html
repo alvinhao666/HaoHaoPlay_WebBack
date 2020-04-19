@@ -1,1 +1,25 @@
-<p>role works!</p>
+<div class="inner-content">
+    <div class="content1">
+        <div class="operater">
+            <button nz-button [nzType]="'primary'" (click)="addRole()">
+                <i nz-icon nzType="plus"></i>
+                <span>添加</span>
+            </button>
+        </div>
+
+        <nz-table #nzTable [nzSize]="'small'" [nzData]="roleData" [nzHideOnSinglePage]="true">
+            <thead>
+                <tr>
+                    <th nzWidth="100px">序号</th>
+                    <th nzWidth="150px">角色</th>
+                    <th nzWidth="150px">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let d of nzTable.data;let idx=index;">
+
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>

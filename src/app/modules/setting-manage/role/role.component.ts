@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoleComponent implements OnInit {
 
+  roleData = null;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  addRole() {
+
+  }
 }
