@@ -3,20 +3,26 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { RoleRoutingModule } from './role.route';
 import { RoleComponent } from './role.component';
-import { RoleEditComponent } from './role-edit/role-edit.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
+const NzModule = [
+  NzButtonModule,
+  NzCardModule,
+  NzTableModule,
+  NzTreeModule
+];
 
 @NgModule({
-  declarations: [RoleComponent, RoleEditComponent],
+  declarations: [RoleComponent],
   imports: [
     CommonModule,
     RoleRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NzTableModule,
-    NzButtonModule
+    ...NzModule
   ]
 })
 export class RoleModule { }

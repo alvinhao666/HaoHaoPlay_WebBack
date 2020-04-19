@@ -1,25 +1,38 @@
 <div class="inner-content">
     <div class="content1">
-        <div class="operater">
+        <!-- <div class="operater">
             <button nz-button [nzType]="'primary'" (click)="addRole()">
                 <i nz-icon nzType="plus"></i>
                 <span>添加</span>
             </button>
-        </div>
+        </div> -->
 
         <nz-table #nzTable [nzSize]="'small'" [nzData]="roleData" [nzHideOnSinglePage]="true">
             <thead>
                 <tr>
                     <th nzWidth="100px">序号</th>
                     <th nzWidth="150px">角色</th>
+                    <th nzWidth="150px">用户数量</th>
                     <th nzWidth="150px">操作</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let d of nzTable.data;let idx=index;">
-
+                    <td>{{idx+1}}</td>
+                    <td>{{d.Name}}</td>
+                    <td>
+                        <label style="color: green;">{{d.UserCount}}</label>
+                    </td>
+                    <td>
+                        <a (click)="viewRole(d)">查看权限</a>
+                    </td>
                 </tr>
             </tbody>
         </nz-table>
+    </div>
+    <div class="content2" *ngIf="title">
+        <nz-card nzType="inner" nzTitle="{{title}}" [nzSize]="'small'">
+
+        </nz-card>
     </div>
 </div>

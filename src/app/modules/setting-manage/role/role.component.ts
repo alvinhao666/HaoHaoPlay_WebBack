@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-role',
@@ -9,12 +10,19 @@ export class RoleComponent implements OnInit {
 
   roleData = null;
 
-  constructor() { }
+  title = null;
+
+  constructor(
+    private router: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+    this.roleData = this.router.snapshot.data.roleList;
   }
 
-  addRole() {
 
+
+  viewRole(role: any) {
+    this.title = role.Name + '的权限';
   }
 }

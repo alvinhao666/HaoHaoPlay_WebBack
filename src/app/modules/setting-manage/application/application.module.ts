@@ -10,6 +10,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { ApplicationListComponent } from './application-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationRoutingModule } from './application.route';
@@ -27,7 +28,8 @@ const NzModule = [
     NzTableModule,
     NzInputModule,
     NzInputNumberModule,
-    NzTreeModule
+    NzTreeModule,
+    NzPopconfirmModule
 ];
 
 @NgModule({
