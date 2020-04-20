@@ -32,7 +32,8 @@
     </div>
     <div class="content2" *ngIf="title">
         <nz-card nzType="inner" nzTitle="{{title}}" [nzSize]="'small'">
-
+            <nz-tree [nzData]="nodes" nzBlockNode nzCheckable nzMultiple [nzCheckedKeys]="checkedKeys">
+            </nz-tree>
         </nz-card>
     </div>
 </div>

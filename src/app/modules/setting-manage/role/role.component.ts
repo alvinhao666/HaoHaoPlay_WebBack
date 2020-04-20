@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { H_Http } from '@core';
 
 @Component({
   selector: 'app-role',
@@ -12,8 +13,13 @@ export class RoleComponent implements OnInit {
 
   title = null;
 
+  nodes = null;
+
+  checkedKeys = null;
+
   constructor(
     private router: ActivatedRoute,
+    private http: H_Http
   ) { }
 
   ngOnInit() {
@@ -24,5 +30,11 @@ export class RoleComponent implements OnInit {
 
   viewRole(role: any) {
     this.title = role.Name + '的权限';
+    this.http.get(`Role/GetRoleModule/${role.Id}`).subscribe(d => {
+      if (!d) return;
+      this.nodes = d.Nodes;
+      this.checkedKeys = d.CheckedKeys;
+      console.log(this.checkedKeys)
+    });
   }
 }
