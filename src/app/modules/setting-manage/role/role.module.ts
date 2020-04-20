@@ -7,12 +7,14 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { RoleRoutingModule } from './role.route';
 import { RoleComponent } from './role.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 const NzModule = [
   NzButtonModule,
   NzCardModule,
   NzTableModule,
-  NzTreeModule
+  NzTreeModule,
+  NzMessageModule
 ];
 
 @NgModule({
