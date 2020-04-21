@@ -18,6 +18,8 @@ export class MainComponent extends CoreContainer implements OnInit {
 
   headImgUrl = null;
 
+  menus = null;
+
   constructor(
     private http: H_Http,
     private router: Router,
@@ -42,6 +44,7 @@ export class MainComponent extends CoreContainer implements OnInit {
       return;
     }
     const d = JSON.parse(user);
+    this.menus = d.Menus;
     this.name = d.Name;
     this.firstName = this.name.substring(0, 1);
     this.firstNameBgColor = getColorByFirstName(d.FirstNameSpell);
