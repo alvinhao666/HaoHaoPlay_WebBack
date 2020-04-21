@@ -7,10 +7,10 @@
             </button>
         </div> -->
 
-        <nz-table #nzTable [nzSize]="'small'" [nzData]="roleData" [nzHideOnSinglePage]="true">
+        <nz-table #nzTable nzBordered [nzSize]="'small'" [nzData]="roleData" [nzHideOnSinglePage]="true">
             <thead>
                 <tr>
-                    <th nzWidth="100px">序号</th>
+                    <th nzWidth="60px">序号</th>
                     <th nzWidth="150px">角色</th>
                     <th nzWidth="150px">用户数量</th>
                     <th nzWidth="150px">操作</th>
@@ -24,7 +24,7 @@
                         <label style="color: green;">{{d.UserCount}}</label>
                     </td>
                     <td>
-                        <a (click)="viewRole(d)">查看权限</a>
+                        <a (click)="viewRole(d)">分配权限</a>
                     </td>
                 </tr>
             </tbody>

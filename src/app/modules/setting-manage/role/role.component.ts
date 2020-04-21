@@ -56,14 +56,11 @@ export class RoleComponent implements OnInit {
   checkBoxChange(event: NzFormatEmitEvent) {
     const checkedNodes = this.tree.getCheckedNodeList();
     const halfCheckedNodes = this.tree.getHalfCheckedNodeList();
-    console.log(checkedNodes);
-    console.log(halfCheckedNodes);
     this.arrayKey = [];
     this.handleCheckedTreeNode(checkedNodes, this.arrayKey);
     halfCheckedNodes.forEach((item: NzTreeNode) => {
       this.arrayKey.push(item.key);
     });
-    console.log(this.arrayKey);
   }
 
   handleCheckedTreeNode(nodes: NzTreeNode[], arrayKey: string[]) {
