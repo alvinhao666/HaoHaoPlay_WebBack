@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { H_Http, getColorByFirstName, CoreContainer } from '@core';
 import { UserInfoSubject } from '../share/user-info.subject';
+import { NzMessageService } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -18,6 +20,8 @@ export class MainComponent extends CoreContainer implements OnInit {
 
   constructor(
     private http: H_Http,
+    private router: Router,
+    private msg: NzMessageService,
     private userInfoSubject: UserInfoSubject) {
     super();
     this.userInfoSubject.userInfo$.subscribe((d: any) => {
@@ -31,15 +35,19 @@ export class MainComponent extends CoreContainer implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get(`User/Current`).subscribe(d => {
-      if (!d) return;
-      this.name = d.Name;
-      this.firstName = this.name.substring(0, 1);
-      this.firstNameBgColor = getColorByFirstName(d.FirstNameSpell);
-      if (d.HeadImgUrl) {
-        this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
-      }
-    });
+    const user = localStorage.getItem(environment.user_key);
+    if (!user) {
+      this.msg.error('当前用户数据异常，请重新登录');
+      this.logout();
+      return;
+    }
+    const d = JSON.parse(user);
+    this.name = d.Name;
+    this.firstName = this.name.substring(0, 1);
+    this.firstNameBgColor = getColorByFirstName(d.FirstNameSpell);
+    if (d.HeadImgUrl) {
+      this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
+    }
   }
 
 
