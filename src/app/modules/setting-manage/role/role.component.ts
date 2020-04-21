@@ -53,15 +53,9 @@ export class RoleComponent implements OnInit {
   }
 
 
-  checkBoxChange(event: NzFormatEmitEvent) {
-    const checkedNodes = this.tree.getCheckedNodeList();
-    const halfCheckedNodes = this.tree.getHalfCheckedNodeList();
-    this.arrayKey = [];
-    this.handleCheckedTreeNode(checkedNodes, this.arrayKey);
-    halfCheckedNodes.forEach((item: NzTreeNode) => {
-      this.arrayKey.push(item.key);
-    });
-  }
+  // checkBoxChange(event: NzFormatEmitEvent) {
+
+  // }
 
   handleCheckedTreeNode(nodes: NzTreeNode[], arrayKey: string[]) {
     nodes.forEach((item: NzTreeNode) => {
@@ -77,6 +71,14 @@ export class RoleComponent implements OnInit {
   }
 
   updateRoleModule() {
+    const checkedNodes = this.tree.getCheckedNodeList();
+    const halfCheckedNodes = this.tree.getHalfCheckedNodeList();
+    this.arrayKey = [];
+    this.handleCheckedTreeNode(checkedNodes, this.arrayKey);
+    halfCheckedNodes.forEach((item: NzTreeNode) => {
+      this.arrayKey.push(item.key);
+    });
+
     this.http.put(`Role/UpdateRoleAuth/${this.roleId}`, {
       ModuleIds: this.arrayKey
     }).subscribe(d => {
