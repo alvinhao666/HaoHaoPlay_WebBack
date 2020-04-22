@@ -17,7 +17,7 @@
                 <nz-form-item>
                     <nz-form-label>状态</nz-form-label>
                     <nz-form-control>
-                        <nz-select [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" formControlName="sEnabled">
+                        <nz-select nzAllowClear [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" formControlName="sEnabled">
                             <nz-option *ngFor="let i of statuses; let idx = index" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
                         </nz-select>
                     </nz-form-control>
