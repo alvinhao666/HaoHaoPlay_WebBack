@@ -95,7 +95,7 @@ export class LoginComponent {
       this.loginLoading = false;
       if (!d) return;
       localStorage.setItem(environment.token_key, d.Jwt);
-      localStorage.removeItem(environment.user_key);
+      // localStorage.removeItem(environment.user_key);
       localStorage.setItem(environment.user_key, JSON.stringify(d));
       // location.reload();
       location.href = location.href.split('/')[0] + '/main/dashboard';
