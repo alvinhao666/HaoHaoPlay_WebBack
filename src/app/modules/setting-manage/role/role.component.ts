@@ -26,6 +26,8 @@ export class RoleComponent implements OnInit {
 
   roleId = null;
 
+  virtualHeight = '500px';
+
   constructor(
     private router: ActivatedRoute,
     private http: H_Http,
@@ -34,6 +36,7 @@ export class RoleComponent implements OnInit {
 
   ngOnInit() {
     this.roleData = this.router.snapshot.data.roleList;
+    this.virtualHeight = (document.body.clientHeight - 220) + 'px';
   }
 
 
