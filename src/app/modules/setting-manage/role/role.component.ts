@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { H_Http } from '@core';
-import { NzFormatEmitEvent, NzTreeComponent, NzTreeNode, NzMessageService } from 'ng-zorro-antd';
+import { NzFormatEmitEvent, NzTreeComponent, NzTreeNode, NzMessageService, NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-role',
@@ -32,6 +32,7 @@ export class RoleComponent implements OnInit {
     private router: ActivatedRoute,
     private http: H_Http,
     private msg: NzMessageService,
+    private modalSrv: NzModalService
   ) { }
 
   ngOnInit() {
@@ -69,6 +70,15 @@ export class RoleComponent implements OnInit {
           arrayKey.push(item.key);
           this.handleCheckedTreeNode(item.children, arrayKey);
         }
+      }
+    });
+  }
+
+  update() {
+    this.modalSrv.confirm({
+      nzTitle: '确认更新?',
+      nzOnOk: () => {
+        this.updateRoleModule();
       }
     });
   }
