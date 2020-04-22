@@ -25,6 +25,8 @@ export class UserEditComponent implements OnInit {
 
     form: FormGroup;
 
+    roles = null;
+
     formatterAge = value => value && `${value}`;
     parserAge = value => value && value.replace('.', '');
 
@@ -69,6 +71,10 @@ export class UserEditComponent implements OnInit {
         return this.form.controls.fQQ;
     }
 
+    get fRole() {
+        return this.form.controls.fRole;
+    }
+
     constructor(
         private fb: FormBuilder,
         private http: H_Http,
@@ -83,12 +89,16 @@ export class UserEditComponent implements OnInit {
             fPhone: [null, [Validators.required, Validators.pattern(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)]],
             fEmail: [null, Validators.email],
             fWechat: [null, Validators.nullValidator],
-            fQQ: [null, Validators.nullValidator]
+            fQQ: [null, Validators.nullValidator],
+            fRole: [null, Validators.required]
         });
     }
 
     ngOnInit() {
-
+        this.http.get(`Role`).subscribe(d => {
+            if (!d) return;
+            this.roles = d;
+        });
     }
 
     close() {
@@ -106,6 +116,7 @@ export class UserEditComponent implements OnInit {
     }
 
     addUser() {
+  
         this.http
             .post('User', {
                 LoginName: this.fLoginName.value,
@@ -116,7 +127,9 @@ export class UserEditComponent implements OnInit {
                 Phone: this.fPhone.value,
                 Email: this.fEmail.value,
                 WeChat: this.fWechat.value,
-                QQ: this.fQQ.value
+                QQ: this.fQQ.value,
+                RoleId: this.fRole.value,
+                RoleName: this.roles.find(a => a.Id === this.fRole.value).Name
             })
             .subscribe(d => {
                 if (!d) return;

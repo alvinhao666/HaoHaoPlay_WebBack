@@ -14,8 +14,10 @@
                 <div nz-col nzSpan="12">
                     <nz-form-item>
                         <nz-form-label nzRequired [nzSpan]="8">角色</nz-form-label>
-                        <nz-form-control [nzSpan]="16">
-                            <input nz-input placeholder="" autocomplete="off">
+                        <nz-form-control [nzSpan]="16" nzErrorTip="角色必填">
+                            <nz-select nzShowSearch nzAllowClear formControlName="fRole">
+                                <nz-option *ngFor="let item of roles" [nzLabel]="item.Name" [nzValue]="item.Id"></nz-option>
+                            </nz-select>
                         </nz-form-control>
                     </nz-form-item>
                 </div>
