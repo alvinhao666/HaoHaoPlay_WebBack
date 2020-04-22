@@ -88,7 +88,7 @@
                         <td>
                             <ng-container *ngIf="!editCache[d.Id].edit; else saveTpl">
                                 <a (click)="startEdit(d.Id)">编辑</a>
-                                <a nz-popconfirm (nzOnConfirm)="deleteResource(d.Id)" style="margin-left:10px;" nzTooltipTitle="确定删除?">删除</a>
+                                <a nz-popconfirm (nzOnConfirm)="deleteResource(d.Id)" style="margin-left:10px;" nzPopconfirmTitle="确定删除?">删除</a>
                             </ng-container>
                             <ng-template #saveTpl>
                                 <a (click)="saveEdit(d.Id)">保存</a>
