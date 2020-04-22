@@ -58,8 +58,11 @@ export class H_HttpInterceptor implements HttpInterceptor {
               this.msg.error(body.ErrorMsg);
             }
             if (body.ErrorCode > 100000 && body.ErrorCode < 100006) {
-              localStorage.removeItem(environment.token_key);
-              this.goTo('login');
+              setTimeout(() => {
+                localStorage.removeItem(environment.token_key);
+                location.reload();
+              }, 3000);
+              // this.goTo('login');
               //todo 清除token
             }
             // 继续抛出错误中断后续所有 Pipe、subscribe 操作，因此：
