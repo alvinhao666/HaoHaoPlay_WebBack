@@ -116,7 +116,6 @@ export class UserEditComponent implements OnInit {
     }
 
     addUser() {
-  
         this.http
             .post('User', {
                 LoginName: this.fLoginName.value,
@@ -128,8 +127,7 @@ export class UserEditComponent implements OnInit {
                 Email: this.fEmail.value,
                 WeChat: this.fWechat.value,
                 QQ: this.fQQ.value,
-                RoleId: this.fRole.value,
-                RoleName: this.roles.find(a => a.Id === this.fRole.value).Name
+                RoleId: this.fRole.value
             })
             .subscribe(d => {
                 if (!d) return;
