@@ -1,4 +1,4 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="添加应用" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzWidth]="400">
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="title" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzWidth]="400">
     <form nz-form [formGroup]="form">
         <nz-form-item>
             <nz-form-label nzRequired [nzSpan]="4">标题</nz-form-label>

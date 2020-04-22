@@ -106,6 +106,5 @@
     </div>
 </div>
 
-<dialog-application-edit #DiaglogApplicationEdit [type]="type" [Id]="activedNode?.key" (onSave)="saveAddNode()">
-</dialog-application-edit>
+<dialog-application-edit #DiaglogApplicationEdit [type]="type" [title]="title" [Id]="activedNode?.key" (onSave)="saveAddNode()"></dialog-application-edit>
 <dialog-resource-edit #DiaglogResourceEdit [Id]="activedNode?.key" (onSave)="saveAddResource()"></dialog-resource-edit>

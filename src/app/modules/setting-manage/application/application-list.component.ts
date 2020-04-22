@@ -25,6 +25,7 @@ export class ApplicationListComponent implements OnInit {
     activedNode: any = { key: '0' };
 
     type = 0;
+    title = '';
     iconName = '';
 
     form: FormGroup;
@@ -103,6 +104,11 @@ export class ApplicationListComponent implements OnInit {
 
     addNode(e: Event) {
         e.stopPropagation();
+        if (this.type === 0) {
+            this.title = '添加主菜单';
+        } else {
+            this.title = '添加应用';
+        }
         this.dialogApplication.isVisible = true;
     }
 

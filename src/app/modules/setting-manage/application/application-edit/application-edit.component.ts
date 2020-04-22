@@ -7,7 +7,7 @@ import { H_Http } from '@core';
   templateUrl: './application-edit.component.html',
   styleUrls: ['./application-edit.component.less']
 })
-export class ApplicationEditComponent implements OnInit {
+export class ApplicationEditComponent   {
 
   isVisible = false;
 
@@ -18,6 +18,8 @@ export class ApplicationEditComponent implements OnInit {
   @Input() Id = null;
 
   @Output() onSave = new EventEmitter();
+
+  @Input()  title = '';
 
   get fName() {
     return this.form.controls.fName;
@@ -46,9 +48,6 @@ export class ApplicationEditComponent implements OnInit {
       fRouterUrl: [null, Validators.required],
       fSort: [null, Validators.required]
     });
-  }
-
-  ngOnInit() {
   }
 
 
