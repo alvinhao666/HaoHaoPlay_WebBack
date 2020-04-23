@@ -34,7 +34,7 @@
 
         <div class="operater">
             <div class="fl">
-                <button nz-button [nzType]="'primary'" (click)="addUser()">
+                <button nz-button [nzType]="'primary'" (click)="addUser()" *ngIf="CheckAuth('1_32')">
                     <i nz-icon nzType="plus"></i>
                     <span>添加</span>
                 </button>

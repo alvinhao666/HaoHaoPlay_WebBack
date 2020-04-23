@@ -23,7 +23,9 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   loading = false;
 
   headImgUrl = null;
-  // user: Observable<any>;
+  firstName = '';
+
+  firstNameBgColor = '';
 
   formatterAge = value => value && `${value}`;
   parserAge = value => value && value.replace('.', '');

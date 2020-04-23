@@ -95,6 +95,10 @@ export class UserEditComponent implements OnInit {
     }
 
     ngOnInit() {
+
+    }
+
+    getRoles() {
         this.http.get(`User/GetRole`).subscribe(d => {
             if (!d) return;
             this.roles = d;

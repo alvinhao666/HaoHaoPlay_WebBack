@@ -25,8 +25,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     public msg: NzMessageService,
     private http: H_Http,
-    private router: Router
-  ) {
+    private router: Router) {
 
     this.form = this.fb.group({
       userName: [null, Validators.required],
@@ -35,6 +34,7 @@ export class LoginComponent {
       captcha: [null, Validators.required],
       remember: [true],
     });
+
   }
 
   get userName() {
@@ -97,9 +97,11 @@ export class LoginComponent {
       localStorage.setItem(environment.token_key, d.Jwt);
       // localStorage.removeItem(environment.user_key);
       localStorage.setItem(environment.user_key, JSON.stringify(d));
+
+      // Core.authNums = d.AuthNums;
       // location.reload();
-      location.href = location.href.split('/')[0] + '/main/dashboard';
-      //this.router.navigateByUrl('main/dashboard');
+      location.href = location.href.split('/')[0] + '/main/dashboard'; //
+      // this.router.navigateByUrl('main/dashboard');
       // location.reload();
     }, e => {
       this.loginLoading = false;

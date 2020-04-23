@@ -1,10 +1,9 @@
 import { FormGroup } from '@angular/forms';
-import { CoreContainer } from './core.container';
 
-export abstract class CoreEdit extends CoreContainer {
+export abstract class CoreEdit   {
 
     constructor() {
-        super();
+
     }
 
     checkForm(form: FormGroup): boolean {

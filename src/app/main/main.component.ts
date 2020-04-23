@@ -1,20 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
-import { H_Http, getColorByFirstName, CoreContainer } from '@core';
+import { H_Http, getColorByFirstName } from '@core';
 import { UserInfoSubject } from '../share/user-info.subject';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
+import { Core } from '@core/container/core';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.less']
 })
-export class MainComponent extends CoreContainer implements OnInit {
+export class MainComponent extends Core implements OnInit {
 
   isCollapsed = false;
 
   name = '';
+
+  firstName = '';
+
+  firstNameBgColor = '';
 
   headImgUrl = null;
 
@@ -41,6 +46,7 @@ export class MainComponent extends CoreContainer implements OnInit {
   }
 
   ngOnInit() {
+
     const user = localStorage.getItem(environment.user_key);
     if (!user) {
       this.msg.error('当前用户数据异常，请重新登录');
@@ -55,6 +61,7 @@ export class MainComponent extends CoreContainer implements OnInit {
     if (d.HeadImgUrl) {
       this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
     }
+    Core.authNums = d.AuthNums;
   }
 
 

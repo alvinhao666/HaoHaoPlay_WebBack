@@ -7,6 +7,7 @@ import { UploadFile, NzModalService } from 'ng-zorro-antd';
 import { UserEditComponent } from './user-edit/user-edit.componnent';
 import { UserViewComponent } from './user-view/user-view.component';
 import { ActivatedRoute } from '@angular/router';
+import { Core } from '@core/container/core';
 
 @Component({
     selector: 'user-list',
@@ -14,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./user-list.component.less']
 })
 
-export class UserListComponent implements OnInit {
+export class UserListComponent extends Core implements OnInit {
 
     @ViewChild('silderUserEdit', { static: false }) sliderUserEdit: UserEditComponent;
     @ViewChild('silderUserView', { static: false }) sliderUserView: UserViewComponent;
@@ -71,8 +72,9 @@ export class UserListComponent implements OnInit {
         private http: H_Http,
         private datePipe: DatePipe,
         private modalSrv: NzModalService,
-        private router: ActivatedRoute,
-    ) {
+        private router: ActivatedRoute) {
+
+        super();
         this.searchForm = this.fb.group({
             sName: [null],
             sPhone: [null],
@@ -183,7 +185,7 @@ export class UserListComponent implements OnInit {
     addUser() {
         this.slider_edit_title = '添加用户';
         this.slider_edit_visible = true;
-
+        this.sliderUserEdit.getRoles();
     }
 
 
