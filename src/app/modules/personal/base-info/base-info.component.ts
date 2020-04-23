@@ -117,7 +117,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       if (d.HeadImgUrl) {
         this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
       }
-      this.userInfoSubject.userInfo$.next({ Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: this.headImgUrl });
+      this.userInfoSubject.userInfo$.next({ Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: d.HeadImgUrl });
     });
   }
 
