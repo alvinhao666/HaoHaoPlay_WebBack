@@ -32,6 +32,10 @@ export class MainComponent extends CoreContainer implements OnInit {
       this.firstNameBgColor = d.FirstNameBgColor;
       if (d.HeadImgUrl) {
         this.headImgUrl = d.HeadImgUrl;
+        const value = localStorage.getItem(environment.user_key);
+        const user = JSON.parse(value);
+        user.HeadImgUrl = d.HeadImgUrl;
+        localStorage.setItem(environment.user_key, JSON.stringify(user));
       }
     });
   }
