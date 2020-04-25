@@ -7,7 +7,7 @@ import { UploadFile, NzModalService } from 'ng-zorro-antd';
 import { UserEditComponent } from './user-edit/user-edit.componnent';
 import { UserViewComponent } from './user-view/user-view.component';
 import { ActivatedRoute } from '@angular/router';
-import { Core } from '@core/container/core';
+import { Core } from '@core';
 
 @Component({
     selector: 'user-list',

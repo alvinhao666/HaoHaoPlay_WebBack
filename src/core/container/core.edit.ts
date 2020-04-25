@@ -1,9 +1,10 @@
 import { FormGroup } from '@angular/forms';
+import { Core } from './core';
 
-export abstract class CoreEdit   {
+export class CoreEdit extends Core {
 
     constructor() {
-
+        super();
     }
 
     checkForm(form: FormGroup): boolean {

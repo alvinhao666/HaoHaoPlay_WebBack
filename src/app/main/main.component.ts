@@ -4,7 +4,7 @@ import { H_Http, getColorByFirstName } from '@core';
 import { UserInfoSubject } from '../share/user-info.subject';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
-import { Core } from '@core/container/core';
+import { Core } from '@core';
 
 @Component({
   selector: 'app-main',
