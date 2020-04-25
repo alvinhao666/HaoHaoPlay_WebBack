@@ -45,6 +45,12 @@
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
+                    <nz-form-label [nzSpan]="4">编码</nz-form-label>
+                    <nz-form-control [nzSpan]="18">
+                        <input nz-input id="code" formControlName="fCode" [disabled]="true" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
                     <nz-form-label nzNoColon [nzSpan]="4"></nz-form-label>
                     <button nz-button nzType="primary" [nzSize]="'small'" (click)="updateNode()">更新</button>
                     <button nz-button nzType="danger" [nzSize]="'small'" style="margin-left: 12px;" (click)="deleteNode()">删除</button>

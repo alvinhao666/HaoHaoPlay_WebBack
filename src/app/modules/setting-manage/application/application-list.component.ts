@@ -60,7 +60,8 @@ export class ApplicationListComponent implements OnInit {
             fName: [null, Validators.required],
             fIcon: [null, Validators.required],
             fRouterUrl: [null, Validators.required],
-            fSort: [null, Validators.required]
+            fSort: [null, Validators.required],
+            fCode: [null, Validators.nullValidator]
         });
     }
 
@@ -95,6 +96,7 @@ export class ApplicationListComponent implements OnInit {
             this.form.get('fSort').setValue(d.Sort);
             this.form.get('fIcon').setValue(d.Icon);
             this.form.get('fRouterUrl').setValue(d.RouterUrl);
+            this.form.get('fCode').setValue(d.Code);
             if (this.type === 2) {
                 this.resourceData = d.Resources;
                 this.handleResourceData();
