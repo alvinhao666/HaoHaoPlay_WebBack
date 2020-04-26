@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { H_Http } from '@core';
+import { H_Http, Core } from '@core';
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNode, NzMessageService, NzModalService } from 'ng-zorro-antd';
 
 @Component({
@@ -8,7 +8,7 @@ import { NzFormatEmitEvent, NzTreeComponent, NzTreeNode, NzMessageService, NzMod
   templateUrl: './role.component.html',
   styleUrls: ['./role.component.less']
 })
-export class RoleComponent implements OnInit {
+export class RoleComponent extends Core implements OnInit {
 
   roleData = null;
 
@@ -32,8 +32,9 @@ export class RoleComponent implements OnInit {
     private router: ActivatedRoute,
     private http: H_Http,
     private msg: NzMessageService,
-    private modalSrv: NzModalService
-  ) { }
+    private modalSrv: NzModalService) {
+    super();
+  }
 
   ngOnInit() {
     this.roleData = this.router.snapshot.data.roleList;

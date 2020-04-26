@@ -44,14 +44,14 @@
                 </button>
                 <nz-dropdown-menu #moreOperate>
                     <ul nz-menu>
-                        <li nz-menu-item (click)="export()">导出</li>
-                        <li nz-menu-item (click)="exportTemplate()">导出模板</li>
+                        <li nz-menu-item (click)="export()" *ngIf="CheckAuth('1_4096')">导出</li>
+                        <li nz-menu-item (click)="exportTemplate()" *ngIf="CheckAuth('1_8192')">导出模板</li>
                     </ul>
                 </nz-dropdown-menu>
             </div>
 
             <div class="fr">
-                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getUsers()">查询</button>
+                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getUsers()" *ngIf="CheckAuth('1_64')">查询</button>
                 <button nz-button type="reset" class="btn-reset">重置</button>
             </div>
         </div>
@@ -91,7 +91,7 @@
                 <td>{{d.LastLoginTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
                 <td>{{d.LastLoginIP}}</td>
                 <td nzRight="0px">
-                    <a href="javascript:;" (click)="view(d.Id)">查看</a>
+                    <a href="javascript:;" (click)="view(d.Id)" *ngIf="CheckAuth('1_128')">查看</a>
                     <!-- <nz-divider nzType="vertical"></nz-divider> -->
                     <a href="javascript:;" (click)="edit(d.Id)" *ngIf="d.Id!=-1&&CheckAuth('1_256')" style="margin-left:10px;">编辑</a>
                     <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&CheckAuth('1_512')"></nz-divider> -->
@@ -107,7 +107,7 @@
         共{{total}}条
     </ng-template>
 
-    <div nz-row nzType="flex">
+    <div nz-row nzType="flex" *ngIf="CheckAuth('1_1048576')">
         <div nz-col nzSpan="4">
             <button nz-button [nzType]="'primary'" [disabled]="fileList.length == 0" style="margin-right: 8px">
                 <span>导入</span>
