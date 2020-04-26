@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { H_Http, Core } from '@core';
-import { NzFormatEmitEvent, NzTreeComponent, NzTreeNode, NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { H_Http, CoreContainer } from '@core';
+import { NzTreeComponent, NzTreeNode, NzMessageService, NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',
   styleUrls: ['./role.component.less']
 })
-export class RoleComponent extends Core implements OnInit {
+export class RoleComponent extends CoreContainer implements OnInit {
 
   roleData = null;
 

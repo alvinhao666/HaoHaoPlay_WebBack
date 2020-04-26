@@ -1,5 +1,5 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
-import { H_Http, Core } from '@core';
+import { H_Http, CoreContainer } from '@core';
 import { ActivatedRoute } from '@angular/router';
 import { NzTreeNode, NzFormatEmitEvent, NzModalService, NzMessageService } from 'ng-zorro-antd';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,7 +12,7 @@ import { ResourceEditComponent } from './resource-edit/resource-edit.component';
     styleUrls: ['./application-list.component.less']
 })
 
-export class ApplicationListComponent extends Core implements OnInit {
+export class ApplicationListComponent extends CoreContainer implements OnInit {
 
 
     @ViewChild('DiaglogApplicationEdit', { static: false }) dialogApplication: ApplicationEditComponent;

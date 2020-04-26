@@ -7,7 +7,7 @@ import { UploadFile, NzModalService } from 'ng-zorro-antd';
 import { UserEditComponent } from './user-edit/user-edit.componnent';
 import { UserViewComponent } from './user-view/user-view.component';
 import { ActivatedRoute } from '@angular/router';
-import { Core } from '@core';
+import { CoreContainer } from '@core';
 
 @Component({
     selector: 'user-list',
@@ -15,7 +15,7 @@ import { Core } from '@core';
     styleUrls: ['./user-list.component.less']
 })
 
-export class UserListComponent extends Core implements OnInit {
+export class UserListComponent extends CoreContainer implements OnInit {
 
     @ViewChild('silderUserEdit', { static: false }) sliderUserEdit: UserEditComponent;
     @ViewChild('silderUserView', { static: false }) sliderUserView: UserViewComponent;

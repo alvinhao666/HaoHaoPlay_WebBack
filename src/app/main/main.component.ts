@@ -4,14 +4,14 @@ import { H_Http, getColorByFirstName } from '@core';
 import { UserInfoSubject } from '../share/user-info.subject';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
-import { Core } from '@core';
+import { Core, CoreContainer } from '@core';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.less']
 })
-export class MainComponent extends Core implements OnInit {
+export class MainComponent extends CoreContainer implements OnInit {
 
   isCollapsed = false;
 
