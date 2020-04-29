@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd';
   templateUrl: './update-pwd.component.html',
   styleUrls: ['./update-pwd.component.less']
 })
-export class UpdatePwdComponent extends CoreEdit implements OnInit {
+export class UpdatePwdComponent extends CoreEdit implements OnInit, OnDestroy {
 
   isVisible = false;
 
@@ -27,8 +27,13 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
 
   @Output() onSave = new EventEmitter();
 
+
+  oldPwdChange$ = new BehaviorSubject('');
   // 定义一个行为subject
-  passwordChange$ = new BehaviorSubject('');
+  newPwdChange$ = new BehaviorSubject('');
+
+
+
 
   get fPassword() {
     return this.form.controls.fPassword;
@@ -55,15 +60,44 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
     });
   }
 
+
   ngOnInit() {
-    this.passwordChange$
+
+    this.oldPwdChange$
       .asObservable()
       .pipe(debounceTime(300)) // debounceTime(200) 间隔时间 200ms
-      .subscribe((value: string) => this.checkPasswordLevel(value));
+      .subscribe((value: string) => {
+        if (!this.fOldPassword.value || !this.fPassword.value) return;
+        this.fPassword.markAsDirty();
+        this.fPassword.updateValueAndValidity();
+      });
+
+    this.newPwdChange$
+      .asObservable()
+      .pipe(debounceTime(300)) // debounceTime(200) 间隔时间 200ms
+      .subscribe((value: string) => {
+        if (!this.fPassword.value) return;
+
+        this.checkPasswordLevel(value);
+
+        if (this.fRePassword.value) {
+          this.fRePassword.markAsDirty();
+          this.fRePassword.updateValueAndValidity();
+        }
+      });
   }
 
-  passwordChange(value: string) {
-    this.passwordChange$.next(value);
+  ngOnDestroy() {
+    this.oldPwdChange$.unsubscribe();
+    this.newPwdChange$.unsubscribe();
+  }
+
+  oldPwdChange(value: string) {
+    this.oldPwdChange$.next(value);
+  }
+
+  newPwdChange(value: string) {
+    this.newPwdChange$.next(value);
   }
 
   handleCancel() {
@@ -89,6 +123,7 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
   }
 
   checkPasswordLevel(password: string) {
+
     if (this.regexWeak.test(password)) {
       this.passwordLevel = '弱';
       this.levelColor = 'red';

@@ -95,7 +95,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   update() {
     if (!this.checkForm(this.form)) return;
     this.loading = true;
-    this.http.put(`CurrentUser/UpdateCBaseInfo`, {
+    this.http.put(`CurrentUser/UpdateBaseInfo`, {
       Name: this.fName.value,
       NickName: this.fNickName.value,
       Gender: parseInt(this.fGender.value, 10),
