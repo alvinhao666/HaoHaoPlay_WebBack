@@ -37,8 +37,8 @@ export class SafeInfoComponent implements OnInit {
     this.dialogUpdatePwd.isVisible = true;
   }
 
-  updatePwd() {
-    this.http.get(`User/CurrentSecurityInfo`).subscribe(d => {
+  updateSecurityInfo() {
+    this.http.get(`CurrentUser/SecurityInfo`).subscribe(d => {
       if (!d) return;
       this.passwordLevel = d.PasswordLevel;
       this.phone = d.Phone;

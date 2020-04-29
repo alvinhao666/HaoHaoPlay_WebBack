@@ -40,7 +40,7 @@ export class AvatarComponent implements OnInit {
   handleOk() {
     this.isVisible = false;
     const baseStr = this.cropper.getDataURL();
-    this.http.put('User/UpdateCurrentHeadImg', { Base64Str: baseStr }).subscribe(d => {
+    this.http.put('CurrentUser/UpdateHeadImg', { Base64Str: baseStr }).subscribe(d => {
       if (!d) return;
       this.onSave.emit();
       this.msg.success('更新成功');

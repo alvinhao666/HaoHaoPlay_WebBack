@@ -73,7 +73,7 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit {
   handleOk() {
     if (!this.checkForm(this.form)) return;
     this.loading = true;
-    this.http.put('User/UpdateCurrentPassword', {
+    this.http.put('CurrentUser/UpdatePassword', {
       OldPassword: this.fOldPassword.value,
       NewPassword: this.fPassword.value,
       RePassword: this.fRePassword.value
