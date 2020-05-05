@@ -16,6 +16,9 @@
                     <li nz-menu-item nzMatchRouter *ngFor="let sub of item.ChildMenus;">
                         <a routerLink="{{sub.RouterUrl}}">{{sub.Name}}</a>
                     </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="setting/dict">字典管理</a>
+                    </li>
                 </ul>
             </li>
         </ul>
