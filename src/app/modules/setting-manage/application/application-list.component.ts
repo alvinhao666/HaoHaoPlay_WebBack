@@ -63,7 +63,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
             fIcon: [null, Validators.required],
             fRouterUrl: [null, Validators.required],
             fSort: [null, Validators.required],
-            fCode: [null, Validators.nullValidator]
+            fCode: [{ value: null, disabled: true }, Validators.nullValidator]
         });
     }
 

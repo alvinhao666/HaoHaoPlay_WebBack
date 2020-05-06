@@ -1,4 +1,4 @@
-<div class="inner-content">
+<nz-card [nzBordered]="false">
     <div class="content1">
         <nz-card nzType="inner" nzTitle="列表" [nzSize]="'small'">
             <nz-tree [nzData]="nodes" (nzClick)="select($event)" nzBlockNode nzShowLine nzExpandAll [nzTreeTemplate]="nzTreeTemplate">
@@ -47,7 +47,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSpan]="4">编码</nz-form-label>
                     <nz-form-control [nzSpan]="18">
-                        <input nz-input id="code" formControlName="fCode" [disabled]="true" />
+                        <input nz-input id="code" formControlName="fCode" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
@@ -110,7 +110,7 @@
             <button nz-button nzType="primary" [nzSize]="'small'" (click)="addResource()" *ngIf="CheckAuth('1_131072')">添加</button>
         </nz-card>
     </div>
-</div>
+</nz-card>
 
 <dialog-application-edit #DiaglogApplicationEdit [type]="type" [title]="title" [Id]="activedNode?.key" (onSave)="saveAddNode()"></dialog-application-edit>
 <dialog-resource-edit #DiaglogResourceEdit [Id]="activedNode?.key" (onSave)="saveAddResource()"></dialog-resource-edit>

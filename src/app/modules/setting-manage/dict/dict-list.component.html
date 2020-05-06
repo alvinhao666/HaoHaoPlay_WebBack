@@ -1,0 +1,24 @@
+<nz-card [nzBordered]="false">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm">
+        <div nz-row>
+            <nz-form-item>
+                <nz-form-label>字典名称</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="sDictName" autocomplete="off">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>字典编码</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="sDictCode" autocomplete="off">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading">查询</button>
+            </nz-form-item>
+            <nz-form-item>
+                <button nz-button type="reset">重置</button>
+            </nz-form-item>
+        </div>
+    </form>
+</nz-card>

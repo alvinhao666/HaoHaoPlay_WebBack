@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DictComponent } from './dict.component';
+import { DictListComponent } from './dict-list.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: DictComponent
+    component: DictListComponent
   }
 ];
 
