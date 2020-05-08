@@ -2,10 +2,12 @@
     <nz-sider class="menu-sidebar" nzCollapsible nzBreakpoint="md" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
         <div class="sidebar-logo">
             <a routerLink="dashboard">
-                <img src="../../../assets/img/logo.svg" alt="logo">
+                <!-- <img src="../../../assets/img/logo.svg" alt="logo"> -->
+                <i nz-icon [nzIconfont]="'icon-icon-test'" style="font-size: 32px;"></i>
                 <h1>首页</h1>
             </a>
         </div>
+
         <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
             <li nz-submenu nzOpen *ngFor="let item of menus;let i=index;">
                 <span title>
