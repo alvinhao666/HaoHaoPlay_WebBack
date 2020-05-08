@@ -11,7 +11,7 @@ import { Core, CoreContainer } from '@core';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.less']
 })
-export class MainComponent extends CoreContainer implements OnInit {
+export class MainComponent extends CoreContainer {
 
   isCollapsed = false;
 
@@ -31,6 +31,9 @@ export class MainComponent extends CoreContainer implements OnInit {
     private msg: NzMessageService,
     private userInfoSubject: UserInfoSubject) {
     super();
+
+    this.init();
+
     this.userInfoSubject.userInfo$.subscribe((d: any) => {
       this.name = d.Name;
       this.firstName = d.FirstName;
@@ -45,8 +48,7 @@ export class MainComponent extends CoreContainer implements OnInit {
     });
   }
 
-  ngOnInit() {
-
+  init() {
     const user = localStorage.getItem(environment.user_key);
     if (!user) {
       this.msg.error('当前用户数据异常，请重新登录');

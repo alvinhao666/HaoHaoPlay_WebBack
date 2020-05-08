@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CoreContainer } from '@core';
+import { DictEditComponent } from './dict-edit/dict-edit.component';
 
 @Component({
   selector: 'app-dict',
@@ -9,9 +10,18 @@ import { CoreContainer } from '@core';
 })
 export class DictListComponent extends CoreContainer implements OnInit {
 
+
+  @ViewChild('dialogDictEdit', { static: false }) dialogDictEdit: DictEditComponent;
+
   searchForm: FormGroup;
 
   tableLoading: false;
+
+  dataSet: null;
+
+  pageIndex = 1;
+  pageSize = 10;
+  total = 1;
 
   get sDictName() {
     return this.searchForm.controls.sDictName;
@@ -34,4 +44,8 @@ export class DictListComponent extends CoreContainer implements OnInit {
   ngOnInit(): void {
   }
 
+
+  addDict() {
+    this.dialogDictEdit.visible = true;
+  }
 }

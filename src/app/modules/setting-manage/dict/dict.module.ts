@@ -7,17 +7,25 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
+import { DictEditComponent } from './dict-edit/dict-edit.component';
 
 const NzModule = [
   NzCardModule,
   NzFormModule,
   NzInputModule,
-  NzButtonModule
+  NzButtonModule,
+  NzTableModule,
+  NzIconModule,
+  NzModalModule
 ];
 
 
 @NgModule({
-  declarations: [DictListComponent],
+  declarations: [DictListComponent, DictEditComponent],
   imports: [
     CommonModule,
     DictRoutingModule,

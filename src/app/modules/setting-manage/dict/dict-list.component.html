@@ -21,4 +21,33 @@
             </nz-form-item>
         </div>
     </form>
+
+    <div class="operater">
+        <button nz-button [nzType]="'primary'" (click)="addDict()">
+            <i nz-icon nzType="plus"></i>
+            <span>添加</span>
+        </button>
+    </div>
+
+    <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
+        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ x:'1550px',y: '420px' }" [nzSize]="'middle'">
+        <thead (nzSortChange)="sort($event)" nzSortPriority>
+            <tr>
+                <th nzLeft="0px" nzWidth="60px">序号</th>
+                <th nzLeft="60px" nzWidth="220px">字典名称</th>
+                <th nzWidth="220px">字典编码</th>
+                <th>备注</th>
+                <th nzWidth="220px">创建时间</th>
+                <th nzRight="0px" nzWidth="200px">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </nz-table>
+    <ng-template #totalTemplate>
+        共{{total}}条
+    </ng-template>
 </nz-card>
+
+<app-dict-edit #dialogDictEdit></app-dict-edit>
