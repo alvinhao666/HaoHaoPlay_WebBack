@@ -11,11 +11,11 @@ import { NzMessageService } from 'ng-zorro-antd';
 
 export class UserEditComponent implements OnInit {
 
-    @Input() visible = false;
+    visible = false;
 
     @Input() title = '';
 
-    @Output() onClose = new EventEmitter();
+    // @Output() onClose = new EventEmitter();
 
     @Output() onSave = new EventEmitter();
 
@@ -106,7 +106,7 @@ export class UserEditComponent implements OnInit {
     }
 
     close() {
-        this.onClose.emit();
+        // this.onClose.emit();
         this.reset();
     }
 
@@ -187,10 +187,9 @@ export class UserEditComponent implements OnInit {
     }
 
     reset() {
-        setTimeout(() => {
-            this.form.reset();
-            this.isEdit = false;
-            this.userId = null;
-        }, 300);
+        this.visible = false;
+        this.form.reset();
+        this.isEdit = false;
+        this.userId = null;
     }
 }

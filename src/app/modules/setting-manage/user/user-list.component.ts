@@ -19,11 +19,11 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
     @ViewChild('silderUserEdit', { static: false }) sliderUserEdit: UserEditComponent;
     @ViewChild('silderUserView', { static: false }) sliderUserView: UserViewComponent;
-    slider_edit_visible = false;
-    slider_edit_title = '';
+    // slider_edit_visible = false;
+    // slider_edit_title = '';
 
-    slider_view_visible = false;
-    slider_view_title = '';
+    // slider_view_visible = false;
+    // slider_view_title = '';
 
     searchForm: FormGroup;
     statuses = [
@@ -183,8 +183,10 @@ export class UserListComponent extends CoreContainer implements OnInit {
     }
 
     addUser() {
-        this.slider_edit_title = '添加用户';
-        this.slider_edit_visible = true;
+        // this.slider_edit_title = '添加用户';
+        // this.slider_edit_visible = true;
+        this.sliderUserEdit.visible = true;
+        this.sliderUserEdit.title = '添加用户';
         this.sliderUserEdit.getRoles();
     }
 
@@ -197,12 +199,12 @@ export class UserListComponent extends CoreContainer implements OnInit {
         return false;
     }
 
-    closeEditSlider() {
-        this.slider_edit_visible = false;
-    }
+    // closeEditSlider() {
+    //     this.slider_edit_visible = false;
+    // }
 
     onSave() {
-        this.slider_edit_visible = false;
+        // this.slider_edit_visible = false;
         this.pageIndex = 1;
         this.getUsers();
     }
@@ -245,13 +247,13 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
     async edit(id: any) {
         await this.sliderUserEdit.showUser(id);
-        this.slider_edit_title = '编辑用户';
-        this.slider_edit_visible = true;
+        this.sliderUserEdit.title = '编辑用户';
+        this.sliderUserEdit.visible = true;
     }
 
     async view(id: any) {
         await this.sliderUserView.showUser(id);
-        this.slider_view_visible = true;
+        this.sliderUserView.visible = true;
     }
 
 
