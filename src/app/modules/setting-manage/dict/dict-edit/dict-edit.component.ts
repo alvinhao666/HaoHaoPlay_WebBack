@@ -47,10 +47,10 @@ export class DictEditComponent extends CoreEdit implements OnInit {
 
   save() {
     if (!this.checkForm(this.form)) return;
-    this.http.post('Dict', {
+    this.http.post('Dict/AddDict', {
       DictCode: this.fDictCode.value,
-      fDictName: this.fDictName.value,
-      fRemark: this.fRemark.value
+      DictName: this.fDictName.value,
+      Remark: this.fRemark.value
     }).subscribe(d => {
       if (!d) return;
       this.onSave.emit();
