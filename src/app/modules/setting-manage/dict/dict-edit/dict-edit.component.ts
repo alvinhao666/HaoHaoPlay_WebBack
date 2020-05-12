@@ -11,6 +11,12 @@ export class DictEditComponent extends CoreEdit implements OnInit {
 
   visible = false;
 
+  title = '';
+
+  isUpdate = false;
+
+  dictId = null;
+
   @Output() onSave = new EventEmitter();
 
   form: FormGroup;
@@ -47,6 +53,15 @@ export class DictEditComponent extends CoreEdit implements OnInit {
 
   save() {
     if (!this.checkForm(this.form)) return;
+
+    if (this.isUpdate) {
+      this.update();
+    } else {
+      this.add();
+    }
+  }
+
+  add() {
     this.http.post('Dict/AddDict', {
       DictCode: this.fDictCode.value,
       DictName: this.fDictName.value,
@@ -58,8 +73,30 @@ export class DictEditComponent extends CoreEdit implements OnInit {
     });
   }
 
+  update() {
+    this.http.put(`Dict/UpdateDict/${this.dictId}`, {
+      DictCode: this.fDictCode.value,
+      DictName: this.fDictName.value,
+      Remark: this.fRemark.value
+    }).subscribe(d => {
+      if (!d) return;
+      this.onSave.emit();
+      this.reset();
+    });
+  }
+
+  showDict(d: any) {
+    this.form.get('fDictName').setValue(d.DictName);
+    this.form.get('fDictCode').setValue(d.DictCode);
+    this.form.get('fRemark').setValue(d.Remark);
+    this.dictId = d.Id;
+    this.isUpdate = true;
+  }
+
   reset() {
     this.visible = false;
+    this.isUpdate = false;
+    this.dictId = null;
     this.form.reset();
   }
 }

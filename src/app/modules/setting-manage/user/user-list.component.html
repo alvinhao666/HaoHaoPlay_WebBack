@@ -88,7 +88,7 @@
                     {{d.EnabledString}}
                 </td>
                 <td>{{d.RoleName}}</td>
-                <td>{{d.LastLoginTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{d.LastLoginTime}}</td>
                 <td>{{d.LastLoginIP}}</td>
                 <td nzRight="0px">
                     <a href="javascript:;" (click)="view(d.Id)" *ngIf="CheckAuth('1_128')">查看</a>

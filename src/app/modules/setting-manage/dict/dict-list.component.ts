@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { CoreContainer, H_Http } from '@core';
 import { DictEditComponent } from './dict-edit/dict-edit.component';
 import { ActivatedRoute } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-dict',
@@ -36,6 +37,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: H_Http,
+    private modal: NzModalService,
     private activedRoute: ActivatedRoute) {
     super();
     this.searchForm = this.fb.group({
@@ -54,6 +56,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
 
 
   addDict() {
+    this.dialogDictEdit.title = '添加字典';
     this.dialogDictEdit.visible = true;
   }
 
@@ -91,5 +94,22 @@ export class DictListComponent extends CoreContainer implements OnInit {
   // 保存字典
   onSaveDict() {
     this.getDicts();
+  }
+
+  editDict(data: any) {
+    this.dialogDictEdit.showDict(data);
+    this.dialogDictEdit.title = '编辑字典';
+    this.dialogDictEdit.visible = true;
+  }
+
+  deleteDict(data: any) {
+    this.modal.confirm({
+      nzTitle: `确认删除 ${data.DictName}?`,
+      nzOnOk: () => this.http.delete(`DeleteDict/${data.Id}`).subscribe(d => {
+        if (!d) return;
+        this.getDicts();
+      })
+    });
+
   }
 }

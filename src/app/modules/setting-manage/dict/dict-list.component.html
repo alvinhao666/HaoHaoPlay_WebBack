@@ -50,6 +50,8 @@
                 <td>{{d.CreateTime}}</td>
                 <td>
                     <a>数据项</a>
+                    <a (click)="editDict(d)" style="margin-left:10px;">编辑</a>
+                    <a (click)="deleteDict(d)" style="margin-left:10px;">删除</a>
                 </td>
             </tr>
         </tbody>
