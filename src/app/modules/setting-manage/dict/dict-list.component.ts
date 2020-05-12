@@ -16,7 +16,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
 
   searchForm: FormGroup;
 
-  tableLoading: false;
+  tableLoading = false;
 
   dataSet: null;
 
@@ -45,7 +45,8 @@ export class DictListComponent extends CoreContainer implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSet = this.activedRoute.snapshot.data.dictList;
+    this.dataSet = this.activedRoute.snapshot.data.dictList.Items;
+
   }
 
 
@@ -55,11 +56,34 @@ export class DictListComponent extends CoreContainer implements OnInit {
 
   // 查询字典列表
   getDicts() {
+    this.tableLoading = true;
+    this.http.get('Dict/GetDictList', {
+      PageIndex: this.pageIndex,
+      PageSize: this.pageSize,
+      DictName: this.sDictName.value,
+      DictCode: this.sDictCode.value
+    }).subscribe(d => {
+      this.tableLoading = false;
+      if (!d) return;
+      this.dataSet = d.Items;
+    }, e => {
+      this.tableLoading = false;
+    });
+  }
 
+
+  pageIndexChange(pageIndex: number) {
+    this.pageIndex = pageIndex;
+    this.getDicts();
+  }
+
+  pageSizeChange(pageSize: number) {
+    this.pageSize = pageSize;
+    this.getDicts();
   }
 
   // 保存字典
   onSaveDict() {
-
+    this.getDicts();
   }
 }
