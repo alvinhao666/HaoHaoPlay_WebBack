@@ -45,8 +45,11 @@ export class DictListComponent extends CoreContainer implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSet = this.activedRoute.snapshot.data.dictList.Items;
-
+    const d = this.activedRoute.snapshot.data.dictList;
+    this.dataSet = d.Items;
+    this.pageIndex = d.PageIndex;
+    this.pageSize = d.PageSize;
+    this.total = d.TotalCount;
   }
 
 
@@ -66,6 +69,9 @@ export class DictListComponent extends CoreContainer implements OnInit {
       this.tableLoading = false;
       if (!d) return;
       this.dataSet = d.Items;
+      this.pageIndex = d.PageIndex;
+      this.pageSize = d.PageSize;
+      this.total = d.TotalCount;
     }, e => {
       this.tableLoading = false;
     });
