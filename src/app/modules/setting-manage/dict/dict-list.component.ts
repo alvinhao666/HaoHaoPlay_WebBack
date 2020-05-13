@@ -4,6 +4,7 @@ import { CoreContainer, H_Http } from '@core';
 import { DictEditComponent } from './dict-edit/dict-edit.component';
 import { ActivatedRoute } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd';
+import { DictItemListComponent } from './dict-item-list/dict-item-list.component';
 
 @Component({
   selector: 'app-dict',
@@ -14,6 +15,8 @@ export class DictListComponent extends CoreContainer implements OnInit {
 
 
   @ViewChild('dialogDictEdit', { static: false }) dialogDictEdit: DictEditComponent;
+
+  @ViewChild('dialogDictItemList', { static: false }) dialogDictItemList: DictItemListComponent;
 
   searchForm: FormGroup;
 
@@ -105,11 +108,15 @@ export class DictListComponent extends CoreContainer implements OnInit {
   deleteDict(data: any) {
     this.modal.confirm({
       nzTitle: `确认删除 ${data.DictName}?`,
-      nzOnOk: () => this.http.delete(`DeleteDict/${data.Id}`).subscribe(d => {
+      nzOnOk: () => this.http.delete(`Dict/DeleteDict/${data.Id}`).subscribe(d => {
         if (!d) return;
         this.getDicts();
       })
     });
+  }
 
+  showDictItem(data: any) {
+    this.dialogDictItemList.visible = true;
+    this.dialogDictItemList.title = data.DictName;
   }
 }

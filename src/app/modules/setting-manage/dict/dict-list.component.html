@@ -49,7 +49,7 @@
                 <td>{{d.Remark}}</td>
                 <td>{{d.CreateTime}}</td>
                 <td>
-                    <a>数据项</a>
+                    <a (click)="showDictItem(d)">数据项</a>
                     <a (click)="editDict(d)" style="margin-left:10px;">编辑</a>
                     <a (click)="deleteDict(d)" style="margin-left:10px;">删除</a>
                 </td>
@@ -62,3 +62,5 @@
 </nz-card>
 
 <app-dict-edit #dialogDictEdit (onSave)="onSaveDict()"></app-dict-edit>
+
+<app-dict-item-list #dialogDictItemList></app-dict-item-list>

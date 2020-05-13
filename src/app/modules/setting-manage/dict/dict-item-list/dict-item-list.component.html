@@ -1,0 +1,18 @@
+<nz-modal [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="900" [(nzVisible)]="visible" [nzTitle]="title" [nzFooter]="null" (nzOnCancel)="close()">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm">
+        <div nz-row>
+            <nz-form-item>
+                <nz-form-label>数据项名称</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="sItemName" autocomplete="off">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getDicts()">查询</button>
+            </nz-form-item>
+            <nz-form-item>
+                <button nz-button type="reset">重置</button>
+            </nz-form-item>
+        </div>
+    </form>
+</nz-modal>

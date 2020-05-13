@@ -12,6 +12,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { DictEditComponent } from './dict-edit/dict-edit.component';
+import { DictItemListComponent } from './dict-item-list/dict-item-list.component';
 
 const NzModule = [
   NzCardModule,
@@ -25,7 +26,7 @@ const NzModule = [
 
 
 @NgModule({
-  declarations: [DictListComponent, DictEditComponent],
+  declarations: [DictListComponent, DictEditComponent, DictItemListComponent, DictItemListComponent],
   imports: [
     CommonModule,
     DictRoutingModule,
