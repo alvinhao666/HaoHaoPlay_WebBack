@@ -71,7 +71,8 @@ export class DictItemEditComponent extends CoreEdit implements OnInit {
       ItemValue: this.fItemValue.value,
       ItemName: this.fItemName.value,
       Remark: this.fRemark.value,
-      ParentId: this.dictId
+      ParentId: this.dictId,
+      Sort: this.fSort.value
     }).subscribe(d => {
       if (!d) return;
       this.onSave.emit();
@@ -84,7 +85,7 @@ export class DictItemEditComponent extends CoreEdit implements OnInit {
       ItemValue: parseInt(this.fItemValue.value, 10),
       ItemName: this.fItemName.value,
       Remark: this.fRemark.value,
-      Sort: parseInt(this.fSort.value, 10)
+      Sort: this.fSort.value
     }).subscribe(d => {
       if (!d) return;
       this.onSave.emit();
