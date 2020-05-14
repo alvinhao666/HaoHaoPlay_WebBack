@@ -8,11 +8,50 @@
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-                <button nz-button type="submit" [nzType]="'primary'">查询</button>
+                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getDictItem(dictId)">查询</button>
             </nz-form-item>
             <nz-form-item>
                 <button nz-button type="reset">重置</button>
             </nz-form-item>
         </div>
     </form>
+    <div class="operating-wrapper">
+        <button nz-button [nzType]="'primary'" (click)="addDictItem()">
+            <i nz-icon nzType="plus"></i>
+            <span>添加</span>
+        </button>
+    </div>
+
+    <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
+        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzSize]="'small'">
+        <thead>
+            <tr>
+                <th nzLeft="0px" nzWidth="60px">序号</th>
+                <th nzLeft="60px" nzWidth="150px">名称</th>
+                <th nzWidth="100px">值</th>
+                <th>备注</th>
+                <th nzWidth="100px">排序</th>
+                <th nzWidth="150px">创建时间</th>
+                <th nzRight="0px" nzWidth="100px">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let d of nzTable.data;let idx=index;">
+                <td>{{idx+1}}</td>
+                <td>{{d.ItemName}}</td>
+                <td>{{d.ItemValue}}</td>
+                <td>{{d.Remark}}</td>
+                <td>{{d.Sort}}</td>
+                <td>{{d.CreateTime}}</td>
+                <td>
+                    <a (click)="editItem(d)">编辑</a>
+                    <a nz-popconfirm (nzOnConfirm)="deleteItem(d)" nzPopconfirmTitle="确定删除?" class="ml10">删除</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+    <ng-template #totalTemplate>
+        共{{total}}条
+    </ng-template>
 </nz-modal>
+<app-dict-item-edit #dialogDictItemEdit (onSave)="getDictItem(dictId)"></app-dict-item-edit>

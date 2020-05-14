@@ -3,6 +3,13 @@ import { Core } from './core';
 
 export class CoreEdit extends Core {
 
+    /**
+      *\d为数字、\D为非数字、/g为全局匹配、在之前加/只是语法原因
+      *将非数字部分替换为""
+      **/
+    formatterInt = value => value && `${value}`;
+    parserInt = value => value.trim().replace(/\D/g, '');
+
     constructor() {
         super();
     }

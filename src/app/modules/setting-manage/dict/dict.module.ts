@@ -10,9 +10,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { DictEditComponent } from './dict-edit/dict-edit.component';
 import { DictItemListComponent } from './dict-item-list/dict-item-list.component';
+import { DictItemEditComponent } from './dict-item-edit/dict-item-edit.component';
 
 const NzModule = [
   NzCardModule,
@@ -21,12 +23,14 @@ const NzModule = [
   NzButtonModule,
   NzTableModule,
   NzIconModule,
-  NzModalModule
+  NzModalModule,
+  NzInputNumberModule,
+  NzPopconfirmModule
 ];
 
 
 @NgModule({
-  declarations: [DictListComponent, DictEditComponent, DictItemListComponent, DictItemListComponent],
+  declarations: [DictListComponent, DictEditComponent, DictItemListComponent, DictItemListComponent, DictItemEditComponent],
   imports: [
     CommonModule,
     DictRoutingModule,

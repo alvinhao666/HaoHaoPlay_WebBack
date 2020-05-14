@@ -22,7 +22,7 @@
         </div>
     </form>
 
-    <div class="operater">
+    <div class="operating-wrapper">
         <button nz-button [nzType]="'primary'" (click)="addDict()">
             <i nz-icon nzType="plus"></i>
             <span>添加</span>
@@ -50,8 +50,8 @@
                 <td>{{d.CreateTime}}</td>
                 <td>
                     <a (click)="showDictItem(d)">数据项</a>
-                    <a (click)="editDict(d)" style="margin-left:10px;">编辑</a>
-                    <a (click)="deleteDict(d)" style="margin-left:10px;">删除</a>
+                    <a (click)="editDict(d)" class="ml10">编辑</a>
+                    <a (click)="deleteDict(d)" class="ml10">删除</a>
                 </td>
             </tr>
         </tbody>

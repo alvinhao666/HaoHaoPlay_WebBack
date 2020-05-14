@@ -1,6 +1,6 @@
 import { OnInit, Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { H_Http, ComparePwdValidators } from '@core';
+import { H_Http, ComparePwdValidators, CoreEdit } from '@core';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
@@ -9,7 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd';
     styleUrls: ['./user-edit.component.less']
 })
 
-export class UserEditComponent implements OnInit {
+export class UserEditComponent extends CoreEdit implements OnInit {
 
     visible = false;
 
@@ -26,11 +26,6 @@ export class UserEditComponent implements OnInit {
     form: FormGroup;
 
     roles = null;
-
-    formatterAge = value => value && `${value}`;
-    parserAge = value => value && value.replace('.', '');
-
-
 
     get fLoginName() {
         return this.form.controls.fLoginName;
@@ -79,6 +74,7 @@ export class UserEditComponent implements OnInit {
         private fb: FormBuilder,
         private http: H_Http,
         public msg: NzMessageService) {
+        super();
         this.form = this.fb.group({
             fLoginName: [null, Validators.required],
             fName: [null, Validators.required],
