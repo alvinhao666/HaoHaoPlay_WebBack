@@ -31,7 +31,7 @@
 
     <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
         [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzSize]="'middle'">
-        <thead (nzSortChange)="sort($event)" nzSortPriority>
+        <thead>
             <tr>
                 <th nzLeft="0px" nzWidth="60px">序号</th>
                 <th nzLeft="60px" nzWidth="220px">字典名称</th>
