@@ -60,6 +60,7 @@ export class DictItemListComponent implements OnInit {
 
   async getDictItem(id: string) {
     this.dictId = id;
+    this.tableLoading = true;
     await this.http.get('Dict/GetDictItemList', {
       PageIndex: this.pageIndex,
       PageSize: this.pageSize,
