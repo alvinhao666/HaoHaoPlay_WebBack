@@ -23,7 +23,7 @@
     </form>
 
     <div class="operating-wrapper">
-        <button nz-button [nzType]="'primary'" (click)="addDict()">
+        <button nz-button [nzType]="'primary'" (click)="addDict()" *ngIf="CheckAuth('1_1048576')">
             <i nz-icon nzType="plus"></i>
             <span>添加</span>
         </button>
@@ -50,8 +50,8 @@
                 <td>{{d.CreateTime}}</td>
                 <td>
                     <a (click)="showDictItem(d)">数据项</a>
-                    <a (click)="editDict(d)" class="ml10">编辑</a>
-                    <a (click)="deleteDict(d)" class="ml10">删除</a>
+                    <a (click)="editDict(d)" class="ml10" *ngIf="CheckAuth('1_2097152')">编辑</a>
+                    <a (click)="deleteDict(d)" class="ml10" *ngIf="CheckAuth('1_4194304')">删除</a>
                 </td>
             </tr>
         </tbody>
