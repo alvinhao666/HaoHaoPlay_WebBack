@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DictItemEditComponent } from '../dict-item-edit/dict-item-edit.component';
-import { H_Http } from '@core';
+import { H_Http, CoreContainer } from '@core';
 
 @Component({
   selector: 'app-dict-item-list',
   templateUrl: './dict-item-list.component.html',
   styleUrls: ['./dict-item-list.component.less']
 })
-export class DictItemListComponent implements OnInit {
+export class DictItemListComponent extends CoreContainer implements OnInit {
 
 
   @ViewChild('dialogDictItemEdit', { static: false }) dialogDictItemEdit: DictItemEditComponent;
@@ -37,7 +37,7 @@ export class DictItemListComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: H_Http) {
-
+    super();
     this.searchForm = this.fb.group({
       sItemName: [null]
     });
