@@ -23,7 +23,7 @@
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-                <nz-form-label>时间</nz-form-label>
+                <nz-form-label>最后登录时间</nz-form-label>
                 <nz-form-control>
                     <nz-range-picker nzFormat="yyyy-MM-dd" formControlName="sLastLoginTime">
                     </nz-range-picker>
@@ -32,7 +32,7 @@
         </div>
 
 
-        <div class="operating-wrapper">
+        <div class="operate-wrapper">
             <div class="fl">
                 <button nz-button [nzType]="'primary'" (click)="addUser()" *ngIf="CheckAuth('1_32')">
                     <i nz-icon nzType="plus"></i>
@@ -51,8 +51,11 @@
             </div>
 
             <div class="fr">
-                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getUsers()" *ngIf="CheckAuth('1_64')">查询</button>
-                <button nz-button type="reset" class="btn-reset">重置</button>
+                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getUsers()" *ngIf="CheckAuth('1_64')">
+                    <i nz-icon nzType="search"></i>
+                    <span>查询</span>
+                </button>
+                <button nz-button type="reset">重置</button>
             </div>
         </div>
     </form>
@@ -84,7 +87,7 @@
                 <td>{{d.Phone}}</td>
                 <td>{{d.Email}}</td>
                 <td>{{d.WeChat}}</td>
-                <td [class.success]="d.Enabled" [class.error]="!d.Enabled">
+                <td [class.enable]="d.Enabled" [class.disable]="!d.Enabled">
                     {{d.EnabledString}}
                 </td>
                 <td>{{d.RoleName}}</td>

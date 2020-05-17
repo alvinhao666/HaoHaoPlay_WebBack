@@ -61,6 +61,7 @@
     <div class="content3" *ngIf="type===2">
         <nz-card nzType="inner" nzTitle="资源" [nzSize]="'small'">
 
+            <button nz-button nzType="primary" [nzSize]="'small'" (click)="addResource()" *ngIf="CheckAuth('1_32768')" style="margin-bottom: 10px;">添加</button>
             <nz-table #nzTable [nzSize]="'small'" [nzData]="resourceData" [nzHideOnSinglePage]="true" [nzScroll]="{ y: '400px' }">
                 <thead>
                     <tr>
@@ -107,7 +108,7 @@
                     </tr>
                 </tbody>
             </nz-table>
-            <button nz-button nzType="primary" [nzSize]="'small'" (click)="addResource()" *ngIf="CheckAuth('1_32768')">添加</button>
+
         </nz-card>
     </div>
 </nz-card>

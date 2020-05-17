@@ -14,7 +14,10 @@
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getDicts()">查询</button>
+                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getDicts()">
+                    <i nz-icon nzType="search"></i>
+                    <span>查询</span>
+                </button>
             </nz-form-item>
             <nz-form-item>
                 <button nz-button type="reset">重置</button>
@@ -22,7 +25,7 @@
         </div>
     </form>
 
-    <div class="operating-wrapper">
+    <div class="operate-wrapper">
         <button nz-button [nzType]="'primary'" (click)="addDict()" *ngIf="CheckAuth('1_1048576')">
             <i nz-icon nzType="plus"></i>
             <span>添加</span>
