@@ -66,10 +66,10 @@
                 <thead>
                     <tr>
                         <th nzWidth="60px" nzLeft="0px">序号</th>
-                        <th nzWidth="150px" nzLeft="60px">名称</th>
+                        <th nzWidth="120px" nzLeft="60px">名称</th>
                         <th>编码</th>
                         <th nzWidth="150px">排序值</th>
-                        <th nzWidth="100px">操作</th>
+                        <th nzWidth="90px">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,7 +92,7 @@
                                 <nz-input-number [(ngModel)]="editCache[d.Id].data.Sort"></nz-input-number>
                             </ng-template>
                         </td>
-                        <td>
+                        <td nzRight="0px">
                             <ng-container *ngIf="!editCache[d.Id].edit; else saveTpl">
                                 <a (click)="startEdit(d.Id)" *ngIf="CheckAuth('1_65536')" class="a-operate">编辑</a>
                                 <a nz-popconfirm (nzOnConfirm)="deleteResource(d.Id)" nzPopconfirmTitle="确定删除?" *ngIf="CheckAuth('1_131072')" class="ml10 a-operate">删除</a>
