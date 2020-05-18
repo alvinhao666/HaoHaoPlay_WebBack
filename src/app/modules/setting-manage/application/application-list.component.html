@@ -94,12 +94,12 @@
                         </td>
                         <td>
                             <ng-container *ngIf="!editCache[d.Id].edit; else saveTpl">
-                                <a (click)="startEdit(d.Id)" *ngIf="CheckAuth('1_65536')">编辑</a>
-                                <a nz-popconfirm (nzOnConfirm)="deleteResource(d.Id)" style="margin-left:10px;" nzPopconfirmTitle="确定删除?" *ngIf="CheckAuth('1_131072')">删除</a>
+                                <a (click)="startEdit(d.Id)" *ngIf="CheckAuth('1_65536')" class="a-operate">编辑</a>
+                                <a nz-popconfirm (nzOnConfirm)="deleteResource(d.Id)" nzPopconfirmTitle="确定删除?" *ngIf="CheckAuth('1_131072')" class="ml10 a-operate">删除</a>
                             </ng-container>
                             <ng-template #saveTpl>
-                                <a (click)="saveEdit(d.Id)">保存</a>
-                                <a (click)="cancelEdit(d.Id)" style="margin-left:10px;">取消</a>
+                                <a (click)="saveEdit(d.Id)" class="a-operate">保存</a>
+                                <a (click)="cancelEdit(d.Id)" class="ml10 a-operate">取消</a>
                             </ng-template>
                             <!-- <a href="javascript:;" (click)="edit(d.Id)"></a> -->
                             <!-- <nz-divider nzType="vertical"></nz-divider> -->

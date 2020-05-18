@@ -52,9 +52,9 @@
                 <td>{{d.Remark}}</td>
                 <td>{{d.CreateTime}}</td>
                 <td>
-                    <a (click)="showDictItem(d)">数据项</a>
-                    <a (click)="editDict(d)" class="ml10" *ngIf="CheckAuth('1_2097152')">编辑</a>
-                    <a (click)="deleteDict(d)" class="ml10" *ngIf="CheckAuth('1_4194304')">删除</a>
+                    <a (click)="showDictItem(d)" class="a-operate">数据项</a>
+                    <a (click)="editDict(d)" *ngIf="CheckAuth('1_2097152')" class="ml10 a-operate">编辑</a>
+                    <a (click)="deleteDict(d)" *ngIf="CheckAuth('1_4194304')" class="ml10 a-operate">删除</a>
                 </td>
             </tr>
         </tbody>
