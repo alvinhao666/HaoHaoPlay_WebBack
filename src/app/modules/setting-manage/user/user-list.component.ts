@@ -64,7 +64,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
     uploading = false;
     fileList: UploadFile[] = [];
 
-
+    scrollValue = { x: '0px', y: '0px' };
 
     tableLoading = false;
     constructor(
@@ -86,6 +86,9 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
 
     ngOnInit() {
+        this.scrollValue.y = '420px';
+        this.scrollValue.x = (window.innerWidth - 296 - 50) + 'px';
+
         const d = this.router.snapshot.data.userList;
         this.dataSet = d.Items;
         this.total = d.TotalCount;

@@ -50,6 +50,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
   }
 
   ngOnInit(): void {
+
     const d = this.activedRoute.snapshot.data.dictList;
     this.dataSet = d.Items;
     this.pageIndex = d.PageIndex;

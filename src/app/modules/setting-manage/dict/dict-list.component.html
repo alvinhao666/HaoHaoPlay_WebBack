@@ -33,14 +33,14 @@
     </div>
 
     <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
-        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ x:'1230px',y: '420px' }" [nzSize]="'small'">
+        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzSize]="'small'">
         <thead>
             <tr>
                 <th nzLeft="0px" nzWidth="60px">序号</th>
-                <th nzLeft="60px" nzWidth="150px">字典名称</th>
-                <th nzLeft="210px" nzWidth="150px">字典编码</th>
+                <th nzLeft="60px" nzWidth="180px">字典名称</th>
+                <th nzLeft="240px" nzWidth="180px">字典编码</th>
                 <th>备注</th>
-                <th nzWidth="200px">创建时间</th>
+                <th nzWidth="220px">创建时间</th>
                 <th nzRight="0px" nzWidth="140px">操作</th>
             </tr>
         </thead>
@@ -48,8 +48,8 @@
             <tr *ngFor="let d of nzTable.data;let idx=index;">
                 <td nzLeft="0px">{{idx+1}}</td>
                 <td nzLeft="60px">{{d.DictName}}</td>
-                <td nzLeft="210px">{{d.DictCode}}</td>
-                <td>{{d.Remark}}</td>
+                <td nzLeft="240px">{{d.DictCode}}</td>
+                <td title="{{d.Remark}}">{{d.Remark}}</td>
                 <td>{{d.CreateTime}}</td>
                 <td nzRight="0px">
                     <a (click)="showDictItem(d)" class="a-operate">数据项</a>

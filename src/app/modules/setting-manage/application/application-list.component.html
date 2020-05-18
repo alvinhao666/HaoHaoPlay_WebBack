@@ -62,14 +62,14 @@
         <nz-card nzType="inner" nzTitle="资源" [nzSize]="'small'">
 
             <button nz-button nzType="primary" [nzSize]="'small'" (click)="addResource()" *ngIf="CheckAuth('1_32768')" style="margin-bottom: 10px;">添加</button>
-            <nz-table #nzTable [nzSize]="'small'" [nzData]="resourceData" [nzHideOnSinglePage]="true" [nzScroll]="{  x:'460px', y: '400px' }">
+            <nz-table #nzTable [nzSize]="'small'" [nzData]="resourceData" [nzHideOnSinglePage]="true">
                 <thead>
                     <tr>
                         <th nzWidth="60px" nzLeft="0px">序号</th>
                         <th nzWidth="120px" nzLeft="60px">名称</th>
                         <th>编码</th>
                         <th nzWidth="150px">排序值</th>
-                        <th nzWidth="90px">操作</th>
+                        <th nzWidth="90px" nzRight="0px">操作</th>
                     </tr>
                 </thead>
                 <tbody>

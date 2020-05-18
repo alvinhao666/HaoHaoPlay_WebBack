@@ -61,20 +61,20 @@
     </form>
 
     <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
-        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ x:'1540px',y: '420px' }" [nzSize]="'small'">
+        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="scrollValue" [nzSize]="'small'">
         <thead (nzSortChange)="sort($event)" nzSortPriority>
             <tr>
                 <th nzLeft="0px" nzWidth="60px">序号</th>
                 <th nzLeft="60px" nzWidth="100px">姓名</th>
                 <th nzWidth="100px" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别</th>
                 <th nzWidth="100px" nzShowSort nzColumnKey="0">年龄</th>
-                <th nzWidth="120px">手机号</th>
+                <th nzWidth="130px">手机号</th>
                 <th>邮箱</th>
                 <th nzWidth="150px">微信</th>
                 <th nzWidth="80px">状态</th>
                 <th nzWidth="120px">角色</th>
-                <th nzWidth="150px">最后登录时间</th>
-                <th nzWidth="120px">最后登录IP</th>
+                <th nzWidth="180px">最后登录时间</th>
+                <th nzWidth="140px">最后登录IP</th>
                 <th nzRight="0px" nzWidth="160px">操作</th>
             </tr>
         </thead>
