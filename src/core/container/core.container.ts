@@ -2,6 +2,13 @@ import { Core } from './core';
 
 export class CoreContainer extends Core {
 
+    //当前页码
+    pageIndex = 1;
+    //每页条数
+    pageSize = 10;
+    //总数
+    totalCount = 1;
+
     constructor() {
         super();
     }
@@ -17,5 +24,14 @@ export class CoreContainer extends Core {
         const num = Number(auths[1]);
         const authNum = Number(Core.authNums[index]);
         return (num & authNum) === num;
+    }
+
+    pageIndexChange(pageIndex: number) {
+        this.pageIndex = pageIndex;
+ 
+    }
+
+    pageSizeChange(pageSize: number) {
+        this.pageSize = pageSize;
     }
 }
