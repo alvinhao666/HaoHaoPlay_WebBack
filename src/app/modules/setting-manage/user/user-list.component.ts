@@ -177,7 +177,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
     exportTemplate() {
         const a = document.createElement('a'); //创建一个<a></a>标签
-        a.href = `${environment.api_url}template/user.xlsx?Authorization=${this.getToken()}`;
+        a.href = `${environment.api_url}file_template/user.xlsx?Authorization=${this.getToken()}`;
         a.download = '用户模板.xlsx';  //文件名称   //跨域的时候 名字不会改
         a.style.display = 'none';
         document.body.appendChild(a);
