@@ -12,7 +12,7 @@ export class DictListResolve implements Resolve<any> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        return this.http.get(`Dict/GetDictList`, {
+        return this.http.get(`Dict/GetDictPagedList`, {
             PageIndex: 1,
             PageSize: 10,
         }).toPromise().then(d => {

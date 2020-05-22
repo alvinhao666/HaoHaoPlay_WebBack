@@ -95,7 +95,7 @@ export class UserEditComponent extends CoreEdit implements OnInit {
     }
 
     getRoles() {
-        this.http.get(`User/GetRole`).subscribe(d => {
+        this.http.get(`User/GetRoleList`).subscribe(d => {
             if (!d) return;
             this.roles = d;
         });
@@ -117,7 +117,7 @@ export class UserEditComponent extends CoreEdit implements OnInit {
 
     addUser() {
         this.http
-            .post('User', {
+            .post('User/Add', {
                 LoginName: this.fLoginName.value,
                 Password: this.fPassword.value,
                 Name: this.fName.value,
@@ -139,7 +139,7 @@ export class UserEditComponent extends CoreEdit implements OnInit {
 
     editUser(id: any) {
         this.http
-            .put(`User/${id}`, {
+            .put(`User/Update/${id}`, {
                 Name: this.fName.value,
                 Gender: parseInt(this.fGender.value, 10),
                 Age: this.fAge.value,
@@ -158,7 +158,7 @@ export class UserEditComponent extends CoreEdit implements OnInit {
 
     async showUser(id: any) {
         this.isEdit = true;
-        await this.http.get(`User/${id}`).toPromise().then(d => {
+        await this.http.get(`User/Get/${id}`).toPromise().then(d => {
             if (!d) return;
             this.form.get('fName').setValue(d.Name);
             this.form.get('fGender').setValue(d.Gender.toString());

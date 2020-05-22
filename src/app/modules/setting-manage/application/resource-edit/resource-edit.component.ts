@@ -34,7 +34,7 @@ export class ResourceEditComponent extends CoreEdit implements OnInit {
 
   handleOk() {
     if (!this.checkForm(this.form)) return;
-    this.http.post(`Resource`, {
+    this.http.post(`Resource/Add`, {
       Name: this.fName.value,
       ParentId: this.Id
     }).subscribe(d => {

@@ -57,7 +57,7 @@ export class ApplicationEditComponent   {
 
   handleOk() {
     if (!this.checkForm(this.form)) return;
-    this.http.post(`Module`, {
+    this.http.post(`Module/Add`, {
       Name: this.fName.value,
       Icon: this.fIcon.value,
       RouterUrl: this.fRouterUrl.value,

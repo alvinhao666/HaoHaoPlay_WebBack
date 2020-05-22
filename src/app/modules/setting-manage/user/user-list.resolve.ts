@@ -12,7 +12,7 @@ export class UserListResolve implements Resolve<any> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        return this.http.get(`User`, {
+        return this.http.get(`User/GetPagedList`, {
             PageIndex: 1,
             PageSize: 10,
         }).toPromise().then(d => {

@@ -67,7 +67,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
   // 查询字典列表
   getDicts() {
     this.tableLoading = true;
-    this.http.get('Dict/GetDictList', {
+    this.http.get('Dict/GetDictPagedList', {
       PageIndex: this.pageIndex,
       PageSize: this.pageSize,
       DictName: this.sDictName.value,

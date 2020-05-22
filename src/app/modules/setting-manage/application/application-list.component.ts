@@ -79,7 +79,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
     }
 
     getNodes() {
-        this.http.get(`Module`).subscribe(d => {
+        this.http.get(`Module/GetList`).subscribe(d => {
             if (!d) return;
             this.nodes = d;
         });
@@ -90,7 +90,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
             this.type = 0;
             return;
         }
-        this.http.get(`Module/${node.key}`).subscribe(d => {
+        this.http.get(`Module/Get/${node.key}`).subscribe(d => {
             if (!d) return;
             this.type = d.Type;
             this.iconName = d.Icon;
@@ -123,7 +123,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
         this.modalSrv.confirm({
             nzTitle: '确认更新?',
             nzOnOk: () => {
-                this.http.put(`Module/${this.activedNode.key}`, {
+                this.http.put(`Module/Update/${this.activedNode.key}`, {
                     Name: this.fName.value,
                     Icon: this.fIcon.value,
                     RouterUrl: this.fRouterUrl.value,
@@ -142,7 +142,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
         this.modalSrv.confirm({
             nzTitle: '确认删除?',
             nzOnOk: () => {
-                this.http.delete(`Module/${this.activedNode.key}`).subscribe(d => {
+                this.http.delete(`Module/Delete/${this.activedNode.key}`).subscribe(d => {
                     if (!d) return;
                     this.getNodes();
                     this.activedNode = { key: '0' };
@@ -194,7 +194,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
     }
 
     deleteResource(id: any) {
-        this.http.delete(`Resource/${id}`).subscribe(d => {
+        this.http.delete(`Resource/Delete/${id}`).subscribe(d => {
             if (!d) return;
             this.getResources();
         });
@@ -205,7 +205,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
     }
 
     saveEdit(id: string): void {
-        this.http.put(`Resource/${this.editCache[id].data.Id}`, {
+        this.http.put(`Resource/Update/${this.editCache[id].data.Id}`, {
             Name: this.editCache[id].data.Name,
             Sort: parseInt(this.editCache[id].data.Sort, 10)
         }).subscribe(d => {

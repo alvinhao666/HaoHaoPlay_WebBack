@@ -69,7 +69,7 @@ export class MainComponent extends CoreContainer {
 
   // 退出登录
   logout() {
-    this.http.post('Logout').subscribe(d => {
+    this.http.post('CurrentUser/Logout').subscribe(d => {
       if (!d) return;
       localStorage.removeItem(environment.token_key);
       location.href = location.href.split('/')[0];

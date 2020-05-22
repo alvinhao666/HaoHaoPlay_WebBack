@@ -12,7 +12,7 @@ export class RoleListResolve implements Resolve<any> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        return this.http.get(`Role`).toPromise().then(d => {
+        return this.http.get(`Role/GetRoleList`).toPromise().then(d => {
             return d;
         });
     }

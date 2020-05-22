@@ -128,7 +128,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
     getUsers() {
         this.tableLoading = true;
         this.http
-            .get('User', {
+            .get('User/GetPagedList', {
                 Name: this.sName.value || '',
                 Phone: this.sPhone.value || '',
                 Gender: this.sGender,
@@ -217,7 +217,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
         this.modalSrv.confirm({
             nzTitle: `确认删除 ${data.Name}?`,
             nzOnOk: () => this.http
-                .delete(`User/${data.Id}`)
+                .delete(`User/Delete/${data.Id}`)
                 .subscribe(() => {
                     this.getUsers();
                 })
