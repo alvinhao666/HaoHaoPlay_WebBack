@@ -113,7 +113,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   }
 
   getUser() {
-    this.http.get(`CurrentUser`).subscribe(d => {
+    this.http.get(`CurrentUser/GetUser`).subscribe(d => {
       if (!d) return;
       this.setCurrentUser(d);
       if (d.HeadImgUrl) {
