@@ -36,11 +36,14 @@ export class UserListComponent extends CoreContainer implements OnInit {
     ];
     sGender = '';
 
-    dataSet: any[] = [];
+    // dataSet: any[] = [];
 
-    pageIndex = 1;
-    pageSize = 10;
-    total = 1;
+    // //当前页码
+    // pageIndex = 1;
+    // //每页条数
+    // pageSize = 10;
+    // //总数
+    // totalCount = 1;
 
     sortValue = '';
     sortKey = '';
@@ -64,9 +67,9 @@ export class UserListComponent extends CoreContainer implements OnInit {
     uploading = false;
     fileList: UploadFile[] = [];
 
-    scrollValue = { x: '0px', y: '0px' };
+    
 
-    tableLoading = false;
+    // tableLoading = false;
     constructor(
         private fb: FormBuilder,
         private http: H_Http,
@@ -75,6 +78,9 @@ export class UserListComponent extends CoreContainer implements OnInit {
         private router: ActivatedRoute) {
 
         super();
+
+        this.searchPagedListFn = this.getUsers;
+
         this.searchForm = this.fb.group({
             sName: [null],
             sPhone: [null],
@@ -91,19 +97,19 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
         const d = this.router.snapshot.data.userList;
         this.dataSet = d.Items;
-        this.total = d.TotalCount;
+        this.totalCount = d.TotalCount;
     }
 
 
-    pageIndexChange(pageIndex: number) {
-        this.pageIndex = pageIndex;
-        this.getUsers();
-    }
+    // pageIndexChange(pageIndex: number) {
+    //     this.pageIndex = pageIndex;
+    //     this.getUsers();
+    // }
 
-    pageSizeChange(pageSize: number) {
-        this.pageSize = pageSize;
-        this.getUsers();
-    }
+    // pageSizeChange(pageSize: number) {
+    //     this.pageSize = pageSize;
+    //     this.getUsers();
+    // }
 
     sort(sort: { key: string, value: string }): void {
         this.sortKey = sort.key;
@@ -146,7 +152,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
                 this.dataSet = d.Items;
                 this.pageIndex = d.PageIndex;
                 this.pageSize = d.PageSize;
-                this.total = d.TotalCount;
+                this.totalCount = d.TotalCount;
             }, e => {
                 this.tableLoading = false;
             }

@@ -20,13 +20,13 @@ export class DictListComponent extends CoreContainer implements OnInit {
 
   searchForm: FormGroup;
 
-  tableLoading = false;
+  // tableLoading = false;
 
-  dataSet: null;
+  // dataSet: null;
 
-  pageIndex = 1;
-  pageSize = 10;
-  total = 1;
+  // pageIndex = 1;
+  // pageSize = 10;
+  // totalCount = 1;
 
   get sDictName() {
     return this.searchForm.controls.sDictName;
@@ -43,6 +43,9 @@ export class DictListComponent extends CoreContainer implements OnInit {
     private modal: NzModalService,
     private activedRoute: ActivatedRoute) {
     super();
+    
+    this.searchPagedListFn = this.getDicts;
+
     this.searchForm = this.fb.group({
       sDictName: [null],
       sDictCode: [null]
@@ -55,7 +58,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
     this.dataSet = d.Items;
     this.pageIndex = d.PageIndex;
     this.pageSize = d.PageSize;
-    this.total = d.TotalCount;
+    this.totalCount = d.TotalCount;
   }
 
 
@@ -78,22 +81,22 @@ export class DictListComponent extends CoreContainer implements OnInit {
       this.dataSet = d.Items;
       this.pageIndex = d.PageIndex;
       this.pageSize = d.PageSize;
-      this.total = d.TotalCount;
+      this.totalCount = d.TotalCount;
     }, e => {
       this.tableLoading = false;
     });
   }
 
 
-  pageIndexChange(pageIndex: number) {
-    this.pageIndex = pageIndex;
-    this.getDicts();
-  }
+  // pageIndexChange(pageIndex: number) {
+  //   this.pageIndex = pageIndex;
+  //   this.getDicts();
+  // }
 
-  pageSizeChange(pageSize: number) {
-    this.pageSize = pageSize;
-    this.getDicts();
-  }
+  // pageSizeChange(pageSize: number) {
+  //   this.pageSize = pageSize;
+  //   this.getDicts();
+  // }
 
   // 保存字典
   onSaveDict() {

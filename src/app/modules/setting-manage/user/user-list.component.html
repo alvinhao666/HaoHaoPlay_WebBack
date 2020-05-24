@@ -34,7 +34,7 @@
 
         <div class="operate-wrapper">
             <div class="fl">
-                <button nz-button [nzType]="'primary'" (click)="addUser()" *ngIf="CheckAuth('1_32')">
+                <button nz-button [nzType]="'primary'" (click)="addUser()" *ngIf="checkAuth('1_32')">
                     <i nz-icon nzType="plus"></i>
                     <span>添加</span>
                 </button>
@@ -44,14 +44,14 @@
                 </button>
                 <nz-dropdown-menu #moreOperate>
                     <ul nz-menu>
-                        <li nz-menu-item (click)="export()" *ngIf="CheckAuth('1_2048')">导出</li>
-                        <li nz-menu-item (click)="exportTemplate()" *ngIf="CheckAuth('1_1024')">导出模板</li>
+                        <li nz-menu-item (click)="export()" *ngIf="checkAuth('1_2048')">导出</li>
+                        <li nz-menu-item (click)="exportTemplate()" *ngIf="checkAuth('1_1024')">导出模板</li>
                     </ul>
                 </nz-dropdown-menu>
             </div>
 
             <div class="fr">
-                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getUsers()" *ngIf="CheckAuth('1_64')">
+                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getUsers()" *ngIf="checkAuth('1_64')">
                     <i nz-icon nzType="search"></i>
                     <span>查询</span>
                 </button>
@@ -60,7 +60,7 @@
         </div>
     </form>
 
-    <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total"
+    <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount"
         [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="scrollValue" [nzSize]="'small'">
         <thead (nzSortChange)="sort($event)" nzSortPriority>
             <tr>
@@ -96,12 +96,12 @@
                 <td nzRight="0px">
                     <a (click)="view(d.Id)" class="a-operate">查看</a>
                     <!-- <nz-divider nzType="vertical"></nz-divider> -->
-                    <a (click)="edit(d.Id)" *ngIf="d.Id!=-1&&CheckAuth('1_64')" class="ml10 a-operate">编辑</a>
-                    <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&CheckAuth('1_512')"></nz-divider> -->
-                    <a (click)="disable(d)" *ngIf="d.Enabled&&d.Id!=-1&&CheckAuth('1_128')" class="ml10 a-operate">注销</a>
-                    <a (click)="enable(d)" *ngIf="!d.Enabled&&d.Id!=-1&&CheckAuth('1_256')" class="ml10 a-operate">启用</a>
-                    <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&CheckAuth('1_2048')"></nz-divider> -->
-                    <a (click)="delete(d)" *ngIf="d.Id!=-1&&CheckAuth('1_512')" class="ml10 a-operate">删除</a>
+                    <a (click)="edit(d.Id)" *ngIf="d.Id!=-1&&checkAuth('1_64')" class="ml10 a-operate">编辑</a>
+                    <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&checkAuth('1_512')"></nz-divider> -->
+                    <a (click)="disable(d)" *ngIf="d.Enabled&&d.Id!=-1&&checkAuth('1_128')" class="ml10 a-operate">注销</a>
+                    <a (click)="enable(d)" *ngIf="!d.Enabled&&d.Id!=-1&&checkAuth('1_256')" class="ml10 a-operate">启用</a>
+                    <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&checkAuth('1_2048')"></nz-divider> -->
+                    <a (click)="delete(d)" *ngIf="d.Id!=-1&&checkAuth('1_512')" class="ml10 a-operate">删除</a>
                 </td>
             </tr>
         </tbody>
@@ -110,7 +110,7 @@
         共{{total}}条
     </ng-template>
 
-    <div nz-row nzType="flex" *ngIf="CheckAuth('1_1024')">
+    <div nz-row nzType="flex" *ngIf="checkAuth('1_1024')">
         <div nz-col nzSpan="4">
             <button nz-button [nzType]="'primary'" [disabled]="fileList.length == 0" style="margin-right: 16px">
                 <span>导入</span>

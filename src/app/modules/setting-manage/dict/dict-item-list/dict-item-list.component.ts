@@ -20,13 +20,13 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
   searchForm: FormGroup;
 
 
-  dataSet = null;
+  // dataSet = null;
 
-  pageIndex = 1;
-  pageSize = 10;
-  total = 1;
+  // pageIndex = 1;
+  // pageSize = 10;
+  // totalCount = 1;
 
-  tableLoading = false;
+  // tableLoading = false;
 
   dictId = null;
 
@@ -38,6 +38,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     private fb: FormBuilder,
     private http: H_Http) {
     super();
+    this.searchPagedListFn = this.getDictItem;
     this.searchForm = this.fb.group({
       sItemName: [null]
     });
@@ -59,7 +60,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
   }
 
   async getDictItem(id: string) {
-    this.dictId = id;
+    
     this.tableLoading = true;
     await this.http.get('Dict/GetDictItemPagedList', {
       PageIndex: this.pageIndex,
@@ -72,7 +73,9 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
       this.dataSet = d.Items;
       this.pageIndex = d.PageIndex;
       this.pageSize = d.PageSize;
-      this.total = d.TotalCount;
+      this.totalCount = d.TotalCount;
+      this.dictId = id;
+      this.searchPagedListParam = id;
     }, e => {
       this.tableLoading = false;
     });
@@ -91,13 +94,13 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     this.dialogDictItemEdit.showDictItem(d);
   }
 
-  pageIndexChange(pageIndex: number) {
-    this.pageIndex = pageIndex;
-    this.getDictItem(this.dictId);
-  }
+  // pageIndexChange(pageIndex: number) {
+  //   this.pageIndex = pageIndex;
+  //   this.getDictItem(this.dictId);
+  // }
 
-  pageSizeChange(pageSize: number) {
-    this.pageSize = pageSize;
-    this.getDictItem(this.dictId);
-  }
+  // pageSizeChange(pageSize: number) {
+  //   this.pageSize = pageSize;
+  //   this.getDictItem(this.dictId);
+  // }
 }
