@@ -43,7 +43,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
     private modal: NzModalService,
     private activedRoute: ActivatedRoute) {
     super();
-    
+
     this.searchPagedListFn = this.getDicts;
 
     this.searchForm = this.fb.group({
@@ -70,18 +70,13 @@ export class DictListComponent extends CoreContainer implements OnInit {
   // 查询字典列表
   getDicts() {
     this.tableLoading = true;
-    this.http.get('Dict/GetDictPagedList', {
-      PageIndex: this.pageIndex,
-      PageSize: this.pageSize,
+    this.http.get('Dict/GetDictPagedList', this.handleSearchParam({
       DictName: this.sDictName.value,
       DictCode: this.sDictCode.value
-    }).subscribe(d => {
+    })).subscribe(d => {
       this.tableLoading = false;
       if (!d) return;
-      this.dataSet = d.Items;
-      this.pageIndex = d.PageIndex;
-      this.pageSize = d.PageSize;
-      this.totalCount = d.TotalCount;
+      this.initTableData(d);
     }, e => {
       this.tableLoading = false;
     });

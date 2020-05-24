@@ -39,12 +39,26 @@ export class CoreContainer extends Core {
     }
 
     pageIndexChange(pageIndex: number) {
-        this.pageIndex = pageIndex; 
+        this.pageIndex = pageIndex;
         this.searchPagedListFn(this.searchPagedListParam);
+    }
+
+    handleSearchParam(param?: any): any {
+        return Object.assign(param, {
+            PageIndex: this.pageIndex,
+            PageSize: this.pageSize,
+        });
     }
 
     pageSizeChange(pageSize: number) {
         this.pageSize = pageSize;
         this.searchPagedListFn(this.searchPagedListParam);
+    }
+
+    initTableData(d: any) {
+        this.dataSet = d.Items;
+        this.pageIndex = d.PageIndex;
+        this.pageSize = d.PageSize;
+        this.totalCount = d.TotalCount;
     }
 }

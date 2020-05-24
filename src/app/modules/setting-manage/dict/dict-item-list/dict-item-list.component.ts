@@ -62,18 +62,13 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
   async getDictItem(id: string) {
     
     this.tableLoading = true;
-    await this.http.get('Dict/GetDictItemPagedList', {
-      PageIndex: this.pageIndex,
-      PageSize: this.pageSize,
+    await this.http.get('Dict/GetDictItemPagedList', this.handleSearchParam({
       ItemName: this.sItemName.value,
       ParentId: id
-    }).toPromise().then(d => {
+    })).toPromise().then(d => {
       this.tableLoading = false;
       if (!d) return;
-      this.dataSet = d.Items;
-      this.pageIndex = d.PageIndex;
-      this.pageSize = d.PageSize;
-      this.totalCount = d.TotalCount;
+      this.initTableData(d);
       this.dictId = id;
       this.searchPagedListParam = id;
     }, e => {

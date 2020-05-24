@@ -67,7 +67,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
     uploading = false;
     fileList: UploadFile[] = [];
 
-    
+
 
     // tableLoading = false;
     constructor(
@@ -134,25 +134,20 @@ export class UserListComponent extends CoreContainer implements OnInit {
     getUsers() {
         this.tableLoading = true;
         this.http
-            .get('User/GetPagedList', {
+            .get('User/GetPagedList', this.handleSearchParam({
                 Name: this.sName.value || '',
                 Phone: this.sPhone.value || '',
                 Gender: this.sGender,
                 Enabled: this.sEnabled.value || '',
                 LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
                 LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
-                PageIndex: this.pageIndex,
-                PageSize: this.pageSize,
                 SortField: this.sortKey,
                 OrderByType: this.sortValue
-            })
+            }))
             .subscribe(d => {
                 this.tableLoading = false;
                 if (!d) return;
-                this.dataSet = d.Items;
-                this.pageIndex = d.PageIndex;
-                this.pageSize = d.PageSize;
-                this.totalCount = d.TotalCount;
+                this.initTableData(d);
             }, e => {
                 this.tableLoading = false;
             }
