@@ -15,8 +15,10 @@ export class CoreContainer extends Core {
     //滚动
     scrollValue = { x: '0px', y: '0px' };
 
+    //分页查询方法入参
     searchPagedListParam: any = null;
 
+    //分页查询方法
     searchPagedListFn: (param?: any) => void;
 
     constructor() {
