@@ -37,14 +37,12 @@ export class CoreContainer extends Core {
     }
 
     pageIndexChange(pageIndex: number) {
-        this.pageIndex = pageIndex;
-     
+        this.pageIndex = pageIndex; 
         this.searchPagedListFn(this.searchPagedListParam);
     }
 
     pageSizeChange(pageSize: number) {
         this.pageSize = pageSize;
-        console.log(this.searchPagedListParam+"111")
         this.searchPagedListFn(this.searchPagedListParam);
     }
 }
