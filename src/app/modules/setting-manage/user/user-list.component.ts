@@ -89,7 +89,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
             this.sortValue = '1';
         else
             this.sortValue = '';
-        this.getUsers();
+        this.search();
     }
 
     updateFilter(values: string[]): void {
@@ -97,13 +97,12 @@ export class UserListComponent extends CoreContainer implements OnInit {
             this.sGender = values[0];
         else
             this.sGender = '';
-        this.getUsers();
+        this.search();
     }
 
     //查询用户
     getUsers() {
-        this.tableLoading = true;
-        this.http
+        return this.http
             .get('User/GetPagedList', this.handleSearchParam({
                 Name: this.sName.value || '',
                 Phone: this.sPhone.value || '',
@@ -113,13 +112,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
                 LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
                 SortField: this.sortKey,
                 OrderByType: this.sortValue
-            }))
-            .subscribe(d => {
-                this.tableLoading = false;
-                this.setTableData(d);
-            }, e => {
-                this.tableLoading = false;
-            });
+            }));
     }
 
     export() {
@@ -171,7 +164,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
     onSave() {
         this.initPageIndex();
-        this.getUsers();
+        this.search();
     }
 
     //删除用户
@@ -181,7 +174,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
             nzOnOk: () => this.http
                 .delete(`User/Delete/${data.Id}`)
                 .subscribe(() => {
-                    this.getUsers();
+                    this.search();
                 })
         });
     }
@@ -193,7 +186,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
             nzOnOk: () => this.http
                 .put(`User/Disable/${data.Id}`)
                 .subscribe(() => {
-                    this.getUsers();
+                    this.search();
                 })
         });
     }
@@ -205,7 +198,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
             nzOnOk: () => this.http
                 .put(`User/Enable/${data.Id}`)
                 .subscribe(() => {
-                    this.getUsers();
+                    this.search();
                 })
         });
     }

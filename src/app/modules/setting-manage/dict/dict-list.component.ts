@@ -65,22 +65,17 @@ export class DictListComponent extends CoreContainer implements OnInit {
 
   // 查询字典列表
   getDicts() {
-    this.tableLoading = true;
-    this.http.get('Dict/GetDictPagedList', this.handleSearchParam({
+
+    return this.http.get('Dict/GetDictPagedList', this.handleSearchParam({
       DictName: this.sDictName.value,
       DictCode: this.sDictCode.value
-    })).subscribe(d => {
-      this.tableLoading = false;
-      this.setTableData(d);
-    }, e => {
-      this.tableLoading = false;
-    });
+    }));
   }
 
   // 保存字典
   onSaveDict() {
     this.initPageIndex();
-    this.getDicts();
+    this.search();
   }
 
   editDict(data: any) {
@@ -94,7 +89,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
       nzTitle: `确认删除 ${data.DictName}?`,
       nzOnOk: () => this.http.delete(`Dict/DeleteDict/${data.Id}`).subscribe(d => {
         if (!d) return;
-        this.getDicts();
+        this.search();
       })
     });
   }

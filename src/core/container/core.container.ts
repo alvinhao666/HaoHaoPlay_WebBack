@@ -1,4 +1,5 @@
 import { Core } from './core';
+import { Observable } from 'rxjs';
 
 export class CoreContainer extends Core {
 
@@ -19,7 +20,7 @@ export class CoreContainer extends Core {
     searchParam: any = null;
 
     //分页查询方法
-    searchFn: (param?: any) => void;
+    searchFn: (param?: any) => Observable<any>;
 
     constructor() {
         super();
@@ -39,17 +40,23 @@ export class CoreContainer extends Core {
     }
 
     search() {
-        this.searchFn(this.searchParam);
+        this.tableLoading = true;
+        this.searchFn(this.searchParam).subscribe(d => {
+            this.tableLoading = false;
+            this.setTableData(d);
+        }, e => {
+            this.tableLoading = false;
+        });
     }
 
     pageIndexChange(pageIndex: number) {
         this.pageIndex = pageIndex;
-        this.searchFn(this.searchParam);
+        this.search();
     }
 
     pageSizeChange(pageSize: number) {
         this.pageSize = pageSize;
-        this.searchFn(this.searchParam);
+        this.search();
     }
 
 
