@@ -53,8 +53,16 @@ export class DictListComponent extends CoreContainer implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.scrollValue = { y: '400px' };
     this.setTableData(this.activedRoute.snapshot.data.dictList);
+  }
+
+
+  // 查询字典列表
+  getDicts() {
+    return this.http.get('Dict/GetDictPagedList', this.handleSearchParam({
+      DictName: this.sDictName.value,
+      DictCode: this.sDictCode.value
+    }));
   }
 
 
@@ -63,14 +71,6 @@ export class DictListComponent extends CoreContainer implements OnInit {
     this.dialogDictEdit.visible = true;
   }
 
-  // 查询字典列表
-  getDicts() {
-
-    return this.http.get('Dict/GetDictPagedList', this.handleSearchParam({
-      DictName: this.sDictName.value,
-      DictCode: this.sDictCode.value
-    }));
-  }
 
   // 保存字典
   onSaveDict() {

@@ -81,6 +81,22 @@ export class UserListComponent extends CoreContainer implements OnInit {
         this.setTableData(this.router.snapshot.data.userList);
     }
 
+    //查询用户
+    getUsers() {
+        return this.http
+            .get('User/GetPagedList', this.handleSearchParam({
+                Name: this.sName.value || '',
+                Phone: this.sPhone.value || '',
+                Gender: this.sGender,
+                Enabled: this.sEnabled.value || '',
+                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
+                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
+                SortField: this.sortKey,
+                OrderByType: this.sortValue
+            }));
+    }
+
+
     sort(sort: { key: string, value: string }): void {
         this.sortKey = sort.key;
         if (sort.value === 'ascend')
@@ -100,20 +116,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
         this.search();
     }
 
-    //查询用户
-    getUsers() {
-        return this.http
-            .get('User/GetPagedList', this.handleSearchParam({
-                Name: this.sName.value || '',
-                Phone: this.sPhone.value || '',
-                Gender: this.sGender,
-                Enabled: this.sEnabled.value || '',
-                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
-                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
-                SortField: this.sortKey,
-                OrderByType: this.sortValue
-            }));
-    }
+
 
     export() {
         this.http
