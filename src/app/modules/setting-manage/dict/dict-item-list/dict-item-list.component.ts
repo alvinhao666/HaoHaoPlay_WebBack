@@ -29,7 +29,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     private fb: FormBuilder,
     private http: H_Http) {
     super();
-    // this.searchFn = this.getDictItem;
+    this.searchFn = this.getDictItem;
     this.searchForm = this.fb.group({
       sItemName: [null]
     });
@@ -50,25 +50,18 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     this.dialogDictItemEdit.dictId = this.dictId;
   }
 
-  async getDictItem(id: string) {
-
-    this.tableLoading = true;
-    await this.http.get('Dict/GetDictItemPagedList', this.handleSearchParam({
+  getDictItem() {
+    // this.searchParam = this.dictId;
+    return this.http.get('Dict/GetDictItemPagedList', this.handleSearchParam({
       ItemName: this.sItemName.value,
-      ParentId: id
-    })).toPromise().then(d => {
-      this.tableLoading = false;
-      this.setTableData(d);
-      this.dictId = id;
-    }, e => {
-      this.tableLoading = false;
-    });
+      ParentId: this.dictId
+    }));
   }
 
   deleteItem(d: any) {
     this.http.delete(`Dict/DeleteDictItem/${d.Id}`).subscribe(d => {
       if (!d) return;
-      this.getDictItem(this.dictId);
+      this.search();
     });
   }
 
@@ -79,6 +72,6 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
   }
 
   onSave() {
-    this.getDictItem(this.dictId);
+    this.search();
   }
 }

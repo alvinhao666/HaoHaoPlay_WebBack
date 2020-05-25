@@ -17,7 +17,7 @@ export class CoreContainer extends Core {
     scrollValue = { x: '0px', y: '0px' };
 
     //分页查询方法入参
-    searchParam: any = null;
+    // searchParam: any = null;
 
     //分页查询方法
     searchFn: (param?: any) => Observable<any>;
@@ -41,7 +41,7 @@ export class CoreContainer extends Core {
 
     search() {
         this.tableLoading = true;
-        this.searchFn(this.searchParam).subscribe(d => {
+        this.searchFn().subscribe(d => {
             this.tableLoading = false;
             this.setTableData(d);
         }, e => {
