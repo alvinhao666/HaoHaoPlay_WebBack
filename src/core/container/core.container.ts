@@ -55,7 +55,7 @@ export class CoreContainer extends Core {
         this.searchPagedListFn(this.searchPagedListParam);
     }
 
-    initTableData(d: any) {
+    setTableData(d: any) {
         this.dataSet = d.Items;
         this.pageIndex = d.PageIndex;
         this.pageSize = d.PageSize;

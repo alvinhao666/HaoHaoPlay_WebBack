@@ -68,7 +68,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     })).toPromise().then(d => {
       this.tableLoading = false;
       if (!d) return;
-      this.initTableData(d);
+      this.setTableData(d);
       this.dictId = id;
       this.searchPagedListParam = id;
     }, e => {

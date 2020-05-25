@@ -76,7 +76,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
     })).subscribe(d => {
       this.tableLoading = false;
       if (!d) return;
-      this.initTableData(d);
+      this.setTableData(d);
     }, e => {
       this.tableLoading = false;
     });
