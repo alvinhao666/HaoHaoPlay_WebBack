@@ -33,7 +33,7 @@
     </div>
 
     <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount"
-        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzSize]="'small'">
+        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{ y: '380px' }" [nzSize]="'small'">
         <thead>
             <tr>
                 <th nzLeft="0px" nzWidth="60px">序号</th>

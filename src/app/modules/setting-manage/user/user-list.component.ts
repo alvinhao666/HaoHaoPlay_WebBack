@@ -75,7 +75,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
 
     ngOnInit() {
-        this.scrollValue.y = '420px';
+        this.scrollValue.y = '395px';
         this.scrollValue.x = (window.innerWidth - 296 - 50) + 'px';
 
         this.setTableData(this.router.snapshot.data.userList);

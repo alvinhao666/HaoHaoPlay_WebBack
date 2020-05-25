@@ -53,6 +53,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.scrollValue = { y: '400px' };
     this.setTableData(this.activedRoute.snapshot.data.dictList);
   }
 
