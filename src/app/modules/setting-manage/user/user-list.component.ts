@@ -19,11 +19,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
     @ViewChild('silderUserEdit', { static: false }) sliderUserEdit: UserEditComponent;
     @ViewChild('silderUserView', { static: false }) sliderUserView: UserViewComponent;
-    // slider_edit_visible = false;
-    // slider_edit_title = '';
-
-    // slider_view_visible = false;
-    // slider_view_title = '';
 
     searchForm: FormGroup;
     statuses = [
@@ -35,15 +30,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
         { text: '女', value: '0' }
     ];
     sGender = '';
-
-    // dataSet: any[] = [];
-
-    // //当前页码
-    // pageIndex = 1;
-    // //每页条数
-    // pageSize = 10;
-    // //总数
-    // totalCount = 1;
 
     sortValue = '';
     sortKey = '';
@@ -67,9 +53,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
     uploading = false;
     fileList: UploadFile[] = [];
 
-
-
-    // tableLoading = false;
     constructor(
         private fb: FormBuilder,
         private http: H_Http,
@@ -97,17 +80,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
         this.setTableData(this.router.snapshot.data.userList);
     }
-
-
-    // pageIndexChange(pageIndex: number) {
-    //     this.pageIndex = pageIndex;
-    //     this.getUsers();
-    // }
-
-    // pageSizeChange(pageSize: number) {
-    //     this.pageSize = pageSize;
-    //     this.getUsers();
-    // }
 
     sort(sort: { key: string, value: string }): void {
         this.sortKey = sort.key;
@@ -184,8 +156,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
     }
 
     addUser() {
-        // this.slider_edit_title = '添加用户';
-        // this.slider_edit_visible = true;
         this.sliderUserEdit.visible = true;
         this.sliderUserEdit.title = '添加用户';
         this.sliderUserEdit.getRoles();
@@ -200,13 +170,8 @@ export class UserListComponent extends CoreContainer implements OnInit {
         return false;
     }
 
-    // closeEditSlider() {
-    //     this.slider_edit_visible = false;
-    // }
-
     onSave() {
-        // this.slider_edit_visible = false;
-        this.pageIndex = 1;
+        this.initPageIndex();
         this.getUsers();
     }
 

@@ -43,16 +43,22 @@ export class CoreContainer extends Core {
         this.searchPagedListFn(this.searchPagedListParam);
     }
 
+    pageSizeChange(pageSize: number) {
+        this.pageSize = pageSize;
+        this.searchPagedListFn(this.searchPagedListParam);
+    }
+
+
+    initPageIndex() {
+        this.pageIndex = 1;
+    }
+
+
     handleSearchParam(param?: any): any {
         return Object.assign(param, {
             PageIndex: this.pageIndex,
             PageSize: this.pageSize,
         });
-    }
-
-    pageSizeChange(pageSize: number) {
-        this.pageSize = pageSize;
-        this.searchPagedListFn(this.searchPagedListParam);
     }
 
     setTableData(d: any) {

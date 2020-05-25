@@ -19,15 +19,6 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
 
   searchForm: FormGroup;
 
-
-  // dataSet = null;
-
-  // pageIndex = 1;
-  // pageSize = 10;
-  // totalCount = 1;
-
-  // tableLoading = false;
-
   dictId = null;
 
   get sItemName() {
@@ -60,7 +51,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
   }
 
   async getDictItem(id: string) {
-    
+
     this.tableLoading = true;
     await this.http.get('Dict/GetDictItemPagedList', this.handleSearchParam({
       ItemName: this.sItemName.value,
@@ -89,13 +80,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     this.dialogDictItemEdit.showDictItem(d);
   }
 
-  // pageIndexChange(pageIndex: number) {
-  //   this.pageIndex = pageIndex;
-  //   this.getDictItem(this.dictId);
-  // }
-
-  // pageSizeChange(pageSize: number) {
-  //   this.pageSize = pageSize;
-  //   this.getDictItem(this.dictId);
-  // }
+  onSave() {
+    this.getDictItem(this.dictId);
+  }
 }

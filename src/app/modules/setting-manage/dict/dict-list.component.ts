@@ -77,19 +77,9 @@ export class DictListComponent extends CoreContainer implements OnInit {
     });
   }
 
-
-  // pageIndexChange(pageIndex: number) {
-  //   this.pageIndex = pageIndex;
-  //   this.getDicts();
-  // }
-
-  // pageSizeChange(pageSize: number) {
-  //   this.pageSize = pageSize;
-  //   this.getDicts();
-  // }
-
   // 保存字典
   onSaveDict() {
+    this.initPageIndex();
     this.getDicts();
   }
 
