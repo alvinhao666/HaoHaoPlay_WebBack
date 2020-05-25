@@ -29,7 +29,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     private fb: FormBuilder,
     private http: H_Http) {
     super();
-    this.searchPagedListFn = this.getDictItem;
+    this.searchFn = this.getDictItem;
     this.searchForm = this.fb.group({
       sItemName: [null]
     });
@@ -58,10 +58,9 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
       ParentId: id
     })).toPromise().then(d => {
       this.tableLoading = false;
-      if (!d) return;
       this.setTableData(d);
       this.dictId = id;
-      this.searchPagedListParam = id;
+      this.searchParam = id;
     }, e => {
       this.tableLoading = false;
     });

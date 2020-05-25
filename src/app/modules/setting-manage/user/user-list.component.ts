@@ -62,7 +62,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
         super();
 
-        this.searchPagedListFn = this.getUsers;
+        this.searchFn = this.getUsers;
 
         this.searchForm = this.fb.group({
             sName: [null],
@@ -116,7 +116,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
             }))
             .subscribe(d => {
                 this.tableLoading = false;
-                if (!d) return;
                 this.setTableData(d);
             }, e => {
                 this.tableLoading = false;

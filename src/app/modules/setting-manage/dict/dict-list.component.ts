@@ -44,7 +44,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
     private activedRoute: ActivatedRoute) {
     super();
 
-    this.searchPagedListFn = this.getDicts;
+    this.searchFn = this.getDicts;
 
     this.searchForm = this.fb.group({
       sDictName: [null],
@@ -71,7 +71,6 @@ export class DictListComponent extends CoreContainer implements OnInit {
       DictCode: this.sDictCode.value
     })).subscribe(d => {
       this.tableLoading = false;
-      if (!d) return;
       this.setTableData(d);
     }, e => {
       this.tableLoading = false;

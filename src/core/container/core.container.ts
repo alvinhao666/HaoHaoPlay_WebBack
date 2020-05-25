@@ -16,10 +16,10 @@ export class CoreContainer extends Core {
     scrollValue = { x: '0px', y: '0px' };
 
     //分页查询方法入参
-    searchPagedListParam: any = null;
+    searchParam: any = null;
 
     //分页查询方法
-    searchPagedListFn: (param?: any) => void;
+    searchFn: (param?: any) => void;
 
     constructor() {
         super();
@@ -38,14 +38,18 @@ export class CoreContainer extends Core {
         return (num & authNum) === num;
     }
 
+    search() {
+        this.searchFn(this.searchParam);
+    }
+
     pageIndexChange(pageIndex: number) {
         this.pageIndex = pageIndex;
-        this.searchPagedListFn(this.searchPagedListParam);
+        this.searchFn(this.searchParam);
     }
 
     pageSizeChange(pageSize: number) {
         this.pageSize = pageSize;
-        this.searchPagedListFn(this.searchPagedListParam);
+        this.searchFn(this.searchParam);
     }
 
 
@@ -62,6 +66,7 @@ export class CoreContainer extends Core {
     }
 
     setTableData(d: any) {
+        if (!d) return;
         this.dataSet = d.Items;
         this.pageIndex = d.PageIndex;
         this.pageSize = d.PageSize;

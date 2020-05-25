@@ -51,7 +51,7 @@
             </div>
 
             <div class="fr">
-                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="getUsers()" *ngIf="checkAuth('1_64')">
+                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="search()" *ngIf="checkAuth('1_64')">
                     <i nz-icon nzType="search"></i>
                     <span>查询</span>
                 </button>
