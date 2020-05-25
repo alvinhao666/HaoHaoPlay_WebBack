@@ -95,9 +95,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
         this.scrollValue.y = '420px';
         this.scrollValue.x = (window.innerWidth - 296 - 50) + 'px';
 
-        const d = this.router.snapshot.data.userList;
-        this.dataSet = d.Items;
-        this.totalCount = d.TotalCount;
+        this.setTableData(this.router.snapshot.data.userList);
     }
 
 
@@ -150,8 +148,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
                 this.setTableData(d);
             }, e => {
                 this.tableLoading = false;
-            }
-            );
+            });
     }
 
     export() {
