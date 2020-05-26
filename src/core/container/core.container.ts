@@ -55,6 +55,7 @@ export class CoreContainer extends Core {
     }
 
     pageSizeChange(pageSize: number) {
+        this.initPageIndex();
         this.pageSize = pageSize;
         this.search();
     }
