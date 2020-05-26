@@ -39,9 +39,9 @@ export class CoreContainer extends Core {
         return (num & authNum) === num;
     }
 
-    search() {
+    async search() {
         this.tableLoading = true;
-        this.searchFn().subscribe(d => {
+        await this.searchFn().toPromise().then(d => {
             this.tableLoading = false;
             this.setTableData(d);
         }, e => {

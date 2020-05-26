@@ -94,9 +94,9 @@ export class DictListComponent extends CoreContainer implements OnInit {
     });
   }
 
-  showDictItem(data: any) {
+  async showDictItem(data: any) {
     this.dialogDictItemList.dictId = data.Id;
-    this.dialogDictItemList.search();
+    await this.dialogDictItemList.search();
     this.dialogDictItemList.visible = true;
     this.dialogDictItemList.title = data.DictName;
   }
