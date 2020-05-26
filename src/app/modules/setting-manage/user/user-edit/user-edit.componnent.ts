@@ -184,8 +184,10 @@ export class UserEditComponent extends CoreEdit implements OnInit {
 
     reset() {
         this.visible = false;
-        this.form.reset();
-        this.isEdit = false;
-        this.userId = null;
+        setTimeout(() => {
+            this.form.reset();
+            this.isEdit = false;
+            this.userId = null;
+        }, 300);
     }
 }
