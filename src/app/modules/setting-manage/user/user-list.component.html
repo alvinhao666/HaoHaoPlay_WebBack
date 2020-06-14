@@ -69,7 +69,7 @@
                 <th nzWidth="100px" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别</th>
                 <th nzWidth="100px" nzShowSort nzColumnKey="0">年龄</th>
                 <th nzWidth="130px">手机号</th>
-                <th>邮箱</th>
+                <th nzWidth="200px">邮箱</th>
                 <th nzWidth="150px">微信</th>
                 <th nzWidth="80px">状态</th>
                 <th nzWidth="120px">角色</th>
@@ -85,8 +85,8 @@
                 <td>{{d.GenderString}}</td>
                 <td>{{d.Age}}</td>
                 <td>{{d.Phone}}</td>
-                <td>{{d.Email}}</td>
-                <td>{{d.WeChat}}</td>
+                <td title="{{d.Email}}">{{d.Email}}</td>
+                <td title="{{d.WeChat}}">{{d.WeChat}}</td>
                 <td [class.enable]="d.Enabled" [class.disable]="!d.Enabled">
                     {{d.EnabledString}}
                 </td>
