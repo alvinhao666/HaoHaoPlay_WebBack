@@ -1,5 +1,5 @@
 <nz-layout class="app-layout">
-    <nz-sider class="menu-sidebar" nzCollapsible nzBreakpoint="md" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <nz-sider class="menu-sidebar" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed">
         <div class="sidebar-logo">
             <a routerLink="dashboard">
                 <!-- <img src="../../../assets/img/logo.svg" alt="logo"> -->
@@ -9,7 +9,7 @@
             </a>
         </div>
 
-        <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="false">
             <li nz-submenu nzOpen *ngFor="let item of menus;let i=index;">
                 <span title>
                     <i nz-icon [nzIconfont]="item.Icon"></i>
