@@ -107,6 +107,7 @@ export class UserEditComponent extends CoreEdit implements OnInit {
     }
 
     save() {
+        
         if (!this.validate()) return;
         if (this.isEdit && this.userId) {
             this.editUser(this.userId);
@@ -174,7 +175,7 @@ export class UserEditComponent extends CoreEdit implements OnInit {
     validate(): boolean {
         let flag = true;
         for (const key of Object.keys(this.form.controls)) {
-            if (this.isEdit && (key === 'fLoginName' || key === 'fPassword' || key === 'fRePassword')) continue;
+            if (this.isEdit && (key === 'fLoginName' || key === 'fPassword' || key === 'fRePassword' || key === 'fRole')) continue;
             this.form.controls[key].markAsDirty();
             this.form.controls[key].updateValueAndValidity();
             flag = flag && !this.form.controls[key].invalid;
