@@ -100,8 +100,8 @@ export class LoginComponent {
 
       // Core.authNums = d.AuthNums;
       // location.reload();
-      // location.href = location.href.split('/')[0] + '/main/dashboard'; 
-      this.router.navigateByUrl('main/dashboard');
+      location.href = location.href.split('/')[0] + '/main/dashboard'; 
+      // this.router.navigateByUrl('main/dashboard');
       // location.reload();
     }, e => {
       this.loginLoading = false;

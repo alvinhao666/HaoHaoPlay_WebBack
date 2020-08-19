@@ -72,8 +72,8 @@ export class MainComponent extends CoreContainer {
     this.http.post('CurrentUser/Logout').subscribe(d => {
       if (!d) return;
       localStorage.removeItem(environment.token_key);
-      // location.href = location.href.split('/')[0];
-      this.router.navigateByUrl('/');
+      location.href = location.href.split('/')[0];
+      // this.router.navigateByUrl('/');
       // location.reload();
     });
   }
