@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { H_Http } from '@core';
 import { DatePipe } from '@angular/common';
 import { environment } from '@env/environment';
-import { UploadFile, NzModalService } from 'ng-zorro-antd';
+import { UploadFile, NzModalService, NzMessageService } from 'ng-zorro-antd';
 import { UserEditComponent } from './user-edit/user-edit.componnent';
 import { UserViewComponent } from './user-view/user-view.component';
 import { ActivatedRoute } from '@angular/router';
@@ -58,7 +58,8 @@ export class UserListComponent extends CoreContainer implements OnInit {
         private http: H_Http,
         private datePipe: DatePipe,
         private modalSrv: NzModalService,
-        private router: ActivatedRoute) {
+        private router: ActivatedRoute,
+        public msg: NzMessageService) {
 
         super();
 
@@ -164,6 +165,20 @@ export class UserListComponent extends CoreContainer implements OnInit {
         }
         return false;
     }
+
+    importExcel() {
+        const formData = new FormData();
+        // tslint:disable-next-line:no-any
+        this.fileList.forEach((file: any) => {
+            formData.append('用户数据', file);
+        });
+
+        this.http.post('User/Import', formData).subscribe(d => {
+            if (!d) return;
+            this.msg.success('导入成功');
+        });
+    }
+
 
     onSave() {
         this.initPageIndex();
