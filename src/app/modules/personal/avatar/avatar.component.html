@@ -23,10 +23,14 @@
 
 <ng-template #modalFooter>
     <div class="zoom-group">
-        <i class="fa fa-undo" (click)="turnLeft()"></i>
+        <i class="fa" nz-icon [nzIconfont]="'icon-undo'" (click)="turnLeft()"></i>
+        <i class="fa" nz-icon [nzIconfont]="'icon-plus'" (click)="large()"></i>
+        <i class="fa" nz-icon [nzIconfont]="'icon-Minus'" (click)="reduce()"></i>
+        <i class="fa" nz-icon [nzIconfont]="'icon-redo-alt'" (click)="turnRight()"></i>
+        <!-- <i class="fa fa-undo" (click)="turnLeft()"></i>
         <i class="fa fa-plus" (click)="large()"></i>
         <i class="fa fa-minus" (click)="reduce()"></i>
-        <i class="fa fa-repeat" (click)="turnRight()"></i>
+        <i class="fa fa-repeat" (click)="turnRight()"></i> -->
     </div>
     <span class="upload" (click)="upload()">上传</span>
     <button nz-button nzType="primary" (click)="handleOk()">确定</button>
