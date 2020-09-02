@@ -79,13 +79,12 @@ export class LoginComponent {
       if (this.mobile.invalid || this.captcha.invalid) return;
     }
 
-    // **注：** DEMO中使用 `setTimeout` 来模拟 http
-    // 默认配置中对所有HTTP请求都会强制[校验](https://ng-alain.com/auth/getting-started) 用户 Token
-    // 然一般来说登录请求不需要校验，因此可以在请求URL加上：`/login?_allow_anonymous=true` 表示不触发用户 Token 校验
 
     const jsencrypt = new JSEncryptModule.JSEncrypt();
+    this.publicKey = btoa(atob(this.publicKey).padStart(256, '\0')); //https://stackoverflow.com/questions/60727404/rsa-decryption-exception-the-length-of-the-data-to-decrypt-is-not-valid-for-the
     jsencrypt.setPublicKey(this.publicKey);
     const pwd = jsencrypt.encrypt(this.password.value);
+
     this.loginLoading = true;
     this.http.post('Login', {
       LoginName: this.userName.value,
