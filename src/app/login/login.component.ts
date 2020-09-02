@@ -83,9 +83,8 @@ export class LoginComponent {
     const jsencrypt = new JSEncryptModule.JSEncrypt();
 
     jsencrypt.setPublicKey(this.publicKey);
-    let  pwd = jsencrypt.encrypt(this.password.value);
+    const pwd = jsencrypt.encrypt(this.password.value);
 
-    pwd = btoa(atob(pwd).padStart(256, '\0')); //https://stackoverflow.com/questions/60727404/rsa-decryption-exception-the-length-of-the-data-to-decrypt-is-not-valid-for-the
     this.loginLoading = true;
     this.http.post('Login', {
       LoginName: this.userName.value,
