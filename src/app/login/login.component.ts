@@ -81,10 +81,11 @@ export class LoginComponent {
 
 
     const jsencrypt = new JSEncryptModule.JSEncrypt();
-    this.publicKey = btoa(atob(this.publicKey).padStart(256, '\0')); //https://stackoverflow.com/questions/60727404/rsa-decryption-exception-the-length-of-the-data-to-decrypt-is-not-valid-for-the
-    jsencrypt.setPublicKey(this.publicKey);
-    const pwd = jsencrypt.encrypt(this.password.value);
 
+    jsencrypt.setPublicKey(this.publicKey);
+    let  pwd = jsencrypt.encrypt(this.password.value);
+
+    pwd = btoa(atob(pwd).padStart(256, '\0')); //https://stackoverflow.com/questions/60727404/rsa-decryption-exception-the-length-of-the-data-to-decrypt-is-not-valid-for-the
     this.loginLoading = true;
     this.http.post('Login', {
       LoginName: this.userName.value,
@@ -99,7 +100,7 @@ export class LoginComponent {
 
       // Core.authNums = d.AuthNums;
       // location.reload();
-      location.href = location.href.split('/')[0] + '/main/dashboard'; 
+      location.href = location.href.split('/')[0] + '/main/dashboard';
       // this.router.navigateByUrl('main/dashboard');
       // location.reload();
     }, e => {
