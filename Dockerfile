@@ -1,4 +1,4 @@
-FROM node:10.13-alpine AS builder
+FROM node:12.18-alpine AS builder
 # set working directory 
 # /app这个不用修改
 WORKDIR /app
@@ -10,7 +10,7 @@ RUN npm install
 # build the angular app
 COPY . .
 RUN npm run build
-FROM nginx:stable-alpine
+FROM nginx:1.18.0-alpine
 
 # copy from dist to nginx root dir，
 #file-system需要用你的项目名字替换
