@@ -5,6 +5,7 @@ WORKDIR /app
 
 # install and cache app dependencies
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install
 
 # build the angular app
