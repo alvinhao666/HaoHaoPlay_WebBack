@@ -52,16 +52,12 @@ export class LoginComponent {
   get captcha() {
     return this.form.controls.captcha;
   }
-
-  // endregion
+  
 
   switch(ret: any) {
     this.type = ret.index;
   }
 
-
-
-  // endregion
 
   submit() {
 
