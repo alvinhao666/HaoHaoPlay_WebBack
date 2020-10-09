@@ -1,7 +1,9 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
 import { H_Http, CoreContainer } from '@core';
 import { ActivatedRoute } from '@angular/router';
-import { NzTreeNode, NzFormatEmitEvent, NzModalService, NzMessageService } from 'ng-zorro-antd';
+import { NzTreeNode, NzFormatEmitEvent } from 'ng-zorro-antd/tree';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
 import { ResourceEditComponent } from './resource-edit/resource-edit.component';

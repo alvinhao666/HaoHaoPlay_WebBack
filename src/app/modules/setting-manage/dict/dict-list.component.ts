@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { CoreContainer, H_Http } from '@core';
 import { DictEditComponent } from './dict-edit/dict-edit.component';
 import { ActivatedRoute } from '@angular/router';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { DictItemListComponent } from './dict-item-list/dict-item-list.component';
 
 @Component({

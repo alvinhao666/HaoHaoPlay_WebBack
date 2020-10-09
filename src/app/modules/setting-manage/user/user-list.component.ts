@@ -3,7 +3,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { H_Http } from '@core';
 import { DatePipe } from '@angular/common';
 import { environment } from '@env/environment';
-import { UploadFile, NzModalService, NzMessageService } from 'ng-zorro-antd';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { UserEditComponent } from './user-edit/user-edit.componnent';
 import { UserViewComponent } from './user-view/user-view.component';
 import { ActivatedRoute } from '@angular/router';
@@ -51,7 +53,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
     }
 
     uploading = false;
-    fileList: UploadFile[] = [];
+    fileList: NzUploadFile[] = [];
 
     constructor(
         private fb: FormBuilder,
@@ -158,7 +160,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
     }
 
 
-    beforeUpload = (file: UploadFile): boolean => {
+    beforeUpload = (file: NzUploadFile): boolean => {
         const isExist = this.fileList.find(a => a.name === file.name);
         if (!isExist) {
             this.fileList = this.fileList.concat(file);

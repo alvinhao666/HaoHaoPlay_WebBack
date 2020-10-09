@@ -1,7 +1,7 @@
 import { Component, OnInit, Type, OnDestroy } from '@angular/core';
 
 import { Router, NavigationError, NavigationCancel, NavigationStart } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from '@env/environment';
 import { Subscription } from 'rxjs';
 

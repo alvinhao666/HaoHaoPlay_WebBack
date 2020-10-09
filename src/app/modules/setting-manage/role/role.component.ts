@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { H_Http, CoreContainer } from '@core';
-import { NzTreeComponent, NzTreeNode, NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { NzTreeComponent, NzTreeNode } from 'ng-zorro-antd/tree';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-role',
@@ -67,7 +69,7 @@ export class RoleComponent extends CoreContainer implements OnInit {
       if (item.isChecked && item.children.length === 0) {
         arrayKey.push(item.key);
       } else {
-        if (item.isAllChecked && item.children.length > 0) {
+        if (item.isChecked && item.children.length > 0) {
           arrayKey.push(item.key);
           this.handleCheckedTreeNode(item.children, arrayKey);
         }

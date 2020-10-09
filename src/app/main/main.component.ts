@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { H_Http, getColorByFirstName } from '@core';
 import { UserInfoSubject } from '../share/user-info.subject';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
 import { Core, CoreContainer } from '@core';
 

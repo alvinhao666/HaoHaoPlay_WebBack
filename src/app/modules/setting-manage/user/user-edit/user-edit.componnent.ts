@@ -1,7 +1,7 @@
 import { OnInit, Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, ComparePwdValidators, CoreEdit } from '@core';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
     selector: 'modal-user-edit',
