@@ -16,7 +16,7 @@ FROM nginx:1.18.0
 # copy from dist to nginx root dir，
 #file-system需要用你的项目名字替换
 COPY --from=builder /app/dist/haohaoplaywebback  /usr/share/nginx/html
-COPY ./nginx.angular.conf  /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf  /etc/nginx/conf.d/default.conf
 # expose port 80
 EXPOSE 80
 
