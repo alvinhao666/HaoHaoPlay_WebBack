@@ -6,7 +6,10 @@ export const environment = {
   api_url: 'http://localhost:8000/',
   token_key: 'HaoToken_Dev',
   user_key: 'HaoUser_Dev',
-  production: false
+  production: false,
+  bucket: 'dev-1253596932', /* 必须 */
+  region: 'ap-nanjing',     /* 存储桶所在地域，必须字段 */
+  avatarDir: 'avatar'
 };
 
 /*

@@ -39,7 +39,8 @@ export class MainComponent extends CoreContainer {
       this.firstName = d.FirstName;
       this.firstNameBgColor = d.FirstNameBgColor;
       if (d.HeadImgUrl) {
-        this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
+        // this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
+        this.headImgUrl = d.HeadImgUrl;
         const value = localStorage.getItem(environment.user_key);
         const user = JSON.parse(value);
         user.HeadImgUrl = d.HeadImgUrl;
@@ -60,9 +61,12 @@ export class MainComponent extends CoreContainer {
     this.name = d.Name;
     this.firstName = this.name.substring(0, 1);
     this.firstNameBgColor = getColorByFirstName(d.FirstNameSpell);
-    if (d.HeadImgUrl) {
-      this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
-    }
+
+    // if (d.HeadImgUrl) {
+    //   this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
+    // }
+
+    this.headImgUrl = d.HeadImgUrl || d.HeadImgUrl;
     Core.authNums = d.AuthNums;
   }
 

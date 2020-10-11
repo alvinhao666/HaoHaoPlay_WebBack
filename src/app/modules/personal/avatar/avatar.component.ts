@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { cropbox, H_Http } from '@core';
-
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'dialog-avatar',
@@ -23,6 +23,8 @@ export class AvatarComponent implements OnInit {
 
   cropper: any = null;
 
+  cos: any = null;
+
   @Output() onSave = new EventEmitter();
 
   constructor(
@@ -31,16 +33,56 @@ export class AvatarComponent implements OnInit {
 
 
   ngOnInit() {
+    const COS = require('cos-js-sdk-v5');
+    this.cos = new COS({ getAuthorization: this.getTencentCosFederationToken.bind(this) });
+
+  }
+
+  getTencentCosFederationToken(options, callback) {
+    this.http.get('Common/GetTencentCosFederationToken').subscribe(d => {
+      if (!d) return;
+      const credentials = d && d.Credentials;
+      callback({
+        TmpSecretId: credentials.TmpSecretId,
+        TmpSecretKey: credentials.TmpSecretKey,
+        XCosSecurityToken: credentials.Token,
+        // 建议返回服务器时间作为签名的开始时间，避免用户浏览器本地时间偏差过大导致签名错误
+        StartTime: d.StartTime, // 时间戳，单位秒，如：1580000000
+        ExpiredTime: d.ExpiredTime, // 时间戳，单位秒，如：1580000900
+      });
+    });
   }
 
   handleCancel() {
     this.isVisible = false;
   }
 
-  handleOk() {
+  async handleOk() {
     this.isVisible = false;
-    const baseStr = this.cropper.getDataURL();
-    this.http.put('CurrentUser/UpdateHeadImg', { Base64Str: baseStr }).subscribe(d => {
+    //const baseStr = this.cropper.getDataURL();
+
+    const blob = this.cropper.getBlob();
+
+    let fileName = '';
+    await this.http.get('Common/GetAvatarName').toPromise().then(d => {
+      if (!d) return;
+      fileName = d;
+    });
+
+    this.cos.putObject({
+      Bucket: environment.bucket, /* 必须 */
+      Region: environment.region,     /* 存储桶所在地域，必须字段 */
+      Key: environment.avatarDir + '/' + fileName,              /* 必须 */
+      Body: blob,                /* 必须 */
+      onProgress: function (progressData) {
+        console.log(JSON.stringify(progressData));
+      }
+    }, this.updateHeadImage.bind(this));
+
+  }
+
+  updateHeadImage(err, data) {
+    this.http.put('CurrentUser/UpdateHeadImg', { HeadImageUrl: data.Location }).subscribe(d => {
       if (!d) return;
       this.onSave.emit();
       this.msg.success('更新成功');
