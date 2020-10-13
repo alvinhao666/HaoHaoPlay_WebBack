@@ -20,7 +20,7 @@ export class CoreContainer extends Core {
     // searchParam: any = null;
 
     //分页查询方法
-    searchPagedListFn: (param?: any) => Observable<any>;
+    searchPagedListFn: () => Observable<any>;
 
     constructor() {
         super();
