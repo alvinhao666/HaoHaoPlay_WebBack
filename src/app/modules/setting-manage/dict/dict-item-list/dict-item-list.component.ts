@@ -29,7 +29,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     private fb: FormBuilder,
     private http: H_Http) {
     super();
-    this.searchFn = this.getDictItem;
+    this.searchPagedListFn = this.getDictItem;
     this.searchForm = this.fb.group({
       sItemName: [null]
     });

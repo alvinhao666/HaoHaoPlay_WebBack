@@ -20,7 +20,7 @@ export class CoreContainer extends Core {
     // searchParam: any = null;
 
     //分页查询方法
-    searchFn: (param?: any) => Observable<any>;
+    searchPagedListFn: (param?: any) => Observable<any>;
 
     constructor() {
         super();
@@ -41,8 +41,18 @@ export class CoreContainer extends Core {
 
     async search() {
         this.tableLoading = true;
+        await this.searchPagedListFn().toPromise().then(d => {
+            this.tableLoading = false;
+            this.setTableData(d);
+        }, e => {
+            this.tableLoading = false;
+        });
+    }
+
+    async reSearch() {
+        this.tableLoading = true;
         this.initPageIndex();
-        await this.searchFn().toPromise().then(d => {
+        await this.searchPagedListFn().toPromise().then(d => {
             this.tableLoading = false;
             this.setTableData(d);
         }, e => {

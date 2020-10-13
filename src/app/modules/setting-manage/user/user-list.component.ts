@@ -65,7 +65,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
         super();
 
-        this.searchFn = this.getUsers;
+        this.searchPagedListFn = this.getUsers;
 
         this.searchForm = this.fb.group({
             sName: [null],

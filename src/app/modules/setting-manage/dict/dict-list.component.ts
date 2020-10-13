@@ -44,7 +44,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
     private activedRoute: ActivatedRoute) {
     super();
 
-    this.searchFn = this.getDicts;
+    this.searchPagedListFn = this.getDicts;
 
     this.searchForm = this.fb.group({
       sDictName: [null],
