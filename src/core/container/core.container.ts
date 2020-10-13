@@ -41,6 +41,7 @@ export class CoreContainer extends Core {
 
     async search() {
         this.tableLoading = true;
+        this.initPageIndex();
         await this.searchFn().toPromise().then(d => {
             this.tableLoading = false;
             this.setTableData(d);
