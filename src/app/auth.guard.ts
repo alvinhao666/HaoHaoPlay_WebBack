@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate {
             this.router.navigateByUrl('login');
         }
 
+        // 如果可以跳转页面，返回true,不能，则返回false
         return true;
     }
 
