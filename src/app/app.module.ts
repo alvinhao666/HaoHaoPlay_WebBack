@@ -10,7 +10,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { H_HttpInterceptor } from '../core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.route';
-import { AuthGuard } from './auth.guard';
 
 
 // registerLocaleData(zh);
@@ -28,7 +27,6 @@ import { AuthGuard } from './auth.guard';
   ],
   entryComponents: [],  // 动态加载的组件
   providers: [
-    AuthGuard,
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: H_HttpInterceptor, multi: true },
     // { provide: NZ_I18N, useValue: zh_CN }
