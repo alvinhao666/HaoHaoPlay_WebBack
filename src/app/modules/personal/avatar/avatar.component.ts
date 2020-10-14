@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { cropbox, H_Http } from '@core';
-import { environment } from '@env/environment';
 
 @Component({
   selector: 'dialog-avatar',
@@ -63,16 +62,21 @@ export class AvatarComponent implements OnInit {
 
     const blob = this.cropper.getBlob();
 
-    let fileName = '';
+    let bucket = '';
+    let key = '';
+    let region = '';
+    
     await this.http.get('Common/GetAvatarName').toPromise().then(d => {
       if (!d) return;
-      fileName = d;
+      bucket = d.Bucket;
+      key = d.Key;
+      region = d.Region;
     });
 
     this.cos.putObject({
-      Bucket: environment.bucket, /* 必须 */
-      Region: environment.region,     /* 存储桶所在地域，必须字段 */
-      Key: environment.avatarDir + '/' + fileName,              /* 必须 */
+      Bucket: bucket, /* 必须 */
+      Region: region,     /* 存储桶所在地域，必须字段 */
+      Key: key,              /* 必须 */
       Body: blob,                /* 必须 */
       onProgress: function (progressData) {
         console.log(JSON.stringify(progressData));
