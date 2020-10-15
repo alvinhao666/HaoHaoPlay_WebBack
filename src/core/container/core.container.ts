@@ -50,14 +50,8 @@ export class CoreContainer extends Core {
     }
 
     async reSearch() {
-        this.tableLoading = true;
         this.initPageIndex();
-        await this.searchPagedListFn().toPromise().then(d => {
-            this.tableLoading = false;
-            this.setTableData(d);
-        }, e => {
-            this.tableLoading = false;
-        });
+        await this.search();
     }
 
     pageIndexChange(pageIndex: number) {
