@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { H_HttpInterceptor } from '../core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.route';
+import { NzMessageModule } from 'ng-zorro-antd/message'; //消息弹窗 全局 http拦截器里有引用
 
 
 // registerLocaleData(zh);
@@ -23,7 +24,8 @@ import { AppRoutingModule } from './app.route';
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NzMessageModule
   ],
   entryComponents: [],  // 动态加载的组件
   providers: [
