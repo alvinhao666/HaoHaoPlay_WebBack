@@ -4,71 +4,66 @@ import { Router, NavigationError, NavigationCancel, NavigationStart } from '@ang
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from '@env/environment';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-root',
     // template: `<ng-container *ngComponentOutlet='componentConent'></ng-container>`,
     template: `<router-outlet></router-outlet>`,
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
 
-    // private router$: Subscription;
-    // componentConent: Type<any>;
-    // constructor(
-    //     private router: Router,
-    //     public msg: NzMessageService) {
-    //     this.routerHandle();
-    // }
+    private router$: Subscription;
+    componentConent: Type<any>;
+    constructor(
+        private router: Router,
+        private location: Location,
+        public msg: NzMessageService) {
 
-
-    // ngOnInit() {
-    //     // this.titleService.setTitle('好好玩后台系管理统');
-    //     // this.viewSwitching();
-    // }
-    // ngOnDestroy(): void {
-    //     this.router$.unsubscribe();
-    // }
-
-    // // viewSwitching() {
-    // //     const token = this.getToken();
-    // //     this.componentConent = token ? MainComponent : LoginComponent;
-    // // }
-
-    // private routerHandle() {
-    //     this.router$ = this.router.events.subscribe(evt => {
-    //         if (evt instanceof NavigationError || evt instanceof NavigationCancel) {
-    //             if (evt instanceof NavigationError) {
-    //                 this.msg.error(`${evt.url}地址无效`, { nzDuration: 1000 * 3 });
-    //             }
-    //             if (this.getToken()) {
-    //                 this.goTo('main/dashboard');
-    //             } else {
-    //                 this.goTo('/login');
-    //             }
-    //             return;
-    //         }
-    //         if (evt instanceof NavigationStart) {
-    //             if (this.getToken()) {
-    //                 if (evt.url === '/' || evt.url === '/login') {
-    //                     this.goTo('main/dashboard');
-    //                 }
-    //             } else {
-    //                 if (evt.url !== '/' && evt.url !== '/login') {
-    //                     // this.msg.error('请先登录系统');
-    //                     this.goTo('/login');
-    //                 }
-    //             }
-    //             return;
-    //         }
-    //     });
-    // }
-
-    // private getToken(): string {
-    //     return localStorage.getItem(environment.token_key);
-    // }
+    }
 
 
-    // private goTo(url: string) {
-    //     this.router.navigateByUrl(url);
-    // }
+    ngOnInit() {
+        if (this.getToken()) {
+            this.routerHandle();
+        }
+    }
+
+    ngOnDestroy(): void {
+        this.router$.unsubscribe();
+    }
+
+    private routerHandle() {
+        this.router$ = this.router.events.subscribe(evt => {
+            if (evt instanceof NavigationError || evt instanceof NavigationCancel) {
+                // if (evt instanceof NavigationError) {
+                //     this.msg.error(`${evt.url}地址无效`, { nzDuration: 1000 * 3 });
+                // }
+                if (this.getToken()) {
+                    this.location.back();
+                } else {
+                    this.router.navigateByUrl('login');
+                }
+                return;
+            }
+            if (evt instanceof NavigationStart) {
+                if (this.getToken()) {
+                    // console.log(evt.url); '/login';
+                    if (evt.url === '/' || evt.url === '/login') {
+                        this.router.navigateByUrl('main/dashboard');
+                    }
+                } else {
+                    if (evt.url !== '/' && evt.url !== '/login') {
+                        // this.msg.error('请先登录系统');
+                        this.router.navigateByUrl('login');
+                    }
+                }
+                return;
+            }
+        });
+    }
+
+    private getToken(): string {
+        return localStorage.getItem(environment.token_key);
+    }
 }
