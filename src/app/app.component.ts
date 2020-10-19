@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
 import { Router, NavigationError, NavigationCancel, NavigationStart } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from '@env/environment';
@@ -44,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 return;
             }
             if (evt instanceof NavigationStart) {
-                // console.log('NavigationStart');
+                console.log('NavigationStart');
                 if (this.getToken()) {
                     // console.log(evt.url); '/login';
                     if (evt.url === '/' || evt.url === '/login') {
