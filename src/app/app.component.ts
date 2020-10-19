@@ -24,9 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        if (this.getToken()) {
-            this.routerHandle();
-        }
+        this.routerHandle();
     }
 
     ngOnDestroy(): void {
@@ -47,10 +45,11 @@ export class AppComponent implements OnInit, OnDestroy {
                 return;
             }
             if (evt instanceof NavigationStart) {
+                // console.log('NavigationStart');
                 if (this.getToken()) {
                     // console.log(evt.url); '/login';
                     if (evt.url === '/' || evt.url === '/login') {
-                        this.router.navigateByUrl('main/dashboard');
+                        this.location.back();
                     }
                 } else {
                     if (evt.url !== '/' && evt.url !== '/login') {

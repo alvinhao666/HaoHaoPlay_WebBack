@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: './main/main.module#MainModule'
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 
