@@ -43,7 +43,6 @@ export class AppComponent implements OnInit, OnDestroy {
                 return;
             }
             if (evt instanceof NavigationStart) {
-                console.log('NavigationStart');
                 if (this.getToken()) {
                     // console.log(evt.url); '/login';
                     if (evt.url === '/' || evt.url === '/login') {
