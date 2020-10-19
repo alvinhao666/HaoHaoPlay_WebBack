@@ -6,13 +6,11 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
-    canActivate: [AuthGuard]
+    loadChildren: './login/login.module#LoginModule',
   },
   {
     path: 'login',
     loadChildren: './login/login.module#LoginModule',
-    pathMatch: 'full'
   },
   {
     path: 'main',
@@ -20,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    component: AppComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
