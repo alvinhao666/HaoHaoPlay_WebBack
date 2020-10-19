@@ -1,4 +1,4 @@
-import { Component, OnInit, Type, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Router, NavigationError, NavigationCancel, NavigationStart } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -8,13 +8,12 @@ import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-root',
-    // template: `<ng-container *ngComponentOutlet='componentConent'></ng-container>`,
     template: `<router-outlet></router-outlet>`,
 })
 export class AppComponent implements OnInit, OnDestroy {
 
     private router$: Subscription;
-    componentConent: Type<any>;
+
     constructor(
         private router: Router,
         private location: Location,
