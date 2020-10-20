@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 if (this.getToken()) {
                     // console.log(evt.url); '/login';
                     if (evt.url === '/' || evt.url === '/login') {
-                        this.location.back();
+                        this.router.navigateByUrl('main/dashboard');
                     }
                 } else {
                     if (evt.url !== '/' && evt.url !== '/login') {
