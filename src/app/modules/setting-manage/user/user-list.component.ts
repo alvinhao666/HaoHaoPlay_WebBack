@@ -116,7 +116,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
             this.sGender = values[0];
         else
             this.sGender = '';
-        this.search();
+        this.reSearch();
     }
 
 
