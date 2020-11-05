@@ -95,7 +95,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
                 LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
                 LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
                 SortFields: this.sortKey,
-                OrderByTypes: this.sortValue
+                SortTypes: this.sortValue
             }));
     }
 
