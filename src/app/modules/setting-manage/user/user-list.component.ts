@@ -94,8 +94,8 @@ export class UserListComponent extends CoreContainer implements OnInit {
                 Enabled: this.sEnabled.value || '',
                 LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
                 LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
-                SortField: this.sortKey,
-                OrderByType: this.sortValue
+                SortFields: this.sortKey,
+                OrderByTypes: this.sortValue
             }));
     }
 
@@ -107,8 +107,8 @@ export class UserListComponent extends CoreContainer implements OnInit {
         else if (sort.value === 'descend')
             this.sortValue = '1';
         else
-            this.sortValue = '';
-        this.search();
+            this.sortValue = '1';
+        this.reSearch();
     }
 
     updateFilter(values: string[]): void {
