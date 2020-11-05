@@ -36,6 +36,8 @@ export class UserListComponent extends CoreContainer implements OnInit {
     sortValue = '';
     sortKey = '';
 
+    colSortAge = SortUser.Age;
+
     get sName() {
         return this.searchForm.controls.sName;
     }
@@ -102,12 +104,15 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
     sort(sort: { key: string, value: string }): void {
         this.sortKey = sort.key;
-        if (sort.value === 'ascend')
+        if (sort.value === 'ascend') {
             this.sortValue = '0';
-        else if (sort.value === 'descend')
+        } else if (sort.value === 'descend') {
             this.sortValue = '1';
-        else
-            this.sortValue = '1';
+        } else {
+            this.sortValue = '';
+            this.sortKey = '';
+        }
+
         this.reSearch();
     }
 
@@ -238,4 +243,9 @@ export class UserListComponent extends CoreContainer implements OnInit {
     private getToken(): string {
         return localStorage.getItem(environment.token_key);
     }
+}
+
+
+export enum SortUser {
+    Age
 }

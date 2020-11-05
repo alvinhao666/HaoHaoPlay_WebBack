@@ -67,7 +67,7 @@
                 <th nzLeft="0px" nzWidth="60px">序号</th>
                 <th nzLeft="60px" nzWidth="100px">姓名</th>
                 <th nzWidth="100px" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别</th>
-                <th nzWidth="100px" nzShowSort nzColumnKey="0" [nzSortFn]="true">年龄</th>
+                <th nzWidth="100px" nzShowSort nzColumnKey="{{colSortAge}}" [nzSortFn]="true">年龄</th>
                 <th nzWidth="130px">手机号</th>
                 <th nzWidth="200px">邮箱</th>
                 <th nzWidth="150px">微信</th>
