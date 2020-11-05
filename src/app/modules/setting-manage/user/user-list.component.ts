@@ -1,6 +1,6 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { H_Http } from '@core';
+import { H_Http, SortType } from '@core';
 import { DatePipe } from '@angular/common';
 import { environment } from '@env/environment';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
@@ -33,8 +33,8 @@ export class UserListComponent extends CoreContainer implements OnInit {
     ];
     sGender = '';
 
-    sortValue = '';
-    sortKey = '';
+    // sortValue = '';
+    // sortKey = '';
 
     colSortAge = SortUser.Age;
 
@@ -95,23 +95,25 @@ export class UserListComponent extends CoreContainer implements OnInit {
                 Gender: this.sGender,
                 Enabled: this.sEnabled.value || '',
                 LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
-                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
-                SortFields: this.sortKey,
-                SortTypes: this.sortValue
+                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || ''
             }));
     }
 
 
-    sort(sort: { key: string, value: string }): void {
-        this.sortKey = sort.key;
-        if (sort.value === 'ascend') {
-            this.sortValue = '0';
-        } else if (sort.value === 'descend') {
-            this.sortValue = '1';
-        } else {
-            this.sortValue = '';
-            this.sortKey = '';
+    sort(sort: { key: number, value: string }): void {
+      
+        const index = this.sortFields.indexOf(sort.key);
+        if (index > -1) {
+            this.sortFields.splice(index, 1);
+            this.sortTypes.splice(index, 1);
         }
+        if (sort.value === 'ascend') {
+            this.sortFields.push(sort.key);
+            this.sortTypes.push(SortType.Ascend);
+        } else if (sort.value === 'descend') {
+            this.sortFields.push(sort.key);
+            this.sortTypes.push(SortType.Descend);
+        } 
 
         this.reSearch();
     }
@@ -134,8 +136,8 @@ export class UserListComponent extends CoreContainer implements OnInit {
                 Gender: this.sGender,
                 Enabled: this.sEnabled.value || '',
                 LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
-                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || '',
-                OrderFileds: this.sortValue && (this.sortKey + this.sortValue)
+                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || ''
+                // OrderFileds: this.sortValue && (this.sortKey + this.sortValue)
             })
             .subscribe((d: any) => {
                 const a = document.createElement('a'); //创建一个<a></a>标签

@@ -16,6 +16,10 @@ export class CoreContainer extends Core {
     //滚动
     scrollValue = { x: '0px', y: '0px' };
 
+    sortFields: number[] = [];
+
+    sortTypes: number[] = [];
+
     //分页查询方法入参
     // searchParam: any = null;
 
@@ -75,6 +79,8 @@ export class CoreContainer extends Core {
         return Object.assign(param, {
             PageIndex: this.pageIndex,
             PageSize: this.pageSize,
+            SortFields: this.sortFields,
+            SortTypes: this.sortTypes
         });
     }
 
@@ -85,4 +91,9 @@ export class CoreContainer extends Core {
         this.pageSize = d.PageSize;
         this.totalCount = d.TotalCount;
     }
+}
+
+export enum SortType {
+    Ascend,
+    Descend
 }
