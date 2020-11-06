@@ -31,7 +31,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
         { text: '男', value: '1' },
         { text: '女', value: '0' }
     ];
-    sGender = '';
+    sGender = null;
 
     colSortAge = SortUser.Age;
 
@@ -87,12 +87,12 @@ export class UserListComponent extends CoreContainer implements OnInit {
     getUsers() {
         return this.http
             .get('User/GetPagedList', this.handleSearchParam({
-                Name: this.sName.value || '',
-                Phone: this.sPhone.value || '',
+                Name: this.sName.value,
+                Phone: this.sPhone.value,
                 Gender: this.sGender,
-                Enabled: this.sEnabled.value || '',
-                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
-                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || ''
+                Enabled: this.sEnabled.value,
+                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd'),
+                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd')
             }));
     }
 
@@ -102,7 +102,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
         if (values.length !== this.filterGender.length && values.length > 0)
             this.sGender = values[0];
         else
-            this.sGender = '';
+            this.sGender = null;
         this.reSearch();
     }
 
@@ -110,12 +110,12 @@ export class UserListComponent extends CoreContainer implements OnInit {
     export() {
         this.http
             .get('User/Export', {
-                Name: this.sName.value || '',
-                Phone: this.sPhone.value || '',
+                Name: this.sName.value,
+                Phone: this.sPhone.value,
                 Gender: this.sGender,
-                Enabled: this.sEnabled.value || '',
-                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd') || '',
-                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd') || ''
+                Enabled: this.sEnabled.value,
+                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd'),
+                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd')
                 // OrderFileds: this.sortValue && (this.sortKey + this.sortValue)
             })
             .subscribe((d: any) => {
