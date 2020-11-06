@@ -70,8 +70,4 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     this.dialogDictItemEdit.title = '编辑数据项';
     this.dialogDictItemEdit.showDictItem(d);
   }
-
-  onSave() {
-    this.search();
-  }
 }

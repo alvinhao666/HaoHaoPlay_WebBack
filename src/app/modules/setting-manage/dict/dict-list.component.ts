@@ -72,12 +72,6 @@ export class DictListComponent extends CoreContainer implements OnInit {
   }
 
 
-  // 保存字典
-  onSaveDict() {
-    this.initPageIndex();
-    this.search();
-  }
-
   editDict(data: any) {
     this.dialogDictEdit.showDict(data);
     this.dialogDictEdit.title = '编辑字典';
