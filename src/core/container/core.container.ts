@@ -91,6 +91,24 @@ export class CoreContainer extends Core {
         this.pageSize = d.PageSize;
         this.totalCount = d.TotalCount;
     }
+
+    sortChange(sort: { key: number, value: string }) {
+      
+        const index = this.sortFields.indexOf(sort.key);
+        if (index > -1) {
+            this.sortFields.splice(index, 1);
+            this.sortTypes.splice(index, 1);
+        }
+        if (sort.value === 'ascend') {
+            this.sortFields.push(sort.key);
+            this.sortTypes.push(SortType.Ascend);
+        } else if (sort.value === 'descend') {
+            this.sortFields.push(sort.key);
+            this.sortTypes.push(SortType.Descend);
+        } 
+
+        this.reSearch();
+    }
 }
 
 export enum SortType {

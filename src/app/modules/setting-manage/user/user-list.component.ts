@@ -1,6 +1,6 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { H_Http, SortType } from '@core';
+import { H_Http } from '@core';
 import { DatePipe } from '@angular/common';
 import { environment } from '@env/environment';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
@@ -32,9 +32,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
         { text: '女', value: '0' }
     ];
     sGender = '';
-
-    // sortValue = '';
-    // sortKey = '';
 
     colSortAge = SortUser.Age;
 
@@ -100,23 +97,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
     }
 
 
-    sort(sort: { key: number, value: string }): void {
-      
-        const index = this.sortFields.indexOf(sort.key);
-        if (index > -1) {
-            this.sortFields.splice(index, 1);
-            this.sortTypes.splice(index, 1);
-        }
-        if (sort.value === 'ascend') {
-            this.sortFields.push(sort.key);
-            this.sortTypes.push(SortType.Ascend);
-        } else if (sort.value === 'descend') {
-            this.sortFields.push(sort.key);
-            this.sortTypes.push(SortType.Descend);
-        } 
-
-        this.reSearch();
-    }
 
     updateFilter(values: string[]): void {
         if (values.length !== this.filterGender.length && values.length > 0)
@@ -125,7 +105,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
             this.sGender = '';
         this.reSearch();
     }
-
 
 
     export() {
@@ -186,12 +165,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
             if (!d) return;
             this.msg.success('导入成功');
         });
-    }
-
-
-    onSave() {
-        this.initPageIndex();
-        this.search();
     }
 
     //删除用户

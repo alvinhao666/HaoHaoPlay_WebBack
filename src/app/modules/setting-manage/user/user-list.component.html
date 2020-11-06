@@ -62,7 +62,7 @@
 
     <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount"
         [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="scrollValue" [nzSize]="'small'">
-        <thead (nzSortOrderChange)="sort($event)" nzSortPriority>
+        <thead (nzSortOrderChange)="sortChange($event)" nzSortPriority>
             <tr>
                 <th nzLeft="0px" nzWidth="60px">序号</th>
                 <th nzLeft="60px" nzWidth="100px">姓名</th>
@@ -125,6 +125,6 @@
     </div>
 </nz-card>
 
-<modal-user-edit #silderUserEdit (onSave)="onSave()"></modal-user-edit>
+<modal-user-edit #silderUserEdit (onSave)="reSearch()"></modal-user-edit>
 
 <slider-user-view #silderUserView></slider-user-view>
