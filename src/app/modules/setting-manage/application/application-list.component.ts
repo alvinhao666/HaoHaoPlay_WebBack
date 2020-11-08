@@ -76,7 +76,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
 
 
     select(data: NzFormatEmitEvent): void {
-        // if (this.activedNode.key === data.node.key) return;
+        if (this.activedNode.key === data.node.key) return;
         this.activedNode = data.node;
         this.getNodeInfo(data.node);
     }
