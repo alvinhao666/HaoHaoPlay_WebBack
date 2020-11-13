@@ -59,7 +59,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
 
   // 查询字典列表
   getDicts() {
-    return this.http.get('Dict/GetDictPagedList', this.handleSearchParam({
+    return this.http.get('Dict/GetDictPagedList', this.setQueryParam({
       DictName: this.sDictName.value,
       DictCode: this.sDictCode.value
     }));

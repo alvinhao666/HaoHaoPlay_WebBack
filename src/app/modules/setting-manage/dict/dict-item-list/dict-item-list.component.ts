@@ -52,7 +52,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
 
   getDictItem() {
     // this.searchParam = this.dictId;
-    return this.http.get('Dict/GetDictItemPagedList', this.handleSearchParam({
+    return this.http.get('Dict/GetDictItemPagedList', this.setQueryParam({
       ItemName: this.sItemName.value,
       ParentId: this.dictId
     }));

@@ -75,7 +75,7 @@ export class CoreContainer extends Core {
     }
 
 
-    handleSearchParam(param?: any): any {
+    setQueryParam(param?: any): any {
         return Object.assign(param, {
             PageIndex: this.pageIndex,
             PageSize: this.pageSize,

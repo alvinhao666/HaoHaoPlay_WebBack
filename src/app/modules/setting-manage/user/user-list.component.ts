@@ -86,7 +86,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
     //查询用户
     getUsers() {
         return this.http
-            .get('User/GetPagedList', this.handleSearchParam({
+            .get('User/GetPagedList', this.setQueryParam({
                 Name: this.sName.value,
                 Phone: this.sPhone.value,
                 Gender: this.sGender,
