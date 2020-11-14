@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, CoreEdit, getColorByFirstName } from '@core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute } from '@angular/router';
-import { UserInfoSubject } from '../../../share/user-info.subject';
+import { UserInfoSubject } from '../../../share/subjects/user-info.subject';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { environment } from '@env/environment';
 
