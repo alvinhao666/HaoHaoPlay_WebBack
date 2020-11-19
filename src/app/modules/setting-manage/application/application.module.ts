@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationRoutingModule } from './application.route';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
 import { ResourceEditComponent } from './resource-edit/resource-edit.component';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 
 
 const NzModule = [
@@ -29,7 +30,8 @@ const NzModule = [
     NzInputModule,
     NzInputNumberModule,
     NzTreeModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzAutocompleteModule
 ];
 
 @NgModule({
