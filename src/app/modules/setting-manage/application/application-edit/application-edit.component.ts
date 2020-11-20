@@ -1,13 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { H_Http } from '@core';
+import { H_Http, icons } from '@core';
 
 @Component({
   selector: 'dialog-application-edit',
   templateUrl: './application-edit.component.html',
   styleUrls: ['./application-edit.component.less']
 })
-export class ApplicationEditComponent   {
+export class ApplicationEditComponent {
 
   isVisible = false;
 
@@ -19,7 +19,7 @@ export class ApplicationEditComponent   {
 
   @Output() onSave = new EventEmitter();
 
-  @Input()  title = '';
+  @Input() title = '';
 
   get fName() {
     return this.form.controls.fName;
@@ -48,6 +48,8 @@ export class ApplicationEditComponent   {
       fRouterUrl: [null, Validators.required],
       fSort: [null, Validators.required]
     });
+
+    console.log(icons);
   }
 
 

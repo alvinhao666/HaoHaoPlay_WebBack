@@ -19,11 +19,8 @@
                     <i nz-icon nzType="search"></i>
                 </ng-template>
                 <nz-autocomplete #auto>
-                    <nz-auto-option>
-                        1
-                    </nz-auto-option>
-                    <nz-auto-option>
-                        2
+                    <nz-auto-option *ngFor="let item of icons">
+                        <i nz-icon [nzType]="item.Icon"></i>
                     </nz-auto-option>
                 </nz-autocomplete>
             </nz-form-control>
