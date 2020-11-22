@@ -10,7 +10,7 @@
             <nz-form-label nzRequired [nzSpan]="4">图标</nz-form-label>
             <nz-form-control [nzSpan]="18" nzErrorTip="图标不能为空">
                 <nz-input-group [nzPrefix]="prefixTemplateIcon" [nzSuffix]="suffixIconSearch">
-                    <input nz-input id="icon" formControlName="fIcon" #inputIcon [nzAutocomplete]="auto" />
+                    <input nz-input id="icon" formControlName="fIcon" #inputIcon [nzAutocomplete]="auto" (input)="onInputIcon($event)" (keydown)="onKeyDownIcon($event)" style="ime-mode:disabled;" />
                 </nz-input-group>
                 <ng-template #prefixTemplateIcon>
                     <i nz-icon [nzType]="inputIcon.value" class="iconfont"></i>
@@ -19,9 +19,9 @@
                     <i nz-icon nzType="search"></i>
                 </ng-template>
                 <nz-autocomplete #auto>
-                    <!-- <nz-auto-option *ngFor="let item of icons">
-                        <i nz-icon [nzType]="item.Icon"></i>
-                    </nz-auto-option> -->
+                    <nz-auto-option *ngFor="let name of icons" [nzValue]="name" [nzLabel]="name">
+                        <i nz-icon [nzType]="name" style="font-size: 16px;"></i>
+                    </nz-auto-option>
                 </nz-autocomplete>
             </nz-form-control>
         </nz-form-item>

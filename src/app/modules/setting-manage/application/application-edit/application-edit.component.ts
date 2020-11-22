@@ -13,6 +13,8 @@ export class ApplicationEditComponent {
 
   form: FormGroup;
 
+  iconList: string[];
+
   @Input() type = null; // 当前点击的node
 
   @Input() Id = null;
@@ -49,8 +51,45 @@ export class ApplicationEditComponent {
       fSort: [null, Validators.required]
     });
 
-    console.log(icons);
+    this.iconList = icons;
+    // icons.forEach(element => {
+    //   this.iconList.push(element);
+    // });
+    // icons.forEach(element => {
+    //   this.iconList.push(element);
+    // });
+    // icons.forEach(element => {
+    //   this.iconList.push(element);
+    // });
+    // icons.forEach(element => {
+    //   this.iconList.push(element);
+    // });
+    // icons.forEach(element => {
+    //   this.iconList.push(element);
+    // });
   }
+
+  onInputIcon(event: InputEvent) {
+
+    const inputLength = event.data.length;
+    this.fIcon.setValue(this.fIcon.value.substring(0, this.fIcon.value.length - inputLength));
+  }
+
+  onKeyDownIcon(event: KeyboardEvent) {
+    return false; //任何 都不能输入
+  }
+
+  // onKeyUpIcon(event: KeyboardEvent) {
+  //   console.log("sdf")
+  //   let temp = ''; 
+  //   for (let i = 0; i < this.fIcon.value.length; i++) {
+  //     if (this.fIcon.value.charCodeAt(i) > 0 && this.fIcon.value.charCodeAt(i) < 255)
+  //       temp += this.fIcon.value.charAt(i);
+  //   }
+
+  //   this.fIcon.setValue(temp);
+  // }
+
 
 
   handleCancel() {

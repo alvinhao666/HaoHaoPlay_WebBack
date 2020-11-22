@@ -1,5 +1,5 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
-import { H_Http, CoreContainer } from '@core';
+import { H_Http, CoreContainer, icons } from '@core';
 import { ActivatedRoute } from '@angular/router';
 import { NzTreeNode, NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -35,6 +35,9 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
     resourceData = null;
     editCache: { [key: string]: { edit: boolean; data: any } } = {};
 
+
+    iconList: string[];
+
     get fName() {
         return this.form.controls.fName;
     }
@@ -60,6 +63,8 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
         private msg: NzMessageService) {
 
         super();
+
+        this.iconList = icons;
         this.form = this.fb.group({
             fName: [null, Validators.required],
             fIcon: [null, Validators.required],
@@ -72,6 +77,17 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
 
     ngOnInit(): void {
         this.nodes = this.router.snapshot.data.treeList;
+    }
+
+
+    onInputIcon(event: InputEvent) {
+
+        const inputLength = event.data.length;
+        this.fIcon.setValue(this.fIcon.value.substring(0, this.fIcon.value.length - inputLength));
+    }
+
+    onKeyDownIcon(event: KeyboardEvent) {
+        return false; //任何 都不能输入
     }
 
 
