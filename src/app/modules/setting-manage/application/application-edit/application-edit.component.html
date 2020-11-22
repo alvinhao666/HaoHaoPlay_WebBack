@@ -19,7 +19,7 @@
                     <i nz-icon nzType="search"></i>
                 </ng-template>
                 <nz-autocomplete #auto>
-                    <nz-auto-option *ngFor="let name of icons" [nzValue]="name" [nzLabel]="name">
+                    <nz-auto-option *ngFor="let name of iconList" [nzValue]="name" [nzLabel]="name">
                         <i nz-icon [nzType]="name" style="font-size: 16px;"></i>
                     </nz-auto-option>
                 </nz-autocomplete>
