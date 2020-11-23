@@ -80,15 +80,15 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
     }
 
 
-    onInputIcon(event: InputEvent) {
+    // onInputIcon(event: InputEvent) {
 
-        const inputLength = event.data.length;
-        this.fIcon.setValue(this.fIcon.value.substring(0, this.fIcon.value.length - inputLength));
-    }
+    //     const inputLength = event.data.length;
+    //     this.fIcon.setValue(this.fIcon.value.substring(0, this.fIcon.value.length - inputLength));
+    // }
 
-    onKeyDownIcon(event: KeyboardEvent) {
-        return false; //任何 都不能输入
-    }
+    // onKeyDownIcon(event: KeyboardEvent) {
+    //     return false; //任何 都不能输入
+    // }
 
 
     select(data: NzFormatEmitEvent): void {
