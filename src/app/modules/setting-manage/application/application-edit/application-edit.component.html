@@ -23,7 +23,7 @@
                         <i nz-icon [nzType]="name" style="font-size: 16px;"></i>
                     </nz-auto-option>
                 </nz-autocomplete> -->
-                <nz-select nzAllowClear [nzCustomTemplate]="selectTmp" formControlName="fIcon">
+                <nz-select nzAllowClear [nzCustomTemplate]="selectTmp" formControlName="fIcon" nzDropdownClassName="selectDiv">
                     <nz-option nzCustomContent *ngFor="let name of iconList" [nzValue]="name" [nzLabel]="name">
                         <i nz-icon [nzType]="name" style="font-size: 16px;"></i>
                         <!-- <span>{{name}}</span> -->
