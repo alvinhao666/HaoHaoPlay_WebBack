@@ -60,28 +60,28 @@
         </div>
     </form>
 
-    <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount"
+    <nz-table #nzFixedTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount"
         [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="scrollValue" [nzSize]="'small'">
         <thead (nzSortOrderChange)="sortChange($event)" nzSortPriority>
             <tr>
-                <th nzLeft="0px" nzWidth="60px">序号</th>
-                <th nzLeft="60px" nzWidth="100px">姓名</th>
+                <th [nzLeft]="true" nzWidth="60px">序号</th>
+                <th [nzLeft]="true" nzWidth="100px">姓名</th>
                 <th nzWidth="100px" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别</th>
                 <th nzWidth="100px" nzShowSort nzColumnKey="{{colSortAge}}" [nzSortFn]="true">年龄</th>
                 <th nzWidth="130px">手机号</th>
-                <th nzWidth="200px">邮箱</th>
+                <th>邮箱</th>
                 <th nzWidth="150px">微信</th>
                 <th nzWidth="80px">状态</th>
                 <th nzWidth="120px">角色</th>
                 <th nzWidth="180px">最后登录时间</th>
                 <th nzWidth="140px">最后登录IP</th>
-                <th nzRight="0px" nzWidth="165px">操作</th>
+                <th [nzRight]="true" nzWidth="165px">操作</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let d of nzTable.data;let idx=index;">
-                <td nzLeft="0px">{{idx+1}}</td>
-                <td nzLeft="60px">{{d.Name}}</td>
+            <tr *ngFor="let d of nzFixedTable.data;let idx=index;">
+                <td [nzLeft]="true">{{idx+1}}</td>
+                <td [nzLeft]="true">{{d.Name}}</td>
                 <td>{{d.GenderString}}</td>
                 <td>{{d.Age}}</td>
                 <td>{{d.Phone}}</td>
@@ -93,7 +93,7 @@
                 <td>{{d.RoleName}}</td>
                 <td>{{d.LastLoginTime}}</td>
                 <td>{{d.LastLoginIP}}</td>
-                <td nzRight="0px">
+                <td [nzRight]="true">
                     <a (click)="view(d.Id)" class="a-operate" *ngIf="checkAuth('1_8388608')">查看</a>
                     <!-- <nz-divider nzType="vertical"></nz-divider> -->
                     <a (click)="edit(d.Id)" *ngIf="d.Id!=-1&&checkAuth('1_64')" class="ml10 a-operate">编辑</a>
