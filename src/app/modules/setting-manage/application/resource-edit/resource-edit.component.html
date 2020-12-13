@@ -1,10 +1,13 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="添加资源" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzWidth]="400">
-    <form nz-form [formGroup]="form">
-        <nz-form-item>
-            <nz-form-label nzRequired [nzSpan]="4">名称</nz-form-label>
-            <nz-form-control [nzSpan]="18" nzErrorTip="名称不能为空">
-                <input nz-input id="title" formControlName="fName" />
-            </nz-form-control>
-        </nz-form-item>
-    </form>
+
+    <ng-container *nzModalContent>
+        <form nz-form [formGroup]="form">
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="4">名称</nz-form-label>
+                <nz-form-control [nzSpan]="18" nzErrorTip="名称不能为空">
+                    <input nz-input id="title" formControlName="fName" />
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
 </nz-modal>

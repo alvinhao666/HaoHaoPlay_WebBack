@@ -1,38 +1,41 @@
 <nz-modal [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="500" [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="close()" (nzOnOk)="save()">
-    <form nz-form [formGroup]="form">
-        <div nz-row>
-            <div nz-col nzSpan="12">
-                <nz-form-item>
-                    <nz-form-label nzRequired [nzSpan]="6">名称</nz-form-label>
-                    <nz-form-control nzErrorTip="名称必填" [nzSpan]="18">
-                        <input nz-input formControlName="fItemName" autocomplete="off">
-                    </nz-form-control>
-                </nz-form-item>
+
+    <ng-container *nzModalContent>
+        <form nz-form [formGroup]="form">
+            <div nz-row>
+                <div nz-col nzSpan="12">
+                    <nz-form-item>
+                        <nz-form-label nzRequired [nzSpan]="6">名称</nz-form-label>
+                        <nz-form-control nzErrorTip="名称必填" [nzSpan]="18">
+                            <input nz-input formControlName="fItemName" autocomplete="off">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="12">
+                    <nz-form-item>
+                        <nz-form-label nzRequired [nzSpan]="6">值</nz-form-label>
+                        <nz-form-control nzErrorTip="值必填" [nzSpan]="18">
+                            <nz-input-number [nzMin]="1" [nzMax]="100" [nzStep]="1" formControlName="fItemValue" [nzFormatter]="formatterInt" [nzParser]="parserInt"></nz-input-number>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="12">
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6">排序值</nz-form-label>
+                        <nz-form-control [nzSpan]="18">
+                            <nz-input-number [nzMin]="1" [nzMax]="100" [nzStep]="1" formControlName="fSort" [nzFormatter]="formatterInt" [nzParser]="parserInt"></nz-input-number>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="24">
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="3">备注</nz-form-label>
+                        <nz-form-control [nzSpan]="21">
+                            <textarea formControlName="fRemark" nz-input rows="3"></textarea>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
             </div>
-            <div nz-col nzSpan="12">
-                <nz-form-item>
-                    <nz-form-label nzRequired [nzSpan]="6">值</nz-form-label>
-                    <nz-form-control nzErrorTip="值必填" [nzSpan]="18">
-                        <nz-input-number [nzMin]="1" [nzMax]="100" [nzStep]="1" formControlName="fItemValue" [nzFormatter]="formatterInt" [nzParser]="parserInt"></nz-input-number>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <div nz-col nzSpan="12">
-                <nz-form-item>
-                    <nz-form-label [nzSpan]="6">排序值</nz-form-label>
-                    <nz-form-control [nzSpan]="18">
-                        <nz-input-number [nzMin]="1" [nzMax]="100" [nzStep]="1" formControlName="fSort" [nzFormatter]="formatterInt" [nzParser]="parserInt"></nz-input-number>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-            <div nz-col nzSpan="24">
-                <nz-form-item>
-                    <nz-form-label [nzSpan]="3">备注</nz-form-label>
-                    <nz-form-control [nzSpan]="21">
-                        <textarea formControlName="fRemark" nz-input rows="3"></textarea>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-        </div>
-    </form>
+        </form>
+    </ng-container>
 </nz-modal>

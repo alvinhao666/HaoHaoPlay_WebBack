@@ -1,60 +1,64 @@
 <nz-modal [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="1000" [(nzVisible)]="visible" [nzTitle]="title" [nzFooter]="null" (nzOnCancel)="close()">
-    <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm">
-        <div nz-row>
-            <nz-form-item>
-                <nz-form-label>数据项名称</nz-form-label>
-                <nz-form-control>
-                    <input nz-input formControlName="sItemName" autocomplete="off">
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="reSearch()">
-                    <i nz-icon nzType="search"></i>
-                    <span>查询</span>
-                </button>
-            </nz-form-item>
-            <nz-form-item>
-                <button nz-button type="reset">重置</button>
-            </nz-form-item>
-        </div>
-    </form>
-    <div class="operate-wrapper">
-        <button nz-button [nzType]="'primary'" (click)="addDictItem()" *ngIf="checkAuth('1_1048576')">
-            <i nz-icon nzType="plus"></i>
-            <span>添加</span>
-        </button>
-    </div>
 
-    <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount"
-        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzSize]="'small'">
-        <thead>
-            <tr>
-                <th nzLeft="0px" nzWidth="60px">序号</th>
-                <th nzLeft="60px" nzWidth="150px">名称</th>
-                <th nzWidth="100px">值</th>
-                <th>备注</th>
-                <th nzWidth="100px">排序</th>
-                <th nzWidth="180px">创建时间</th>
-                <th nzRight="0px" nzWidth="90px">操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let d of nzTable.data;let idx=index;">
-                <td>{{idx+1}}</td>
-                <td>{{d.ItemName}}</td>
-                <td>{{d.ItemValue}}</td>
-                <td>{{d.Remark}}</td>
-                <td>{{d.Sort}}</td>
-                <td>{{d.CreateTime}}</td>
-                <td>
-                    <a (click)="editItem(d)" *ngIf="checkAuth('1_2097152')" class="a-operate">编辑</a>
-                    <a nz-popconfirm (nzOnConfirm)="deleteItem(d)" nzPopconfirmTitle="确定删除?" *ngIf="checkAuth('1_4194304')" class="ml10 a-operate">删除</a>
-                </td>
-            </tr>
-        </tbody>
-    </nz-table>
-    <ng-template #totalTemplate>
-        共{{totalCount}}条
-    </ng-template>
+
+    <ng-container *nzModalContent>
+        <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm">
+            <div nz-row>
+                <nz-form-item>
+                    <nz-form-label>数据项名称</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="sItemName" autocomplete="off">
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="tableLoading" (click)="reSearch()">
+                        <i nz-icon nzType="search"></i>
+                        <span>查询</span>
+                    </button>
+                </nz-form-item>
+                <nz-form-item>
+                    <button nz-button type="reset">重置</button>
+                </nz-form-item>
+            </div>
+        </form>
+        <div class="operate-wrapper">
+            <button nz-button [nzType]="'primary'" (click)="addDictItem()" *ngIf="checkAuth('1_1048576')">
+                <i nz-icon nzType="plus"></i>
+                <span>添加</span>
+            </button>
+        </div>
+
+        <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount"
+            [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzSize]="'small'">
+            <thead>
+                <tr>
+                    <th nzLeft="0px" nzWidth="60px">序号</th>
+                    <th nzLeft="60px" nzWidth="150px">名称</th>
+                    <th nzWidth="100px">值</th>
+                    <th>备注</th>
+                    <th nzWidth="100px">排序</th>
+                    <th nzWidth="180px">创建时间</th>
+                    <th nzRight="0px" nzWidth="90px">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let d of nzTable.data;let idx=index;">
+                    <td>{{idx+1}}</td>
+                    <td>{{d.ItemName}}</td>
+                    <td>{{d.ItemValue}}</td>
+                    <td>{{d.Remark}}</td>
+                    <td>{{d.Sort}}</td>
+                    <td>{{d.CreateTime}}</td>
+                    <td>
+                        <a (click)="editItem(d)" *ngIf="checkAuth('1_2097152')" class="a-operate">编辑</a>
+                        <a nz-popconfirm (nzOnConfirm)="deleteItem(d)" nzPopconfirmTitle="确定删除?" *ngIf="checkAuth('1_4194304')" class="ml10 a-operate">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <ng-template #totalTemplate>
+            共{{totalCount}}条
+        </ng-template>
+    </ng-container>
 </nz-modal>
 <app-dict-item-edit #dialogDictItemEdit (onSave)="reSearch()"></app-dict-item-edit>
