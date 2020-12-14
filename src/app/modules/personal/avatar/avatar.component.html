@@ -1,24 +1,26 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="更换头像" [nzWidth]="500" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzClassName="avatar-modal">
-    <div class="avatar-content">
-        <div class="imageBox">
-            <div class="thumbBox"></div>
-            <div class="spinner" style="display: none">Loading...</div>
-        </div>
-        <div class="avatar-preview">
-            <div>预览</div>
-            <div id="preview-f">
-                <img class="previewBoxF" width="100" height="100" alt="">
+    <ng-container *nzModalContent>
+        <div class="avatar-content">
+            <div class="imageBox">
+                <div class="thumbBox"></div>
+                <div class="spinner" style="display: none">Loading...</div>
             </div>
+            <div class="avatar-preview">
+                <div>预览</div>
+                <div id="preview-f">
+                    <img class="previewBoxF" width="100" height="100" alt="">
+                </div>
 
-            <div>100x100</div>
-            <div id="preview-s">
-                <img class="previewBoxS" width="50" height="50" alt="">
+                <div>100x100</div>
+                <div id="preview-s">
+                    <img class="previewBoxS" width="50" height="50" alt="">
+                </div>
+
+                <div>50x50</div>
             </div>
-
-            <div>50x50</div>
         </div>
-    </div>
-    <input type="file" id="avatarInput" style="display: none;" accept="image/*">
+        <input type="file" id="avatarInput" style="display: none;" accept="image/*">
+    </ng-container>
 </nz-modal>
 
 <ng-template #modalFooter>

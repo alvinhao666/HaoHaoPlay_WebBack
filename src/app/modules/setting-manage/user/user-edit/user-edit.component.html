@@ -27,7 +27,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">密码</nz-form-label>
                             <nz-form-control [nzSpan]="16" [nzErrorTip]="passwordErrorTpl">
-                                <input nz-input formControlName="fPassword" placeholder="" type="password" autocomplete="new-password">
+                                <input nz-input formControlName="fPassword" placeholder="" type="text" class="pwd">
                             </nz-form-control>
                             <ng-template #passwordErrorTpl>
                                 <ng-container *ngIf="fPassword.dirty && fPassword.errors?.required">密码必填</ng-container>
@@ -40,7 +40,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">重复密码</nz-form-label>
                             <nz-form-control [nzSpan]="16" [nzErrorTip]="repasswordErrorTpl">
-                                <input nz-input formControlName="fRePassword" placeholder="" type="password" autocomplete="new-password">
+                                <input nz-input formControlName="fRePassword" placeholder="" type="text" class="pwd">
                             </nz-form-control>
 
                             <ng-template #repasswordErrorTpl>
