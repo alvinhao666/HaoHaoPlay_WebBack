@@ -27,7 +27,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">密码</nz-form-label>
                             <nz-form-control [nzSpan]="16" [nzErrorTip]="passwordErrorTpl">
-                                <input nz-input formControlName="fPassword" type="text" class="pwd" style="ime-mode:disabled;" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false">
+                                <input nz-input formControlName="fPassword" type="text" class="pwd" style="ime-mode:disabled;" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false" onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')">
                             </nz-form-control>
                             <ng-template #passwordErrorTpl>
                                 <ng-container *ngIf="fPassword.dirty && fPassword.errors?.required">密码必填</ng-container>
@@ -40,7 +40,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">重复密码</nz-form-label>
                             <nz-form-control [nzSpan]="16" [nzErrorTip]="repasswordErrorTpl">
-                                <input nz-input formControlName="fRePassword" type="text" class="pwd" style="ime-mode:disabled;" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false">
+                                <input nz-input formControlName="fRePassword" type="text" class="pwd" style="ime-mode:disabled;" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false" onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')">
                             </nz-form-control>
 
                             <ng-template #repasswordErrorTpl>
