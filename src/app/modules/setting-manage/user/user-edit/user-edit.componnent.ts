@@ -98,7 +98,7 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
 
         this.newPwdChange$
             .asObservable()
-            .pipe(debounceTime(100)) // debounceTime(200) 间隔时间 200ms
+            .pipe(debounceTime(150)) // debounceTime(200) 间隔时间 200ms
             .subscribe((value: string) => {
                 if (!this.fPassword.value) return;
 

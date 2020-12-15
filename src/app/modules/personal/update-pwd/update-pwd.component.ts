@@ -65,7 +65,7 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit, OnDestroy {
 
     this.oldPwdChange$
       .asObservable()
-      .pipe(debounceTime(300)) // debounceTime(200) 间隔时间 200ms
+      .pipe(debounceTime(150)) // debounceTime(200) 间隔时间 200ms
       .subscribe((value: string) => {
         if (!this.fOldPassword.value || !this.fPassword.value) return;
         this.fPassword.markAsDirty();
@@ -74,7 +74,7 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit, OnDestroy {
 
     this.newPwdChange$
       .asObservable()
-      .pipe(debounceTime(300)) // debounceTime(200) 间隔时间 200ms
+      .pipe(debounceTime(150)) // debounceTime(200) 间隔时间 200ms
       .subscribe((value: string) => {
         if (!this.fPassword.value) return;
 
