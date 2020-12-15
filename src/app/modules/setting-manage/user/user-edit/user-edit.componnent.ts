@@ -1,7 +1,9 @@
-import { OnInit, Component, Input, Output, EventEmitter } from '@angular/core';
+import { OnInit, Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, ComparePwdValidators, CoreEdit } from '@core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { BehaviorSubject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
     selector: 'modal-user-edit',
@@ -9,7 +11,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     styleUrls: ['./user-edit.component.less']
 })
 
-export class UserEditComponent extends CoreEdit implements OnInit {
+export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
 
     visible = false;
 
@@ -26,6 +28,8 @@ export class UserEditComponent extends CoreEdit implements OnInit {
     form: FormGroup;
 
     roles = null;
+
+    newPwdChange$ = new BehaviorSubject('');
 
     get fLoginName() {
         return this.form.controls.fLoginName;
@@ -92,6 +96,21 @@ export class UserEditComponent extends CoreEdit implements OnInit {
 
     ngOnInit() {
 
+        this.newPwdChange$
+            .asObservable()
+            .pipe(debounceTime(100)) // debounceTime(200) 间隔时间 200ms
+            .subscribe((value: string) => {
+                if (!this.fPassword.value) return;
+
+                if (this.fRePassword.value) {
+                    this.fRePassword.markAsDirty();
+                    this.fRePassword.updateValueAndValidity();
+                }
+            });
+    }
+
+    newPwdChange(value: string) {
+        this.newPwdChange$.next(value);
     }
 
     getRoles() {
@@ -107,7 +126,7 @@ export class UserEditComponent extends CoreEdit implements OnInit {
     }
 
     save() {
-        
+
         if (!this.validate()) return;
         if (this.isEdit && this.userId) {
             this.editUser(this.userId);
@@ -190,5 +209,10 @@ export class UserEditComponent extends CoreEdit implements OnInit {
             this.isEdit = false;
             this.userId = null;
         }, 300);
+    }
+
+
+    ngOnDestroy() {
+        this.newPwdChange$.unsubscribe();
     }
 }
