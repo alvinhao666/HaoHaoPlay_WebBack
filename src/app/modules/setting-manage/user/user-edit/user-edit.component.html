@@ -9,7 +9,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">账号</nz-form-label>
                             <nz-form-control nzErrorTip="账号必填" [nzSpan]="16">
-                                <input nz-input formControlName="fLoginName" placeholder="" autocomplete="off">
+                                <input nz-input formControlName="fLoginName" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -27,7 +27,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">密码</nz-form-label>
                             <nz-form-control [nzSpan]="16" [nzErrorTip]="passwordErrorTpl">
-                                <input nz-input formControlName="fPassword" placeholder="" type="text" class="pwd" style="ime-mode:disabled;" onpaste="return false">
+                                <input nz-input formControlName="fPassword" type="text" class="pwd" style="ime-mode:disabled;" onpaste="return false">
                             </nz-form-control>
                             <ng-template #passwordErrorTpl>
                                 <ng-container *ngIf="fPassword.dirty && fPassword.errors?.required">密码必填</ng-container>
@@ -40,7 +40,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">重复密码</nz-form-label>
                             <nz-form-control [nzSpan]="16" [nzErrorTip]="repasswordErrorTpl">
-                                <input nz-input formControlName="fRePassword" placeholder="" type="text" class="pwd" style="ime-mode:disabled;" onpaste="return false">
+                                <input nz-input formControlName="fRePassword" type="text" class="pwd" style="ime-mode:disabled;" onpaste="return false">
                             </nz-form-control>
 
                             <ng-template #repasswordErrorTpl>
@@ -58,7 +58,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">姓名</nz-form-label>
                             <nz-form-control nzErrorTip="姓名必填" [nzSpan]="16">
-                                <input nz-input formControlName="fName" placeholder="" autocomplete="off">
+                                <input nz-input formControlName="fName" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -85,7 +85,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">手机</nz-form-label>
                             <nz-form-control nzErrorTip="手机号格式有误" [nzSpan]="16">
-                                <input nz-input formControlName="fPhone" placeholder="" autocomplete="off">
+                                <input nz-input formControlName="fPhone" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -93,7 +93,7 @@
                         <nz-form-item>
                             <nz-form-label [nzSpan]="8">邮箱</nz-form-label>
                             <nz-form-control nzErrorTip="邮箱地址格式有误" [nzSpan]="16">
-                                <input nz-input type="email" formControlName="fEmail" placeholder="" autocomplete="off">
+                                <input nz-input type="email" formControlName="fEmail" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -101,7 +101,7 @@
                         <nz-form-item>
                             <nz-form-label [nzSpan]="8">QQ</nz-form-label>
                             <nz-form-control [nzSpan]="16">
-                                <input nz-input type="text" formControlName="fQQ" placeholder="" autocomplete="off">
+                                <input nz-input type="text" formControlName="fQQ" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -109,7 +109,7 @@
                         <nz-form-item>
                             <nz-form-label [nzSpan]="8">微信</nz-form-label>
                             <nz-form-control [nzSpan]="16">
-                                <input nz-input type="text" formControlName="fWechat" placeholder="" autocomplete="off">
+                                <input nz-input type="text" formControlName="fWechat" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
