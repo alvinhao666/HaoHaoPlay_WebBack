@@ -18,7 +18,7 @@
                 <nz-form-item>
                     <nz-form-label nzRequired [nzSpan]="4">标题</nz-form-label>
                     <nz-form-control [nzSpan]="18" nzErrorTip="标题不能为空">
-                        <input nz-input id="title" formControlName="fName" />
+                        <input nz-input id="title" formControlName="fName" autocomplete="off" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item *ngIf="type===1">
@@ -50,7 +50,7 @@
                 <nz-form-item *ngIf="type===2">
                     <nz-form-label nzRequired [nzSpan]="4">路由</nz-form-label>
                     <nz-form-control [nzSpan]="18" nzErrorTip="路由不能为空">
-                        <input nz-input id="url" formControlName="fRouterUrl" />
+                        <input nz-input id="url" formControlName="fRouterUrl" autocomplete="off" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item *ngIf="type===1||type===2">
