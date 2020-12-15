@@ -85,7 +85,7 @@
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">手机</nz-form-label>
                             <nz-form-control nzErrorTip="手机号格式有误" [nzSpan]="16">
-                                <input nz-input formControlName="fPhone" placeholder="">
+                                <input nz-input formControlName="fPhone" placeholder="" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -93,7 +93,7 @@
                         <nz-form-item>
                             <nz-form-label [nzSpan]="8">邮箱</nz-form-label>
                             <nz-form-control nzErrorTip="邮箱地址格式有误" [nzSpan]="16">
-                                <input nz-input formControlName="fEmail" placeholder="">
+                                <input nz-input type="email" formControlName="fEmail" placeholder="" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -101,7 +101,7 @@
                         <nz-form-item>
                             <nz-form-label [nzSpan]="8">QQ</nz-form-label>
                             <nz-form-control [nzSpan]="16">
-                                <input nz-input formControlName="fQQ" placeholder="">
+                                <input nz-input type="text" formControlName="fQQ" placeholder="" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -109,7 +109,7 @@
                         <nz-form-item>
                             <nz-form-label [nzSpan]="8">微信</nz-form-label>
                             <nz-form-control [nzSpan]="16">
-                                <input nz-input formControlName="fWechat" placeholder="">
+                                <input nz-input type="text" formControlName="fWechat" placeholder="" autocomplete="off">
                             </nz-form-control>
                         </nz-form-item>
                     </div>
