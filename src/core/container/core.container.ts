@@ -13,8 +13,7 @@ export class CoreContainer extends Core {
     dataSet: any[] = [];
     //查询显示加载动画
     tableLoading = false;
-    //滚动
-    scrollValue = { x: '0px', y: '0px' };
+
 
     sortFields: number[] = [];
 
