@@ -10,6 +10,7 @@ import { H_HttpInterceptor } from '../core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.route';
 import { NzMessageModule } from 'ng-zorro-antd/message'; //消息弹窗 全局 http拦截器里有引用
+import { Exception404Component } from './404.component';
 
 
 registerLocaleData(zh);
@@ -17,7 +18,8 @@ registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Exception404Component
   ],
   imports: [
     AppRoutingModule,

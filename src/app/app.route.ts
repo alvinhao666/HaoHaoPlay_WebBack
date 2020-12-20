@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { Exception404Component } from './404.component';
+import { LoginGuard } from './login.guard';
+import { MainGuard } from './main.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -9,16 +13,17 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: './login/login.module#LoginModule',
+    canLoad: [LoginGuard]
   },
   {
     path: 'main',
-    loadChildren: './main/main.module#MainModule'
+    loadChildren: './main/main.module#MainModule',
+    canLoad: [MainGuard]
+  },
+  {
+    path: '**',
+    component: Exception404Component
   }
-  // {
-  //   path: '**',
-  //   component: AppComponent,
-  //   canActivate: [AuthGuard]
-  // }
 ];
 
 @NgModule({
