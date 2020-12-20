@@ -5,13 +5,14 @@
             <nz-form-item>
                 <nz-form-label nzRequired [nzSpan]="7">原密码</nz-form-label>
                 <nz-form-control nzErrorTip="原密码必填" [nzSpan]="14">
-                    <input nz-input formControlName="fOldPassword" type="text" class="pwd" autocomplete="new-password" (input)="oldPwdChange($event)">
+                    <input nz-input formControlName="fOldPassword" type="text" class="pwd" autocomplete="off" (input)="oldPwdChange($event)" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false" onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')">
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-label nzRequired [nzSpan]="7">新密码</nz-form-label>
                 <nz-form-control [nzSpan]="14" [nzErrorTip]="passwordErrorTpl">
-                    <input nz-input formControlName="fPassword" type="text" class="pwd" autocomplete="new-password" (ngModelChange)="newPwdChange($event)" ng-minlength="6">
+                    <input nz-input formControlName="fPassword" type="text" class="pwd" autocomplete="off" (ngModelChange)="newPwdChange($event)" ng-minlength="6" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false"
+                        onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')">
                     <ng-template #passwordErrorTpl>
                         <ng-container *ngIf="fPassword.dirty && fPassword.errors?.required">新密码必填</ng-container>
                         <ng-container *ngIf="fPassword.dirty && fPassword.errors?.minlength">密码最少6个字符</ng-container>
@@ -25,7 +26,7 @@
             <nz-form-item>
                 <nz-form-label nzRequired [nzSpan]="7">重复新密码</nz-form-label>
                 <nz-form-control [nzSpan]="14" [nzErrorTip]="repasswordErrorTpl">
-                    <input nz-input formControlName="fRePassword" type="text" class="pwd" autocomplete="new-password" ng-minlength="6">
+                    <input nz-input formControlName="fRePassword" type="text" class="pwd" autocomplete="off" ng-minlength="6" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false" onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')">
                     <ng-template #repasswordErrorTpl>
                         <ng-container *ngIf="fRePassword.dirty && fRePassword.errors?.required">重复新密码必填</ng-container>
                         <ng-container *ngIf="fRePassword.dirty && fRePassword.errors?.notEqual">密码不一致</ng-container>
