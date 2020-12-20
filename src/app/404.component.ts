@@ -57,6 +57,6 @@ import { Location } from '@angular/common';
 export class Exception404Component {
 
     constructor(
-        private location: Location) {
+        public location: Location) {
     }
 }
