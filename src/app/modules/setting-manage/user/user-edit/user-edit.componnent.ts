@@ -180,13 +180,22 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
         this.isEdit = true;
         await this.http.get(`User/Get/${id}`).toPromise().then(d => {
             if (!d) return;
-            this.form.get('fName').setValue(d.Name);
-            this.form.get('fGender').setValue(d.Gender.toString());
-            this.form.get('fAge').setValue(d.Age);
-            this.form.get('fPhone').setValue(d.Phone);
-            this.form.get('fEmail').setValue(d.Email);
-            this.form.get('fWechat').setValue(d.WeChat);
-            this.form.get('fQQ').setValue(d.QQ);
+            // this.form.get('fName').setValue(d.Name);
+            // this.form.get('fGender').setValue(d.Gender.toString());
+            // this.form.get('fAge').setValue(d.Age);
+            // this.form.get('fPhone').setValue(d.Phone);
+            // this.form.get('fEmail').setValue(d.Email);
+            // this.form.get('fWechat').setValue(d.WeChat);
+            // this.form.get('fQQ').setValue(d.QQ);
+            this.form.patchValue({
+                fName: d.Name,
+                fGender: d.Gender,
+                fAge: d.Age,
+                fPhone: d.Phone,
+                fEmail: d.Email,
+                fWechat: d.WeChat,
+                fQQ: d.QQ
+            });
             this.userId = d.Id;
         });
     }
