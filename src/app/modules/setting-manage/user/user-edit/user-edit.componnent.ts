@@ -189,7 +189,7 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
             // this.form.get('fQQ').setValue(d.QQ);
             this.form.patchValue({
                 fName: d.Name,
-                fGender: d.Gender.ToString(),
+                fGender: d.Gender.toString(),
                 fAge: d.Age,
                 fPhone: d.Phone,
                 fEmail: d.Email,
