@@ -22,7 +22,7 @@
         "cos-js-sdk-v5": "^1.0.1",
         "jsencrypt": "^3.0.0-rc.1",
         "minireset.css": "0.0.6",
-        "ng-zorro-antd": "^10.2.0",
+        "ng-zorro-antd": "^10.2.2",
         "rxjs": "~6.6.0",
         "tslib": "^2.0.0",
         "zone.js": "~0.10.2"
