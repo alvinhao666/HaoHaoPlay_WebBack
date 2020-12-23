@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 // import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { registerLocaleData, DatePipe, LocationStrategy, PathLocationStrategy, APP_BASE_HREF } from '@angular/common';
+import { registerLocaleData, DatePipe } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { H_HttpInterceptor } from '../core';
