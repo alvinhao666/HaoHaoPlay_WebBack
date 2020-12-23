@@ -4,6 +4,7 @@ import { H_Http, getColorByFirstName } from '@core';
 import { UserInfoSubject } from '../share/subjects/user-info.subject';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Core, CoreContainer } from '@core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -26,6 +27,7 @@ export class MainComponent extends CoreContainer {
 
   constructor(
     private http: H_Http,
+    private router: Router,
     private msg: NzMessageService,
     private userInfoSubject: UserInfoSubject) {
     super();
@@ -74,8 +76,8 @@ export class MainComponent extends CoreContainer {
     this.http.post('CurrentUser/Logout').subscribe(d => {
       if (!d) return;
       localStorage.removeItem(environment.token_key);
-      location.href = location.href.split('/')[0];
-      // this.router.navigateByUrl('/');
+      // location.href = location.href.split('/')[0];
+      this.router.navigateByUrl('/');
       // location.reload();
     });
   }
