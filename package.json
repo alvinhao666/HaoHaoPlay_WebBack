@@ -23,6 +23,7 @@
     "jsencrypt": "^3.0.0-rc.1",
     "minireset.css": "0.0.6",
     "ng-zorro-antd": "^11.0.0",
+    "nprogress": "^0.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
