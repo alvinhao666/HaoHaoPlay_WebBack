@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import * as JSEncryptModule from 'jsencrypt';
+import JSEncrypt from 'jsencrypt';
 import { H_Http } from '@core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
@@ -76,7 +76,7 @@ export class LoginComponent {
     }
 
 
-    const jsencrypt = new JSEncryptModule.JSEncrypt();
+    const jsencrypt = new JSEncrypt();
 
     jsencrypt.setPublicKey(this.publicKey);
     const pwd = jsencrypt.encrypt(this.password.value);
