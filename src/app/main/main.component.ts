@@ -25,6 +25,8 @@ export class MainComponent extends CoreContainer {
 
   menus = null;
 
+  nProgress = require('nprogress').configure({ showSpinner: false });
+
   constructor(
     private http: H_Http,
     private router: Router,
@@ -73,12 +75,17 @@ export class MainComponent extends CoreContainer {
 
   // 退出登录
   logout() {
+    this.nProgress.start();
     this.http.post('CurrentUser/Logout').subscribe(d => {
-      if (!d) return;
+      if (!d) {
+        this.nProgress.done();
+        return;
+      }
       localStorage.removeItem(environment.token_key);
       // location.href = location.href.split('/')[0];
       this.router.navigateByUrl('/');
       // location.reload();
+      this.nProgress.done();
     });
   }
 }
