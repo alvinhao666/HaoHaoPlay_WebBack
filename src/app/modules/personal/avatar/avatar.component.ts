@@ -22,7 +22,7 @@ export class AvatarComponent implements OnInit {
 
   cropper: any = null;
 
-  cos = require('cos-js-sdk-v5');
+  cos: any = null;
 
   @Output() onSave = new EventEmitter();
 
@@ -32,7 +32,7 @@ export class AvatarComponent implements OnInit {
 
 
   ngOnInit() {
-
+    const COS = require('cos-js-sdk-v5');
     this.cos = new COS({ getAuthorization: this.getTencentCosFederationToken.bind(this) });
 
   }
@@ -65,7 +65,7 @@ export class AvatarComponent implements OnInit {
     let bucket = '';
     let key = '';
     let region = '';
-    
+
     await this.http.get('Common/GetUploadAvatarInfo').toPromise().then(d => {
       if (!d) return;
       bucket = d.Bucket;
