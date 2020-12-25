@@ -22,7 +22,7 @@ export class AvatarComponent implements OnInit {
 
   cropper: any = null;
 
-  cos: any = null;
+  cos = require('cos-js-sdk-v5');
 
   @Output() onSave = new EventEmitter();
 
@@ -32,7 +32,7 @@ export class AvatarComponent implements OnInit {
 
 
   ngOnInit() {
-    const COS = require('cos-js-sdk-v5');
+
     this.cos = new COS({ getAuthorization: this.getTencentCosFederationToken.bind(this) });
 
   }
