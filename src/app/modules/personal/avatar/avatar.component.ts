@@ -65,7 +65,7 @@ export class AvatarComponent implements OnInit {
     let bucket = '';
     let key = '';
     let region = '';
-    
+
     await this.http.get('Common/GetUploadAvatarInfo').toPromise().then(d => {
       if (!d) return;
       bucket = d.Bucket;
