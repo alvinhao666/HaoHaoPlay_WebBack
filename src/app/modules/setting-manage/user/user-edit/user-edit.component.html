@@ -85,9 +85,13 @@
                     <div nz-col nzSpan="12">
                         <nz-form-item>
                             <nz-form-label nzRequired [nzSpan]="8">手机</nz-form-label>
-                            <nz-form-control nzErrorTip="手机号格式有误" [nzSpan]="16">
+                            <nz-form-control [nzErrorTip]="PhoneErrorTpl" [nzSpan]="16">
                                 <input nz-input formControlName="fPhone" autocomplete="off">
                             </nz-form-control>
+                            <ng-template #PhoneErrorTpl>
+                                <ng-container *ngIf="fPhone.dirty && fPhone.errors?.required">手机必填</ng-container>
+                                <ng-container *ngIf="fPhone.dirty && fPhone.errors?.pattern">手机格式不正确</ng-container>
+                            </ng-template>
                         </nz-form-item>
                     </div>
                     <div nz-col nzSpan="12">

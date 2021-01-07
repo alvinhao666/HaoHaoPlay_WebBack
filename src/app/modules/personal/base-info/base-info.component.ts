@@ -90,7 +90,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     // this.setFirstNameBgColor(getColorByFirstName(user.FirstNameSpell));
     this.form.get('fName').setValue(user.Name);
 
-    this.form.get('fGender').setValue(user.Gender.toString());
+    // this.form.get('fGender').setValue(user.Gender.toString());
     this.form.get('fPhone').setValue(user.Phone);
     this.form.get('fWeChat').setValue(user.WeChat);
     // this.form.get('fAge').setValue(user.Age);

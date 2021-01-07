@@ -14,7 +14,7 @@
                     <input nz-input formControlName="fNickName" placeholder="" autocomplete="off">
                 </nz-form-control>
             </nz-form-item> -->
-            <nz-form-item>
+            <!-- <nz-form-item>
                 <nz-form-label [nzSpan]="5">性别</nz-form-label>
                 <nz-form-control>
                     <nz-radio-group formControlName="fGender">
@@ -22,12 +22,16 @@
                         <label nz-radio nzValue="0" [nzDisabled]="true">女</label>
                     </nz-radio-group>
                 </nz-form-control>
-            </nz-form-item>
+            </nz-form-item> -->
             <nz-form-item>
                 <nz-form-label [nzSpan]="5" nzRequired>手机</nz-form-label>
-                <nz-form-control [nzSpan]="12" nzErrorTip="手机号格式有误">
+                <nz-form-control [nzSpan]="12" [nzErrorTip]="PhoneErrorTpl">
                     <input nz-input formControlName="fPhone" placeholder="" autocomplete="off">
                 </nz-form-control>
+                <ng-template #PhoneErrorTpl>
+                    <ng-container *ngIf="fPhone.dirty && fPhone.errors?.required">手机必填</ng-container>
+                    <ng-container *ngIf="fPhone.dirty && fPhone.errors?.pattern">手机格式不正确</ng-container>
+                </ng-template>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-label [nzSpan]="5">微信</nz-form-label>
