@@ -41,6 +41,11 @@ export class ApplicationEditComponent {
   }
 
 
+  get fAlias() {
+    return this.form.controls.fAlias;
+  }
+
+
   constructor(
     private http: H_Http,
     private fb: FormBuilder) {
@@ -48,7 +53,8 @@ export class ApplicationEditComponent {
       fName: [null, Validators.required],
       fIcon: [null, Validators.required],
       fRouterUrl: [null, Validators.required],
-      fSort: [null, Validators.required]
+      fSort: [null, Validators.required],
+      fAlias: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
     });
 
     this.iconList = icons;
@@ -104,7 +110,8 @@ export class ApplicationEditComponent {
       RouterUrl: this.fRouterUrl.value,
       Sort: this.fSort.value,
       Type: this.type + 1,
-      ParentId: this.Id
+      ParentId: this.Id,
+      Alias: this.fAlias.value
     }).subscribe(d => {
       if (!d) return;
       this.onSave.emit();

@@ -8,6 +8,17 @@
                     <input nz-input id="title" formControlName="fName" autocomplete="off" />
                 </nz-form-control>
             </nz-form-item>
+            <nz-form-item>
+                <nz-form-label nzRequired [nzSpan]="4">别名</nz-form-label>
+                <nz-form-control [nzSpan]="18" [nzErrorTip]="ErrorTpl">
+                    <input nz-input id="alias" formControlName="fAlias" autocomplete="off" style="ime-mode:disabled;" />
+                </nz-form-control>
+
+                <ng-template #ErrorTpl>
+                    <ng-container *ngIf="fAlias.dirty && fAlias.errors?.required">别名必填</ng-container>
+                    <ng-container *ngIf="fAlias.dirty && fAlias.errors?.pattern">只能输入英文</ng-container>
+                </ng-template>
+            </nz-form-item>
         </form>
     </ng-container>
 </nz-modal>

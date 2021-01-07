@@ -20,12 +20,18 @@ export class ResourceEditComponent extends CoreEdit implements OnInit {
     return this.form.controls.fName;
   }
 
+  get fAlias() {
+    return this.form.controls.fAlias;
+  }
+
+
   constructor(
     private http: H_Http,
     private fb: FormBuilder) {
     super();
     this.form = this.fb.group({
       fName: [null, Validators.required],
+      fAlias: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
     });
   }
 
@@ -36,7 +42,8 @@ export class ResourceEditComponent extends CoreEdit implements OnInit {
     if (!this.checkForm(this.form)) return;
     this.http.post(`Resource/Add`, {
       Name: this.fName.value,
-      ParentId: this.Id
+      ParentId: this.Id,
+      Alias: this.fAlias.value
     }).subscribe(d => {
       if (!d) return;
       this.onSave.emit();
