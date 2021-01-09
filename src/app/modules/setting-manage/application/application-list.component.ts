@@ -38,22 +38,27 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
 
     iconList: string[];
 
-    get fName() {
-        return this.form.controls.fName;
+    get Name() {
+        return this.form.controls.Name;
     }
 
-    get fIcon() {
-        return this.form.controls.fIcon;
+    get Icon() {
+        return this.form.controls.Icon;
     }
 
-    get fRouterUrl() {
-        return this.form.controls.fRouterUrl;
+    get RouterUrl() {
+        return this.form.controls.RouterUrl;
+    }
+
+    get Sort() {
+        return this.form.controls.Sort;
+    }
+
+    get Alias() {
+        return this.form.controls.Alias;
     }
 
 
-    get fSort() {
-        return this.form.controls.fSort;
-    }
 
     constructor(
         private http: H_Http,
@@ -66,11 +71,12 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
 
         this.iconList = icons;
         this.form = this.fb.group({
-            fName: [null, Validators.required],
-            fIcon: [null, Validators.required],
-            fRouterUrl: [null, Validators.required],
-            fSort: [null, Validators.required],
-            fCode: [{ value: null, disabled: true }, Validators.nullValidator]
+            Name: [null, Validators.required],
+            Icon: [null, Validators.required],
+            RouterUrl: [null, Validators.required],
+            Sort: [null, Validators.required],
+            Code: [{ value: null, disabled: true }, Validators.nullValidator],
+            Alias: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]]
         });
     }
 
@@ -101,6 +107,9 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
         this.http.get(`Module/GetList`).subscribe(d => {
             if (!d) return;
             this.nodes = d;
+            if (this.activedNode !== '0') {
+                this.getNodeInfo(this.activedNode);
+            }
         });
     }
 
@@ -113,11 +122,9 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
             if (!d) return;
             this.type = d.Type;
             this.iconName = d.Icon;
-            this.form.get('fName').setValue(d.Name);
-            this.form.get('fSort').setValue(d.Sort);
-            this.form.get('fIcon').setValue(d.Icon);
-            this.form.get('fRouterUrl').setValue(d.RouterUrl);
-            this.form.get('fCode').setValue(d.Code);
+
+            this.form.patchValue({ ...d });
+
             if (this.type === 2) {
                 this.resourceData = d.Resources;
                 this.handleResourceData();
@@ -143,11 +150,12 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
             nzTitle: '确认更新?',
             nzOnOk: () => {
                 this.http.put(`Module/Update/${this.activedNode.key}`, {
-                    Name: this.fName.value,
-                    Icon: this.fIcon.value,
-                    RouterUrl: this.fRouterUrl.value,
-                    Sort: this.fSort.value,
-                    Type: this.type
+                    Name: this.Name.value,
+                    Icon: this.Icon.value,
+                    RouterUrl: this.RouterUrl.value,
+                    Sort: this.Sort.value,
+                    Type: this.type,
+                    Alias: this.Alias.value
                 }).subscribe(d => {
                     if (!d) return;
                     this.msg.success('更新成功');
@@ -178,7 +186,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
     checkForm(form: FormGroup): boolean {
         let flag = true;
         for (const key of Object.keys(form.controls)) {
-            if ((this.type === 1 && key === 'fRouterUrl') || (this.type === 2 && key === 'fIcon')) continue;
+            if ((this.type === 1 && key === 'RouterUrl') || (this.type === 2 && key === 'Icon')) continue;
             form.controls[key].markAsDirty();
             form.controls[key].updateValueAndValidity();
             flag = flag && !form.controls[key].invalid;
@@ -226,7 +234,8 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
     saveEdit(id: string): void {
         this.http.put(`Resource/Update/${this.editCache[id].data.Id}`, {
             Name: this.editCache[id].data.Name,
-            Sort: parseInt(this.editCache[id].data.Sort, 10)
+            Sort: parseInt(this.editCache[id].data.Sort, 10),
+            Alias: this.editCache[id].data.Alias,
         }).subscribe(d => {
             if (!d) return;
             this.msg.success('更新成功');

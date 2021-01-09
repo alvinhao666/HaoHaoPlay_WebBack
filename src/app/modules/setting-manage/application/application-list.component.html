@@ -18,7 +18,7 @@
                 <nz-form-item>
                     <nz-form-label nzRequired [nzSpan]="4">标题</nz-form-label>
                     <nz-form-control [nzSpan]="18" nzErrorTip="标题必填">
-                        <input nz-input id="title" formControlName="fName" autocomplete="off" />
+                        <input nz-input id="title" formControlName="Name" autocomplete="off" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item *ngIf="type===1">
@@ -38,7 +38,7 @@
                                 <i nz-icon [nzType]="name" style="font-size: 16px;"></i>
                             </nz-auto-option>
                         </nz-autocomplete> -->
-                        <nz-select nzAllowClear [nzCustomTemplate]="selectTmp" formControlName="fIcon" nzDropdownClassName="selectDiv">
+                        <nz-select nzAllowClear [nzCustomTemplate]="selectTmp" formControlName="Icon" nzDropdownClassName="selectDiv">
                             <nz-option nzCustomContent *ngFor="let name of iconList" [nzValue]="name" [nzLabel]="name">
                                 <i nz-icon [nzType]="name" style="font-size: 16px;"></i>
                                 <!-- <span>{{name}}</span> -->
@@ -50,19 +50,29 @@
                 <nz-form-item *ngIf="type===2">
                     <nz-form-label nzRequired [nzSpan]="4">路由</nz-form-label>
                     <nz-form-control [nzSpan]="18" nzErrorTip="路由必填">
-                        <input nz-input id="url" formControlName="fRouterUrl" autocomplete="off" />
+                        <input nz-input id="url" formControlName="RouterUrl" autocomplete="off" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item *ngIf="type===1||type===2">
                     <nz-form-label nzRequired [nzSpan]="4">排序</nz-form-label>
                     <nz-form-control [nzSpan]="18" nzErrorTip="排序必填">
-                        <nz-input-number id="sort" formControlName="fSort"></nz-input-number>
+                        <nz-input-number id="sort" formControlName="Sort"></nz-input-number>
                     </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzSpan]="4">别名</nz-form-label>
+                    <nz-form-control [nzSpan]="18" [nzErrorTip]="AliasErrorTpl">
+                        <input nz-input id="alias" formControlName="Alias" autocomplete="off" />
+                    </nz-form-control>
+                    <ng-template #AliasErrorTpl>
+                        <ng-container *ngIf="Alias.dirty && Alias.errors?.required">别名必填</ng-container>
+                        <ng-container *ngIf="Alias.dirty && Alias.errors?.pattern">只能输入英文</ng-container>
+                    </ng-template>
                 </nz-form-item>
                 <nz-form-item>
                     <nz-form-label [nzSpan]="4">编码</nz-form-label>
                     <nz-form-control [nzSpan]="18">
-                        <input nz-input id="code" formControlName="fCode" />
+                        <input nz-input id="code" formControlName="Code" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
@@ -81,9 +91,10 @@
                 <thead>
                     <tr>
                         <th nzWidth="60px" nzLeft="0px">序号</th>
-                        <th nzWidth="120px" nzLeft="60px">名称</th>
+                        <th nzWidth="130px" nzLeft="60px">名称</th>
+                        <th nzWidth="150px">别名</th>
                         <th>编码</th>
-                        <th nzWidth="150px">排序值</th>
+                        <th nzWidth="80px">排序值</th>
                         <th nzWidth="90px" nzRight="0px">操作</th>
                     </tr>
                 </thead>
@@ -91,11 +102,19 @@
                     <tr *ngFor="let d of nzTable.data;let idx=index;">
                         <td nzLeft="0px">{{idx+1}}</td>
                         <td nzLeft="60px">
-                            <ng-container *ngIf="!editCache[d.Id].edit; else nameInputTpl">
+                            <ng-container *ngIf="!editCache[d.Id].edit; else NameInputTpl">
                                 {{ d.Name }}
                             </ng-container>
-                            <ng-template #nameInputTpl>
+                            <ng-template #NameInputTpl>
                                 <input type="text" nz-input [(ngModel)]="editCache[d.Id].data.Name" />
+                            </ng-template>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[d.Id].edit; else AliasInputTpl">
+                                {{ d.Alias }}
+                            </ng-container>
+                            <ng-template #AliasInputTpl>
+                                <input type="text" nz-input [(ngModel)]="editCache[d.Id].data.Alias" />
                             </ng-template>
                         </td>
                         <td>{{d.ResourceCode}}</td>
