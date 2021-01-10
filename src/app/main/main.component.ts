@@ -77,7 +77,7 @@ export class MainComponent extends CoreContainer {
   logout() {
     this.nProgress.start();
     this.http.post('CurrentUser/Logout').subscribe(d => {
-      if (!d) {
+      if (d === null) {
         this.nProgress.done();
         return;
       }

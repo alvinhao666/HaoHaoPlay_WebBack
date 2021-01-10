@@ -112,7 +112,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       HomeAddress: this.fHomeAddress.value
     }).subscribe(d => {
       this.loading = false;
-      if (!d) return;
+      if (d === null) return;
       this.msg.success('更新成功');
       this.getUser();
     }, e => {
@@ -122,7 +122,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
 
   getUser() {
     this.http.get(`CurrentUser/GetUser`).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.setCurrentUser(d);
       // if (d.HeadImgUrl) {
       //   this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;

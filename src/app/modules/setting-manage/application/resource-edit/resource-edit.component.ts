@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, CoreEdit } from '@core';
 
@@ -7,7 +7,7 @@ import { H_Http, CoreEdit } from '@core';
   templateUrl: './resource-edit.component.html',
   styleUrls: ['./resource-edit.component.less']
 })
-export class ResourceEditComponent extends CoreEdit implements OnInit {
+export class ResourceEditComponent extends CoreEdit  {
 
   isVisible = false;
 
@@ -35,8 +35,6 @@ export class ResourceEditComponent extends CoreEdit implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
 
   handleOk() {
     if (!this.checkForm(this.form)) return;
@@ -45,7 +43,7 @@ export class ResourceEditComponent extends CoreEdit implements OnInit {
       ParentId: this.Id,
       Alias: this.fAlias.value
     }).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.onSave.emit();
       this.reset();
     });
@@ -57,7 +55,7 @@ export class ResourceEditComponent extends CoreEdit implements OnInit {
 
   reset() {
     this.isVisible = false;
-    this.form.reset();
+    this.resetForm(this.form);
   }
 
 }

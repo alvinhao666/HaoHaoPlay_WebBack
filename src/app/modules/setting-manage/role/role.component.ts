@@ -53,7 +53,7 @@ export class RoleComponent extends CoreContainer implements OnInit {
 
   InitTree(id: string) {
     this.http.get(`Role/GetRoleModule/${id}`).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.nodes = d.Nodes;
       this.checkedKeys = d.CheckedKeys;
     });
@@ -98,7 +98,7 @@ export class RoleComponent extends CoreContainer implements OnInit {
     this.http.put(`Role/UpdateRoleAuth/${this.roleId}`, {
       ModuleIds: this.arrayKey
     }).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.msg.success('更新成功');
       this.InitTree(this.roleId);
     });

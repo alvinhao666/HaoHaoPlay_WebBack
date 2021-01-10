@@ -23,4 +23,12 @@ export class CoreEdit extends Core {
         }
         return flag;
     }
+
+    resetForm(form: FormGroup) {
+        form.reset();
+        for (const key of Object.keys(form.controls)) {
+            form.controls[key].markAsPristine();
+            form.controls[key].updateValueAndValidity();
+        }
+    }
 }

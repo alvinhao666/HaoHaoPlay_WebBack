@@ -39,7 +39,7 @@ export class SafeInfoComponent implements OnInit {
 
   updateSecurityInfo() {
     this.http.get(`CurrentUser/SecurityInfo`).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.passwordLevel = d.PasswordLevel;
       this.phone = d.Phone;
       this.email = d.Email;

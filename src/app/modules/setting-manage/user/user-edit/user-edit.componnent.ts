@@ -1,9 +1,8 @@
-import { OnInit, Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { H_Http, ComparePwdValidators, CoreEdit } from '@core';
+import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl, ValidationErrors } from '@angular/forms';
+import { H_Http, CoreEdit } from '@core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { BehaviorSubject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Observable, Observer } from 'rxjs';
 
 @Component({
     selector: 'modal-user-edit',
@@ -11,7 +10,7 @@ import { debounceTime } from 'rxjs/operators';
     styleUrls: ['./user-edit.component.less']
 })
 
-export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
+export class UserEditComponent extends CoreEdit {
 
     visible = false;
 
@@ -28,8 +27,6 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
     form: FormGroup;
 
     roles = null;
-
-    newPwdChange$ = new BehaviorSubject('');
 
     get fLoginName() {
         return this.form.controls.fLoginName;
@@ -74,16 +71,54 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
         return this.form.controls.fRole;
     }
 
+    timerOfLoginName = null;
+    loginNameAsyncValidator = (control: FormControl) => {
+        return new Observable((observer: Observer<ValidationErrors | null>) => {
+
+            if (this.timerOfLoginName) {
+                clearTimeout(this.timerOfLoginName);
+                this.timerOfLoginName = null;
+            }
+
+            this.timerOfLoginName = setTimeout(() => {
+
+                if (control.value === '') return;
+                this.http.get(`User/IsExistLoginName?loginName=${control.value}`).subscribe(d => {
+                    if (d === null) return;
+
+                    if (d === false) {
+
+                        observer.next(null);
+                        observer.complete();
+                    }
+
+                    observer.next({ error: true, existLoginName: d });
+
+                    observer.complete();
+                });
+            }, 300);
+        });
+    }
+
+    rePasswordValidator = (control: FormControl): { [s: string]: boolean } => {
+        if (control.value) {
+            if (control.value !== this.form.controls.fPassword.value) {
+                return { error: true, notEqual: true };
+            }
+        }
+        return {};
+    }
+
     constructor(
         private fb: FormBuilder,
         private http: H_Http,
         public msg: NzMessageService) {
         super();
         this.form = this.fb.group({
-            fLoginName: [null, Validators.required],
+            fLoginName: [null, [Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/)], [this.loginNameAsyncValidator]],
             fName: [null, Validators.required],
             fPassword: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
-            fRePassword: [null, [Validators.required, ComparePwdValidators.equal('fPassword')]],
+            fRePassword: [null, [Validators.required, this.rePasswordValidator]],
             fAge: [null, Validators.required],
             fGender: [null, Validators.required],
             fPhone: [null, [Validators.required, Validators.pattern(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)]],
@@ -94,28 +129,14 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
         });
     }
 
-    ngOnInit() {
-
-        this.newPwdChange$
-            .asObservable()
-            .pipe(debounceTime(150)) // debounceTime(200) 间隔时间 200ms
-            .subscribe((value: string) => {
-                if (!this.fPassword.value) return;
-
-                if (this.fRePassword.value) {
-                    this.fRePassword.markAsDirty();
-                    this.fRePassword.updateValueAndValidity();
-                }
-            });
-    }
-
     newPwdChange(value: string) {
-        this.newPwdChange$.next(value);
+        //this.newPwdChange$.next(value);
+        setTimeout(() => this.form.controls.fRePassword.updateValueAndValidity());
     }
 
     getRoles() {
         this.http.get(`User/GetRoleList`).subscribe(d => {
-            if (!d) return;
+            if (d === null) return;
             this.roles = d;
         });
     }
@@ -150,7 +171,7 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
                 RoleId: this.fRole.value
             })
             .subscribe(d => {
-                if (!d) return;
+                if (d === null) return;
                 this.msg.success('添加成功');
                 this.onSave.emit();
                 this.reset();
@@ -169,7 +190,7 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
                 QQ: this.fQQ.value
             })
             .subscribe(d => {
-                if (!d) return;
+                if (d === null) return;
                 this.msg.success('编辑成功');
                 this.onSave.emit();
                 this.reset();
@@ -179,7 +200,7 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
     async showUser(id: any) {
         this.isEdit = true;
         await this.http.get(`User/Get/${id}`).toPromise().then(d => {
-            if (!d) return;
+            if (d === null) return;
             // this.form.get('fName').setValue(d.Name);
             // this.form.get('fGender').setValue(d.Gender.toString());
             // this.form.get('fAge').setValue(d.Age);
@@ -214,14 +235,10 @@ export class UserEditComponent extends CoreEdit implements OnInit, OnDestroy {
     reset() {
         this.visible = false;
         setTimeout(() => {
-            this.form.reset();
+            this.resetForm(this.form);
             this.isEdit = false;
             this.userId = null;
         }, 300);
     }
 
-
-    ngOnDestroy() {
-        this.newPwdChange$.unsubscribe();
-    }
 }
