@@ -14,9 +14,9 @@
                     <input nz-input formControlName="fPassword" type="text" class="pwd" autocomplete="off" (ngModelChange)="newPwdChange($event)" ng-minlength="6" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false"
                         onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')">
                     <ng-template #passwordErrorTpl>
-                        <ng-container *ngIf="fPassword.dirty && fPassword.errors?.required">新密码必填</ng-container>
-                        <ng-container *ngIf="fPassword.dirty && fPassword.errors?.minlength">密码最少6个字符</ng-container>
-                        <ng-container *ngIf="fPassword.dirty && fPassword.errors?.maxlength">密码最多16个字符</ng-container>
+                        <ng-container *ngIf="fPassword.dirty && fPassword.errors?.required">必填</ng-container>
+                        <ng-container *ngIf="fPassword.dirty && fPassword.errors?.minlength">最少6个字符</ng-container>
+                        <ng-container *ngIf="fPassword.dirty && fPassword.errors?.maxlength">最多16个字符</ng-container>
                         <ng-container *ngIf="fPassword.dirty && fPassword.errors?.same">新密码跟原密码不能相同</ng-container>
                     </ng-template>
                 </nz-form-control>
@@ -28,7 +28,7 @@
                 <nz-form-control [nzSpan]="14" [nzErrorTip]="repasswordErrorTpl">
                     <input nz-input formControlName="fRePassword" type="text" class="pwd" autocomplete="off" ng-minlength="6" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false" onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')">
                     <ng-template #repasswordErrorTpl>
-                        <ng-container *ngIf="fRePassword.dirty && fRePassword.errors?.required">重复新密码必填</ng-container>
+                        <ng-container *ngIf="fRePassword.dirty && fRePassword.errors?.required">必填</ng-container>
                         <ng-container *ngIf="fRePassword.dirty && fRePassword.errors?.notEqual">密码不一致</ng-container>
                     </ng-template>
                 </nz-form-control>

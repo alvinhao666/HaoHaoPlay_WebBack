@@ -60,7 +60,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
 
   deleteItem(d: any) {
     this.http.delete(`Dict/DeleteDictItem/${d.Id}`).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.search();
     });
   }

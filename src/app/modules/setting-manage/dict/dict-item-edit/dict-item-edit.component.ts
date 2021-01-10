@@ -74,7 +74,7 @@ export class DictItemEditComponent extends CoreEdit implements OnInit {
       ParentId: this.dictId,
       Sort: this.fSort.value
     }).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.onSave.emit();
       this.reset();
     });
@@ -87,7 +87,7 @@ export class DictItemEditComponent extends CoreEdit implements OnInit {
       Remark: this.fRemark.value,
       Sort: this.fSort.value
     }).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.onSave.emit();
       this.reset();
     });
@@ -106,7 +106,7 @@ export class DictItemEditComponent extends CoreEdit implements OnInit {
     this.visible = false;
     this.isUpdate = false;
     this.dictId = null;
-    this.form.reset();
+    this.resetForm(this.form);
   }
 
 }

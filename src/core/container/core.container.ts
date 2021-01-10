@@ -84,7 +84,7 @@ export class CoreContainer extends Core {
     }
 
     setTableData(d: any) {
-        if (!d) return;
+        if (d === null) return;
         this.dataSet = d.Items;
         this.pageIndex = d.PageIndex;
         this.pageSize = d.PageSize;

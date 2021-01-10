@@ -92,7 +92,7 @@ export class LoginComponent {
       IsRememberLogin: this.remember.value
     }).subscribe(d => {
 
-      if (!d) {
+      if (d === null) {
         this.loginLoading = false;
         this.nProgress.done();
         return;

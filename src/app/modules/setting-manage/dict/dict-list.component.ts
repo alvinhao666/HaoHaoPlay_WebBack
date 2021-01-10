@@ -82,7 +82,7 @@ export class DictListComponent extends CoreContainer implements OnInit {
     this.modal.confirm({
       nzTitle: `确认删除 ${data.DictName}?`,
       nzOnOk: () => this.http.delete(`Dict/DeleteDict/${data.Id}`).subscribe(d => {
-        if (!d) return;
+        if (d === null) return;
         this.search();
       })
     });

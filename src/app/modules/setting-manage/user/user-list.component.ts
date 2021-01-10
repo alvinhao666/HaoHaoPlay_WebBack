@@ -160,7 +160,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
         });
 
         this.http.post('User/Import', formData).subscribe(d => {
-            if (!d) return;
+            if (d === null) return;
             this.msg.success('导入成功');
         });
     }

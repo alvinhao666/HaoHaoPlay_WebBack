@@ -4,7 +4,7 @@
         <form nz-form [formGroup]="form">
             <nz-form-item>
                 <nz-form-label nzRequired [nzSpan]="4">名称</nz-form-label>
-                <nz-form-control [nzSpan]="18" nzErrorTip="名称必填">
+                <nz-form-control [nzSpan]="18" nzErrorTip="必填">
                     <input nz-input id="title" formControlName="fName" autocomplete="off" />
                 </nz-form-control>
             </nz-form-item>
@@ -15,7 +15,7 @@
                 </nz-form-control>
 
                 <ng-template #ErrorTpl>
-                    <ng-container *ngIf="fAlias.dirty && fAlias.errors?.required">别名必填</ng-container>
+                    <ng-container *ngIf="fAlias.dirty && fAlias.errors?.required">必填</ng-container>
                     <ng-container *ngIf="fAlias.dirty && fAlias.errors?.pattern">只能输入英文</ng-container>
                 </ng-template>
             </nz-form-item>

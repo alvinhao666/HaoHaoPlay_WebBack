@@ -1,8 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { H_Http, CoreEdit, ComparePwdValidators, CompareOldPwdValidators } from '@core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { H_Http, CoreEdit } from '@core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
@@ -10,7 +8,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   templateUrl: './update-pwd.component.html',
   styleUrls: ['./update-pwd.component.less']
 })
-export class UpdatePwdComponent extends CoreEdit implements OnInit, OnDestroy {
+export class UpdatePwdComponent extends CoreEdit {
 
   isVisible = false;
 
@@ -28,12 +26,6 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit, OnDestroy {
   @Output() onSave = new EventEmitter();
 
 
-  oldPwdChange$ = new BehaviorSubject('');
-  // 定义一个行为subject
-  newPwdChange$ = new BehaviorSubject('');
-
-
-
 
   get fPassword() {
     return this.form.controls.fPassword;
@@ -47,6 +39,25 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit, OnDestroy {
     return this.form.controls.fOldPassword;
   }
 
+  passwordValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (control.value) {
+      if (control.value === this.form.controls.fOldPassword.value) {
+        return { error: true, same: true };
+      }
+    }
+    return {};
+  }
+
+
+  rePasswordValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (control.value) {
+      if (control.value !== this.form.controls.fPassword.value) {
+        return { error: true, notEqual: true };
+      }
+    }
+    return {};
+  }
+
 
   constructor(
     private fb: FormBuilder,
@@ -55,49 +66,23 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit, OnDestroy {
     super();
     this.form = this.fb.group({
       fOldPassword: [null, Validators.required],
-      fPassword: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(16), CompareOldPwdValidators.match('fOldPassword')]],
-      fRePassword: [null, [Validators.required, ComparePwdValidators.equal('fPassword')]]
+      fPassword: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(16), this.passwordValidator]],
+      fRePassword: [null, [Validators.required, this.rePasswordValidator]]
     });
   }
 
 
-  ngOnInit() {
 
-    this.oldPwdChange$
-      .asObservable()
-      .pipe(debounceTime(150)) // debounceTime(200) 间隔时间 200ms
-      .subscribe((value: string) => {
-        if (!this.fOldPassword.value || !this.fPassword.value) return;
-        this.fPassword.markAsDirty();
-        this.fPassword.updateValueAndValidity();
-      });
-
-    this.newPwdChange$
-      .asObservable()
-      .pipe(debounceTime(150)) // debounceTime(200) 间隔时间 200ms
-      .subscribe((value: string) => {
-        if (!this.fPassword.value) return;
-
-        this.checkPasswordLevel(value);
-
-        if (this.fRePassword.value) {
-          this.fRePassword.markAsDirty();
-          this.fRePassword.updateValueAndValidity();
-        }
-      });
-  }
-
-  ngOnDestroy() {
-    this.oldPwdChange$.unsubscribe();
-    this.newPwdChange$.unsubscribe();
-  }
 
   oldPwdChange(value: string) {
-    this.oldPwdChange$.next(value);
+    setTimeout(() => this.form.controls.fPassword.updateValueAndValidity());
   }
 
   newPwdChange(value: string) {
-    this.newPwdChange$.next(value);
+    setTimeout(() => {
+      this.form.controls.fRePassword.updateValueAndValidity();
+      this.checkPasswordLevel(value);
+    }, 300);
   }
 
   handleCancel() {
@@ -113,7 +98,7 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit, OnDestroy {
       RePassword: this.fRePassword.value
     }).subscribe(d => {
       this.loading = false;
-      if (!d) return;
+      if (d === null) return;
       this.msg.success('更新成功');
       this.onSave.emit();
       this.reset();
@@ -140,7 +125,13 @@ export class UpdatePwdComponent extends CoreEdit implements OnInit, OnDestroy {
 
   reset() {
     this.isVisible = false;
-    this.form.reset();
+
+    // tslint:disable-next-line:forin
+    // for (const key in this.form.controls) {
+    //   this.form.controls[key].markAsPristine();
+    //   this.form.controls[key].updateValueAndValidity();
+    // }
+    this.resetForm(this.form);
   }
 }
 

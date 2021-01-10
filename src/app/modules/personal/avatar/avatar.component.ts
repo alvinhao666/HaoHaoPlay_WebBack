@@ -39,7 +39,7 @@ export class AvatarComponent implements OnInit {
 
   getTencentCosFederationToken(options, callback) {
     this.http.get('Common/GetTencentCosFederationToken').subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       const credentials = d && d.Credentials;
       callback({
         TmpSecretId: credentials.TmpSecretId,
@@ -67,7 +67,7 @@ export class AvatarComponent implements OnInit {
     let region = '';
 
     await this.http.get('Common/GetUploadAvatarInfo').toPromise().then(d => {
-      if (!d) return;
+      if (d === null) return;
       bucket = d.Bucket;
       key = d.Key;
       region = d.Region;
@@ -87,7 +87,7 @@ export class AvatarComponent implements OnInit {
 
   updateHeadImage(err, data) {
     this.http.put('CurrentUser/UpdateHeadImg', { HeadImageUrl: data.Location }).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.onSave.emit();
       this.msg.success('更新成功');
     });

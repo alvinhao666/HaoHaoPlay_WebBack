@@ -29,8 +29,8 @@
                     <input nz-input formControlName="fPhone" placeholder="" autocomplete="off">
                 </nz-form-control>
                 <ng-template #PhoneErrorTpl>
-                    <ng-container *ngIf="fPhone.dirty && fPhone.errors?.required">手机必填</ng-container>
-                    <ng-container *ngIf="fPhone.dirty && fPhone.errors?.pattern">手机格式不正确</ng-container>
+                    <ng-container *ngIf="fPhone.dirty && fPhone.errors?.required">必填</ng-container>
+                    <ng-container *ngIf="fPhone.dirty && fPhone.errors?.pattern">格式不正确</ng-container>
                 </ng-template>
             </nz-form-item>
             <nz-form-item>

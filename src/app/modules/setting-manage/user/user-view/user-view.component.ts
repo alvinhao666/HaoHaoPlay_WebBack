@@ -30,7 +30,7 @@ export class UserViewComponent implements OnInit {
   async showUser(id: any) {
 
     await this.http.get(`User/Get/${id}`).toPromise().then(d => {
-      if (!d) return;
+      if (d === null) return;
       this.user = d;
       this.visible = true;
     });

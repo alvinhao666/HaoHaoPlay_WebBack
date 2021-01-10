@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CoreEdit, H_Http } from '@core';
 
@@ -7,7 +7,7 @@ import { CoreEdit, H_Http } from '@core';
   templateUrl: './dict-edit.component.html',
   styleUrls: ['./dict-edit.component.less']
 })
-export class DictEditComponent extends CoreEdit implements OnInit {
+export class DictEditComponent extends CoreEdit {
 
   visible = false;
 
@@ -44,9 +44,6 @@ export class DictEditComponent extends CoreEdit implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
-
   close() {
     this.reset();
   }
@@ -67,7 +64,7 @@ export class DictEditComponent extends CoreEdit implements OnInit {
       DictName: this.fDictName.value,
       Remark: this.fRemark.value
     }).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.onSave.emit();
       this.reset();
     });
@@ -79,7 +76,7 @@ export class DictEditComponent extends CoreEdit implements OnInit {
       DictName: this.fDictName.value,
       Remark: this.fRemark.value
     }).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.onSave.emit();
       this.reset();
     });
@@ -97,6 +94,6 @@ export class DictEditComponent extends CoreEdit implements OnInit {
     this.visible = false;
     this.isUpdate = false;
     this.dictId = null;
-    this.form.reset();
+    this.resetForm(this.form);
   }
 }

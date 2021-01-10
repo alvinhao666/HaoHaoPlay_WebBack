@@ -1,13 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { H_Http, icons } from '@core';
+import { CoreEdit, H_Http, icons } from '@core';
 
 @Component({
   selector: 'dialog-application-edit',
   templateUrl: './application-edit.component.html',
   styleUrls: ['./application-edit.component.less']
 })
-export class ApplicationEditComponent {
+export class ApplicationEditComponent extends CoreEdit {
 
   isVisible = false;
 
@@ -49,6 +49,7 @@ export class ApplicationEditComponent {
   constructor(
     private http: H_Http,
     private fb: FormBuilder) {
+    super();
     this.form = this.fb.group({
       fName: [null, Validators.required],
       fIcon: [null, Validators.required],
@@ -113,7 +114,7 @@ export class ApplicationEditComponent {
       ParentId: this.Id,
       Alias: this.fAlias.value
     }).subscribe(d => {
-      if (!d) return;
+      if (d === null) return;
       this.onSave.emit();
       this.reset();
     });
@@ -121,7 +122,7 @@ export class ApplicationEditComponent {
 
   reset() {
     this.isVisible = false;
-    this.form.reset();
+    this.resetForm(this.form);
   }
 
   checkForm(form: FormGroup): boolean {

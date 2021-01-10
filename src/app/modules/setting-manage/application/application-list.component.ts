@@ -105,7 +105,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
 
     getNodes() {
         this.http.get(`Module/GetList`).subscribe(d => {
-            if (!d) return;
+            if (d === null) return;
             this.nodes = d;
             if (this.activedNode !== '0') {
                 this.getNodeInfo(this.activedNode);
@@ -119,7 +119,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
             return;
         }
         this.http.get(`Module/Get/${node.key}`).subscribe(d => {
-            if (!d) return;
+            if (d === null) return;
             this.type = d.Type;
             this.iconName = d.Icon;
 
@@ -157,7 +157,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
                     Type: this.type,
                     Alias: this.Alias.value
                 }).subscribe(d => {
-                    if (!d) return;
+                    if (d === null) return;
                     this.msg.success('更新成功');
                     this.getNodes();
                 });
@@ -170,7 +170,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
             nzTitle: '确认删除?',
             nzOnOk: () => {
                 this.http.delete(`Module/Delete/${this.activedNode.key}`).subscribe(d => {
-                    if (!d) return;
+                    if (d === null) return;
                     this.getNodes();
                     this.activedNode = { key: '0' };
                     this.type = null;
@@ -201,7 +201,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
 
     getResources() {
         this.http.get(`Resource/GetList/${this.activedNode.key}`).subscribe(d => {
-            if (!d) return;
+            if (d === null) return;
             this.resourceData = d;
             this.handleResourceData();
         });
@@ -222,7 +222,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
 
     deleteResource(id: any) {
         this.http.delete(`Resource/Delete/${id}`).subscribe(d => {
-            if (!d) return;
+            if (d === null) return;
             this.getResources();
         });
     }
@@ -237,7 +237,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
             Sort: parseInt(this.editCache[id].data.Sort, 10),
             Alias: this.editCache[id].data.Alias,
         }).subscribe(d => {
-            if (!d) return;
+            if (d === null) return;
             this.msg.success('更新成功');
             this.getResources();
         });
