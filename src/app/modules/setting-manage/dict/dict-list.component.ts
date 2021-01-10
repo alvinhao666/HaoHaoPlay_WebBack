@@ -20,14 +20,6 @@ export class DictListComponent extends CoreContainer implements OnInit {
 
   searchForm: FormGroup;
 
-  // tableLoading = false;
-
-  // dataSet: null;
-
-  // pageIndex = 1;
-  // pageSize = 10;
-  // totalCount = 1;
-
   get sDictName() {
     return this.searchForm.controls.sDictName;
   }
