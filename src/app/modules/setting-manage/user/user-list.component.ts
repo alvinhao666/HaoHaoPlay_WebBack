@@ -51,7 +51,6 @@ export class UserListComponent extends CoreContainer implements OnInit {
         return this.searchForm.controls.sLastLoginTime;
     }
 
-    uploading = false;
     fileList: NzUploadFile[] = [];
 
     constructor(
