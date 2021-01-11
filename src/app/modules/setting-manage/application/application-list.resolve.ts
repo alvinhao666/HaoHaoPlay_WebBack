@@ -12,7 +12,7 @@ export class ApplicationTreeResolve implements Resolve<any> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        return this.http.get(`Module/GetList`).toPromise().then(d => {
+        return this.http.get(`Module/GetTreeList`).toPromise().then(d => {
             return d;
         });
     }

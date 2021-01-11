@@ -104,7 +104,7 @@ export class ApplicationListComponent extends CoreContainer implements OnInit {
     }
 
     getNodes() {
-        this.http.get(`Module/GetList`).subscribe(d => {
+        this.http.get(`Module/GetTreeList`).subscribe(d => {
             if (d === null) return;
             this.nodes = d;
             if (this.activedNode !== '0') {
