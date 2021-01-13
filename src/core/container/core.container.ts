@@ -19,9 +19,6 @@ export class CoreContainer extends Core {
 
     sortTypes: number[] = [];
 
-    //分页查询方法入参
-    // searchParam: any = null;
-
     //分页查询方法
     searchPagedListFn: () => Observable<any>;
 
