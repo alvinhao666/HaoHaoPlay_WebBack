@@ -74,7 +74,7 @@ export class CoreContainer extends Core {
     }
 
 
-    setQueryParam(param?: any): any {
+    setPagedQueryParam(param?: any): any {
         return Object.assign(param, {
             PageIndex: this.pageIndex,
             PageSize: this.pageSize,

@@ -39,7 +39,7 @@
                 <th nzLeft nzWidth="60px">序号</th>
                 <th nzLeft nzWidth="180px">字典名称</th>
                 <th nzLeft nzWidth="180px">字典编码</th>
-                <th>备注</th>
+                <th>数据项</th>
                 <th nzWidth="220px">创建时间</th>
                 <th nzRight nzWidth="140px">操作</th>
             </tr>
@@ -49,10 +49,10 @@
                 <td nzLeft>{{idx+1}}</td>
                 <td nzLeft>{{d.DictName}}</td>
                 <td nzLeft>{{d.DictCode}}</td>
-                <td title="{{d.Remark}}">{{d.Remark}}</td>
+                <td title="{{d.ItemNames}}">{{d.ItemNames}}</td>
                 <td>{{d.CreateTime}}</td>
                 <td nzRight>
-                    <a (click)="showDictItem(d)" class="a-operate">数据项</a>
+                    <a (click)="showDictItem(d)" class="a-operate">查看</a>
                     <a (click)="editDict(d)" *ngIf="checkAuth('1_2097152')" class="ml10 a-operate">编辑</a>
                     <a (click)="deleteDict(d)" *ngIf="checkAuth('1_4194304')" class="ml10 a-operate">删除</a>
                 </td>
