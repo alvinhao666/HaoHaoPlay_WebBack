@@ -51,6 +51,17 @@ export class UserListComponent extends CoreContainer implements OnInit {
         return this.searchForm.controls.sLastLoginTime;
     }
 
+    get queryParam() {
+        return {
+            LikeName: this.sName.value,
+            LikePhone: this.sPhone.value,
+            Gender: this.sGender,
+            Enabled: this.sEnabled.value,
+            LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd'),
+            LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd')
+        };
+    }
+
     fileList: NzUploadFile[] = [];
 
     constructor(
@@ -73,24 +84,17 @@ export class UserListComponent extends CoreContainer implements OnInit {
         });
     }
 
-
-
     ngOnInit() {
 
         this.setTableData(this.router.snapshot.data.userList);
     }
 
+
+
     //查询用户
     getUsers() {
         return this.http
-            .get('User/GetPagedList', this.setQueryParam({
-                Name: this.sName.value,
-                Phone: this.sPhone.value,
-                Gender: this.sGender,
-                Enabled: this.sEnabled.value,
-                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd'),
-                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd')
-            }));
+            .get('User/GetPagedList', this.setPagedQueryParam(this.queryParam));
     }
 
 
@@ -106,15 +110,7 @@ export class UserListComponent extends CoreContainer implements OnInit {
 
     export() {
         this.http
-            .get('User/Export', {
-                Name: this.sName.value,
-                Phone: this.sPhone.value,
-                Gender: this.sGender,
-                Enabled: this.sEnabled.value,
-                LastLoginTimeStart: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[0], 'yyyy-MM-dd'),
-                LastLoginTimeEnd: this.sLastLoginTime.value && this.datePipe.transform(this.sLastLoginTime.value[1], 'yyyy-MM-dd')
-                // OrderFileds: this.sortValue && (this.sortKey + this.sortValue)
-            })
+            .get('User/Export', this.queryParam)
             .subscribe((d: any) => {
                 const a = document.createElement('a'); //创建一个<a></a>标签
                 a.href = `${environment.api_url}ExportExcel/${d.FileName}?Authorization=${this.getToken()}&FileId=${d.FileId}`;
