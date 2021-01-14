@@ -85,6 +85,21 @@ const cropbox = async function (options) {
                 element.style.OTransform = 'rotate(' + this.degree + 'deg)';
                 element.style.transform = 'rotate(' + this.degree + 'deg)';
             }
+            // rotateBase64Image : function(isForward) {
+            //     let canvas, ctx, image;
+            //     canvas = document.createElement('canvas');
+            //     ctx = canvas.getContext('2d');
+            //     image = obj.image;
+            //     canvas.width = image.height;
+            //     canvas.height = image.width;
+            //     ctx.translate(image.height / 2, image.width / 2);
+            //     ctx.rotate(90 * Math.PI / 180 * (isForward ? 1 : -1));
+            //     ctx.drawImage(image, image.width / -2, image.height / -2);
+            //     options.imgSrc = canvas.toDataURL();
+            //     options.ratio = obj.ratio;
+            //     cropbox(options);
+            //     obj.draw();
+            //   }
         },
         attachEvent = function (node, event, cb) {
             if (node.attachEvent)
