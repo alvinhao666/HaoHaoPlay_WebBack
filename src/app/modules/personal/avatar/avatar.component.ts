@@ -14,7 +14,7 @@ export class AvatarComponent implements OnInit {
   options = {
     imageBox: '.imageBox',
     thumbBox: '.thumbBox',
-    spinner: '.spinner',
+    // spinner: '.spinner',
     imgSrc: '',
     previewBoxF: '.previewBoxF',
     previewBoxS: '.previewBoxS'
