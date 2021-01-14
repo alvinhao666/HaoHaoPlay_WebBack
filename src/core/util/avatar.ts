@@ -62,12 +62,10 @@ const cropbox = async function (options) {
                 setBackground();
             },
             turnLeft: function () {
-                this.degree = this.degree - 90;
-                setBackground();
+                this.rotateBase64Image(false);
             },
             turnRight: function () {
-                this.degree = this.degree + 90;
-                setBackground();
+                this.rotateBase64Image(true);
             },
             draw: function () {
                 const data = this.getDataURL();
@@ -75,15 +73,18 @@ const cropbox = async function (options) {
                 const previewS = document.querySelector(options.previewBoxS);
                 previewF.setAttribute('src', data);
                 previewS.setAttribute('src', data);
-                this.setTransform(previewF);
-                this.setTransform(previewS);
             },
-            setTransform: function (element: any) {
-                element.style.webkitTransform = 'rotate(' + this.degree + 'deg)';
-                element.style.MozTransform = 'rotate(' + this.degree + 'deg)';
-                element.style.msTransform = 'rotate(' + this.degree + 'deg)';
-                element.style.OTransform = 'rotate(' + this.degree + 'deg)';
-                element.style.transform = 'rotate(' + this.degree + 'deg)';
+            rotateBase64Image: function (isForward) {
+                let canvas, ctx, image;
+                canvas = document.createElement('canvas');
+                ctx = canvas.getContext('2d');
+                image = obj.image;
+                canvas.width = image.height;
+                canvas.height = image.width;
+                ctx.translate(image.height / 2, image.width / 2);
+                ctx.rotate(90 * Math.PI / 180 * (isForward ? 1 : -1));
+                ctx.drawImage(image, image.width / -2, image.height / -2);
+                obj.image.src = canvas.toDataURL();   
             }
         },
         attachEvent = function (node, event, cb) {
@@ -144,7 +145,7 @@ const cropbox = async function (options) {
                 obj.state.mouseX = e.clientX;
                 obj.state.mouseY = e.clientY;
                 obj.draw();
-            } 
+            }
         },
         imgMouseUp = function (e) {
             stopEvent(e);
