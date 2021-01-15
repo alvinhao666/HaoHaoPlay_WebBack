@@ -86,7 +86,7 @@ export class LoginComponent {
 
     this.nProgress.start();
     this.loginLoading = true;
-    this.http.post('Login', {
+    this.http.post('LoginByAccountPwd', {
       LoginName: this.userName.value,
       Password: pwd,
       IsRememberLogin: this.remember.value
