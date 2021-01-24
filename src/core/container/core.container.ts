@@ -30,11 +30,11 @@ export class CoreContainer extends Core {
     checkAuth(authCode: string): boolean {
         const auths = authCode.split('_');
         if (auths.length < 2) return false;
-        const layer = parseInt(auths[0], 10);
+        const layer = parseInt(auths[auths.length - 2], 10);
         if (isNaN(layer)) return false;
         const index = layer - 1;
         if (index < 0) return false;
-        const num = Number(auths[1]);
+        const num = Number(auths[auths.length - 1]);
         const authNum = Number(Core.authNums[index]);
         return (num & authNum) === num;
     }
@@ -89,7 +89,7 @@ export class CoreContainer extends Core {
     }
 
     sortChange(sort: { key: number, value: string }) {
-      
+
         const index = this.sortFields.indexOf(sort.key);
         if (index > -1) {
             this.sortFields.splice(index, 1);
@@ -101,7 +101,7 @@ export class CoreContainer extends Core {
         } else if (sort.value === 'descend') {
             this.sortFields.push(sort.key);
             this.sortTypes.push(SortType.Descend);
-        } 
+        }
 
         this.reSearch();
     }
