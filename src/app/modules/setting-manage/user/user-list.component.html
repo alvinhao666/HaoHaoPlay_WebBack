@@ -34,7 +34,7 @@
 
         <div class="operate-wrapper">
             <div class="fl">
-                <button nz-button [nzType]="'primary'" (click)="addUser()" *ngIf="checkAuth('1_32')">
+                <button nz-button [nzType]="'primary'" (click)="addUser()" *ngIf="checkAuth('User_Add_1_128')">
                     <i nz-icon nzType="plus"></i>
                     <span>添加</span>
                 </button>
@@ -44,14 +44,14 @@
                 </button>
                 <nz-dropdown-menu #moreOperate>
                     <ul nz-menu>
-                        <li nz-menu-item (click)="export()" *ngIf="checkAuth('1_2048')">导出</li>
-                        <li nz-menu-item (click)="exportTemplate()" *ngIf="checkAuth('1_1024')">导出模板</li>
+                        <li nz-menu-item (click)="export()" *ngIf="checkAuth('User_Export_1_2048')">导出</li>
+                        <li nz-menu-item (click)="exportTemplate()" *ngIf="checkAuth('User_Import_1_4096')">导出模板</li>
                     </ul>
                 </nz-dropdown-menu>
             </div>
 
             <div class="fr">
-                <button nz-button type="submit" [nzType]="'primary'" (click)="reSearch()" *ngIf="checkAuth('1_8388608')">
+                <button nz-button type="submit" [nzType]="'primary'" (click)="reSearch()" *ngIf="checkAuth('User_Search_1_64')">
                     <i nz-icon nzType="search"></i>
                     <span>查询</span>
                 </button>
@@ -94,14 +94,14 @@
                 <td>{{d.LastLoginTime}}</td>
                 <td>{{d.LastLoginIP}}</td>
                 <td nzRight>
-                    <a (click)="view(d.Id)" class="a-operate" *ngIf="checkAuth('1_8388608')">查看</a>
+                    <a (click)="view(d.Id)" class="a-operate" *ngIf="checkAuth('User_View_1_1024')">查看</a>
                     <!-- <nz-divider nzType="vertical"></nz-divider> -->
-                    <a (click)="edit(d.Id)" *ngIf="d.Id!=-1&&checkAuth('1_64')" class="ml10 a-operate">编辑</a>
+                    <a (click)="edit(d.Id)" *ngIf="d.Id!=-1&&checkAuth('User_Update_1_256')" class="ml10 a-operate">编辑</a>
                     <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&checkAuth('1_512')"></nz-divider> -->
-                    <a (click)="disable(d)" *ngIf="d.Enabled&&d.Id!=-1&&checkAuth('1_128')" class="ml10 a-operate">注销</a>
-                    <a (click)="enable(d)" *ngIf="!d.Enabled&&d.Id!=-1&&checkAuth('1_256')" class="ml10 a-operate">启用</a>
+                    <a (click)="disable(d)" *ngIf="d.Enabled&&d.Id!=-1&&checkAuth('User_Disable_1_16777216')" class="ml10 a-operate">注销</a>
+                    <a (click)="enable(d)" *ngIf="!d.Enabled&&d.Id!=-1&&checkAuth('User_Enable_1_33554432')" class="ml10 a-operate">启用</a>
                     <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&checkAuth('1_2048')"></nz-divider> -->
-                    <a (click)="delete(d)" *ngIf="d.Id!=-1&&checkAuth('1_512')" class="ml10 a-operate">删除</a>
+                    <a (click)="delete(d)" *ngIf="d.Id!=-1&&checkAuth('User_Delete_1_512')" class="ml10 a-operate">删除</a>
                 </td>
             </tr>
         </tbody>
@@ -110,7 +110,7 @@
         共{{totalCount}}条
     </ng-template>
 
-    <div nz-row nzType="flex" *ngIf="checkAuth('1_1024')">
+    <div nz-row nzType="flex" *ngIf="checkAuth('User_Import_1_4096')">
         <div nz-col nzSpan="4">
             <button nz-button [nzType]="'primary'" [disabled]="fileList.length == 0" style="margin-right: 16px" (click)="importExcel()">
                 <span>导入</span>

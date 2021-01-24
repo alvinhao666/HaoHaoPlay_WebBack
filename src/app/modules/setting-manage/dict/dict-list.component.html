@@ -26,7 +26,7 @@
     </form>
 
     <div class="operate-wrapper">
-        <button nz-button [nzType]="'primary'" (click)="addDict()" *ngIf="checkAuth('1_1048576')">
+        <button nz-button [nzType]="'primary'" (click)="addDict()" *ngIf="checkAuth('Dict_Add_1_2097152')">
             <i nz-icon nzType="plus"></i>
             <span>添加</span>
         </button>
@@ -52,9 +52,9 @@
                 <td title="{{d.ItemNames}}">{{d.ItemNames}}</td>
                 <td>{{d.CreateTime}}</td>
                 <td nzRight>
-                    <a (click)="showDictItem(d)" class="a-operate">查看</a>
-                    <a (click)="editDict(d)" *ngIf="checkAuth('1_2097152')" class="ml10 a-operate">编辑</a>
-                    <a (click)="deleteDict(d)" *ngIf="checkAuth('1_4194304')" class="ml10 a-operate">删除</a>
+                    <a (click)="showDictItem(d)" *ngIf="checkAuth('Dict_Search_1_1048576')" class="a-operate">查看</a>
+                    <a (click)="editDict(d)" *ngIf="checkAuth('Dict_Edit_1_4194304')" class="ml10 a-operate">编辑</a>
+                    <a (click)="deleteDict(d)" *ngIf="checkAuth('Dict_Delete_1_8388608')" class="ml10 a-operate">删除</a>
                 </td>
             </tr>
         </tbody>

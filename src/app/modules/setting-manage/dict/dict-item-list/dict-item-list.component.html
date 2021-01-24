@@ -11,7 +11,7 @@
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <button nz-button type="submit" [nzType]="'primary'" (click)="reSearch()">
+                    <button nz-button type="submit" [nzType]="'primary'" (click)="reSearch()" *ngIf="checkAuth('Dict_Search_1_1048576')">
                         <i nz-icon nzType="search"></i>
                         <span>查询</span>
                     </button>
@@ -22,7 +22,7 @@
             </div>
         </form>
         <div class="operate-wrapper">
-            <button nz-button [nzType]="'primary'" (click)="addDictItem()" *ngIf="checkAuth('1_1048576')">
+            <button nz-button [nzType]="'primary'" (click)="addDictItem()" *ngIf="checkAuth('Dict_Add_1_2097152')">
                 <i nz-icon nzType="plus"></i>
                 <span>添加</span>
             </button>
@@ -50,8 +50,8 @@
                     <td>{{d.Sort}}</td>
                     <td>{{d.CreateTime}}</td>
                     <td>
-                        <a (click)="editItem(d)" *ngIf="checkAuth('1_2097152')" class="a-operate">编辑</a>
-                        <a nz-popconfirm (nzOnConfirm)="deleteItem(d)" nzPopconfirmTitle="确定删除?" *ngIf="checkAuth('1_4194304')" class="ml10 a-operate">删除</a>
+                        <a (click)="editItem(d)" *ngIf="checkAuth('Dict_Edit_1_4194304')" class="a-operate">编辑</a>
+                        <a nz-popconfirm (nzOnConfirm)="deleteItem(d)" nzPopconfirmTitle="确定删除?" *ngIf="checkAuth('Dict_Delete_1_8388608')" class="ml10 a-operate">删除</a>
                     </td>
                 </tr>
             </tbody>
