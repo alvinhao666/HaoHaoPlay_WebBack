@@ -1,7 +1,4 @@
 FROM node:14.13-buster AS builder
-# set working directory 
-# /app这个不用修改
-WORKDIR /app
 
 # install and cache app dependencies
 ADD package.json /tmp/package.json
@@ -9,10 +6,13 @@ ADD package.json /tmp/package.json
 RUN cd /tmp 
 RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install
-RUN mkdir -p /app && cp -a /tmp/node_modules /app/
+RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
+
+WORKDIR /opt/app
+COPY . /opt/app
+
 
 # build the angular app
-COPY . .
 RUN npm run build
 FROM nginx:1.18.0
 
