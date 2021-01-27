@@ -4,9 +4,12 @@ FROM node:14.13-buster AS builder
 WORKDIR /app
 
 # install and cache app dependencies
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+ADD package.json /tmp/package.json
+
+RUN cd /tmp 
 RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install
+RUN mkdir -p /app && cp -a /tmp/node_modules /app/
 
 # build the angular app
 COPY . .
