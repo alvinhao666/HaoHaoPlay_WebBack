@@ -1,14 +1,15 @@
 FROM node:14.13-buster AS builder
+# set working directory 
+# /app这个不用修改
+WORKDIR /app
 
 # install and cache app dependencies
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./tmp/"]
-RUN cd /tmp  &&  npm config set registry https://registry.npm.taobao.org && npm install
-RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
-
-WORKDIR /opt/app
-COPY . /opt/app
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+RUN npm config set registry https://registry.npm.taobao.org
+RUN npm install
 
 # build the angular app
+COPY . .
 RUN npm run build
 FROM nginx:1.18.0
 
