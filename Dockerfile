@@ -1,8 +1,7 @@
 FROM node:14.13-buster AS builder
 
 # install and cache app dependencies
-ADD package.json /tmp/package.json
-
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./tmp/"]
 RUN cd /tmp 
 RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install
