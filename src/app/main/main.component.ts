@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { environment } from '@env/environment';
 import { H_Http, getColorByFirstName } from '@core';
-import { UserInfoSubject } from '../share/subjects/user-info.subject';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Core, CoreContainer } from '@core';
 import { Router } from '@angular/router';
+import PubSub from 'pubsub-js';
 
 @Component({
   selector: 'app-main',
@@ -30,13 +30,12 @@ export class MainComponent extends CoreContainer {
   constructor(
     private http: H_Http,
     private router: Router,
-    private msg: NzMessageService,
-    private userInfoSubject: UserInfoSubject) {
+    private msg: NzMessageService) {
     super();
 
     this.init();
 
-    this.userInfoSubject.userInfo$.subscribe((d: any) => {
+    PubSub.subscribe('avatar_change', (msg, d) => {
       this.name = d.Name;
       this.firstName = d.FirstName;
       this.firstNameBgColor = d.FirstNameBgColor;

@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { H_Http, CoreEdit, getColorByFirstName } from '@core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute } from '@angular/router';
-import { UserInfoSubject } from '../../../share/subjects/user-info.subject';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { environment } from '@env/environment';
+import PubSub from 'pubsub-js';
 
 
 @Component({
@@ -60,8 +60,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     private fb: FormBuilder,
     private http: H_Http,
     private msg: NzMessageService,
-    private router: ActivatedRoute,
-    private userInfoSubject: UserInfoSubject) {
+    private router: ActivatedRoute) {
     super();
     this.form = this.fb.group({
       fName: [{ value: null, disabled: true }, Validators.required],
@@ -128,7 +127,8 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       //   this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
       // }
       this.headImgUrl = d.HeadImgUrl || d.HeadImgUrl;
-      this.userInfoSubject.userInfo$.next({ Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: d.HeadImgUrl });
+
+      PubSub.publish('avatar_change', { Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: d.HeadImgUrl });
     });
   }
 
