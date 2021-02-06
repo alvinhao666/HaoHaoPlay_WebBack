@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { environment } from '@env/environment';
 import PubSub from 'pubsub-js';
+import { PubSubKey } from 'src/app/share/pubsub.key';
 
 
 @Component({
@@ -128,7 +129,7 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       // }
       this.headImgUrl = d.HeadImgUrl || d.HeadImgUrl;
 
-      PubSub.publish('avatar_change', { Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: d.HeadImgUrl });
+      PubSub.publish(PubSubKey.avatar_change, { Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: d.HeadImgUrl });
     });
   }
 
