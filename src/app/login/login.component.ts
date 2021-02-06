@@ -5,6 +5,7 @@ import JSEncrypt from 'jsencrypt';
 import { H_Http } from '@core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
+import NProgress from 'nprogress';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent {
 
   loginLoading = false;
 
-  nProgress = require('nprogress').configure({ showSpinner: false });
+  nProgress = NProgress.configure({ showSpinner: false });
   constructor(
     private fb: FormBuilder,
     public msg: NzMessageService,
