@@ -5,6 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Core, CoreContainer } from '@core';
 import { Router } from '@angular/router';
 import PubSub from 'pubsub-js';
+import { PubSubKey } from '../share/pubsub.key';
 
 @Component({
   selector: 'app-main',
@@ -35,7 +36,7 @@ export class MainComponent extends CoreContainer {
 
     this.init();
 
-    PubSub.subscribe('avatar_change', (msg, d) => {
+    PubSub.subscribe(PubSubKey.avatar_change, (msg, d) => {
       this.name = d.Name;
       this.firstName = d.FirstName;
       this.firstNameBgColor = d.FirstNameBgColor;
