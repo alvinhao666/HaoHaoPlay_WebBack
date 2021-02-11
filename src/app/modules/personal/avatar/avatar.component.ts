@@ -57,9 +57,7 @@ export class AvatarComponent implements OnInit {
   }
 
   async handleOk() {
-    this.isVisible = false;
     //const baseStr = this.cropper.getDataURL();
-
     const blob = this.cropper.getBlob();
 
     let bucket = '';
@@ -83,6 +81,7 @@ export class AvatarComponent implements OnInit {
       }
     }, this.updateHeadImage.bind(this));
 
+    this.isVisible = false;
   }
 
   updateHeadImage(err, data) {
