@@ -28,47 +28,47 @@ export class UserEditComponent extends CoreEdit {
 
     roles = null;
 
-    get fLoginName() {
-        return this.form.controls.fLoginName;
+    get LoginName() {
+        return this.form.controls.LoginName;
     }
 
-    get fName() {
-        return this.form.controls.fName;
+    get Name() {
+        return this.form.controls.Name;
     }
 
-    get fPassword() {
-        return this.form.controls.fPassword;
+    get Password() {
+        return this.form.controls.Password;
     }
-    get fRePassword() {
-        return this.form.controls.fRePassword;
-    }
-
-    get fAge() {
-        return this.form.controls.fAge;
+    get RePassword() {
+        return this.form.controls.RePassword;
     }
 
-    get fGender() {
-        return this.form.controls.fGender;
+    get Age() {
+        return this.form.controls.Age;
     }
 
-    get fPhone() {
-        return this.form.controls.fPhone;
+    get Gender() {
+        return this.form.controls.Gender;
     }
 
-    get fEmail() {
-        return this.form.controls.fEmail;
+    get Phone() {
+        return this.form.controls.Phone;
     }
 
-    get fWechat() {
-        return this.form.controls.fWechat;
+    get Email() {
+        return this.form.controls.Email;
     }
 
-    get fQQ() {
-        return this.form.controls.fQQ;
+    get Wechat() {
+        return this.form.controls.Wechat;
     }
 
-    get fRole() {
-        return this.form.controls.fRole;
+    get QQ() {
+        return this.form.controls.QQ;
+    }
+
+    get Role() {
+        return this.form.controls.Role;
     }
 
     timerOfLoginName = null;
@@ -102,7 +102,7 @@ export class UserEditComponent extends CoreEdit {
 
     rePasswordValidator = (control: FormControl): { [s: string]: boolean } => {
         if (control.value) {
-            if (control.value !== this.form.controls.fPassword.value) {
+            if (control.value !== this.form.controls.Password.value) {
                 return { error: true, notEqual: true };
             }
         }
@@ -115,23 +115,23 @@ export class UserEditComponent extends CoreEdit {
         public msg: NzMessageService) {
         super();
         this.form = this.fb.group({
-            fLoginName: [null, [Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/)], [this.loginNameAsyncValidator]],
-            fName: [null, Validators.required],
-            fPassword: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
-            fRePassword: [null, [Validators.required, this.rePasswordValidator]],
-            fAge: [null, Validators.required],
-            fGender: [null, Validators.required],
-            fPhone: [null, [Validators.required, Validators.pattern(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)]],
-            fEmail: [null, Validators.email],
-            fWechat: [null, Validators.nullValidator],
-            fQQ: [null, Validators.nullValidator],
-            fRole: [null, Validators.required]
+            LoginName: [null, [Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/)], [this.loginNameAsyncValidator]],
+            Name: [null, Validators.required],
+            Password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
+            RePassword: [null, [Validators.required, this.rePasswordValidator]],
+            Age: [null, Validators.required],
+            Gender: [null, Validators.required],
+            Phone: [null, [Validators.required, Validators.pattern(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)]],
+            Email: [null, Validators.email],
+            Wechat: [null, Validators.nullValidator],
+            QQ: [null, Validators.nullValidator],
+            Role: [null, Validators.required]
         });
     }
 
     newPwdChange(value: string) {
         //this.newPwdChange$.next(value);
-        setTimeout(() => this.form.controls.fRePassword.updateValueAndValidity());
+        setTimeout(() => this.form.controls.RePassword.updateValueAndValidity());
     }
 
     getRoles() {
@@ -159,16 +159,16 @@ export class UserEditComponent extends CoreEdit {
     addUser() {
         this.http
             .post('User/Add', {
-                LoginName: this.fLoginName.value,
-                Password: this.fPassword.value,
-                Name: this.fName.value,
-                Gender: parseInt(this.fGender.value, 10),
-                Age: this.fAge.value,
-                Phone: this.fPhone.value,
-                Email: this.fEmail.value,
-                WeChat: this.fWechat.value,
-                QQ: this.fQQ.value,
-                RoleId: this.fRole.value
+                LoginName: this.LoginName.value,
+                Password: this.Password.value,
+                Name: this.Name.value,
+                Gender: parseInt(this.Gender.value, 10),
+                Age: this.Age.value,
+                Phone: this.Phone.value,
+                Email: this.Email.value,
+                WeChat: this.Wechat.value,
+                QQ: this.QQ.value,
+                RoleId: this.Role.value
             })
             .subscribe(d => {
                 if (d === null) return;
@@ -181,13 +181,13 @@ export class UserEditComponent extends CoreEdit {
     editUser(id: any) {
         this.http
             .put(`User/Update/${id}`, {
-                Name: this.fName.value,
-                Gender: parseInt(this.fGender.value, 10),
-                Age: this.fAge.value,
-                Phone: this.fPhone.value,
-                Email: this.fEmail.value,
-                WeChat: this.fWechat.value,
-                QQ: this.fQQ.value
+                Name: this.Name.value,
+                Gender: parseInt(this.Gender.value, 10),
+                Age: this.Age.value,
+                Phone: this.Phone.value,
+                Email: this.Email.value,
+                WeChat: this.Wechat.value,
+                QQ: this.QQ.value
             })
             .subscribe(d => {
                 if (d === null) return;
@@ -202,21 +202,7 @@ export class UserEditComponent extends CoreEdit {
         await this.http.get(`User/Get/${id}`).toPromise().then(d => {
             if (d === null) return;
             // this.form.get('fName').setValue(d.Name);
-            // this.form.get('fGender').setValue(d.Gender.toString());
-            // this.form.get('fAge').setValue(d.Age);
-            // this.form.get('fPhone').setValue(d.Phone);
-            // this.form.get('fEmail').setValue(d.Email);
-            // this.form.get('fWechat').setValue(d.WeChat);
-            // this.form.get('fQQ').setValue(d.QQ);
-            this.form.patchValue({
-                fName: d.Name,
-                fGender: d.Gender.toString(),
-                fAge: d.Age,
-                fPhone: d.Phone,
-                fEmail: d.Email,
-                fWechat: d.WeChat,
-                fQQ: d.QQ
-            });
+            this.form.patchValue({ ...d, Gender: d.Gender.toString() });
             this.userId = d.Id;
         });
     }
@@ -224,7 +210,7 @@ export class UserEditComponent extends CoreEdit {
     validate(): boolean {
         let flag = true;
         for (const key of Object.keys(this.form.controls)) {
-            if (this.isEdit && (key === 'fLoginName' || key === 'fPassword' || key === 'fRePassword' || key === 'fRole')) continue;
+            if (this.isEdit && (key === 'LoginName' || key === 'Password' || key === 'RePassword' || key === 'Role')) continue;
             this.form.controls[key].markAsDirty();
             this.form.controls[key].updateValueAndValidity();
             flag = flag && !this.form.controls[key].invalid;
