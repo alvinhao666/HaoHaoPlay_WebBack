@@ -130,6 +130,8 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       this.headImgUrl = d.HeadImgUrl || d.HeadImgUrl;
 
       PubSub.publish(PubSubKey.avatar_change, { Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: d.HeadImgUrl });
+
+      this.dialogAavator.isVisible = false;
     });
   }
 

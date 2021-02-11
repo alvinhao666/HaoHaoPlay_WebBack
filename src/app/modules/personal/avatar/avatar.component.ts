@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { cropbox, H_Http } from '@core';
+import { Console } from 'console';
 
 @Component({
   selector: 'dialog-avatar',
@@ -79,12 +80,12 @@ export class AvatarComponent implements OnInit {
       onProgress: function (progressData) {
         console.log(JSON.stringify(progressData));
       }
-    }, this.updateHeadImage.bind(this));
-
-    this.isVisible = false;
+    }, this.updateHeadImage.bind(this)); 
   }
 
   updateHeadImage(err, data) {
+    
+    console.log(err);
     this.http.put('CurrentUser/UpdateHeadImg', { HeadImageUrl: data.Location }).subscribe(d => {
       if (d === null) return;
       this.onSave.emit();
