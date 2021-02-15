@@ -1,66 +1,66 @@
 <nz-layout class="app-layout">
-    <nz-sider class="menu-sidebar" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed">
-        <div class="sidebar-logo">
-            <a routerLink="dashboard">
-                <!-- <img src="../../../assets/img/logo.svg" alt="logo"> -->
-                <!-- <i nz-icon [nzIconfont]="'icon-icon-test'" style="font-size: 32px;"></i> -->
-                <img src="../../../assets/img/logo.png" alt="logo">
-                <h1>首页</h1>
-            </a>
+  <nz-sider class="menu-sidebar" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed">
+    <div class="sidebar-logo">
+      <a routerLink="dashboard">
+        <!-- <img src="../../../assets/img/logo.svg" alt="logo"> -->
+        <!-- <i nz-icon [nzIconfont]="'icon-icon-test'" style="font-size: 32px;"></i> -->
+        <img src="../../../assets/img/logo.png" alt="logo">
+        <h1>首页</h1>
+      </a>
+    </div>
+
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="false">
+      <li nz-submenu nzOpen *ngFor="let item of menus;let i=index;">
+        <span title>
+          <i class="icon-font" nz-icon [nzType]="item.Icon"></i>
+          <span>{{item.Name}}</span>
+        </span>
+        <ul>
+          <li nz-menu-item nzMatchRouter *ngFor="let sub of item.ChildMenus;">
+            <a routerLink="{{sub.RouterUrl}}">{{sub.Name}}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" class="trigger"></i>
+        </span>
+        <div class="header-user" nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'" nzTrigger="click">
+          <div class="header-avatar" *ngIf="headImgUrl">
+            <img [src]="headImgUrl">
+          </div>
+          <div class="header-avatar" *ngIf="!headImgUrl">
+            <div [style.background-color]="firstNameBgColor">{{firstName}}</div>
+          </div>
+          <span class="ml3" style="font-size:16px;">{{name}}</span>
+          <i nz-icon nzType="caret-down"></i>
         </div>
 
-        <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="false">
-            <li nz-submenu nzOpen *ngFor="let item of menus;let i=index;">
-                <span title>
-                    <i class="icon-font" nz-icon [nzType]="item.Icon"></i>
-                    <span>{{item.Name}}</span>
-                </span>
-                <ul>
-                    <li nz-menu-item nzMatchRouter *ngFor="let sub of item.ChildMenus;">
-                        <a routerLink="{{sub.RouterUrl}}">{{sub.Name}}</a>
-                    </li>
-                </ul>
+
+        <nz-dropdown-menu #menu>
+          <ul nz-menu>
+            <li nz-menu-item>
+              <a routerLink="personal/base"><i nz-icon nzType="setting"
+                  style="margin-right: 8px;"></i><span>个人设置</span></a>
             </li>
-        </ul>
-    </nz-sider>
-    <nz-layout>
-        <nz-header>
-            <div class="app-header">
-                <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-                    <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" class="trigger"></i>
-                </span>
-                <div class="header-user" nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'" nzTrigger="click">
-                    <div class="header-avatar" *ngIf="headImgUrl">
-                        <img [src]="headImgUrl">
-                    </div>
-                    <div class="header-avatar" *ngIf="!headImgUrl">
-                        <div [style.background-color]="firstNameBgColor">{{firstName}}</div>
-                    </div>
-                    <span class="ml3" style="font-size:16px;">{{name}}</span>
-                    <i nz-icon nzType="caret-down"></i>
-                </div>
-
-
-                <nz-dropdown-menu #menu>
-                    <ul nz-menu>
-                        <li nz-menu-item>
-                            <a routerLink="personal/base"><i nz-icon nzType="setting"
-                                    style="margin-right: 8px;"></i><span>个人设置</span></a>
-                        </li>
-                        <li nz-menu-item (click)="logout()">
-                            <i nz-icon nzType="logout"></i> 退出登录
-                        </li>
-                    </ul>
-                </nz-dropdown-menu>
-            </div>
-        </nz-header>
-        <nz-content>
-            <div class="breadcrumb">
-                <nz-breadcrumb nzSeparator=">" [nzAutoGenerate]="true"></nz-breadcrumb>
-            </div>
-            <div class="inner-content">
-                <router-outlet></router-outlet>
-            </div>
-        </nz-content>
-    </nz-layout>
+            <li nz-menu-item (click)="logout()">
+              <i nz-icon nzType="logout"></i> 退出登录
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="breadcrumb">
+        <nz-breadcrumb nzSeparator=">" [nzAutoGenerate]="true"></nz-breadcrumb>
+      </div>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
 </nz-layout>

@@ -26,40 +26,42 @@ import { UserViewComponent } from './user-view/user-view.component';
 import { UserRoutingModule } from './user.route';
 
 const NzModule = [
-    NzLayoutModule,
-    NzButtonModule,
-    NzMessageModule,
-    NzModalModule,
-    NzIconModule,
-    NzCardModule,
-    NzFormModule,
-    NzDropDownModule,
-    NzTableModule,
-    NzDrawerModule,
-    NzUploadModule,
-    NzDescriptionsModule,
-    NzInputModule,
-    NzSelectModule,
-    NzDividerModule,
-    NzInputNumberModule,
-    NzDatePickerModule,
-    NzRadioModule,
-    NzGridModule
+  NzLayoutModule,
+  NzButtonModule,
+  NzMessageModule,
+  NzModalModule,
+  NzIconModule,
+  NzCardModule,
+  NzFormModule,
+  NzDropDownModule,
+  NzTableModule,
+  NzDrawerModule,
+  NzUploadModule,
+  NzDescriptionsModule,
+  NzInputModule,
+  NzSelectModule,
+  NzDividerModule,
+  NzInputNumberModule,
+  NzDatePickerModule,
+  NzRadioModule,
+  NzGridModule,
 ];
 
-
-
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        UserRoutingModule,
-        ...NzModule
-    ],
-    providers: [],
-    declarations: [UserListComponent, UserEditComponent, UserViewComponent, UserViewComponent],
-    entryComponents: []
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    UserRoutingModule,
+    ...NzModule,
+  ],
+  providers: [],
+  declarations: [
+    UserListComponent,
+    UserEditComponent,
+    UserViewComponent,
+    UserViewComponent,
+  ],
+  entryComponents: [],
 })
-export class UserModule {
-}
+export class UserModule {}

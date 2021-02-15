@@ -4,18 +4,15 @@ import { UserListComponent } from './user-list.component';
 import { UserListResolve } from './user-list.resolve';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: UserListComponent,
-        resolve: { userList: UserListResolve }
-    }
+  {
+    path: '',
+    component: UserListComponent,
+    resolve: { userList: UserListResolve },
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    providers: [UserListResolve]
+  imports: [RouterModule.forChild(routes)],
+  providers: [UserListResolve],
 })
-export class UserRoutingModule {
-}
-
-
+export class UserRoutingModule {}

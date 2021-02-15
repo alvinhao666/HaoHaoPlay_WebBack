@@ -13,23 +13,17 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 const NzModule = [
-    NzLayoutModule,
-    NzMessageModule,
-    NzIconModule,
-    NzDropDownModule,
-    NzBreadCrumbModule,
-    NzIconModule
-  ];
+  NzLayoutModule,
+  NzMessageModule,
+  NzIconModule,
+  NzDropDownModule,
+  NzBreadCrumbModule,
+  NzIconModule,
+];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        MainRouteModule,
-        ...NzModule
-    ],
-    declarations: [MainComponent],
-    entryComponents: []
+  imports: [CommonModule, RouterModule, MainRouteModule, ...NzModule],
+  declarations: [MainComponent],
+  entryComponents: [],
 })
-export class MainModule {
-}
+export class MainModule {}

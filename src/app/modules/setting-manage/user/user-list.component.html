@@ -1,128 +1,134 @@
 <nz-card [nzBordered]="false">
-    <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm">
+  <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm">
 
-        <div nz-row>
-            <nz-form-item>
-                <nz-form-label>姓名</nz-form-label>
-                <nz-form-control>
-                    <input nz-input formControlName="sName" autocomplete="off">
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label>手机</nz-form-label>
-                <nz-form-control>
-                    <input nz-input formControlName="sPhone" autocomplete="off">
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label>状态</nz-form-label>
-                <nz-form-control>
-                    <nz-select nzAllowClear [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" formControlName="sEnabled">
-                        <nz-option *ngFor="let i of statuses; let idx = index" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
-                    </nz-select>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label>最后登录时间</nz-form-label>
-                <nz-form-control>
-                    <nz-range-picker nzFormat="yyyy-MM-dd" formControlName="sLastLoginTime">
-                    </nz-range-picker>
-                </nz-form-control>
-            </nz-form-item>
-        </div>
-
-
-        <div class="operate-wrapper">
-            <div class="fl">
-                <button nz-button [nzType]="'primary'" (click)="addUser()" *ngIf="checkAuth('User_Add_1_128')">
-                    <i nz-icon nzType="plus"></i>
-                    <span>添加</span>
-                </button>
-                <button nz-button nz-dropdown [nzDropdownMenu]="moreOperate" [nzPlacement]="'bottomRight'">
-                    更多操作
-                    <i nz-icon nzType="down"></i>
-                </button>
-                <nz-dropdown-menu #moreOperate>
-                    <ul nz-menu>
-                        <li nz-menu-item (click)="export()" *ngIf="checkAuth('User_Export_1_2048')">导出</li>
-                        <li nz-menu-item (click)="exportTemplate()" *ngIf="checkAuth('User_Import_1_4096')">导出模板</li>
-                    </ul>
-                </nz-dropdown-menu>
-            </div>
-
-            <div class="fr">
-                <button nz-button type="submit" [nzType]="'primary'" (click)="reSearch()" *ngIf="checkAuth('User_Search_1_64')">
-                    <i nz-icon nzType="search"></i>
-                    <span>查询</span>
-                </button>
-                <button nz-button type="reset">重置</button>
-            </div>
-        </div>
-    </form>
-
-    <nz-table #nzFixedTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount"
-        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzScroll]="{x:'1600px', y: '410px' }" [nzSize]="'small'">
-        <thead (nzSortOrderChange)="sortChange($event)" nzSortPriority>
-            <tr>
-                <th nzLeft nzWidth="60px">序号</th>
-                <th nzLeft nzWidth="100px">姓名</th>
-                <th nzWidth="100px" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别</th>
-                <th nzWidth="100px" nzShowSort nzColumnKey="{{colSortAge}}" [nzSortFn]="true">年龄</th>
-                <th nzWidth="130px">手机号</th>
-                <th>邮箱</th>
-                <th nzWidth="150px">微信</th>
-                <th nzWidth="80px">状态</th>
-                <th nzWidth="120px">角色</th>
-                <th nzWidth="180px">最后登录时间</th>
-                <th nzWidth="140px">最后登录IP</th>
-                <th nzRight nzWidth="165px">操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let d of nzFixedTable.data;let idx=index;">
-                <td nzLeft>{{idx+1}}</td>
-                <td nzLeft>{{d.Name}}</td>
-                <td>{{d.GenderString}}</td>
-                <td>{{d.Age}}</td>
-                <td>{{d.Phone}}</td>
-                <td title="{{d.Email}}">{{d.Email}}</td>
-                <td title="{{d.WeChat}}">{{d.WeChat}}</td>
-                <td [class.enable]="d.Enabled" [class.disable]="!d.Enabled">
-                    {{d.EnabledString}}
-                </td>
-                <td>{{d.RoleName}}</td>
-                <td>{{d.LastLoginTime}}</td>
-                <td>{{d.LastLoginIP}}</td>
-                <td nzRight>
-                    <a (click)="view(d.Id)" class="a-operate" *ngIf="checkAuth('User_View_1_1024')">查看</a>
-                    <!-- <nz-divider nzType="vertical"></nz-divider> -->
-                    <a (click)="edit(d.Id)" *ngIf="d.Id!=-1&&checkAuth('User_Update_1_256')" class="ml10 a-operate">编辑</a>
-                    <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&checkAuth('1_512')"></nz-divider> -->
-                    <a (click)="disable(d)" *ngIf="d.Enabled&&d.Id!=-1&&checkAuth('User_Disable_1_16777216')" class="ml10 a-operate">注销</a>
-                    <a (click)="enable(d)" *ngIf="!d.Enabled&&d.Id!=-1&&checkAuth('User_Enable_1_33554432')" class="ml10 a-operate">启用</a>
-                    <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&checkAuth('1_2048')"></nz-divider> -->
-                    <a (click)="delete(d)" *ngIf="d.Id!=-1&&checkAuth('User_Delete_1_512')" class="ml10 a-operate">删除</a>
-                </td>
-            </tr>
-        </tbody>
-    </nz-table>
-    <ng-template #totalTemplate>
-        共{{totalCount}}条
-    </ng-template>
-
-    <div nz-row nzType="flex" *ngIf="checkAuth('User_Import_1_4096')">
-        <div nz-col nzSpan="4">
-            <button nz-button [nzType]="'primary'" [disabled]="fileList.length == 0" style="margin-right: 16px" (click)="importExcel()">
-                <span>导入</span>
-            </button>
-            <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload" [nzFileType]="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">
-                <button nz-button [nzType]="'default'">
-                    <i nz-icon nzType="upload"></i>
-                    <span>选择excel文件</span>
-                </button>
-            </nz-upload>
-        </div>
+    <div nz-row>
+      <nz-form-item>
+        <nz-form-label>姓名</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="sName" autocomplete="off">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>手机</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="sPhone" autocomplete="off">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>状态</nz-form-label>
+        <nz-form-control>
+          <nz-select nzAllowClear [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" formControlName="sEnabled">
+            <nz-option *ngFor="let i of statuses; let idx = index" [nzLabel]="i.text" [nzValue]="i.value"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>最后登录时间</nz-form-label>
+        <nz-form-control>
+          <nz-range-picker nzFormat="yyyy-MM-dd" formControlName="sLastLoginTime">
+          </nz-range-picker>
+        </nz-form-control>
+      </nz-form-item>
     </div>
+
+
+    <div class="operate-wrapper">
+      <div class="fl">
+        <button nz-button [nzType]="'primary'" (click)="addUser()" *ngIf="checkAuth('User_Add_1_128')">
+          <i nz-icon nzType="plus"></i>
+          <span>添加</span>
+        </button>
+        <button nz-button nz-dropdown [nzDropdownMenu]="moreOperate" [nzPlacement]="'bottomRight'">
+          更多操作
+          <i nz-icon nzType="down"></i>
+        </button>
+        <nz-dropdown-menu #moreOperate>
+          <ul nz-menu>
+            <li nz-menu-item (click)="export()" *ngIf="checkAuth('User_Export_1_2048')">导出</li>
+            <li nz-menu-item (click)="exportTemplate()" *ngIf="checkAuth('User_Import_1_4096')">导出模板</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
+
+      <div class="fr">
+        <button nz-button type="submit" [nzType]="'primary'" (click)="reSearch()" *ngIf="checkAuth('User_Search_1_64')">
+          <i nz-icon nzType="search"></i>
+          <span>查询</span>
+        </button>
+        <button nz-button type="reset">重置</button>
+      </div>
+    </div>
+  </form>
+
+  <nz-table #nzFixedTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)"
+    (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false"
+    [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount" [nzLoading]="tableLoading"
+    nzShowSizeChanger nzShowQuickJumper [nzScroll]="{x:'1600px', y: '410px' }" [nzSize]="'small'">
+    <thead (nzSortOrderChange)="sortChange($event)" nzSortPriority>
+      <tr>
+        <th nzLeft nzWidth="60px">序号</th>
+        <th nzLeft nzWidth="100px">姓名</th>
+        <th nzWidth="100px" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">性别</th>
+        <th nzWidth="100px" nzShowSort nzColumnKey="{{colSortAge}}" [nzSortFn]="true">年龄</th>
+        <th nzWidth="130px">手机号</th>
+        <th>邮箱</th>
+        <th nzWidth="150px">微信</th>
+        <th nzWidth="80px">状态</th>
+        <th nzWidth="120px">角色</th>
+        <th nzWidth="180px">最后登录时间</th>
+        <th nzWidth="140px">最后登录IP</th>
+        <th nzRight nzWidth="165px">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of nzFixedTable.data;let idx=index;">
+        <td nzLeft>{{idx+1}}</td>
+        <td nzLeft>{{d.Name}}</td>
+        <td>{{d.GenderString}}</td>
+        <td>{{d.Age}}</td>
+        <td>{{d.Phone}}</td>
+        <td title="{{d.Email}}">{{d.Email}}</td>
+        <td title="{{d.WeChat}}">{{d.WeChat}}</td>
+        <td [class.enable]="d.Enabled" [class.disable]="!d.Enabled">
+          {{d.EnabledString}}
+        </td>
+        <td>{{d.RoleName}}</td>
+        <td>{{d.LastLoginTime}}</td>
+        <td>{{d.LastLoginIP}}</td>
+        <td nzRight>
+          <a (click)="view(d.Id)" class="a-operate" *ngIf="checkAuth('User_View_1_1024')">查看</a>
+          <!-- <nz-divider nzType="vertical"></nz-divider> -->
+          <a (click)="edit(d.Id)" *ngIf="d.Id!=-1&&checkAuth('User_Update_1_256')" class="ml10 a-operate">编辑</a>
+          <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&checkAuth('1_512')"></nz-divider> -->
+          <a (click)="disable(d)" *ngIf="d.Enabled&&d.Id!=-1&&checkAuth('User_Disable_1_16777216')"
+            class="ml10 a-operate">注销</a>
+          <a (click)="enable(d)" *ngIf="!d.Enabled&&d.Id!=-1&&checkAuth('User_Enable_1_33554432')"
+            class="ml10 a-operate">启用</a>
+          <!-- <nz-divider nzType="vertical" *ngIf="d.Id!=-1&&checkAuth('1_2048')"></nz-divider> -->
+          <a (click)="delete(d)" *ngIf="d.Id!=-1&&checkAuth('User_Delete_1_512')" class="ml10 a-operate">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <ng-template #totalTemplate>
+    共{{totalCount}}条
+  </ng-template>
+
+  <div nz-row nzType="flex" *ngIf="checkAuth('User_Import_1_4096')">
+    <div nz-col nzSpan="4">
+      <button nz-button [nzType]="'primary'" [disabled]="fileList.length == 0" style="margin-right: 16px"
+        (click)="importExcel()">
+        <span>导入</span>
+      </button>
+      <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload"
+        [nzFileType]="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">
+        <button nz-button [nzType]="'default'">
+          <i nz-icon nzType="upload"></i>
+          <span>选择excel文件</span>
+        </button>
+      </nz-upload>
+    </div>
+  </div>
 </nz-card>
 
 <modal-user-edit #silderUserEdit (onSave)="search()"></modal-user-edit>

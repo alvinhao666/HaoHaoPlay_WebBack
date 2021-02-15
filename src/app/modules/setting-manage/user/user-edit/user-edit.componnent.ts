@@ -1,230 +1,267 @@
-import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, ValidationErrors } from '@angular/forms';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { H_Http, CoreEdit } from '@core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, Observer } from 'rxjs';
 
 @Component({
-    selector: 'modal-user-edit',
-    templateUrl: './user-edit.component.html',
-    styleUrls: ['./user-edit.component.less']
+  selector: 'modal-user-edit',
+  templateUrl: './user-edit.component.html',
+  styleUrls: ['./user-edit.component.less'],
 })
-
 export class UserEditComponent extends CoreEdit {
+  visible = false;
 
-    visible = false;
+  @Input() title = '';
 
-    @Input() title = '';
+  // @Output() onClose = new EventEmitter();
 
-    // @Output() onClose = new EventEmitter();
+  @Output() onSave = new EventEmitter();
 
-    @Output() onSave = new EventEmitter();
+  isEdit = false;
 
-    isEdit = false;
+  userId: any = null;
 
-    userId: any = null;
+  form: FormGroup;
 
-    form: FormGroup;
+  roles = null;
 
-    roles = null;
+  get LoginName() {
+    return this.form.controls.LoginName;
+  }
 
-    get LoginName() {
-        return this.form.controls.LoginName;
-    }
+  get Name() {
+    return this.form.controls.Name;
+  }
 
-    get Name() {
-        return this.form.controls.Name;
-    }
+  get Password() {
+    return this.form.controls.Password;
+  }
+  get RePassword() {
+    return this.form.controls.RePassword;
+  }
 
-    get Password() {
-        return this.form.controls.Password;
-    }
-    get RePassword() {
-        return this.form.controls.RePassword;
-    }
+  get Age() {
+    return this.form.controls.Age;
+  }
 
-    get Age() {
-        return this.form.controls.Age;
-    }
+  get Gender() {
+    return this.form.controls.Gender;
+  }
 
-    get Gender() {
-        return this.form.controls.Gender;
-    }
+  get Phone() {
+    return this.form.controls.Phone;
+  }
 
-    get Phone() {
-        return this.form.controls.Phone;
-    }
+  get Email() {
+    return this.form.controls.Email;
+  }
 
-    get Email() {
-        return this.form.controls.Email;
-    }
+  get Wechat() {
+    return this.form.controls.Wechat;
+  }
 
-    get Wechat() {
-        return this.form.controls.Wechat;
-    }
+  get QQ() {
+    return this.form.controls.QQ;
+  }
 
-    get QQ() {
-        return this.form.controls.QQ;
-    }
+  get Role() {
+    return this.form.controls.Role;
+  }
 
-    get Role() {
-        return this.form.controls.Role;
-    }
+  timerOfLoginName = null;
+  loginNameAsyncValidator = (control: FormControl) => {
+    return new Observable((observer: Observer<ValidationErrors | null>) => {
+      if (this.timerOfLoginName) {
+        clearTimeout(this.timerOfLoginName);
+        this.timerOfLoginName = null;
+      }
 
-    timerOfLoginName = null;
-    loginNameAsyncValidator = (control: FormControl) => {
-        return new Observable((observer: Observer<ValidationErrors | null>) => {
-
-            if (this.timerOfLoginName) {
-                clearTimeout(this.timerOfLoginName);
-                this.timerOfLoginName = null;
-            }
-
-            this.timerOfLoginName = setTimeout(() => {
-
-                if (control.value === '') return;
-                this.http.get(`User/IsExistLoginName?loginName=${control.value}`).subscribe(d => {
-                    if (d === null) return;
-
-                    if (d === false) {
-
-                        observer.next(null);
-                        observer.complete();
-                    }
-
-                    observer.next({ error: true, existLoginName: d });
-
-                    observer.complete();
-                });
-            }, 300);
-        });
-    }
-
-    rePasswordValidator = (control: FormControl): { [s: string]: boolean } => {
-        if (control.value) {
-            if (control.value !== this.form.controls.Password.value) {
-                return { error: true, notEqual: true };
-            }
-        }
-        return {};
-    }
-
-    constructor(
-        private fb: FormBuilder,
-        private http: H_Http,
-        public msg: NzMessageService) {
-        super();
-        this.form = this.fb.group({
-            LoginName: [null, [Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/)], [this.loginNameAsyncValidator]],
-            Name: [null, Validators.required],
-            Password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
-            RePassword: [null, [Validators.required, this.rePasswordValidator]],
-            Age: [null, Validators.required],
-            Gender: [null, Validators.required],
-            Phone: [null, [Validators.required, Validators.pattern(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)]],
-            Email: [null, Validators.email],
-            Wechat: [null, Validators.nullValidator],
-            QQ: [null, Validators.nullValidator],
-            Role: [null, Validators.required]
-        });
-    }
-
-    newPwdChange(value: string) {
-        //this.newPwdChange$.next(value);
-        setTimeout(() => this.form.controls.RePassword.updateValueAndValidity());
-    }
-
-    getRoles() {
-        this.http.get(`User/GetRoleList`).subscribe(d => {
+      this.timerOfLoginName = setTimeout(() => {
+        if (control.value === '') return;
+        this.http
+          .get(`User/IsExistLoginName?loginName=${control.value}`)
+          .subscribe((d) => {
             if (d === null) return;
-            this.roles = d;
-        });
-    }
 
-    close() {
-        // this.onClose.emit();
+            if (d === false) {
+              observer.next(null);
+              observer.complete();
+            }
+
+            observer.next({ error: true, existLoginName: d });
+
+            observer.complete();
+          });
+      }, 300);
+    });
+  };
+
+  rePasswordValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (control.value) {
+      if (control.value !== this.form.controls.Password.value) {
+        return { error: true, notEqual: true };
+      }
+    }
+    return {};
+  };
+
+  constructor(
+    private fb: FormBuilder,
+    private http: H_Http,
+    public msg: NzMessageService
+  ) {
+    super();
+    this.form = this.fb.group({
+      LoginName: [
+        null,
+        [Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/)],
+        [this.loginNameAsyncValidator],
+      ],
+      Name: [null, Validators.required],
+      Password: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(16),
+        ],
+      ],
+      RePassword: [null, [Validators.required, this.rePasswordValidator]],
+      Age: [null, Validators.required],
+      Gender: [null, Validators.required],
+      Phone: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+          ),
+        ],
+      ],
+      Email: [null, Validators.email],
+      Wechat: [null, Validators.nullValidator],
+      QQ: [null, Validators.nullValidator],
+      Role: [null, Validators.required],
+    });
+  }
+
+  newPwdChange(value: string) {
+    //this.newPwdChange$.next(value);
+    setTimeout(() => this.form.controls.RePassword.updateValueAndValidity());
+  }
+
+  getRoles() {
+    this.http.get(`User/GetRoleList`).subscribe((d) => {
+      if (d === null) return;
+      this.roles = d;
+    });
+  }
+
+  close() {
+    // this.onClose.emit();
+    this.reset();
+  }
+
+  save() {
+    if (!this.validate()) return;
+    if (this.isEdit && this.userId) {
+      this.editUser(this.userId);
+    } else {
+      this.addUser();
+    }
+  }
+
+  addUser() {
+    this.http
+      .post('User/Add', {
+        LoginName: this.LoginName.value,
+        Password: this.Password.value,
+        Name: this.Name.value,
+        Gender: parseInt(this.Gender.value, 10),
+        Age: this.Age.value,
+        Phone: this.Phone.value,
+        Email: this.Email.value,
+        WeChat: this.Wechat.value,
+        QQ: this.QQ.value,
+        RoleId: this.Role.value,
+      })
+      .subscribe((d) => {
+        if (d === null) return;
+        this.msg.success('添加成功');
+        this.onSave.emit();
         this.reset();
+      });
+  }
+
+  editUser(id: any) {
+    this.http
+      .put(`User/Update/${id}`, {
+        Name: this.Name.value,
+        Gender: parseInt(this.Gender.value, 10),
+        Age: this.Age.value,
+        Phone: this.Phone.value,
+        Email: this.Email.value,
+        WeChat: this.Wechat.value,
+        QQ: this.QQ.value,
+      })
+      .subscribe((d) => {
+        if (d === null) return;
+        this.msg.success('编辑成功');
+        this.onSave.emit();
+        this.reset();
+      });
+  }
+
+  async showUser(id: any) {
+    this.isEdit = true;
+    await this.http
+      .get(`User/Get/${id}`)
+      .toPromise()
+      .then((d) => {
+        if (d === null) return;
+        // this.form.get('fName').setValue(d.Name);
+        this.form.patchValue({ ...d, Gender: d.Gender.toString() });
+        this.userId = d.Id;
+      });
+  }
+
+  validate(): boolean {
+    let flag = true;
+    for (const key of Object.keys(this.form.controls)) {
+      if (
+        this.isEdit &&
+        (key === 'LoginName' ||
+          key === 'Password' ||
+          key === 'RePassword' ||
+          key === 'Role')
+      )
+        continue;
+      this.form.controls[key].markAsDirty();
+      this.form.controls[key].updateValueAndValidity();
+      flag = flag && !this.form.controls[key].invalid;
     }
+    return flag;
+  }
 
-    save() {
-
-        if (!this.validate()) return;
-        if (this.isEdit && this.userId) {
-            this.editUser(this.userId);
-        } else {
-            this.addUser();
-        }
-    }
-
-    addUser() {
-        this.http
-            .post('User/Add', {
-                LoginName: this.LoginName.value,
-                Password: this.Password.value,
-                Name: this.Name.value,
-                Gender: parseInt(this.Gender.value, 10),
-                Age: this.Age.value,
-                Phone: this.Phone.value,
-                Email: this.Email.value,
-                WeChat: this.Wechat.value,
-                QQ: this.QQ.value,
-                RoleId: this.Role.value
-            })
-            .subscribe(d => {
-                if (d === null) return;
-                this.msg.success('添加成功');
-                this.onSave.emit();
-                this.reset();
-            });
-    }
-
-    editUser(id: any) {
-        this.http
-            .put(`User/Update/${id}`, {
-                Name: this.Name.value,
-                Gender: parseInt(this.Gender.value, 10),
-                Age: this.Age.value,
-                Phone: this.Phone.value,
-                Email: this.Email.value,
-                WeChat: this.Wechat.value,
-                QQ: this.QQ.value
-            })
-            .subscribe(d => {
-                if (d === null) return;
-                this.msg.success('编辑成功');
-                this.onSave.emit();
-                this.reset();
-            });
-    }
-
-    async showUser(id: any) {
-        this.isEdit = true;
-        await this.http.get(`User/Get/${id}`).toPromise().then(d => {
-            if (d === null) return;
-            // this.form.get('fName').setValue(d.Name);
-            this.form.patchValue({ ...d, Gender: d.Gender.toString() });
-            this.userId = d.Id;
-        });
-    }
-
-    validate(): boolean {
-        let flag = true;
-        for (const key of Object.keys(this.form.controls)) {
-            if (this.isEdit && (key === 'LoginName' || key === 'Password' || key === 'RePassword' || key === 'Role')) continue;
-            this.form.controls[key].markAsDirty();
-            this.form.controls[key].updateValueAndValidity();
-            flag = flag && !this.form.controls[key].invalid;
-        }
-        return flag;
-    }
-
-    reset() {
-        this.visible = false;
-        setTimeout(() => {
-            this.resetForm(this.form);
-            this.isEdit = false;
-            this.userId = null;
-        }, 300);
-    }
-
+  reset() {
+    this.visible = false;
+    setTimeout(() => {
+      this.resetForm(this.form);
+      this.isEdit = false;
+      this.userId = null;
+    }, 300);
+  }
 }
