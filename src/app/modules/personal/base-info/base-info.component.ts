@@ -6,17 +6,14 @@ import { ActivatedRoute } from '@angular/router';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { environment } from '@env/environment';
 import PubSub from 'pubsub-js';
-import { PubSubKey } from 'src/app/share/pubsub.key';
-
+import { PUBSUB_AVATAR_CHANGE } from 'src/app/share/pubsub.key';
 
 @Component({
   selector: 'app-base-info',
   templateUrl: './base-info.component.html',
-  styleUrls: ['./base-info.component.less']
+  styleUrls: ['./base-info.component.less'],
 })
 export class BaseInfoComponent extends CoreEdit implements OnInit {
-
-
   @ViewChild('DialogAvator', { static: false }) dialogAavator: AvatarComponent;
 
   form: FormGroup;
@@ -31,16 +28,13 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
   // formatterAge = value => value && `${value}`;
   // parserAge = value => value && value.replace('.', '');
 
-
   get fName() {
     return this.form.controls.fName;
   }
 
-
   get fGender() {
     return this.form.controls.fGender;
   }
-
 
   get fPhone() {
     return this.form.controls.fPhone;
@@ -56,22 +50,30 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     return this.form.controls.fHomeAddress;
   }
 
-
   constructor(
     private fb: FormBuilder,
     private http: H_Http,
     private msg: NzMessageService,
-    private router: ActivatedRoute) {
+    private router: ActivatedRoute
+  ) {
     super();
     this.form = this.fb.group({
       fName: [{ value: null, disabled: true }, Validators.required],
 
       fGender: [null],
-      fPhone: [null, [Validators.required, Validators.pattern(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)]],
+      fPhone: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+          ),
+        ],
+      ],
       fWeChat: [null],
       // fAge: [null, Validators.required],
       fProfile: [null],
-      fHomeAddress: [null]
+      fHomeAddress: [null],
     });
   }
 
@@ -96,32 +98,36 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
     // this.form.get('fAge').setValue(user.Age);
     this.form.get('fProfile').setValue(user.Profile);
     this.form.get('fHomeAddress').setValue(user.HomeAddress);
-
   }
 
   update() {
     if (!this.checkForm(this.form)) return;
     this.loading = true;
-    this.http.put(`CurrentUser/UpdateBaseInfo`, {
-      // Name: this.fName.value,
-      Phone: this.fPhone.value,
-      // Gender: parseInt(this.fGender.value, 10),
-      // Age: this.fAge.value,
-      WeChat: this.fWeChat.value,
-      Profile: this.fProfile.value,
-      HomeAddress: this.fHomeAddress.value
-    }).subscribe(d => {
-      this.loading = false;
-      if (d === null) return;
-      this.msg.success('更新成功');
-      this.getUser();
-    }, e => {
-      this.loading = false;
-    });
+    this.http
+      .put(`CurrentUser/UpdateBaseInfo`, {
+        // Name: this.fName.value,
+        Phone: this.fPhone.value,
+        // Gender: parseInt(this.fGender.value, 10),
+        // Age: this.fAge.value,
+        WeChat: this.fWeChat.value,
+        Profile: this.fProfile.value,
+        HomeAddress: this.fHomeAddress.value,
+      })
+      .subscribe(
+        (d) => {
+          this.loading = false;
+          if (d === null) return;
+          this.msg.success('更新成功');
+          this.getUser();
+        },
+        (e) => {
+          this.loading = false;
+        }
+      );
   }
 
   getUser() {
-    this.http.get(`CurrentUser/GetUser`).subscribe(d => {
+    this.http.get(`CurrentUser/GetUser`).subscribe((d) => {
       if (d === null) return;
       this.setCurrentUser(d);
       // if (d.HeadImgUrl) {
@@ -129,7 +135,14 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
       // }
       this.headImgUrl = d.HeadImgUrl || d.HeadImgUrl;
 
-      PubSub.publish(PubSubKey.avatar_change, { Name: d.Name, FirstName: this.firstName, FirstNameBgColor: this.firstNameBgColor, HeadImgUrl: d.HeadImgUrl });
+      PubSub.publish(PUBSUB_AVATAR_CHANGE, {
+        Name: d.Name,
+        FirstName: this.firstName,
+        FirstNameBgColor: this.firstNameBgColor,
+        HeadImgUrl: d.HeadImgUrl,
+      });
+
+      this.dialogAavator.isVisible = false;
     });
   }
 

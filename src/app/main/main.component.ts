@@ -5,16 +5,15 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Core, CoreContainer } from '@core';
 import { Router } from '@angular/router';
 import PubSub from 'pubsub-js';
-import { PubSubKey } from '../share/pubsub.key';
+import { PUBSUB_AVATAR_CHANGE } from '../share/pubsub.key';
 import NProgress from 'nprogress';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.less']
+  styleUrls: ['./main.component.less'],
 })
 export class MainComponent extends CoreContainer {
-
   isCollapsed = false;
 
   name = '';
@@ -32,12 +31,13 @@ export class MainComponent extends CoreContainer {
   constructor(
     private http: H_Http,
     private router: Router,
-    private msg: NzMessageService) {
+    private msg: NzMessageService
+  ) {
     super();
 
     this.init();
 
-    PubSub.subscribe(PubSubKey.avatar_change, (msg, d) => {
+    PubSub.subscribe(PUBSUB_AVATAR_CHANGE, (msg, d) => {
       this.name = d.Name;
       this.firstName = d.FirstName;
       this.firstNameBgColor = d.FirstNameBgColor;
@@ -73,11 +73,10 @@ export class MainComponent extends CoreContainer {
     Core.authNums = d.AuthNums;
   }
 
-
   // 退出登录
   logout() {
     this.nProgress.start();
-    this.http.post('CurrentUser/Logout').subscribe(d => {
+    this.http.post('CurrentUser/Logout').subscribe((d) => {
       if (d === null) {
         this.nProgress.done();
         return;

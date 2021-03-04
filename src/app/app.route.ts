@@ -8,26 +8,31 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
     loadChildren: './login/login.module#LoginModule',
-    canLoad: [LoginGuard]
+    canLoad: [LoginGuard],
   },
   {
     path: 'main',
     loadChildren: './main/main.module#MainModule',
-    canLoad: [MainGuard]
+    canLoad: [MainGuard],
   },
   {
     path: '**',
-    component: Exception404Component
-  }
+    component: Exception404Component,
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: true,
+      relativeLinkResolution: 'legacy',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

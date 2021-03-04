@@ -12,31 +12,23 @@ import { AppRoutingModule } from './app.route';
 import { NzMessageModule } from 'ng-zorro-antd/message'; //消息弹窗 全局 http拦截器里有引用
 import { Exception404Component } from './404.component';
 
-
 registerLocaleData(zh);
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    Exception404Component
-  ],
+  declarations: [AppComponent, Exception404Component],
   imports: [
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzMessageModule
+    NzMessageModule,
   ],
-  entryComponents: [],  // 动态加载的组件
+  entryComponents: [], // 动态加载的组件
   providers: [
     DatePipe,
-    { provide: HTTP_INTERCEPTORS, useClass: H_HttpInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: H_HttpInterceptor, multi: true },
     // { provide: NZ_I18N, useValue: zh_CN }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-export class AppModule {
-
-}
+export class AppModule {}

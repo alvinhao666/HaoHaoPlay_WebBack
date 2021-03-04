@@ -1,133 +1,139 @@
-<nz-modal [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="600" [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="close()" (nzOnOk)="save()">
+<nz-modal [nzClosable]="true" [nzMaskClosable]="false" [nzWidth]="600" [(nzVisible)]="visible" [nzTitle]="title"
+  (nzOnCancel)="close()" (nzOnOk)="save()">
 
-    <ng-container *nzModalContent>
-        <form nz-form [formGroup]="form">
-            <nz-card nzType="inner" nzTitle="账号信息" *ngIf="!isEdit" style="margin-bottom: 12px;" [nzSize]="'small'">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="form">
+      <nz-card nzType="inner" nzTitle="账号信息" *ngIf="!isEdit" style="margin-bottom: 12px;" [nzSize]="'small'">
 
-                <div nz-row>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label nzRequired [nzSpan]="8">账号</nz-form-label>
-                            <nz-form-control [nzErrorTip]="LoginErrorTpl" [nzSpan]="16">
-                                <input nz-input formControlName="fLoginName" autocomplete="off">
-                            </nz-form-control>
-                            <ng-template #LoginErrorTpl>
-                                <ng-container *ngIf="fLoginName.dirty && fLoginName.errors?.required">必填</ng-container>
-                                <ng-container *ngIf="fLoginName.dirty && fLoginName.errors?.pattern">只能输入英文&数字</ng-container>
-                                <ng-container *ngIf="fLoginName.dirty && fLoginName.errors?.existLoginName">
-                                    账号已存在，请重新输入
-                                </ng-container>
-                            </ng-template>
-                        </nz-form-item>
-                    </div>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label nzRequired [nzSpan]="8">角色</nz-form-label>
-                            <nz-form-control [nzSpan]="16" nzErrorTip="必填">
-                                <nz-select nzShowSearch nzAllowClear formControlName="fRole">
-                                    <nz-option *ngFor="let item of roles" [nzLabel]="item.Name" [nzValue]="item.Id"></nz-option>
-                                </nz-select>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label nzRequired [nzSpan]="8">密码</nz-form-label>
-                            <nz-form-control [nzSpan]="16" [nzErrorTip]="passwordErrorTpl">
-                                <input nz-input formControlName="fPassword" type="text" class="pwd" style="ime-mode:disabled;" autocomplete="off" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false" onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')"
-                                    (ngModelChange)="newPwdChange($event)">
-                            </nz-form-control>
-                            <ng-template #passwordErrorTpl>
-                                <ng-container *ngIf="fPassword.dirty && fPassword.errors?.required">必填</ng-container>
-                                <ng-container *ngIf="fPassword.dirty && fPassword.errors?.minlength">最少6个字符</ng-container>
-                                <ng-container *ngIf="fPassword.dirty && fPassword.errors?.maxlength">最多16个字符</ng-container>
-                            </ng-template>
-                        </nz-form-item>
-                    </div>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label nzRequired [nzSpan]="8">重复密码</nz-form-label>
-                            <nz-form-control [nzSpan]="16" [nzErrorTip]="repasswordErrorTpl">
-                                <input nz-input formControlName="fRePassword" type="text" class="pwd" style="ime-mode:disabled;" autocomplete="off" onpaste="return false" ondrop="return false" oncontextmenu="return false" oncut="return false" oncopy="return false" onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')">
-                            </nz-form-control>
+        <div nz-row>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="8">账号</nz-form-label>
+              <nz-form-control [nzErrorTip]="LoginErrorTpl" [nzSpan]="16">
+                <input nz-input formControlName="LoginName" autocomplete="off">
+              </nz-form-control>
+              <ng-template #LoginErrorTpl>
+                <ng-container *ngIf="LoginName.dirty && LoginName.errors?.required">必填</ng-container>
+                <ng-container *ngIf="LoginName.dirty && LoginName.errors?.pattern">只能输入英文&数字</ng-container>
+                <ng-container *ngIf="LoginName.dirty && LoginName.errors?.existLoginName">
+                  账号已存在，请重新输入
+                </ng-container>
+              </ng-template>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="8">角色</nz-form-label>
+              <nz-form-control [nzSpan]="16" nzErrorTip="必填">
+                <nz-select nzShowSearch nzAllowClear formControlName="Role">
+                  <nz-option *ngFor="let item of roles" [nzLabel]="item.Name" [nzValue]="item.Id"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="8">密码</nz-form-label>
+              <nz-form-control [nzSpan]="16" [nzErrorTip]="passwordErrorTpl">
+                <input nz-input formControlName="Password" type="text" class="pwd" style="ime-mode:disabled;"
+                  autocomplete="off" onpaste="return false" ondrop="return false" oncontextmenu="return false"
+                  oncut="return false" oncopy="return false" onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')"
+                  (ngModelChange)="newPwdChange($event)">
+              </nz-form-control>
+              <ng-template #passwordErrorTpl>
+                <ng-container *ngIf="Password.dirty && Password.errors?.required">必填</ng-container>
+                <ng-container *ngIf="Password.dirty && Password.errors?.minlength">最少6个字符</ng-container>
+                <ng-container *ngIf="Password.dirty && Password.errors?.maxlength">最多16个字符</ng-container>
+              </ng-template>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="8">重复密码</nz-form-label>
+              <nz-form-control [nzSpan]="16" [nzErrorTip]="repasswordErrorTpl">
+                <input nz-input formControlName="RePassword" type="text" class="pwd" style="ime-mode:disabled;"
+                  autocomplete="off" onpaste="return false" ondrop="return false" oncontextmenu="return false"
+                  oncut="return false" oncopy="return false" onkeyup="value=value.replace(/[^\u0000-\u00FF]/g,'')">
+              </nz-form-control>
 
-                            <ng-template #repasswordErrorTpl>
-                                <ng-container *ngIf="fRePassword.dirty && fRePassword.errors?.required">必填</ng-container>
-                                <ng-container *ngIf="fRePassword.dirty && fRePassword.errors?.notEqual">密码不一致</ng-container>
-                            </ng-template>
-                        </nz-form-item>
-                    </div>
-                </div>
-            </nz-card>
+              <ng-template #repasswordErrorTpl>
+                <ng-container *ngIf="RePassword.dirty && RePassword.errors?.required">必填</ng-container>
+                <ng-container *ngIf="RePassword.dirty && RePassword.errors?.notEqual">密码不一致</ng-container>
+              </ng-template>
+            </nz-form-item>
+          </div>
+        </div>
+      </nz-card>
 
-            <nz-card nzType="inner" nzTitle="个人信息" [nzSize]="'small'">
-                <div nz-row>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label nzRequired [nzSpan]="8">姓名</nz-form-label>
-                            <nz-form-control nzErrorTip="必填" [nzSpan]="16">
-                                <input nz-input type="text" formControlName="fName" autocomplete="off">
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label nzRequired [nzSpan]="8">性别</nz-form-label>
-                            <nz-form-control nzErrorTip="必选" [nzSpan]="16">
-                                <nz-radio-group formControlName="fGender">
-                                    <label nz-radio nzValue="1">男</label>
-                                    <label nz-radio nzValue="0">女</label>
-                                </nz-radio-group>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label nzRequired [nzSpan]="8">年龄</nz-form-label>
-                            <nz-form-control nzErrorTip="必填" [nzSpan]="16">
-                                <nz-input-number formControlName="fAge" [nzMin]="18" [nzMax]="80" [nzStep]="1" [nzFormatter]="formatterInt" [nzParser]="parserInt"></nz-input-number>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label nzRequired [nzSpan]="8">手机</nz-form-label>
-                            <nz-form-control [nzErrorTip]="PhoneErrorTpl" [nzSpan]="16">
-                                <input nz-input formControlName="fPhone" autocomplete="off">
-                            </nz-form-control>
-                            <ng-template #PhoneErrorTpl>
-                                <ng-container *ngIf="fPhone.dirty && fPhone.errors?.required">必填</ng-container>
-                                <ng-container *ngIf="fPhone.dirty && fPhone.errors?.pattern">格式不正确</ng-container>
-                            </ng-template>
-                        </nz-form-item>
-                    </div>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label [nzSpan]="8">邮箱</nz-form-label>
-                            <nz-form-control nzErrorTip="格式不正确" [nzSpan]="16">
-                                <input nz-input type="email" formControlName="fEmail" autocomplete="off">
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label [nzSpan]="8">QQ</nz-form-label>
-                            <nz-form-control [nzSpan]="16">
-                                <input nz-input type="text" formControlName="fQQ" autocomplete="off">
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div nz-col nzSpan="12">
-                        <nz-form-item>
-                            <nz-form-label [nzSpan]="8">微信</nz-form-label>
-                            <nz-form-control [nzSpan]="16">
-                                <input nz-input type="text" formControlName="fWechat" autocomplete="off">
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                </div>
-            </nz-card>
+      <nz-card nzType="inner" nzTitle="个人信息" [nzSize]="'small'">
+        <div nz-row>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="8">姓名</nz-form-label>
+              <nz-form-control nzErrorTip="必填" [nzSpan]="16">
+                <input nz-input type="text" formControlName="Name" autocomplete="off">
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="8">性别</nz-form-label>
+              <nz-form-control nzErrorTip="必选" [nzSpan]="16">
+                <nz-radio-group formControlName="Gender">
+                  <label nz-radio nzValue="1">男</label>
+                  <label nz-radio nzValue="0">女</label>
+                </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="8">年龄</nz-form-label>
+              <nz-form-control nzErrorTip="必填" [nzSpan]="16">
+                <nz-input-number formControlName="Age" [nzMin]="18" [nzMax]="80" [nzStep]="1"
+                  [nzFormatter]="formatterInt" [nzParser]="parserInt"></nz-input-number>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="8">手机</nz-form-label>
+              <nz-form-control [nzErrorTip]="PhoneErrorTpl" [nzSpan]="16">
+                <input nz-input formControlName="Phone" autocomplete="off">
+              </nz-form-control>
+              <ng-template #PhoneErrorTpl>
+                <ng-container *ngIf="Phone.dirty && Phone.errors?.required">必填</ng-container>
+                <ng-container *ngIf="Phone.dirty && Phone.errors?.pattern">格式不正确</ng-container>
+              </ng-template>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="8">邮箱</nz-form-label>
+              <nz-form-control nzErrorTip="格式不正确" [nzSpan]="16">
+                <input nz-input type="email" formControlName="Email" autocomplete="off">
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="8">QQ</nz-form-label>
+              <nz-form-control [nzSpan]="16">
+                <input nz-input type="text" formControlName="QQ" autocomplete="off">
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="8">微信</nz-form-label>
+              <nz-form-control [nzSpan]="16">
+                <input nz-input type="text" formControlName="Wechat" autocomplete="off">
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+      </nz-card>
 
-        </form>
-    </ng-container>
+    </form>
+  </ng-container>
 </nz-modal>
