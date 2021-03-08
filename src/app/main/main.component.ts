@@ -6,7 +6,6 @@ import { Core, CoreContainer } from '@core';
 import { Router } from '@angular/router';
 import PubSub from 'pubsub-js';
 import { PUBSUB_AVATAR_CHANGE } from '../share/pubsub.key';
-import NProgress from 'nprogress';
 
 @Component({
   selector: 'app-main',
@@ -26,7 +25,7 @@ export class MainComponent extends CoreContainer {
 
   menus = null;
 
-  nProgress = NProgress.configure({ showSpinner: false });
+  nProgress = require('nprogress').configure({ showSpinner: false });
 
   constructor(
     private http: H_Http,
