@@ -63,7 +63,7 @@ export class MainComponent extends CoreContainer {
     this.menus = d.Menus;
     this.name = d.Name;
     this.firstName = this.name.substring(0, 1);
-    this.firstNameBgColor = getColorByFirstName(d.FirstNameSpell);
+    this.firstNameBgColor = getColorByFirstName(d.FirstNameInitial);
 
     // if (d.HeadImgUrl) {
     //   this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;
