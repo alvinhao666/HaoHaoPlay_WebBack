@@ -6,7 +6,6 @@ import { Core, CoreContainer } from '@core';
 import { Router } from '@angular/router';
 import PubSub from 'pubsub-js';
 import { PUBSUB_AVATAR_CHANGE } from '../share/pubsub.key';
-import NProgress from 'nprogress';
 
 @Component({
   selector: 'app-main',
@@ -26,7 +25,7 @@ export class MainComponent extends CoreContainer {
 
   menus = null;
 
-  nProgress = NProgress.configure({ showSpinner: false });
+  nProgress = require('nprogress').configure({ showSpinner: false });
 
   constructor(
     private http: H_Http,
@@ -63,7 +62,7 @@ export class MainComponent extends CoreContainer {
     this.menus = d.Menus;
     this.name = d.Name;
     this.firstName = this.name.substring(0, 1);
-    this.firstNameBgColor = getColorByFirstName(d.FirstNameSpell);
+    this.firstNameBgColor = getColorByFirstName(d.FirstNameInitial);
 
     // if (d.HeadImgUrl) {
     //   this.headImgUrl = environment.api_url + `AvatarFile/${d.HeadImgUrl}`;

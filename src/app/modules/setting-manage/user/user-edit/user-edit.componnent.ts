@@ -38,8 +38,8 @@ export class UserEditComponent extends CoreEdit {
 
   roles = null;
 
-  get LoginName() {
-    return this.form.controls.LoginName;
+  get Account() {
+    return this.form.controls.Account;
   }
 
   get Name() {
@@ -53,8 +53,8 @@ export class UserEditComponent extends CoreEdit {
     return this.form.controls.RePassword;
   }
 
-  get Age() {
-    return this.form.controls.Age;
+  get Birthday() {
+    return this.form.controls.Birthday;
   }
 
   get Gender() {
@@ -81,18 +81,18 @@ export class UserEditComponent extends CoreEdit {
     return this.form.controls.Role;
   }
 
-  timerOfLoginName = null;
-  loginNameAsyncValidator = (control: FormControl) => {
+  timerOfAccount = null;
+  accountAsyncValidator = (control: FormControl) => {
     return new Observable((observer: Observer<ValidationErrors | null>) => {
-      if (this.timerOfLoginName) {
-        clearTimeout(this.timerOfLoginName);
-        this.timerOfLoginName = null;
+      if (this.timerOfAccount) {
+        clearTimeout(this.timerOfAccount);
+        this.timerOfAccount = null;
       }
 
-      this.timerOfLoginName = setTimeout(() => {
+      this.timerOfAccount = setTimeout(() => {
         if (control.value === '') return;
         this.http
-          .get(`User/IsExistLoginName?loginName=${control.value}`)
+          .get(`User/IsExistAccount?Account=${control.value}`)
           .subscribe((d) => {
             if (d === null) return;
 
@@ -101,7 +101,7 @@ export class UserEditComponent extends CoreEdit {
               observer.complete();
             }
 
-            observer.next({ error: true, existLoginName: d });
+            observer.next({ error: true, existAccount: d });
 
             observer.complete();
           });
@@ -125,10 +125,10 @@ export class UserEditComponent extends CoreEdit {
   ) {
     super();
     this.form = this.fb.group({
-      LoginName: [
+      Account: [
         null,
         [Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/)],
-        [this.loginNameAsyncValidator],
+        [this.accountAsyncValidator],
       ],
       Name: [null, Validators.required],
       Password: [
@@ -140,7 +140,7 @@ export class UserEditComponent extends CoreEdit {
         ],
       ],
       RePassword: [null, [Validators.required, this.rePasswordValidator]],
-      Age: [null, Validators.required],
+      Birthday: [null, Validators.required],
       Gender: [null, Validators.required],
       Phone: [
         null,
@@ -187,11 +187,11 @@ export class UserEditComponent extends CoreEdit {
   addUser() {
     this.http
       .post('User/Add', {
-        LoginName: this.LoginName.value,
+        Account: this.Account.value,
         Password: this.Password.value,
         Name: this.Name.value,
         Gender: parseInt(this.Gender.value, 10),
-        Age: this.Age.value,
+        Birthday: this.Birthday.value,
         Phone: this.Phone.value,
         Email: this.Email.value,
         WeChat: this.Wechat.value,
@@ -211,7 +211,7 @@ export class UserEditComponent extends CoreEdit {
       .put(`User/Update/${id}`, {
         Name: this.Name.value,
         Gender: parseInt(this.Gender.value, 10),
-        Age: this.Age.value,
+        Birthday: this.Birthday.value,
         Phone: this.Phone.value,
         Email: this.Email.value,
         WeChat: this.Wechat.value,
@@ -243,7 +243,7 @@ export class UserEditComponent extends CoreEdit {
     for (const key of Object.keys(this.form.controls)) {
       if (
         this.isEdit &&
-        (key === 'LoginName' ||
+        (key === 'Account' ||
           key === 'Password' ||
           key === 'RePassword' ||
           key === 'Role')

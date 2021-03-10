@@ -5,7 +5,6 @@ import JSEncrypt from 'jsencrypt';
 import { H_Http } from '@core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
-import NProgress from 'nprogress';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +22,7 @@ export class LoginComponent {
 
   loginLoading = false;
 
-  nProgress = NProgress.configure({ showSpinner: false });
+  nProgress = require('nprogress').configure({ showSpinner: false });
   constructor(
     private fb: FormBuilder,
     public msg: NzMessageService,
@@ -31,7 +30,7 @@ export class LoginComponent {
     private router: Router
   ) {
     this.form = this.fb.group({
-      userName: [null, Validators.required],
+      account: [null, Validators.required],
       password: [null, Validators.required],
       mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
       captcha: [null, Validators.required],
@@ -39,8 +38,8 @@ export class LoginComponent {
     });
   }
 
-  get userName() {
-    return this.form.controls.userName;
+  get account() {
+    return this.form.controls.account;
   }
   get password() {
     return this.form.controls.password;
@@ -61,11 +60,11 @@ export class LoginComponent {
 
   submit() {
     if (this.type === 0) {
-      this.userName.markAsDirty();
-      this.userName.updateValueAndValidity();
+      this.account.markAsDirty();
+      this.account.updateValueAndValidity();
       this.password.markAsDirty();
       this.password.updateValueAndValidity();
-      if (this.userName.invalid || this.password.invalid) return;
+      if (this.account.invalid || this.password.invalid) return;
     } else {
       this.mobile.markAsDirty();
       this.mobile.updateValueAndValidity();
@@ -83,7 +82,7 @@ export class LoginComponent {
     this.loginLoading = true;
     this.http
       .post('LoginByAccountPwd', {
-        LoginName: this.userName.value,
+        Account: this.account.value,
         Password: pwd,
         IsRememberLogin: this.remember.value,
       })
