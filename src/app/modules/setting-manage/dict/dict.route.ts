@@ -3,18 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { DictListComponent } from './dict-list.component';
 import { DictListResolve } from './dict-list.resolve';
 
-
 const routes: Routes = [
   {
     path: '',
     component: DictListComponent,
-    resolve: { dictList: DictListResolve }
-  }
+    resolve: { dictList: DictListResolve },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [DictListResolve]
+  providers: [DictListResolve],
 })
-export class DictRoutingModule { }
+export class DictRoutingModule {}

@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DictItemEditComponent } from '../dict-item-edit/dict-item-edit.component';
 import { H_Http, CoreContainer } from '@core';
@@ -6,12 +12,13 @@ import { H_Http, CoreContainer } from '@core';
 @Component({
   selector: 'app-dict-item-list',
   templateUrl: './dict-item-list.component.html',
-  styleUrls: ['./dict-item-list.component.less']
+  styleUrls: ['./dict-item-list.component.less'],
 })
 export class DictItemListComponent extends CoreContainer implements OnInit {
+  @ViewChild('dialogDictItemEdit', { static: false })
+  dialogDictItemEdit: DictItemEditComponent;
 
-
-  @ViewChild('dialogDictItemEdit', { static: false }) dialogDictItemEdit: DictItemEditComponent;
+  @Output() onClose = new EventEmitter();
 
   visible = false;
 
@@ -25,23 +32,20 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
     return this.searchForm.controls.sItemName;
   }
 
-  constructor(
-    private fb: FormBuilder,
-    private http: H_Http) {
+  constructor(private fb: FormBuilder, private http: H_Http) {
     super();
     this.searchPagedListFn = this.getDictItem;
     this.searchForm = this.fb.group({
-      sItemName: [null]
+      sItemName: [null],
     });
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   close() {
     this.visible = false;
     this.searchForm.reset();
+    this.onClose.emit();
   }
 
   addDictItem() {
@@ -52,14 +56,17 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
 
   getDictItem() {
     // this.searchParam = this.dictId;
-    return this.http.get('Dict/GetDictItemPagedList', this.setPagedQueryParam({
-      ItemName: this.sItemName.value,
-      ParentId: this.dictId
-    }));
+    return this.http.get(
+      'Dict/GetDictItemPagedList',
+      this.setPagedQueryParam({
+        ItemName: this.sItemName.value,
+        ParentId: this.dictId,
+      })
+    );
   }
 
   deleteItem(d: any) {
-    this.http.delete(`Dict/DeleteDictItem/${d.Id}`).subscribe(d => {
+    this.http.delete(`Dict/DeleteDictItem/${d.Id}`).subscribe((d) => {
       if (d === null) return;
       this.search();
     });

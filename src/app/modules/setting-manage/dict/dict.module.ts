@@ -25,18 +25,23 @@ const NzModule = [
   NzIconModule,
   NzModalModule,
   NzInputNumberModule,
-  NzPopconfirmModule
+  NzPopconfirmModule,
 ];
 
-
 @NgModule({
-  declarations: [DictListComponent, DictEditComponent, DictItemListComponent, DictItemListComponent, DictItemEditComponent],
+  declarations: [
+    DictListComponent,
+    DictEditComponent,
+    DictItemListComponent,
+    DictItemListComponent,
+    DictItemEditComponent,
+  ],
   imports: [
     CommonModule,
     DictRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ...NzModule
-  ]
+    ...NzModule,
+  ],
 })
-export class DictModule { }
+export class DictModule {}

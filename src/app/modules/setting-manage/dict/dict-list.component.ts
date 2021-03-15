@@ -9,14 +9,14 @@ import { DictItemListComponent } from './dict-item-list/dict-item-list.component
 @Component({
   selector: 'app-dict',
   templateUrl: './dict-list.component.html',
-  styleUrls: ['./dict-list.component.less']
+  styleUrls: ['./dict-list.component.less'],
 })
 export class DictListComponent extends CoreContainer implements OnInit {
+  @ViewChild('dialogDictEdit', { static: false })
+  dialogDictEdit: DictEditComponent;
 
-
-  @ViewChild('dialogDictEdit', { static: false }) dialogDictEdit: DictEditComponent;
-
-  @ViewChild('dialogDictItemList', { static: false }) dialogDictItemList: DictItemListComponent;
+  @ViewChild('dialogDictItemList', { static: false })
+  dialogDictItemList: DictItemListComponent;
 
   searchForm: FormGroup;
 
@@ -28,19 +28,19 @@ export class DictListComponent extends CoreContainer implements OnInit {
     return this.searchForm.controls.sDictCode;
   }
 
-
   constructor(
     private fb: FormBuilder,
     private http: H_Http,
     private modal: NzModalService,
-    private activedRoute: ActivatedRoute) {
+    private activedRoute: ActivatedRoute
+  ) {
     super();
 
     this.searchPagedListFn = this.getDicts;
 
     this.searchForm = this.fb.group({
       sDictName: [null],
-      sDictCode: [null]
+      sDictCode: [null],
     });
   }
 
@@ -48,21 +48,21 @@ export class DictListComponent extends CoreContainer implements OnInit {
     this.setTableData(this.activedRoute.snapshot.data.dictList);
   }
 
-
   // 查询字典列表
   getDicts() {
-    return this.http.get('Dict/GetDictPagedList', this.setPagedQueryParam({
-      LikeDictName: this.sDictName.value,
-      LikeDictCode: this.sDictCode.value
-    }));
+    return this.http.get(
+      'Dict/GetDictPagedList',
+      this.setPagedQueryParam({
+        LikeDictName: this.sDictName.value,
+        LikeDictCode: this.sDictCode.value,
+      })
+    );
   }
-
 
   addDict() {
     this.dialogDictEdit.title = '添加字典';
     this.dialogDictEdit.visible = true;
   }
-
 
   editDict(data: any) {
     this.dialogDictEdit.showDict(data);
@@ -73,10 +73,11 @@ export class DictListComponent extends CoreContainer implements OnInit {
   deleteDict(data: any) {
     this.modal.confirm({
       nzTitle: `确认删除 ${data.DictName}?`,
-      nzOnOk: () => this.http.delete(`Dict/DeleteDict/${data.Id}`).subscribe(d => {
-        if (d === null) return;
-        this.search();
-      })
+      nzOnOk: () =>
+        this.http.delete(`Dict/DeleteDict/${data.Id}`).subscribe((d) => {
+          if (d === null) return;
+          this.search();
+        }),
     });
   }
 
