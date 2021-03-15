@@ -18,7 +18,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
   @ViewChild('dialogDictItemEdit', { static: false })
   dialogDictItemEdit: DictItemEditComponent;
 
-  @Output() onClose = new EventEmitter();
+  @Output() onCancel = new EventEmitter();
 
   visible = false;
 
@@ -45,7 +45,7 @@ export class DictItemListComponent extends CoreContainer implements OnInit {
   close() {
     this.visible = false;
     this.searchForm.reset();
-    this.onClose.emit();
+    this.onCancel.emit();
   }
 
   addDictItem() {
