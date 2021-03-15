@@ -1,69 +1,71 @@
 <nz-card [nzBordered]="false">
-    <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm">
-        <div nz-row>
-            <nz-form-item>
-                <nz-form-label>字典名称</nz-form-label>
-                <nz-form-control>
-                    <input nz-input formControlName="sDictName" autocomplete="off">
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label>字典编码</nz-form-label>
-                <nz-form-control>
-                    <input nz-input formControlName="sDictCode" autocomplete="off">
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <button nz-button type="submit" [nzType]="'primary'" (click)="reSearch()">
-                    <i nz-icon nzType="search"></i>
-                    <span>查询</span>
-                </button>
-            </nz-form-item>
-            <nz-form-item>
-                <button nz-button type="reset">重置</button>
-            </nz-form-item>
-        </div>
-    </form>
-
-    <div class="operate-wrapper">
-        <button nz-button [nzType]="'primary'" (click)="addDict()" *ngIf="checkAuth('Dict_Add_1_2097152')">
-            <i nz-icon nzType="plus"></i>
-            <span>添加</span>
+  <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm">
+    <div nz-row>
+      <nz-form-item>
+        <nz-form-label>字典名称</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="sDictName" autocomplete="off">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>字典编码</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="sDictCode" autocomplete="off">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <button nz-button type="submit" [nzType]="'primary'" (click)="reSearch()">
+          <i nz-icon nzType="search"></i>
+          <span>查询</span>
         </button>
+      </nz-form-item>
+      <nz-form-item>
+        <button nz-button type="reset">重置</button>
+      </nz-form-item>
     </div>
+  </form>
 
-    <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount"
-        [nzLoading]="tableLoading" nzShowSizeChanger nzShowQuickJumper [nzSize]="'small'" [nzScroll]="{x:'1600px', y: '410px' }">
-        <thead>
-            <tr>
-                <th nzLeft nzWidth="60px">序号</th>
-                <th nzLeft nzWidth="180px">字典名称</th>
-                <th nzLeft nzWidth="180px">字典编码</th>
-                <th>数据项</th>
-                <th nzWidth="220px">创建时间</th>
-                <th nzRight nzWidth="140px">操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let d of nzTable.data;let idx=index;">
-                <td nzLeft>{{idx+1}}</td>
-                <td nzLeft>{{d.DictName}}</td>
-                <td nzLeft>{{d.DictCode}}</td>
-                <td title="{{d.ItemNames}}">{{d.ItemNames}}</td>
-                <td>{{d.CreateTime}}</td>
-                <td nzRight>
-                    <a (click)="showDictItem(d)" *ngIf="checkAuth('Dict_Search_1_1048576')" class="a-operate">查看</a>
-                    <a (click)="editDict(d)" *ngIf="checkAuth('Dict_Edit_1_4194304')" class="ml10 a-operate">编辑</a>
-                    <a (click)="deleteDict(d)" *ngIf="checkAuth('Dict_Delete_1_8388608')" class="ml10 a-operate">删除</a>
-                </td>
-            </tr>
-        </tbody>
-    </nz-table>
-    <ng-template #totalTemplate>
-        共{{totalCount}}条
-    </ng-template>
+  <div class="operate-wrapper">
+    <button nz-button [nzType]="'primary'" (click)="addDict()" *ngIf="checkAuth('Dict_Add_1_2097152')">
+      <i nz-icon nzType="plus"></i>
+      <span>添加</span>
+    </button>
+  </div>
+
+  <nz-table #nzTable [nzData]="dataSet" (nzPageIndexChange)="pageIndexChange($event)"
+    (nzPageSizeChange)="pageSizeChange($event)" [nzShowTotal]="totalTemplate" [nzFrontPagination]="false"
+    [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount" [nzLoading]="tableLoading"
+    nzShowSizeChanger nzShowQuickJumper [nzSize]="'small'" [nzScroll]="{x:'1600px', y: '410px' }">
+    <thead>
+      <tr>
+        <th nzLeft nzWidth="60px">序号</th>
+        <th nzLeft nzWidth="180px">字典名称</th>
+        <th nzLeft nzWidth="180px">字典编码</th>
+        <th>数据项</th>
+        <th nzWidth="220px">创建时间</th>
+        <th nzRight nzWidth="140px">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of nzTable.data;let idx=index;">
+        <td nzLeft>{{idx+1}}</td>
+        <td nzLeft>{{d.DictName}}</td>
+        <td nzLeft>{{d.DictCode}}</td>
+        <td title="{{d.ItemNames}}">{{d.ItemNames}}</td>
+        <td>{{d.CreateTime}}</td>
+        <td nzRight>
+          <a (click)="showDictItem(d)" *ngIf="checkAuth('Dict_Search_1_1048576')" class="a-operate">查看</a>
+          <a (click)="editDict(d)" *ngIf="checkAuth('Dict_Edit_1_4194304')" class="ml10 a-operate">编辑</a>
+          <a (click)="deleteDict(d)" *ngIf="checkAuth('Dict_Delete_1_8388608')" class="ml10 a-operate">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <ng-template #totalTemplate>
+    共{{totalCount}}条
+  </ng-template>
 </nz-card>
 
 <app-dict-edit #dialogDictEdit (onSave)="search()"></app-dict-edit>
 
-<app-dict-item-list #dialogDictItemList></app-dict-item-list>
+<app-dict-item-list #dialogDictItemList (onClose)="search()"></app-dict-item-list>

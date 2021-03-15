@@ -5,10 +5,9 @@ import { H_Http, CoreEdit } from '@core';
 @Component({
   selector: 'app-dict-item-edit',
   templateUrl: './dict-item-edit.component.html',
-  styleUrls: ['./dict-item-edit.component.less']
+  styleUrls: ['./dict-item-edit.component.less'],
 })
 export class DictItemEditComponent extends CoreEdit implements OnInit {
-
   visible = false;
 
   title = '';
@@ -37,20 +36,17 @@ export class DictItemEditComponent extends CoreEdit implements OnInit {
     return this.form.controls.fRemark;
   }
 
-  constructor(
-    private fb: FormBuilder,
-    private http: H_Http) {
+  constructor(private fb: FormBuilder, private http: H_Http) {
     super();
     this.form = this.fb.group({
       fItemName: [null, Validators.required],
       fItemValue: [null, Validators.required],
       fSort: [null],
-      fRemark: [null]
+      fRemark: [null],
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   close() {
     this.reset();
@@ -67,30 +63,34 @@ export class DictItemEditComponent extends CoreEdit implements OnInit {
   }
 
   add() {
-    this.http.post('Dict/AddDictItem', {
-      ItemValue: this.fItemValue.value,
-      ItemName: this.fItemName.value,
-      Remark: this.fRemark.value,
-      ParentId: this.dictId,
-      Sort: this.fSort.value
-    }).subscribe(d => {
-      if (d === null) return;
-      this.onSave.emit();
-      this.reset();
-    });
+    this.http
+      .post('Dict/AddDictItem', {
+        ItemValue: this.fItemValue.value,
+        ItemName: this.fItemName.value,
+        Remark: this.fRemark.value,
+        ParentId: this.dictId,
+        Sort: this.fSort.value,
+      })
+      .subscribe((d) => {
+        if (d === null) return;
+        this.onSave.emit();
+        this.reset();
+      });
   }
 
   update() {
-    this.http.put(`Dict/UpdateDictItem/${this.dictId}`, {
-      ItemValue: parseInt(this.fItemValue.value, 10),
-      ItemName: this.fItemName.value,
-      Remark: this.fRemark.value,
-      Sort: this.fSort.value
-    }).subscribe(d => {
-      if (d === null) return;
-      this.onSave.emit();
-      this.reset();
-    });
+    this.http
+      .put(`Dict/UpdateDictItem/${this.dictId}`, {
+        ItemValue: parseInt(this.fItemValue.value, 10),
+        ItemName: this.fItemName.value,
+        Remark: this.fRemark.value,
+        Sort: this.fSort.value,
+      })
+      .subscribe((d) => {
+        if (d === null) return;
+        this.onSave.emit();
+        this.reset();
+      });
   }
 
   showDictItem(d: any) {
@@ -108,5 +108,4 @@ export class DictItemEditComponent extends CoreEdit implements OnInit {
     this.dictId = null;
     this.resetForm(this.form);
   }
-
 }
