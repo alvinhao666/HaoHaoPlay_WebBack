@@ -83,13 +83,13 @@ export class BaseInfoComponent extends CoreEdit implements OnInit {
 
   setCurrentUser(user: any) {
     this.firstName = user.Name.substring(0, 1);
-    this.firstNameBgColor = getColorByFirstName(user.FirstNameSpell);
+    this.firstNameBgColor = getColorByFirstName(user.FirstNameInitial);
     // if (user.HeadImgUrl) {
     //   this.headImgUrl = environment.api_url + `AvatarFile/${user.HeadImgUrl}`;
     // }
     this.headImgUrl = user.HeadImgUrl || user.HeadImgUrl;
     // this.setFirstName(user.Name.substring(0, 1));
-    // this.setFirstNameBgColor(getColorByFirstName(user.FirstNameSpell));
+    // this.setFirstNameBgColor(getColorByFirstName(user.FirstNameInitial));
     this.form.get('fName').setValue(user.Name);
 
     // this.form.get('fGender').setValue(user.Gender.toString());
