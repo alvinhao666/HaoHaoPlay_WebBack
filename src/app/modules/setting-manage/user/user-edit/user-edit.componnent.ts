@@ -152,7 +152,7 @@ export class UserEditComponent extends CoreEdit {
         ],
       ],
       Email: [null, Validators.email],
-      Wechat: [null, Validators.nullValidator],
+      WeChat: [null, Validators.nullValidator],
       QQ: [null, Validators.nullValidator],
       Role: [null, Validators.required],
     });
