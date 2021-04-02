@@ -69,8 +69,8 @@ export class UserEditComponent extends CoreEdit {
     return this.form.controls.Email;
   }
 
-  get Wechat() {
-    return this.form.controls.Wechat;
+  get WeChat() {
+    return this.form.controls.WeChat;
   }
 
   get QQ() {
@@ -194,7 +194,7 @@ export class UserEditComponent extends CoreEdit {
         Birthday: this.Birthday.value,
         Phone: this.Phone.value,
         Email: this.Email.value,
-        WeChat: this.Wechat.value,
+        WeChat: this.WeChat.value,
         QQ: this.QQ.value,
         RoleId: this.Role.value,
       })
@@ -214,7 +214,7 @@ export class UserEditComponent extends CoreEdit {
         Birthday: this.Birthday.value,
         Phone: this.Phone.value,
         Email: this.Email.value,
-        WeChat: this.Wechat.value,
+        WeChat: this.WeChat.value,
         QQ: this.QQ.value,
       })
       .subscribe((d) => {
