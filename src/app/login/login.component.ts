@@ -55,7 +55,7 @@ export class LoginComponent {
     this.type = ret.index;
   }
 
-  submit() {
+  login() {
     if (this.type === 0) {
       this.account.markAsDirty();
       this.account.updateValueAndValidity();

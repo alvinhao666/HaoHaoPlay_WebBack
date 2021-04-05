@@ -1,6 +1,6 @@
 <div class="container">
   <div class="content">
-    <form nz-form [formGroup]="form" (ngSubmit)="submit()">
+    <form nz-form [formGroup]="form" (ngSubmit)="login()">
       <nz-tabset [nzCentered]="true" [nzAnimated]="false" (nzSelectChange)="switch($event)">
         <nz-tab nzTitle="账号密码登录">
           <nz-form-item>
@@ -53,8 +53,8 @@
         </nz-col>
       </nz-form-item>
       <nz-form-item>
-        <!--        <button nz-button type="submit" nzType="primary" [nzSize]="'large'" [nzLoading]="loginLoading" nzBlock-->
-        <!--          (keyup.enter)="submit()" (click)="submit()">登录</button>-->
+        <!-- <button nz-button type="submit" nzType="primary" [nzSize]="'large'" [nzLoading]="loginLoading" nzBlock-
+        (keyup.enter)="submit()" (click)="submit()">登录</button>-->
         <button nz-button type="submit" nzType="primary" [nzSize]="'large'" [nzLoading]="loginLoading"
           nzBlock>登录</button>
       </nz-form-item>
